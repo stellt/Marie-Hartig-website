@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Connect — Marie Hartig Studio" />
+  <title>Connect — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/connect.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+</head>
+<body class="worlds-page connect-page">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="meet-marie.html">Meet Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html" class="active">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- MAIN SPLIT LAYOUT -->
+  <div class="connect-wrap">
+
+    <!-- LEFT — Portrait -->
+    <div class="connect-photo">
+      <img src="../assets/images/connect-portrait.jpg" alt="Marie Hartig" />
+    </div>
+
+    <!-- RIGHT — Connect info -->
+    <div class="connect-info">
+      <div class="connect-rule"></div>
+      <h1 class="connect-heading">Connect</h1>
+
+      <!-- Social links -->
+      <div class="connect-socials">
+        <a href="#">@mariehartigstudio</a>
+        <span class="sep">|</span>
+        <a href="#">Instagram</a>
+        <span class="sep">|</span>
+        <a href="#">Facebook</a>
+        <span class="sep">|</span>
+        <a href="mailto:hello@mariehartig.com">hello@mariehartig.com</a>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="connect-newsletter-label">Subscribe to Our Newsletter</div>
+      <div class="connect-newsletter-form">
+        <input type="email" placeholder="Email" />
+        <button type="submit">Sign Up</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="connect-footer">
+    <span><a href="meet-marie.html">Meet Marie</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
+    <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+</body>
+</html>

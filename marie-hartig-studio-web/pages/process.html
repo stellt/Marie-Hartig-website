@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Process — Marie Hartig Studio" />
+  <title>The Process — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/meet-marie.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+
+  <style>
+    /* ============================================
+       PROCESS PAGE — follows meet-marie layout
+       ============================================ */
+
+    .process-section {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+
+    .process-photo {
+      flex: 0 0 42%;
+      background: #ddd8d0;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .process-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .process-text {
+      flex: 1;
+      background: #f5f2ed;
+      display: flex;
+      align-items: center;
+      padding: 6vw 7vw;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .process-text-inner {
+      max-width: 560px;
+    }
+
+    .process-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,0,0,0.18);
+      margin-bottom: 2.4rem;
+    }
+
+    .process-heading {
+      font-family: 'Velour', serif;
+      font-weight: 700;
+      font-size: clamp(1.9rem, 3.5vw, 3.2rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .process-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      line-height: 1.85;
+      color: #333;
+      margin-bottom: 1.4rem;
+    }
+
+    .process-body:last-child { margin-bottom: 0; }
+
+    /* Timeline steps */
+    .process-steps {
+      margin-top: 2.6rem;
+    }
+
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.4rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .process-step:first-child {
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .step-num {
+      font-family: 'Velour', serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: rgba(0,0,0,0.3);
+      min-width: 2rem;
+      padding-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-family: 'Velour', serif;
+      font-weight: 500;
+      font-size: clamp(0.78rem, 1vw, 0.88rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 0.4rem;
+    }
+
+    .step-desc {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      line-height: 1.75;
+      color: #555;
+    }
+
+    /* Investment bullet list */
+    .process-list {
+      list-style: none;
+      margin-top: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .process-list li {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      line-height: 1.75;
+      color: #333;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+
+    .process-list li::before {
+      content: '—';
+      color: rgba(0,0,0,0.3);
+      flex-shrink: 0;
+      font-weight: 200;
+    }
+
+    .price-from {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-top: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-figure {
+      font-family: 'Velour', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      letter-spacing: 0.02em;
+      color: #111;
+      line-height: 1;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 900px) {
+      .process-section {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .process-photo {
+        flex: none;
+        height: 65vw;
+        min-height: 300px;
+      }
+      .process-section.photo-right {
+        flex-direction: column;
+      }
+      .process-text {
+        padding: 10vw 8vw;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .process-section.photo-right {
+        flex-direction: row-reverse;
+      }
+    }
+  </style>
+</head>
+<body class="worlds-page meet-marie-page">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="meet-marie.html">Meet Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html" class="active">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- SECTION 1 — HOW MARIE WORKS -->
+    <section class="process-section">
+
+      <div class="process-photo">
+        <img src="../assets/images/process-studio.jpg" alt="Marie at work" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h1 class="process-heading">How Marie Works</h1>
+
+          <p class="process-body">
+            Each project begins with a conversation about the space, the atmosphere you wish
+            to create, and the story the room might hold. After receiving photographs and the
+            dimensions of the wall or environment in question, Marie meets with you — either in
+            person or online — to explore ideas, inspiration and possibilities.
+          </p>
+          <p class="process-body">
+            From this initial exchange, Marie develops a mood board of imagery, colour palettes
+            and visual references that reflect the character of the space and the vision
+            discussed. At this stage, you will also receive an initial project estimate.
+          </p>
+          <p class="process-body">
+            Once the artistic direction is confirmed, Marie prepares a concept sketch or colour
+            study to illustrate how the artwork will live within the architecture of the room.
+          </p>
+          <p class="process-body">
+            The design is gently refined together until the composition feels balanced and fully
+            aligned with the space, and a timeline for the project is set.
+          </p>
+          <p class="process-body">
+            The painting process itself is an exciting stage of transformation. Clients are
+            welcome to be as involved as they wish, following the work as it unfolds. Marie works
+            with carefully selected natural, water-based paints — including emulsion, acrylic,
+            mineral and chalk finishes — which are fast-drying and odour-free so that the space
+            remains comfortable and usable throughout the process.
+          </p>
+          <p class="process-body">
+            Designs can be created directly on walls or developed on custom panels produced in
+            Marie's studio, depending on the nature of the project.
+          </p>
+          <p class="process-body">
+            When the work is complete, the result is more than a painted wall. It is a quiet
+            transformation of the space — a room that feels more atmospheric, personal and alive.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 2 — PROCESS -->
+    <section class="process-section photo-right">
+
+      <div class="process-photo">
+        <img src="../assets/images/process-painting.jpg" alt="Marie painting" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Process</h2>
+
+          <p class="process-body">
+            Each project is developed individually and typically includes:
+          </p>
+
+          <div class="process-steps">
+
+            <div class="process-step">
+              <span class="step-num">01</span>
+              <div>
+                <p class="step-desc">An initial conversation about the space, atmosphere, and vision</p>
+              </div>
+            </div>
+
+            <div class="process-step">
+              <span class="step-num">02</span>
+              <div>
+                <p class="step-desc">Concept development and sketch design</p>
+              </div>
+            </div>
+
+            <div class="process-step">
+              <span class="step-num">03</span>
+              <div>
+                <p class="step-desc">Refinement of the artwork in dialogue with the client</p>
+              </div>
+            </div>
+
+            <div class="process-step">
+              <span class="step-num">04</span>
+              <div>
+                <p class="step-desc">On-site painting or studio-based work depending on the project</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 3 — INVESTMENT -->
+    <section class="process-section">
+
+      <div class="process-photo">
+        <img src="../assets/images/process-detail.jpg" alt="Finished wall painting" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Investment</h2>
+
+          <p class="process-body">
+            Marie accepts a limited number of commissions each year.
+          </p>
+
+          <ul class="process-list">
+            <li>Commissions begin at €10,000</li>
+            <li>Final investment depends on scale, complexity, and/or installation conditions</li>
+            <li>Marie welcomes commissions internationally</li>
+            <li>Lead times typically range from 3–6 months, so early booking is recommended</li>
+          </ul>
+
+          <p class="price-from">Commissions from</p>
+          <p class="price-figure">€10,000</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="about-footer">
+    <span class="about-footer-left">
+      <a href="contact.html">Connect</a> | <a href="#">Terms of Service</a>
+    </span>
+    <span class="about-footer-right">© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+</body>
+</html>

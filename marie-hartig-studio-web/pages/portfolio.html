@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/portfolio.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+</head>
+<body class="worlds-page portfolio-page">
+
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="meet-marie.html">Meet Marie</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <main class="portfolio-grid">
+
+    <!-- 1 -->
+    <a class="portfolio-item" href="collections/collection-urban.html">
+      <img src="../assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-1.jpg" alt="Urban Infinity Pool" loading="lazy" />
+      <div class="portfolio-item-title">Urban Infinity Pool</div>
+    </a>
+
+    <!-- 2 -->
+    <a class="portfolio-item" href="collections/collection-fuschl.html">
+      <img src="../assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg" alt="Fuschl Rosewood" loading="lazy" />
+      <div class="portfolio-item-title">Fuschl Rosewood</div>
+    </a>
+
+    <!-- 3 -->
+    <a class="portfolio-item" href="collections/collection-creature.html">
+      <img src="../assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg" alt="Creature Comforts" loading="lazy" />
+      <div class="portfolio-item-title">Creature Comforts</div>
+    </a>
+
+    <!-- 4 -->
+    <a class="portfolio-item" href="collections/collection-saint-francis.html">
+      <img src="../assets/images/portfolio/04 SAINT FRANCIS AND THE ANIMALS/saint-francis-1.jpg" alt="Saint Francis and the Animals" loading="lazy" />
+      <div class="portfolio-item-title">Saint Francis and the Animals</div>
+    </a>
+
+    <!-- 5 -->
+    <a class="portfolio-item" href="collections/collection-map-room.html">
+      <img src="../assets/images/portfolio/05 THE MAP ROOM/map-room-1.jpg" alt="The Map Room" loading="lazy" />
+      <div class="portfolio-item-title">The Map Room</div>
+    </a>
+
+    <!-- 6 -->
+    <a class="portfolio-item" href="collections/collection-rickatschwende.html">
+      <img src="../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" />
+      <div class="portfolio-item-title">Rickatschwende Spa Hotel</div>
+    </a>
+
+    <!-- 7 -->
+    <a class="portfolio-item" href="collections/collection-sweetest.html">
+      <img src="../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-1.jpg" alt="Sweetest Dreams" loading="lazy" />
+      <div class="portfolio-item-title">Sweetest Dreams</div>
+    </a>
+
+    <!-- 8 -->
+    <a class="portfolio-item" href="collections/collection-tamsweg.html">
+      <img src="../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-1.jpg" alt="Tamsweg Memories" loading="lazy" />
+      <div class="portfolio-item-title">Tamsweg Memories</div>
+    </a>
+
+    <!-- 9 -->
+    <a class="portfolio-item" href="collections/collection-bellaria.html">
+      <img src="../assets/images/portfolio/08 BELLARIA/bellaria-1.jpg" alt="Bellaria" loading="lazy" />
+      <div class="portfolio-item-title">Bellaria</div>
+    </a>
+
+    <!-- 10 -->
+    <a class="portfolio-item" href="collections/collection-mixed-worlds.html">
+      <img src="../assets/images/portfolio/09 MIXED WORLDS LANDSCAPE/mixed-worlds-1.jpg" alt="Mixed Worlds Landscape" loading="lazy" />
+      <div class="portfolio-item-title">Mixed Worlds Landscape</div>
+    </a>
+
+    <!-- 11 -->
+    <a class="portfolio-item" href="collections/collection-safari-vibes.html">
+      <img src="../assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg" alt="Safari Vibes" loading="lazy" />
+      <div class="portfolio-item-title">Safari Vibes</div>
+    </a>
+
+    <!-- 12 -->
+    <a class="portfolio-item" href="collections/collection-rosewood-vienna.html">
+      <img src="../assets/images/portfolio/11 ROSEWOOD VIENNA/rosewood-vienna-1.jpg" alt="Rosewood Vienna" loading="lazy" />
+      <div class="portfolio-item-title">Rosewood Vienna</div>
+    </a>
+
+    <!-- 13 -->
+    <a class="portfolio-item" href="collections/collection-sahel-heat.html">
+      <img src="../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-1.jpg" alt="Sahel Heat" loading="lazy" />
+      <div class="portfolio-item-title">Sahel Heat</div>
+    </a>
+
+    <!-- 14 -->
+    <a class="portfolio-item" href="collections/collection-augsburg-tropics.html">
+      <img src="../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-1.jpg" alt="Augsburg Tropics" loading="lazy" />
+      <div class="portfolio-item-title">Augsburg Tropics</div>
+    </a>
+
+    <!-- 15 -->
+    <a class="portfolio-item" href="collections/collection-oversize-bloom.html">
+      <img src="../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg" alt="Oversize Bloom" loading="lazy" />
+      <div class="portfolio-item-title">Oversize Bloom</div>
+    </a>
+
+    <!-- 16 -->
+    <a class="portfolio-item" href="collections/collection-bodmin-magic.html">
+      <img src="../assets/images/portfolio/15 BODMIN MAGIC/bodmin-magic-1.jpg" alt="Bodmin Magic" loading="lazy" />
+      <div class="portfolio-item-title">Bodmin Magic</div>
+    </a>
+
+    <!-- 17 -->
+    <a class="portfolio-item" href="collections/collection-das-buben-bad.html">
+      <img src="../assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg" alt="Das Buben Bad" loading="lazy" />
+      <div class="portfolio-item-title">Das Buben Bad</div>
+    </a>
+
+    <!-- 18 -->
+    <a class="portfolio-item" href="collections/collection-rooftop-pool.html">
+      <img src="../assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-1.jpg" alt="Rooftop Pool" loading="lazy" />
+      <div class="portfolio-item-title">Rooftop Pool</div>
+    </a>
+
+    <!-- 19 -->
+    <a class="portfolio-item" href="collections/collection-my-other-house.html">
+      <img src="../assets/images/portfolio/18 MY OTHER HOUSE/my-other-house-1.jpg" alt="My Other House" loading="lazy" />
+      <div class="portfolio-item-title">My Other House</div>
+    </a>
+
+    <!-- 20 -->
+    <a class="portfolio-item" href="collections/collection-kipplings-eden.html">
+      <img src="../assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-1.jpg" alt="Kipplings Eden" loading="lazy" />
+      <div class="portfolio-item-title">Kipplings Eden</div>
+    </a>
+
+    <!-- 21 -->
+    <a class="portfolio-item" href="collections/collection-traumland.html">
+      <img src="../assets/images/portfolio/20 TRAUMLAND/traumland-1.jpg" alt="Traumland" loading="lazy" />
+      <div class="portfolio-item-title">Traumland</div>
+    </a>
+
+    <!-- 22 -->
+    <a class="portfolio-item" href="collections/collection-oak-pub.html">
+      <img src="../assets/images/portfolio/22 THE OAK PUB/oak-pub-1.jpg" alt="The Oak Pub" loading="lazy" />
+      <div class="portfolio-item-title">The Oak Pub</div>
+    </a>
+
+    <!-- 23 -->
+    <a class="portfolio-item" href="collections/collection-soothing-carmelita.html">
+      <img src="../assets/images/portfolio/23 SOOTHING CARMELITA/soothing-carmelita-1.jpg" alt="Soothing Carmelita" loading="lazy" />
+      <div class="portfolio-item-title">Soothing Carmelita</div>
+    </a>
+
+    <!-- 24 -->
+    <a class="portfolio-item" href="collections/collection-best-two-worlds.html">
+      <img src="../assets/images/portfolio/24 THE BEST OF TWO WORLDS/best-two-worlds-1.jpg" alt="The Best of Two Worlds" loading="lazy" />
+      <div class="portfolio-item-title">The Best of Two Worlds</div>
+    </a>
+
+    <!-- 25 -->
+    <a class="portfolio-item" href="collections/collection-inside-gardens.html">
+      <img src="../assets/images/portfolio/25 INSIDE GARDENS/inside-gardens-1.jpg" alt="Inside Gardens" loading="lazy" />
+      <div class="portfolio-item-title">Inside Gardens</div>
+    </a>
+
+    <!-- 26 -->
+    <a class="portfolio-item" href="collections/collection-lines-and-stripes.html">
+      <img src="../assets/images/portfolio/26 LINES AND STRIPES/lines-and-stripes-1.jpg" alt="Lines and Stripes" loading="lazy" />
+      <div class="portfolio-item-title">Lines and Stripes</div>
+    </a>
+
+    <!-- 27 -->
+    <a class="portfolio-item" href="collections/collection-oaks-and-elms.html">
+      <img src="../assets/images/portfolio/27 OAKS AND ELMS/oaks-and-elms-1.jpg" alt="Oaks and Elms" loading="lazy" />
+      <div class="portfolio-item-title">Oaks and Elms</div>
+    </a>
+
+    <!-- 28 -->
+    <a class="portfolio-item" href="collections/collection-cantinetta.html">
+      <img src="../assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-1.jpg" alt="Cantinetta Antinori Blackbirds" loading="lazy" />
+      <div class="portfolio-item-title">Cantinetta Antinori Blackbirds</div>
+    </a>
+
+    <!-- 29 -->
+    <a class="portfolio-item" href="collections/collection-kids-rooms.html">
+      <img src="../assets/images/portfolio/29 KIDS ROOMS/kids-rooms-1.jpg" alt="Kids Rooms" loading="lazy" />
+      <div class="portfolio-item-title">Kids Rooms</div>
+    </a>
+
+    <!-- 30 -->
+    <a class="portfolio-item" href="collections/collection-nobilis-wallpapers.html">
+      <img src="../assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-1.jpg" alt="Nobilis Wallpapers" loading="lazy" />
+      <div class="portfolio-item-title">Nobilis Wallpapers</div>
+    </a>
+
+  </main>
+
+  <footer class="portfolio-footer">
+    <span><a href="contact.html">Connect</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
+    <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+</body>
+</html>

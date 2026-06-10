@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oversize Bloom — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/worlds.css" />
+  <link rel="stylesheet" href="../../css/collection.css" />
+</head>
+<body class="worlds-page collection-page">
+
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="../meet-marie.html">Meet Marie</a></li>
+      <li><a href="../portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="../shop.html">Shop</a></li>
+      <li><a href="../contact.html">Connect</a></li>
+    </ul>
+  </nav>
+
+  <div class="collection-wrap">
+    <div class="collection-grid">
+      <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg" alt="Oversize Bloom" loading="lazy" /></div>
+      <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-2.jpg" alt="Oversize Bloom" loading="lazy" /></div>
+      <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-3.jpg" alt="Oversize Bloom" loading="lazy" /></div>
+      <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-4.jpg" alt="Oversize Bloom" loading="lazy" /></div>
+    </div>
+    <div class="collection-info">
+      <div class="collection-info-top">
+        <div class="collection-rule"></div>
+        <h1 class="collection-title">Oversize Bloom</h1>
+        <p class="collection-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="collection-meta">
+          <div class="collection-meta-item">Location: Lorem Ipsum</div>
+          <div class="collection-meta-item">Year: Lorem</div>
+          <div class="collection-meta-item">Type: Lorem Ipsum</div>
+        </div>
+      </div>
+      <div class="collection-nav">
+        <a href="collection-augsburg-tropics.html">← Previous</a>
+        <a href="collection-bodmin-magic.html">Next →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="collection-footer">
+    <span><a href="../contact.html">Connect</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
+    <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <div class="col-lightbox" id="col-lb">
+    <button class="col-lightbox-close" onclick="closeLb()">✕ &nbsp; Close</button>
+    <button class="col-lightbox-prev" onclick="shift(-1)">&#8592;</button>
+    <img id="col-lb-img" src="" alt="" />
+    <button class="col-lightbox-next" onclick="shift(1)">&#8594;</button>
+  </div>
+
+  <script>
+    const imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+    let cur = 0;
+    const lb = document.getElementById('col-lb');
+    const lbImg = document.getElementById('col-lb-img');
+    function openLb(i) { cur=i; lbImg.src=imgs[i].src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeLb() { lb.classList.remove('open'); document.body.style.overflow=''; }
+    function shift(d) { cur=(cur+d+imgs.length)%imgs.length; lbImg.src=imgs[cur].src; }
+    imgs.forEach((img,i) => img.parentElement.onclick=()=>openLb(i));
+    document.getElementById('col-lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLb();});
+    document.addEventListener('keydown',e=>{
+      if(!lb.classList.contains('open'))return;
+      if(e.key==='ArrowRight')shift(1);
+      if(e.key==='ArrowLeft')shift(-1);
+      if(e.key==='Escape')closeLb();
+    });
+  </script>
+</body>
+</html>

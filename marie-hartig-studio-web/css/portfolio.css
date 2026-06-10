@@ -1,0 +1,300 @@
+/* ============================================
+   MARIE HARTIG STUDIO — Portfolio Page
+   ============================================ */
+
+.portfolio-page {
+  background: #fff;
+}
+
+/* ============================================
+   GRID
+   ============================================ */
+.portfolio-grid {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  background: #ffffff;
+  min-height: calc(100vh - 64px);
+}
+
+/* Each project tile */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3/4;
+  display: block;
+  text-decoration: none;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+/* Dark overlay — always slightly present, deepens on hover */
+.portfolio-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  transition: background 0.4s ease;
+  z-index: 1;
+}
+
+.portfolio-item:hover::after {
+  background: rgba(0,0,0,0.52);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.03);
+}
+
+/* Project name overlay — centred */
+.portfolio-item-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: 'Velour', serif;
+  font-weight: 600;
+  font-size: clamp(1rem, 1.8vw, 1.6rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  line-height: 1.3;
+  pointer-events: none;
+  text-align: center;
+  width: 80%;
+}
+
+/* ============================================
+   LIGHTBOX — true full screen, no borders
+   ============================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #000;
+  flex-direction: column;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+/* Close — top right, always visible */
+.lightbox-close {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.8rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.lightbox-close:hover { color: #fff; }
+
+/* Stage fills entire screen */
+.lightbox-stage {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Image wrapper */
+.lightbox-img-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  background: #000;
+}
+
+/* Landscape: full screen width, full image visible (no crop) */
+.lightbox-stage.landscape .lightbox-img-wrap {
+  flex: 1;
+  height: 100%;
+}
+.lightbox-stage.landscape .lightbox-main {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Portrait: image sized to fit height, text fills remaining width */
+.lightbox-stage.portrait .lightbox-img-wrap {
+  flex: 0 0 auto;
+  height: 100%;
+}
+.lightbox-stage.portrait .lightbox-main {
+  height: 100%;
+  width: auto;
+  max-width: 70vw;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-main {
+  display: block;
+  object-fit: contain;
+}
+
+/* Arrows — overlaid on image edges */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 2.2rem;
+  cursor: pointer;
+  padding: 1.2rem;
+  transition: color 0.2s;
+  z-index: 5;
+  line-height: 1;
+}
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+
+/* For portrait layout, arrows fixed to screen edges */
+.lightbox-stage.portrait ~ * .lightbox-prev,
+.lightbox-stage.portrait .lightbox-prev { left: 1rem; }
+.lightbox-prev:hover,
+.lightbox-next:hover { color: #fff; }
+
+/* Text panel — fills remaining space to the right of portrait image */
+.lightbox-text-panel {
+  flex: 1;
+  background: #0a0a0a;
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  min-width: 0;
+}
+
+.lightbox-project-name {
+  font-family: 'Velour', serif;
+  font-weight: 600;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.4rem;
+}
+
+.lightbox-desc {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Thumbnails strip — bottom */
+.lightbox-thumbs {
+  display: flex;
+  gap: 4px;
+  padding: 8px 1rem;
+  overflow-x: auto;
+  background: #000;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.lightbox-thumbs::-webkit-scrollbar { display: none; }
+
+.lightbox-thumb {
+  flex: 0 0 80px;
+  height: 52px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+  border: 1.5px solid transparent;
+}
+.lightbox-thumb.active {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.7);
+}
+.lightbox-thumb:hover { opacity: 0.7; }
+
+/* ============================================
+   FOOTER
+/* ============================================
+   FOOTER
+   ============================================ */
+.portfolio-footer {
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4vw;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.portfolio-footer a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.portfolio-footer a:hover { color: #333; }
+
+/* Active nav */
+.nav-links a.active {
+  border-bottom: 1px solid #111;
+  padding-bottom: 1px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lightbox-prev { left: -2rem; }
+  .lightbox-next { right: -2rem; }
+}
+
+@media (max-width: 580px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  .lightbox-inner {
+    width: 95vw;
+  }
+  .lightbox-prev { left: 0; }
+  .lightbox-next { right: 0; }
+}

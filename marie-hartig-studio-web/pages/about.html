@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marie Hartig Studio — Marie's Painted Worlds" />
+  <title>Marie's Painted Worlds — Marie Hartig Studio</title>
+
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+  <style>
+    /* ── Newsletter popup ── */
+    .newsletter-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .newsletter-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .newsletter-modal {
+      background: #faf8f4;
+      max-width: 480px;
+      width: 90vw;
+      padding: 3.5rem 3rem 3rem;
+      position: relative;
+      text-align: center;
+      transform: translateY(24px);
+      transition: transform 0.5s ease;
+    }
+
+    .newsletter-overlay.visible .newsletter-modal {
+      transform: translateY(0);
+    }
+
+    .newsletter-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+
+    .newsletter-close:hover { color: #111; }
+
+    .newsletter-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-rule {
+      width: 30px;
+      height: 1px;
+      background: #ccc;
+      margin: 0 auto 1.4rem;
+    }
+
+    .newsletter-title {
+      font-family: 'Velour', serif;
+      font-weight: 700;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #111;
+      margin: 0 0 1.4rem;
+      line-height: 1.2;
+    }
+
+    .newsletter-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: #fff;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: #111;
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .newsletter-input:focus { border-color: #111; }
+    .newsletter-input::placeholder { color: #bbb; }
+
+    .newsletter-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: #111;
+      color: #fff;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .newsletter-submit:hover { background: #333; }
+
+    .newsletter-privacy {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: #bbb;
+      margin-top: 0.8rem;
+    }
+
+    .newsletter-success {
+      display: none;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: #888;
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+<body class="worlds-page">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="meet-marie.html">Meet Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Newsletter Popup -->
+  <div class="newsletter-overlay" id="newsletter-overlay">
+    <div class="newsletter-modal" role="dialog" aria-modal="true" aria-label="Subscribe to newsletter">
+      <button class="newsletter-close" id="newsletter-close">&#215; Close</button>
+      <div class="newsletter-eyebrow">From the Studio</div>
+      <div class="newsletter-rule"></div>
+      <h2 class="newsletter-title">Notes from<br>Marie's Studio</h2>
+      <p class="newsletter-body">
+        Subscribe to receive notes from Marie Hartig's studio — glimpses of works in progress, stories behind each piece, and the inspirations that shape her murals and canvases. Like her art, these letters are personal, reflective, and meant as an invitation to pause.
+      </p>
+      <div class="newsletter-success" id="newsletter-success">
+        Thank you — you'll hear from us soon.
+      </div>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubmit(event)">
+        <input class="newsletter-input" type="email" placeholder="Your email address" required />
+        <button class="newsletter-submit" type="submit">Subscribe</button>
+      </form>
+      <p class="newsletter-privacy">No spam. Unsubscribe at any time.</p>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN SLIDESHOW — no text, pure imagery -->
+  <section class="worlds-slideshow" aria-label="Painted Worlds portfolio">
+    <div class="worlds-progress" aria-hidden="true"></div>
+  </section>
+
+  <script src="../js/worlds.js"></script>
+  <script src="../js/cart.js"></script>
+  <script>
+    // Show popup after 2s delay, only once per session
+    const overlay = document.getElementById('newsletter-overlay');
+    const closeBtn = document.getElementById('newsletter-close');
+
+    if (!sessionStorage.getItem('newsletter_seen')) {
+      setTimeout(() => {
+        overlay.classList.add('visible');
+        sessionStorage.setItem('newsletter_seen', '1');
+      }, 2000);
+    }
+
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('visible');
+    });
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('visible');
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') overlay.classList.remove('visible');
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('newsletter-form').style.display = 'none';
+      document.getElementById('newsletter-success').style.display = 'block';
+      setTimeout(() => overlay.classList.remove('visible'), 2500);
+    }
+  </script>
+</body>
+</html>

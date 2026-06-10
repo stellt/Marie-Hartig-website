@@ -1,0 +1,187 @@
+/* ============================================
+   MARIE HARTIG STUDIO — Connect Page
+   ============================================ */
+
+.connect-page {
+  background: #f5f2ed;
+}
+
+/* ---- Main split layout ---- */
+.connect-wrap {
+  display: flex;
+  min-height: calc(100vh - 64px);
+  margin-top: 64px;
+}
+
+/* ---- LEFT — Portrait photo (white bg) ---- */
+.connect-photo {
+  flex: 0 0 42%;
+  background: #ffffff;
+}
+
+.connect-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ---- RIGHT — Info panel (off-white) ---- */
+.connect-info {
+  flex: 1;
+  background: #f5f2ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6vw 7vw;
+}
+
+.connect-rule {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+  margin-bottom: 2.4rem;
+}
+
+.connect-heading {
+  font-family: 'Velour', serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+}
+
+/* Social links row — exactly like Nate Berkus */
+.connect-socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 3rem;
+}
+
+.connect-socials a {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #111;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.connect-socials a:hover { color: #555; }
+
+.connect-socials .sep {
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  color: rgba(0,0,0,0.3);
+  margin: 0 1rem;
+  font-size: 0.75rem;
+}
+
+/* Newsletter section */
+.connect-newsletter-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 1rem;
+}
+
+.connect-newsletter-form {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  padding-bottom: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  gap: 1rem;
+}
+
+.connect-newsletter-form input {
+  flex: 1;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: #111;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.3rem 0;
+  letter-spacing: 0.05em;
+}
+
+.connect-newsletter-form input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.connect-newsletter-form button {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.connect-newsletter-form button:hover { color: #555; }
+
+/* ---- FOOTER ---- */
+.connect-footer {
+  background: #f5f2ed;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4vw;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.connect-footer a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.connect-footer a:hover { color: #333; }
+
+/* Active nav */
+.nav-links a.active {
+  border-bottom: 1px solid #111;
+  padding-bottom: 1px;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .connect-wrap { flex-direction: column; }
+  .connect-photo {
+    flex: none;
+    height: 60vw;
+    min-height: 320px;
+  }
+  .connect-info { padding: 10vw 8vw; }
+  .connect-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}

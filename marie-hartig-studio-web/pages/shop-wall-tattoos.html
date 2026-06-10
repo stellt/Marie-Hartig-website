@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wall Tattoos — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+  <style>
+    body.shop-page { background: #f5f3ef; }
+    .shop-header { padding: 4rem 6vw 2rem; text-align: center; }
+    .shop-header h1 {
+      font-family: 'Velour', serif; font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 3rem); letter-spacing: 0.2em;
+      text-transform: uppercase; color: #111; margin: 0 0 0.6rem;
+    }
+    .shop-header p {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: #888;
+    }
+    .shop-rule { width: 40px; height: 1px; background: #bbb; margin: 1.2rem auto; }
+    .tattoo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 2rem 6vw 6rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .tattoo-card {
+      background: #fff;
+      border-radius: 4px;
+      padding: 1.5rem 1.5rem 1rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tattoo-card-top {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .tattoo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .tattoo-card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .tattoo-card-img img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .tattoo-card-name {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #888; text-align: center; margin: 0.8rem 0 0.3rem;
+    }
+    .tattoo-card-price {
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 0.08em;
+      color: #111; text-align: center; margin-bottom: 0.6rem;
+    }
+    /* Lightbox */
+    .tattoo-lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+    .tattoo-lightbox.open { display: flex; }
+    .tattoo-lightbox-inner {
+      background: #fff; padding: 3rem; max-width: 500px;
+      width: 90vw; position: relative; border-radius: 4px;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .tattoo-lightbox-inner img { max-width: 100%; max-height: 50vh; object-fit: contain; }
+    .tattoo-lightbox-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-family: 'Jost', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #888; cursor: pointer;
+    }
+    .tattoo-lightbox-close:hover { color: #111; }
+    .tattoo-lightbox-prev, .tattoo-lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: none; font-size: 1.4rem; color: #aaa; cursor: pointer;
+    }
+    .tattoo-lightbox-prev { left: -3.5rem; }
+    .tattoo-lightbox-next { right: -3.5rem; }
+    .tattoo-lightbox-prev:hover, .tattoo-lightbox-next:hover { color: #111; }
+    @media (max-width: 768px) {
+      .tattoo-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 4vw 4rem; }
+      .tattoo-lightbox-prev { left: 0.5rem; }
+      .tattoo-lightbox-next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body class="worlds-page shop-page">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="meet-marie.html">Meet Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="shop-header">
+    <h1>Wall Tattoos</h1>
+    <div class="shop-rule"></div>
+    <p>18 designs — click to enlarge</p>
+  </div>
+
+  <div class="tattoo-grid" id="tattoo-grid"></div>
+
+  <div class="tattoo-lightbox" id="tattoo-lb">
+    <div class="tattoo-lightbox-inner">
+      <button class="tattoo-lightbox-close" onclick="closeLb()">&#215; Close</button>
+      <button class="tattoo-lightbox-prev" onclick="shift(-1)">&#8592;</button>
+      <img id="lb-img" src="" alt="Wall Tattoo" />
+      <div id="lb-name" style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.12em;color:#111;text-transform:uppercase;"></div>
+      <div id="lb-price" style="font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:#111;"></div>
+      <button id="lb-add-btn" class="add-to-cart-btn" style="width:100%;margin-top:0.5rem;">Add to Cart</button>
+      <button class="tattoo-lightbox-next" onclick="shift(1)">&#8594;</button>
+    </div>
+  </div>
+
+  <script src="../js/cart.js"></script>
+  <script>
+    const total = 18;
+    const base = '../assets/images/wall tattoos no bg/Tattoo';
+    const PRICE = 45.00;
+    const grid = document.getElementById('tattoo-grid');
+    const lb = document.getElementById('tattoo-lb');
+    const lbImg = document.getElementById('lb-img');
+    const lbName = document.getElementById('lb-name');
+    const lbPrice = document.getElementById('lb-price');
+    const lbAddBtn = document.getElementById('lb-add-btn');
+    let cur = 0;
+
+    for (let i = 1; i <= total; i++) {
+      const card = document.createElement('div');
+      card.className = 'tattoo-card';
+      card.innerHTML = `
+        <div class="tattoo-card-top">
+          <div class="tattoo-card-img" onclick="openLb(${i-1})">
+            <img src="${base}${i}.png" alt="Wall Tattoo ${i}" loading="lazy" />
+          </div>
+          <div class="tattoo-card-name">Wall Tattoo ${i}</div>
+          <div class="tattoo-card-price">€${PRICE.toFixed(2)}</div>
+        </div>
+        <button class="add-to-cart-btn" onclick="Cart.addItem('tattoo-${i}', 'Wall Tattoo ${i}', ${PRICE}, '${base}${i}.png')">Add to Cart</button>
+      `;
+      grid.appendChild(card);
+    }
+
+    function openLb(i) {
+      cur = i;
+      lbImg.src = `${base}${cur+1}.png`;
+      lbName.textContent = `Wall Tattoo ${cur+1}`;
+      lbPrice.textContent = `€${PRICE.toFixed(2)}`;
+      lbAddBtn.onclick = () => Cart.addItem(`tattoo-${cur+1}`, `Wall Tattoo ${cur+1}`, PRICE, `${base}${cur+1}.png`);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    function shift(d) {
+      cur = (cur + d + total) % total;
+      lbImg.src = `${base}${cur+1}.png`;
+      lbName.textContent = `Wall Tattoo ${cur+1}`;
+      lbAddBtn.onclick = () => Cart.addItem(`tattoo-${cur+1}`, `Wall Tattoo ${cur+1}`, PRICE, `${base}${cur+1}.png`);
+    }
+
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') shift(-1);
+      if (e.key === 'ArrowRight') shift(1);
+      if (e.key === 'Escape') closeLb();
+    });
+  </script>
+</body>
+</html>
