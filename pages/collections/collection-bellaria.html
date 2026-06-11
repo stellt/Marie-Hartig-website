@@ -25,20 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/08 BELLARIA/bellaria-1.jpg" alt="Bellaria" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/08 BELLARIA/bellaria-2.jpg" alt="Bellaria" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/08 BELLARIA/bellaria-3.jpg" alt="Bellaria" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/08 BELLARIA/bellaria-4.jpg" alt="Bellaria" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Bellaria</h1>
-        
         <p class="collection-desc">Sometimes even the tiniest of spaces need to be adorned with beauty…like a jewelry box or treasure chest! That was the plan for this Guest WC in a gorgeous apartment overlooking the city.</p>
         <p class="collection-desc">Lots of detail - an abundance of different leaves, flowers, fruits, birds, butterflies and even 2 little monkeys. Lots of wonderful vibrant colours popping out from this beautiful sumptuous dark blue background, including metallic gold paint that shimmers in the right light.</p>
-
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Guest WC. Private Home. Vienna, Austria</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-tamsweg.html">← Previous</a>
@@ -75,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

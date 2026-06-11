@@ -25,21 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-1.jpg" alt="Augsburg Tropics" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-2.jpg" alt="Augsburg Tropics" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-3.jpg" alt="Augsburg Tropics" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-4.jpg" alt="Augsburg Tropics" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-5.jpg" alt="Augsburg Tropics" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Augsburg Tropics</h1>
-        
-        <p class="collection-desc">In this elegant dining room, in the German countryside, in a house, surrounded by lush forests and pasture, the seasons never change! It is always warm, welcoming, fresh and friendly.</p>
-        <p class="collection-desc">At night, with a dimmed chandelier and candle light, it also looks wonderful… all the gold details that were carefully painted into the various elements, wink, glow and glimmer and create such a warm, magical atmosphere. A wonderful wallpainting project - throughout the whole room, I was able to use lots of colour, paint gorgeous plants and many wonderful birds and animals that keep this room company!</p>
-
+        <p class="collection-desc">In this elegant dining room, in the German countryside, in a house surrounded by lush forests and pasture, the seasons never change! It is always warm, welcoming, fresh and friendly.</p>
+        <p class="collection-desc">At night, with a dimmed chandelier and candle light, it also looks wonderful… all the gold details that were carefully painted into the various elements, wink, glow and glimmer and create such a warm, magical atmosphere.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Dining Room. Private Home. Augsburg, Germany</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-sahel-heat.html">← Previous</a>
@@ -76,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

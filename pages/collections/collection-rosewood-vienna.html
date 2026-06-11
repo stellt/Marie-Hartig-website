@@ -33,13 +33,10 @@
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Rosewood Vienna</h1>
-        
         <p class="collection-desc">I was commissioned to do a wall painting in the Tea Room of the new Rosewood hotel in Vienna. You find a garden of nourishing, healing and welcoming plants, trees and flowers from all over the world in this elegant room, where guests are able to have a cozy coffee or bubbly and some delicious chocolates while looking out onto the streets of Vienna.</p>
-
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Tea Room. Rosewood Hotel. Vienna, Austria</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-safari-vibes.html">← Previous</a>
@@ -76,6 +73,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

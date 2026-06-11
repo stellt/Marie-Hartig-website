@@ -33,14 +33,11 @@
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Bodmin Magic</h1>
-        
-        <p class="collection-desc">This enchanting project took me to the Bodmin Moor in Cornwall. The task was to bring the natural beauty of the surrounding countryside, indoors. The energy on this land is pure, clear and peaceful. It was wonderful to be immersed in this special world for a time and also to bring my energy and contribute to this already amazing home.</p>
+        <p class="collection-desc">This enchanting project took me to the Bodmin Moor in Cornwall. The task was to bring the natural beauty of the surrounding countryside, indoors. The energy on this land is pure, clear and peaceful.</p>
         <p class="collection-desc">I love tapping into and exploring the worlds and energies of the places I paint in and people that commission me to do so. It really makes every project I do so different and unique as it is customized for that specific space. It's one of a kind.</p>
-
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Dining Room. Private Home. Cornwall, UK</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-oversize-bloom.html">← Previous</a>
@@ -77,6 +74,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

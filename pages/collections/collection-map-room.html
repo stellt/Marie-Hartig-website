@@ -28,20 +28,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/05 THE MAP ROOM/map-room-4.jpg" alt="The Map Room" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/05 THE MAP ROOM/map-room-5.jpg" alt="The Map Room" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/05 THE MAP ROOM/map-room-6.jpg" alt="The Map Room" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/05 THE MAP ROOM/map-room-7.jpg" alt="The Map Room" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/05 THE MAP ROOM/map-room-8.jpg" alt="The Map Room" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">The Map Room</h1>
-        
-        <p class="collection-desc">The task here, was to bring in details of old existing ship maps of the region dating back to the 1750s. The aim was to establish a "New World" exploration and discovery feel. All around the room we see the beautiful vegetation and gorgeous scenes of the lush Caribbean islands from another time. We see ships in the distance...a small boat on the shore...footsteps in the sand...a new world emerges…it is the beginning of a new era. The rest is history…</p>
-
+        <p class="collection-desc">The task here, was to bring in details of old existing ship maps of the region dating back to the 1750s. The aim was to establish a "New World" exploration and discovery feel. All around the room we see the beautiful vegetation and gorgeous scenes of the lush Caribbean islands from another time.</p>
+        <p class="collection-desc">We see ships in the distance...a small boat on the shore...footsteps in the sand...a new world emerges…it is the beginning of a new era. The rest is history…</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Dining Room. Private Home. Nassau, Bahamas</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-saint-francis.html">← Previous</a>
@@ -78,6 +74,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

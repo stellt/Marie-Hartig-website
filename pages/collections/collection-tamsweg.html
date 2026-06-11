@@ -25,21 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-1.jpg" alt="Tamsweg Memories" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-2.jpg" alt="Tamsweg Memories" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-3.jpg" alt="Tamsweg Memories" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-4.jpg" alt="Tamsweg Memories" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-5.jpg" alt="Tamsweg Memories" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Tamsweg Memories</h1>
-        
-        <p class="collection-desc">Nestled in a breathtaking valley, embraced by pristine mountains, winding rivers, and rolling meadows, this commission came to life - a true labor of love. The setting is a storybook-perfect, traditional, authentic home brimming with charm, the kind of place that feels like it holds a thousand whispered tales.</p>
-        <p class="collection-desc">Every brushstroke held meaning. The towering trees, delicate flowers, the house itself with its familiar warmth, the breathtaking views that stretch beyond the doorstep - all captured in paint. The animals, the beloved pets, even the smallest objects and symbols that carry significance, each detail was carefully placed, ensuring that this piece would forever hold the spirit of the place and the people who call it home.</p>
-
+        <p class="collection-desc">Nestled in a breathtaking valley, embraced by pristine mountains, winding rivers, and rolling meadows, this commission came to life - a true labor of love.</p>
+        <p class="collection-desc">Every brushstroke held meaning. The towering trees, delicate flowers, the house itself with its familiar warmth, the breathtaking views that stretch beyond the doorstep - all captured in paint. The animals, the beloved pets, even the smallest objects and symbols that carry significance, each detail was carefully placed.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Entertainment Space. Private Home. Tamsweg, Austria</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-sweetest.html">← Previous</a>
@@ -76,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

@@ -25,21 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-2.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-3.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-4.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-5.jpg" alt="Rickatschwende Spa Hotel" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Rickatschwende Spa Hotel</h1>
-        
         <p class="collection-desc">The call here was from the west of Austria…close to Switzerland…at a fabulous Spa Hotel with a strange name, tucked away in the mountains with the most beautiful views all round.</p>
-        <p class="collection-desc">The room is an integral part of the main communal living spaces, where the guests can enjoy one of the many medicinal teas on offer. It is place where people come to nurture, heal, restore and invigorate themselves. All the oversize herbs we painted are part of the curated health program there.</p>
-
+        <p class="collection-desc">The room is an integral part of the main communal living spaces, where the guests can enjoy one of the many medicinal teas on offer. It is a place where people come to nurture, heal, restore and invigorate themselves. All the oversize herbs we painted are part of the curated health program there.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Spa Hotel. Dornbirn, Austria</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-map-room.html">← Previous</a>
@@ -76,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

@@ -25,20 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg" alt="Das Buben Bad" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-2.jpg" alt="Das Buben Bad" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-3.jpg" alt="Das Buben Bad" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-4.jpg" alt="Das Buben Bad" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Das Buben Bad</h1>
-        
         <p class="collection-desc">What was once called 'das Buben Bad' or "the Boys bathroom" has now been totally transformed….it is now THE Bathroom.</p>
         <p class="collection-desc">Deep in the forest in south western Germany, in a beautiful home full of history and memories, they now have wonderful new views all round: lush faraway landscapes, soft trees and flowers and even a hoopoe for company. Summer is not going anywhere. In this space, it's here to stay.</p>
-
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Bathroom. Private Home. Breitenau, Germany</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-bodmin-magic.html">← Previous</a>
@@ -75,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

@@ -25,19 +25,15 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg" alt="Oversize Bloom" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-2.jpg" alt="Oversize Bloom" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-3.jpg" alt="Oversize Bloom" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-4.jpg" alt="Oversize Bloom" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Oversize Bloom</h1>
-        
-        <p class="collection-desc">Here I was commissioned to paint this long dark corridor and with the task to bring some warmth, light, and life into the mix. It is in a lovely apartment in the heart of Munich.</p>
-
+        <p class="collection-desc">Here I was commissioned to paint this long dark corridor with the task to bring some warmth, light, and life into the mix. It is in a lovely apartment in the heart of Munich.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Corridor. Private Home. Munich, Germany</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-augsburg-tropics.html">← Previous</a>
@@ -74,6 +70,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

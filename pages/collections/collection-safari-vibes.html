@@ -25,19 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg" alt="Safari Vibes" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/10 SAFARI VIBES/safari-vibes-2.jpg" alt="Safari Vibes" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/10 SAFARI VIBES/safari-vibes-3.jpg" alt="Safari Vibes" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/10 SAFARI VIBES/safari-vibes-4.jpg" alt="Safari Vibes" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Safari Vibes</h1>
-        
-        <p class="collection-desc">The Bahamas surely is a slice of paradise..but it does not have everything! The fabulous fauna and flora of the African Savannah for example and we were able to bring those in, in this fresh and cheerful design with a very considered colour palate. Zebra, Giraffe, leopard, cheetahs, Dung beetles and even an Elephant…if you can find it…all framed with a beautiful pattern inspired by west African wall art.</p>
-
+        <p class="collection-desc">The Bahamas surely is a slice of paradise..but it does not have everything! The fabulous fauna and flora of the African Savannah for example — and we were able to bring those in, in this fresh and cheerful design with a very considered colour palette.</p>
+        <p class="collection-desc">Zebra, Giraffe, leopard, cheetahs, Dung beetles and even an Elephant…if you can find it…all framed with a beautiful pattern inspired by west African wall art.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Children's Room. Private Home. Nassau, Bahamas</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-mixed-worlds.html">← Previous</a>
@@ -74,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

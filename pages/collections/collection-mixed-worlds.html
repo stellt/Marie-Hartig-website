@@ -33,13 +33,11 @@
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Mixed Worlds Landscape</h1>
-        
-        <p class="collection-desc">A new world has been created. This time in a beautiful sun flooded dining room of an elegant home, high in the mountains surrounded by snow and incredible views. Totally personal and unique - this wall painting tells a family story and combines all their favourite places, where they have lived and have found inspiration. Bagan, Bauhina blossoms, mangos, monkeys, sleeping Buddhas, and the alps all around…this is a mix of worlds where they feel totally at home and can recall and share their most cherished memories.</p>
-
+        <p class="collection-desc">A new world has been created. This time in a beautiful sun flooded dining room of an elegant home, high in the mountains surrounded by snow and incredible views.</p>
+        <p class="collection-desc">Totally personal and unique - this wall painting tells a family story and combines all their favourite places. Bagan, Bauhina blossoms, mangos, monkeys, sleeping Buddhas, and the alps all around…this is a mix of worlds where they feel totally at home and can recall and share their most cherished memories.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Dining Room. Private Home. Hinterthal, Austria</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-bellaria.html">← Previous</a>
@@ -76,6 +74,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

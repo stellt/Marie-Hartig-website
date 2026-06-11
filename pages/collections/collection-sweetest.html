@@ -25,20 +25,16 @@
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-1.jpg" alt="Sweetest Dreams" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-2.jpg" alt="Sweetest Dreams" loading="lazy" /></div>
       <div class="collection-grid-item"><img src="../../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-3.jpg" alt="Sweetest Dreams" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-4.jpg" alt="Sweetest Dreams" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/21 SWEETEST DREAMS/sweetest-5.jpg" alt="Sweetest Dreams" loading="lazy" /></div>
     </div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
         <h1 class="collection-title">Sweetest Dreams</h1>
-        
-        <p class="collection-desc">The location: A gorgeous bedroom, in the most wonderful modern home on the foot of the lush green hills in a town, close to Zurich. The concept: a popular one: a stunning background colour of choice and then I go for it and paint all your favourite trees, birds and plants (and whatever else) in to the room in a composition and colour scheme that really works for the space. It has a 'chinoiserie' feel to it - at least my interpretation of it. I love to do this style and the room ends up looking cosy, warm, elevated and lovely. Positive vibes all round.</p>
-
+        <p class="collection-desc">The location: A gorgeous bedroom, in the most wonderful modern home on the foot of the lush green hills in a town, close to Zurich.</p>
+        <p class="collection-desc">The concept: a popular one: a stunning background colour of choice and then I go for it and paint all your favourite trees, birds and plants into the room in a composition and colour scheme that really works for the space. It has a chinoiserie feel to it. I love to do this style and the room ends up looking cosy, warm, elevated and lovely. Positive vibes all round.</p>
         <div class="collection-meta">
           <div class="collection-meta-item">Location: Bedroom. Private Home. Feusisberg, Switzerland</div>
         </div>
-      </div>
       </div>
       <div class="collection-nav">
         <a href="collection-rickatschwende.html">← Previous</a>
@@ -75,6 +71,23 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
+  </script>
+  <script>
+    function fitGrid() {
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
+      grid.style.gridAutoRows = `${rowH}px`;
+    }
+    fitGrid();
+    window.addEventListener('resize', fitGrid);
   </script>
 </body>
 </html>

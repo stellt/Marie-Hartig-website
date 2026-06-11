@@ -62,12 +62,12 @@
   text-align: center;
 }
 
-/* Studio name — Velour bold, 1.5 sizes bigger than before */
+/* Studio name — Velour bold, sized to fit viewport like editorial hero */
 .hero-title {
   font-family: 'Velour', serif;
   font-weight: 700;
-  font-size: clamp(1.6rem, 3.2vw, 3.4rem);
-  letter-spacing: 0.3em;
+  font-size: clamp(1.8rem, 5.5vw, 5.5rem);
+  letter-spacing: 0.08em;
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1;
@@ -81,31 +81,30 @@
   width: 24px;
   height: 1px;
   background: rgba(255,255,255,0.4);
-  margin: 1rem auto;
+  margin: 1.2rem auto;
   opacity: 1;
 }
 
-/* Subtitle — Alex Brush, bold appearance via stroke + shadow */
+/* Subtitle — Jost weight 400, uppercase, wide tracking */
 .hero-subtitle {
-  font-family: 'AlexBrush', cursive;
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
-  font-size: clamp(1rem, 1.6vw, 1.8rem);
-  letter-spacing: 0.02em;
+  font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   pointer-events: all;
   opacity: 1;
-  -webkit-text-stroke: 0.3px rgba(255,255,255,0.6);
 }
 
 .hero-subtitle a {
-  color: #ffffff;
+  color: rgba(255,255,255,0.85);
   text-decoration: none;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.6), 0 0 30px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   transition: color 0.3s ease;
 }
 
 .hero-subtitle a:hover {
   color: #ffffff;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.7);
 }
 
 /* ---- Counter ---- */
@@ -128,6 +127,6 @@
 }
 
 @media (max-width: 768px) {
-  .hero-title { letter-spacing: 0.14em; }
+  .hero-title { font-size: clamp(1.4rem, 7vw, 3rem); letter-spacing: 0.06em; }
   .slide-counter { bottom: 1.2rem; right: 1.5rem; }
 }
