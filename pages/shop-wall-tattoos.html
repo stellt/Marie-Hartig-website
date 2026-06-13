@@ -46,7 +46,7 @@
     .tattoo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
     .tattoo-card-img {
       width: 100%;
-      aspect-ratio: 1/1;
+      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -54,6 +54,7 @@
     }
     .tattoo-card-img img {
       width: 100%; height: 100%; object-fit: contain; display: block;
+      filter: brightness(1.3);
     }
     .tattoo-card-name {
       font-family: 'Jost', sans-serif; font-weight: 300;
@@ -77,7 +78,7 @@
       width: 90vw; position: relative; border-radius: 4px;
       display: flex; flex-direction: column; align-items: center; gap: 1rem;
     }
-    .tattoo-lightbox-inner img { max-width: 100%; max-height: 50vh; object-fit: contain; }
+    .tattoo-lightbox-inner img { max-width: 100%; max-height: 50vh; object-fit: contain; filter: brightness(1.3); }
     .tattoo-lightbox-close {
       position: absolute; top: 1rem; right: 1.2rem;
       background: none; border: none; font-family: 'Jost', sans-serif;
@@ -141,7 +142,7 @@
   <div class="shop-header">
     <h1>Wall Tattoos</h1>
     <div class="shop-rule"></div>
-    <p>18 designs — click to enlarge</p>
+    <p>28 designs — click to enlarge</p>
   </div>
 
   <div class="tattoo-grid" id="tattoo-grid"></div>
@@ -160,7 +161,7 @@
 
   <script src="../js/cart.js"></script>
   <script>
-    const total = 18;
+    const total = 28;
     const base = '../assets/images/wall tattoos no bg/Tattoo';
     const PRICE = 45.00;
     const grid = document.getElementById('tattoo-grid');

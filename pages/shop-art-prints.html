@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Original Art Prints — Marie Hartig Studio</title>
+  <title>Art Prints — Marie Hartig Studio</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/worlds.css" />
   <link rel="stylesheet" href="../css/cart.css" />
@@ -15,11 +15,75 @@
       font-size: clamp(1.6rem, 3vw, 3rem); letter-spacing: 0.2em;
       text-transform: uppercase; color: #111; margin: 0 0 0.6rem;
     }
-    .shop-rule { width: 40px; height: 1px; background: #bbb; margin: 1.2rem auto; }
-    .prints-coming-soon {
-      text-align: center; padding: 6rem 2rem;
+    .shop-header p {
       font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: #aaa;
+      font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: #888;
+    }
+    .shop-rule { width: 40px; height: 1px; background: #bbb; margin: 1.2rem auto; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 2rem 6vw 6rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .tattoo-card {
+      background: #fff; border-radius: 4px; padding: 1.5rem 1.5rem 1rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .tattoo-card-top { display: flex; flex-direction: column; flex: 1; }
+    .tattoo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .tattoo-card-img {
+      width: 100%; aspect-ratio: 1/1;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .tattoo-card-img img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+      filter: brightness(1);
+    }
+    .tattoo-card-name {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #888; text-align: center; margin: 0.8rem 0 0.3rem;
+    }
+    .tattoo-card-price {
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 0.08em;
+      color: #111; text-align: center; margin-bottom: 0.6rem;
+    }
+    .tattoo-lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+    .tattoo-lightbox.open { display: flex; }
+    .tattoo-lightbox-inner {
+      background: #fff; padding: 3rem; max-width: 500px;
+      width: 90vw; position: relative; border-radius: 4px;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .tattoo-lightbox-inner img { max-width: 100%; max-height: 50vh; object-fit: contain; filter: brightness(1); }
+    .tattoo-lightbox-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-family: 'Jost', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #888; cursor: pointer;
+    }
+    .tattoo-lightbox-close:hover { color: #111; }
+    .tattoo-lightbox-prev, .tattoo-lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: none; font-size: 1.4rem; color: #aaa; cursor: pointer;
+    }
+    .tattoo-lightbox-prev { left: -3.5rem; }
+    .tattoo-lightbox-next { right: -3.5rem; }
+    .tattoo-lightbox-prev:hover, .tattoo-lightbox-next:hover { color: #111; }
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 4vw 6rem; }
+      .tattoo-lightbox-prev { left: 0.5rem; }
+      .tattoo-lightbox-next { right: 0.5rem; }
     }
   </style>
 </head>
@@ -45,7 +109,7 @@
       </li>
     </ul>
   </nav>
-  <!-- Cart Overlay & Drawer -->
+
   <div class="cart-overlay" id="cart-overlay"></div>
   <div class="cart-drawer" id="cart-drawer">
     <div class="cart-drawer-header">
@@ -63,11 +127,109 @@
   </div>
 
   <div class="shop-header">
-    <h1>Original Art Prints</h1>
+    <h1>Art Prints</h1>
     <div class="shop-rule"></div>
+    <p>12 designs — click to enlarge</p>
   </div>
-  <div class="prints-coming-soon">New collection launching soon</div>
+
+  <div class="product-grid" id="print-grid"></div>
+
+  <div class="tattoo-lightbox" id="product-lb">
+    <div class="tattoo-lightbox-inner">
+      <button class="tattoo-lightbox-close" onclick="closeLb()">&#215; Close</button>
+      <button class="tattoo-lightbox-prev" onclick="shiftLb(-1)">&#8592;</button>
+      <img id="lb-img" src="" alt="" />
+      <div id="lb-name" style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.12em;color:#111;text-transform:uppercase;"></div>
+      <div id="lb-price" style="font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:#111;"></div>
+      <button id="lb-add-btn" class="add-to-cart-btn" style="width:100%;margin-top:0.5rem;">Add to Cart</button>
+      <button class="tattoo-lightbox-next" onclick="shiftLb(1)">&#8594;</button>
+    </div>
+  </div>
 
   <script src="../js/cart.js"></script>
+  <script>
+    const PRINT_PRICE = 35.00; // <- update price here
+    const PRINT_BASE  = '../assets/images/wall stickers/Sticker';
+    const PRINT_EXT   = '.png';
+
+    // Display names — filenames stay Sticker1.png through Sticker12.png
+    const PRINT_NAMES = [
+      'Art Print 1',
+      'Art Print 2',
+      'Art Print 3',
+      'Art Print 4',
+      'Celosia',
+      'Guava',
+      'Belle',
+      'Indian Shot',
+      'Neem',
+      'Twins',
+      'Jasmine',
+      'Henry and the Mangos'
+    ];
+
+    let lbItems = [];
+    let lbCur   = 0;
+    const lb       = document.getElementById('product-lb');
+    const lbImg    = document.getElementById('lb-img');
+    const lbName   = document.getElementById('lb-name');
+    const lbPrice  = document.getElementById('lb-price');
+    const lbAddBtn = document.getElementById('lb-add-btn');
+
+    const printGrid = document.getElementById('print-grid');
+    PRINT_NAMES.forEach((name, idx) => {
+      const i   = idx + 1;
+      const src = `${PRINT_BASE}${i}${PRINT_EXT}`;
+      const card = document.createElement('div');
+      card.className = 'tattoo-card';
+      card.innerHTML = `
+        <div class="tattoo-card-top">
+          <div class="tattoo-card-img" onclick="openLb(${idx})">
+            <img src="${src}" alt="${name}" loading="lazy" />
+          </div>
+          <div class="tattoo-card-name">${name}</div>
+          <div class="tattoo-card-price">€${PRINT_PRICE.toFixed(2)}</div>
+        </div>
+        <button class="add-to-cart-btn" onclick="Cart.addItem('print-${i}', '${name}', ${PRINT_PRICE}, '${src}')">Add to Cart</button>
+      `;
+      printGrid.appendChild(card);
+    });
+
+    function openLb(i) {
+      lbItems = PRINT_NAMES.map((name, n) => ({
+        src:   `${PRINT_BASE}${n+1}${PRINT_EXT}`,
+        name:  name,
+        price: PRINT_PRICE,
+        id:    `print-${n+1}`
+      }));
+      lbCur = i;
+      renderLb();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderLb() {
+      const item = lbItems[lbCur];
+      lbImg.src           = item.src;
+      lbImg.alt           = item.name;
+      lbName.textContent  = item.name;
+      lbPrice.textContent = `€${item.price.toFixed(2)}`;
+      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.src);
+    }
+
+    function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    function shiftLb(d) {
+      lbCur = (lbCur + d + lbItems.length) % lbItems.length;
+      renderLb();
+    }
+
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  shiftLb(-1);
+      if (e.key === 'ArrowRight') shiftLb(1);
+      if (e.key === 'Escape')     closeLb();
+    });
+  </script>
 </body>
 </html>

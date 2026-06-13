@@ -254,7 +254,7 @@
   display: block;
   width: 100%;
   padding: 0.7rem 1rem;
-  background: #111;
+  background: #6b6b6b;
   color: #fff;
   border: none;
   font-family: 'Jost', sans-serif;
@@ -268,7 +268,7 @@
   margin-top: 0.5rem;
 }
 
-.add-to-cart-btn:hover { background: #333; }
+.add-to-cart-btn:hover { background: #3a3a3a; }
 
 @media (max-width: 768px) {
   .cart-drawer { width: 100vw; right: -100vw; }

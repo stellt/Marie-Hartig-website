@@ -14,6 +14,8 @@
       height: calc(100vh - 64px);
       margin-top: 64px;
       overflow: hidden;
+      gap: 3px;
+      background: #fff;
     }
     .shop-panel {
       flex: 1;
@@ -66,20 +68,10 @@
       display: block;
       margin-top: 0.6rem;
     }
-    .shop-panel-divider {
-      width: 1px;
-      height: calc(100vh - 64px);
-      background: rgba(255,255,255,0.25);
-      position: absolute;
-      left: 50%;
-      top: 64px;
-      z-index: 10;
-      pointer-events: none;
-    }
+    .shop-panel-divider { display: none; }
     @media (max-width: 768px) {
-      .shop-panels { flex-direction: column; height: auto; min-height: calc(100vh - 56px); margin-top: 56px; }
-      .shop-panel { height: 50vh; }
-      .shop-panel-divider { display: none; }
+      .shop-panels { flex-direction: column; height: auto; min-height: calc(100vh - 56px); margin-top: 56px; gap: 2px; }
+      .shop-panel { height: 34vh; }
     }
   </style>
 </head>
@@ -133,10 +125,18 @@
       </div>
     </a>
     <a class="shop-panel" href="shop-art-prints.html">
-      <img src="../assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-1.jpg" alt="Original Art Prints" />
+      <img src="../assets/images/ThumbnailArtPrints.jpeg" alt="Original Art Prints" />
       <div class="shop-panel-overlay"></div>
       <div class="shop-panel-label">
         Original Art Prints
+        <span class="shop-panel-sub">Shop the collection</span>
+      </div>
+    </a>
+    <a class="shop-panel" href="shop-wallpapers.html">
+      <img src="../assets/images/ThumbnailWallpaper.jpeg" alt="Wallpapers" />
+      <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-label">
+        Wallpapers
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
