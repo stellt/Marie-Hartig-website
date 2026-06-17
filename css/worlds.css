@@ -213,8 +213,10 @@ body.worlds-page {
 
   .nav.nav-open .nav-links {
     max-height: calc(100vh - 56px);
+    max-height: calc(100dvh - 56px);
     overflow-y: auto;
     visibility: visible;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links li {
