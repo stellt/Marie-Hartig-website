@@ -4,7 +4,7 @@
    ============================================ */
 
 .collection-page {
-  background: #f5f2ed;
+  background: #ffffff;
 }
 
 /* ============================================
@@ -12,8 +12,9 @@
    ============================================ */
 .collection-wrap {
   display: flex;
-  height: calc(100vh - 64px);
-  margin-top: 64px;
+  gap: 2vw;
+  height: calc(100vh - 64px - 4vw);
+  margin: calc(64px + 2vw) 2vw 2vw;
   overflow: hidden;
 }
 
@@ -42,19 +43,14 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.5s ease;
-}
-
-.collection-grid-item:hover img {
-  transform: scale(1.03);
 }
 
 /* ---- RIGHT — Text panel ---- */
 .collection-info {
-  flex: 0 0 30%;
-  min-width: 260px;
-  max-width: 400px;
-  background: #f5f2ed;
+  flex: 0 0 32%;
+  min-width: 280px;
+  max-width: 460px;
+  background: #dedad3;
   padding: 3.5vw 3vw 2.5vw;
   display: flex;
   flex-direction: column;
@@ -83,7 +79,7 @@
 .collection-title {
   font-family: 'Velour', serif;
   font-weight: 700;
-  font-size: clamp(1.2rem, 2.2vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #111;
@@ -212,7 +208,7 @@
    FOOTER
    ============================================ */
 .collection-footer {
-  background: #f5f2ed;
+  background: #ffffff;
   border-top: 1px solid rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
@@ -242,19 +238,32 @@
 @media (max-width: 768px) {
   .collection-wrap {
     flex-direction: column;
+    gap: 0;
     height: auto;
+    margin: 56px 0 0;
     overflow: visible;
   }
-  .collection-grid {
-    height: 60vw;
-    grid-template-columns: repeat(2, 1fr);
-  }
   .collection-info {
+    order: -1;
     flex: none;
     max-width: 100%;
     height: auto;
-    padding: 8vw 6vw;
+    padding: 10vw 7vw;
     overflow: visible;
+  }
+  .collection-info-top {
+    overflow: visible;
+  }
+  .collection-desc {
+    overflow: visible;
+  }
+  .collection-grid {
+    order: 2;
+    height: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .collection-grid-item {
+    aspect-ratio: 1/1;
   }
   .collection-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
 }

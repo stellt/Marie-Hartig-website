@@ -3,14 +3,15 @@
    ============================================ */
 
 .connect-page {
-  background: #f5f2ed;
+  background: #ffffff;
 }
 
 /* ---- Main split layout ---- */
 .connect-wrap {
   display: flex;
-  min-height: calc(100vh - 64px);
-  margin-top: 64px;
+  gap: 2vw;
+  min-height: calc(100vh - 64px - 4vw);
+  margin: 64px 2vw 2vw;
 }
 
 /* ---- LEFT — Portrait photo (white bg) ---- */
@@ -30,7 +31,7 @@
 /* ---- RIGHT — Info panel (off-white) ---- */
 .connect-info {
   flex: 1;
-  background: #f5f2ed;
+  background: #dedad3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,13 +51,7 @@
   font-size: clamp(1.6rem, 3vw, 2.6rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ffffff;
-  text-shadow:
-    -1px -1px 0 #b8af9d,
-    1px -1px 0 #b8af9d,
-    -1px 1px 0 #b8af9d,
-    1px 1px 0 #b8af9d,
-    0 2px 6px rgba(0,0,0,0.08);
+  color: #111;
   margin-bottom: 2rem;
   line-height: 1.1;
 }
@@ -149,7 +144,7 @@
 
 /* ---- FOOTER ---- */
 .connect-footer {
-  background: #f5f2ed;
+  background: #ffffff;
   border-top: 1px solid rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
@@ -178,13 +173,37 @@
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 900px) {
-  .connect-wrap { flex-direction: column; }
+  .connect-wrap {
+    flex-direction: column;
+    gap: 0;
+    margin: 56px 0 0;
+  }
   .connect-photo {
     flex: none;
-    height: 60vw;
+    height: 85vw;
     min-height: 320px;
+    max-height: 480px;
   }
-  .connect-info { padding: 10vw 8vw; }
+  .connect-info {
+    justify-content: flex-start;
+    padding: 12vw 8vw 14vw;
+  }
+  .connect-rule {
+    margin-bottom: 2rem;
+  }
+  .connect-heading {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    margin-bottom: 1.6rem;
+  }
+  .connect-socials {
+    margin-bottom: 2.4rem;
+  }
+  .connect-socials .sep {
+    margin: 0 0.6rem;
+  }
+  .connect-newsletter-form {
+    max-width: 100%;
+  }
   .connect-footer {
     flex-direction: column;
     gap: 0.5rem;
