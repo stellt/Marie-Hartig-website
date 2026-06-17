@@ -238,9 +238,9 @@
 @media (max-width: 768px) {
   .collection-wrap {
     flex-direction: column;
-    gap: 0;
+    gap: 2vw;
     height: auto;
-    margin: 56px 0 0;
+    margin: 56px 2vw 2vw;
     overflow: visible;
   }
   .collection-info {
@@ -260,6 +260,8 @@
   .collection-grid {
     order: 2;
     height: auto;
+    gap: 2vw;
+    background: #ffffff;
     grid-template-columns: 1fr;
   }
   .collection-grid-item {
