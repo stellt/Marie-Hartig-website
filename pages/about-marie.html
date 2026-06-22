@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Marie — Marie Hartig Studio" />
+  <title>About Marie — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/meet-marie.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+
+  <style>
+    /* ============================================
+       ABOUT MARIE PAGE — follows process.html layout
+       Two parts, three sections each, alternating photo side
+       ============================================ */
+
+    .process-section {
+      display: flex;
+      gap: 2vw;
+      height: calc(100vh - 64px - 4vw);
+      margin: 2vw 2vw;
+    }
+
+    .process-photo {
+      flex: 0 0 42%;
+      width: 42%;
+      max-width: 42%;
+      background: #ddd8d0;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .process-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .process-text {
+      flex: 1;
+      background: #dedad3;
+      display: flex;
+      align-items: center;
+      padding: 4vw 6vw;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      overflow-y: auto;
+    }
+
+    @media (min-width: 901px) {
+      .process-text {
+        align-items: flex-start;
+        padding-top: 5vw;
+      }
+
+      .process-section.photo-right {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .process-text-inner {
+      max-width: 560px;
+    }
+
+    .process-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,0,0,0.18);
+      margin-bottom: 1.6rem;
+    }
+
+    .process-heading {
+      font-family: 'Velour', serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 1.2rem;
+      line-height: 1.1;
+    }
+
+    .process-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+      line-height: 1.55;
+      color: #333;
+      margin-bottom: 0.85rem;
+    }
+
+    .process-body:last-child { margin-bottom: 0; }
+
+    /* Part divider label — sits above the first section of each part */
+    .part-label-wrap {
+      margin: 2vw 2vw 0;
+    }
+
+    .part-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      padding: 1.2rem 0 0.6rem;
+    }
+
+    .section-divider {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .process-section {
+        flex-direction: column;
+        gap: 0;
+        height: auto;
+        margin: 0;
+      }
+      .process-photo {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 65vw;
+        min-height: 300px;
+      }
+      .process-section.photo-right {
+        flex-direction: column;
+      }
+      .process-text {
+        padding: 10vw 8vw;
+      }
+      .part-label-wrap {
+        margin: 0;
+        padding: 0 6vw;
+      }
+    }
+
+  </style>
+</head>
+<body class="worlds-page meet-marie-page">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main navigation">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-toggle-bar"><span></span><span></span><span></span></span>
+    </button>
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="about-marie.html" class="active">About Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- PART 1 -->
+    <div class="part-label-wrap"><p class="part-label">Part One</p></div>
+
+    <!-- SECTION 1 — pink mural / Marie bio -->
+    <section class="process-section">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h1 class="process-heading">Meet Marie</h1>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 2 — placeholder -->
+    <section class="process-section photo-right">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Lorem Ipsum</h2>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 3 — placeholder -->
+    <section class="process-section">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Lorem Ipsum</h2>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PART 2 -->
+    <div class="part-label-wrap"><p class="part-label">Part Two</p></div>
+
+    <!-- SECTION 4 — placeholder -->
+    <section class="process-section photo-right">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Lorem Ipsum</h2>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 5 — placeholder -->
+    <section class="process-section">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Lorem Ipsum</h2>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SECTION 6 — placeholder -->
+    <section class="process-section photo-right">
+
+      <div class="process-photo">
+        <img src="../assets/images/marie-portrait.jpg" alt="Marie Hartig" />
+      </div>
+
+      <div class="process-text">
+        <div class="process-text-inner">
+          <div class="process-rule"></div>
+          <h2 class="process-heading">Lorem Ipsum</h2>
+          <p class="process-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="process-body">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="about-footer">
+    <span class="about-footer-left">
+      <a href="contact.html">Connect</a> | <a href="#">Terms of Service</a>
+    </span>
+    <span class="about-footer-right">© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
