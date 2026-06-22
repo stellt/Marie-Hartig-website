@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../../css/main.css" />
   <link rel="stylesheet" href="../../css/worlds.css" />
   <link rel="stylesheet" href="../../css/collection.css" />
+  <link rel="stylesheet" href="../../css/cart.css" />
 </head>
 <body class="worlds-page collection-page">
 
@@ -19,9 +20,38 @@
       <li><a href="../about-marie.html">About Marie</a></li>
       <li><a href="../portfolio.html" class="active">Portfolio</a></li>
       <li><a href="../shop.html">Shop</a></li>
+      <li><a href="../process.html">Process</a></li>
       <li><a href="../contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
     </ul>
   </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
 
   <div class="collection-wrap">
     <div class="collection-grid">
@@ -102,6 +132,7 @@
     fitGrid();
     window.addEventListener('resize', fitGrid);
   </script>
+  <script src="../../js/cart.js"></script>
   <script src="../../js/nav.js"></script>
 </body>
 </html>
