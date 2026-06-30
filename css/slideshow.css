@@ -85,12 +85,12 @@
   opacity: 1;
 }
 
-/* Subtitle — Velour Bold (genuine bold weight), uppercase, wide tracking */
+/* Subtitle — Jost weight 400, uppercase, wide tracking */
 .hero-subtitle {
-  font-family: 'Velour', serif;
-  font-weight: 700;
-  font-size: clamp(1rem, 1.3vw, 1.3rem);
-  letter-spacing: 0.22em;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   pointer-events: all;
   opacity: 1;
