@@ -103,6 +103,42 @@ const Cart = (() => {
     document.body.style.overflow = '';
   }
 
+  async function checkout() {
+    const items = getItems();
+    if (items.length === 0) return;
+
+    const btn = document.querySelector('.cart-checkout-btn');
+    const originalText = btn ? btn.textContent : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Redirecting…';
+    }
+
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      });
+
+      if (!res.ok) throw new Error('Checkout session creation failed');
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong starting checkout. Please try again in a moment.');
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    }
+  }
+
   function init() {
     updateBadge();
     renderDrawer();
@@ -119,9 +155,13 @@ const Cart = (() => {
     // Close button
     const closeBtn = document.getElementById('cart-close');
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+    // Checkout button
+    const checkoutBtn = document.querySelector('.cart-checkout-btn');
+    if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
   }
 
   document.addEventListener('DOMContentLoaded', init);
 
-  return { addItem, removeItem, updateQty, openDrawer, closeDrawer, getItems, getTotal };
+  return { addItem, removeItem, updateQty, openDrawer, closeDrawer, getItems, getTotal, checkout };
 })();

@@ -19,6 +19,17 @@
     {"name": "Wall Tattoo 15", "image": "../assets/images/wall tattoos no bg/Tattoo15.png", "price": 45.00},
     {"name": "Wall Tattoo 16", "image": "../assets/images/wall tattoos no bg/Tattoo16.png", "price": 45.00},
     {"name": "Wall Tattoo 17", "image": "../assets/images/wall tattoos no bg/Tattoo17.png", "price": 45.00},
-    {"name": "Wall Tattoo 18", "image": "../assets/images/wall tattoos no bg/Tattoo18.png", "price": 45.00}
+    {"name": "Wall Tattoo 18", "image": "../assets/images/wall tattoos no bg/Tattoo18.png", "price": 45.00},
+    {"name": "Wall Tattoo 19", "image": "../assets/images/wall tattoos no bg/Tattoo19.png", "price": 45.00},
+    {"name": "Wall Tattoo 20", "image": "../assets/images/wall tattoos no bg/Tattoo20.png", "price": 45.00},
+    {"name": "Wall Tattoo 21", "image": "../assets/images/wall tattoos no bg/Tattoo21.png", "price": 45.00},
+    {"name": "Wall Tattoo 22", "image": "../assets/images/wall tattoos no bg/Tattoo22.png", "price": 45.00},
+    {"name": "Wall Tattoo 23", "image": "../assets/images/wall tattoos no bg/Tattoo23.png", "price": 45.00},
+    {"name": "Wall Tattoo 24", "image": "../assets/images/wall tattoos no bg/Tattoo24.png", "price": 45.00},
+    {"name": "Wall Tattoo 25", "image": "../assets/images/wall tattoos no bg/Tattoo25.png", "price": 45.00},
+    {"name": "Wall Tattoo 26", "image": "../assets/images/wall tattoos no bg/Tattoo26.png", "price": 45.00},
+    {"name": "Wall Tattoo 27", "image": "../assets/images/wall tattoos no bg/Tattoo27.png", "price": 45.00},
+    {"name": "Wall Tattoo 28", "image": "../assets/images/wall tattoos no bg/Tattoo28.png", "price": 45.00}
+
   ]
 }

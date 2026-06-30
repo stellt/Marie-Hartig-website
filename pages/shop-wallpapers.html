@@ -125,7 +125,7 @@
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">€0.00</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
     </div>
   </div>
 
@@ -152,11 +152,6 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-    const WALLPAPER_TOTAL = 17;
-    const WALLPAPER_PRICE = 120.00; // <- update price here
-    const WALLPAPER_BASE  = '../assets/images/wallpapers/Wallpaper';
-    const WALLPAPER_EXT   = '.jpeg';
-
     let lbItems = [];
     let lbCur   = 0;
     const lb       = document.getElementById('product-lb');
@@ -164,33 +159,35 @@
     const lbName   = document.getElementById('lb-name');
     const lbPrice  = document.getElementById('lb-price');
     const lbAddBtn = document.getElementById('lb-add-btn');
-
     const wallpaperGrid = document.getElementById('wallpaper-grid');
-    for (let i = 1; i <= WALLPAPER_TOTAL; i++) {
-      const src  = `${WALLPAPER_BASE}${i}${WALLPAPER_EXT}`;
-      const name = `Wallpaper ${i}`;
-      const card = document.createElement('div');
-      card.className = 'tattoo-card';
-      card.innerHTML = `
-        <div class="tattoo-card-top">
-          <div class="tattoo-card-img" onclick="openLb(${i-1})">
-            <img src="${src}" alt="${name}" loading="lazy" />
-          </div>
-          <div class="tattoo-card-name">${name}</div>
-          <div class="tattoo-card-price">€${WALLPAPER_PRICE.toFixed(2)}</div>
-        </div>
-        <button class="add-to-cart-btn" onclick="Cart.addItem('wallpaper-${i}', '${name}', ${WALLPAPER_PRICE}, '${src}')">Add to Cart</button>
-      `;
-      wallpaperGrid.appendChild(card);
-    }
+
+    fetch('../_content/shop-wallpapers.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
+        lbItems = (data.wallpapers || []).map((item, i) => ({ ...item, id: `wallpaper-${i}` }));
+        lbItems.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = 'tattoo-card';
+          card.innerHTML = `
+            <div class="tattoo-card-top">
+              <div class="tattoo-card-img" onclick="openLb(${idx})">
+                <img src="${item.image}" alt="${item.name}" loading="lazy" />
+              </div>
+              <div class="tattoo-card-name">${item.name}</div>
+              <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="Cart.addItem('${item.id}', '${item.name}', ${item.price}, '${item.image}')">Add to Cart</button>
+          `;
+          wallpaperGrid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load wallpapers:', err);
+        wallpaperGrid.innerHTML = '<p style="text-align:center;color:#888;">Unable to load products right now.</p>';
+      });
 
     function openLb(i) {
-      lbItems = Array.from({length: WALLPAPER_TOTAL}, (_, n) => ({
-        src:   `${WALLPAPER_BASE}${n+1}${WALLPAPER_EXT}`,
-        name:  `Wallpaper ${n+1}`,
-        price: WALLPAPER_PRICE,
-        id:    `wallpaper-${n+1}`
-      }));
       lbCur = i;
       renderLb();
       lb.classList.add('open');
@@ -199,11 +196,11 @@
 
     function renderLb() {
       const item = lbItems[lbCur];
-      lbImg.src           = item.src;
+      lbImg.src           = item.image;
       lbImg.alt           = item.name;
       lbName.textContent  = item.name;
       lbPrice.textContent = `€${item.price.toFixed(2)}`;
-      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.src);
+      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.image);
     }
 
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }

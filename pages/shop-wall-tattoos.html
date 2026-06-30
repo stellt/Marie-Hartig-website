@@ -159,7 +159,7 @@
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">€0.00</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
     </div>
   </div>
 
@@ -170,7 +170,7 @@
   </div>
 
   <div class="compose-btn-wrap">
-    <a class="compose-page-btn" href="shop-compose.html">✦ &nbsp; Create Your Own Composition</a>
+    <a class="compose-page-btn" href="shop-compose.html">✦ &nbsp; Click Here for Custom Compositions</a>
   </div>
 
   <div class="tattoo-grid" id="tattoo-grid"></div>
@@ -190,49 +190,61 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-    const total = 28;
-    const base = '../assets/images/wall tattoos no bg/Tattoo';
-    const PRICE = 45.00;
     const grid = document.getElementById('tattoo-grid');
     const lb = document.getElementById('tattoo-lb');
     const lbImg = document.getElementById('lb-img');
     const lbName = document.getElementById('lb-name');
     const lbPrice = document.getElementById('lb-price');
     const lbAddBtn = document.getElementById('lb-add-btn');
+    let items = [];
     let cur = 0;
 
-    for (let i = 1; i <= total; i++) {
-      const card = document.createElement('div');
-      card.className = 'tattoo-card';
-      card.innerHTML = `
-        <div class="tattoo-card-top">
-          <div class="tattoo-card-img" onclick="openLb(${i-1})">
-            <img src="${base}${i}.png" alt="Wall Tattoo ${i}" loading="lazy" />
-          </div>
-          <div class="tattoo-card-name">Wall Tattoo ${i}</div>
-          <div class="tattoo-card-price">€${PRICE.toFixed(2)}</div>
-        </div>
-        <button class="add-to-cart-btn" onclick="Cart.addItem('tattoo-${i}', 'Wall Tattoo ${i}', ${PRICE}, '${base}${i}.png')">Add to Cart</button>
-      `;
-      grid.appendChild(card);
-    }
+    fetch('../_content/shop-tattoos.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
+        items = data.tattoos || [];
+        items.forEach((item, i) => {
+          const card = document.createElement('div');
+          card.className = 'tattoo-card';
+          card.innerHTML = `
+            <div class="tattoo-card-top">
+              <div class="tattoo-card-img" onclick="openLb(${i})">
+                <img src="${item.image}" alt="${item.name}" loading="lazy" />
+              </div>
+              <div class="tattoo-card-name">${item.name}</div>
+              <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="Cart.addItem('tattoo-${i}', '${item.name}', ${item.price}, '${item.image}')">Add to Cart</button>
+          `;
+          grid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load tattoos:', err);
+        grid.innerHTML = '<p style="text-align:center;color:#888;">Unable to load products right now.</p>';
+      });
 
     function openLb(i) {
       cur = i;
-      lbImg.src = `${base}${cur+1}.png`;
-      lbName.textContent = `Wall Tattoo ${cur+1}`;
-      lbPrice.textContent = `€${PRICE.toFixed(2)}`;
-      lbAddBtn.onclick = () => Cart.addItem(`tattoo-${cur+1}`, `Wall Tattoo ${cur+1}`, PRICE, `${base}${cur+1}.png`);
+      renderLb();
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
+    function renderLb() {
+      const item = items[cur];
+      lbImg.src = item.image;
+      lbImg.alt = item.name;
+      lbName.textContent = item.name;
+      lbPrice.textContent = `€${item.price.toFixed(2)}`;
+      lbAddBtn.onclick = () => Cart.addItem(`tattoo-${cur}`, item.name, item.price, item.image);
+    }
+
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
     function shift(d) {
-      cur = (cur + d + total) % total;
-      lbImg.src = `${base}${cur+1}.png`;
-      lbName.textContent = `Wall Tattoo ${cur+1}`;
-      lbAddBtn.onclick = () => Cart.addItem(`tattoo-${cur+1}`, `Wall Tattoo ${cur+1}`, PRICE, `${base}${cur+1}.png`);
+      cur = (cur + d + items.length) % items.length;
+      renderLb();
     }
 
     lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
