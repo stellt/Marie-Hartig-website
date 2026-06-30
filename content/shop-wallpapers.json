@@ -1,0 +1,24 @@
+{
+  "heading": "Wallpapers",
+  "price": 120.00,
+  "wallpapers": [
+    {"name": "Wallpaper 1", "image": "../assets/images/wallpapers/Wallpaper1.jpeg", "price": 120.00},
+    {"name": "Wallpaper 2", "image": "../assets/images/wallpapers/Wallpaper2.jpeg", "price": 120.00},
+    {"name": "Wallpaper 3", "image": "../assets/images/wallpapers/Wallpaper3.jpeg", "price": 120.00},
+    {"name": "Wallpaper 4", "image": "../assets/images/wallpapers/Wallpaper4.jpeg", "price": 120.00},
+    {"name": "Wallpaper 5", "image": "../assets/images/wallpapers/Wallpaper5.jpeg", "price": 120.00},
+    {"name": "Wallpaper 6", "image": "../assets/images/wallpapers/Wallpaper6.jpeg", "price": 120.00},
+    {"name": "Wallpaper 7", "image": "../assets/images/wallpapers/Wallpaper7.jpeg", "price": 120.00},
+    {"name": "Wallpaper 8", "image": "../assets/images/wallpapers/Wallpaper8.jpeg", "price": 120.00},
+    {"name": "Wallpaper 9", "image": "../assets/images/wallpapers/Wallpaper9.jpeg", "price": 120.00},
+    {"name": "Wallpaper 10", "image": "../assets/images/wallpapers/Wallpaper10.jpeg", "price": 120.00},
+    {"name": "Wallpaper 11", "image": "../assets/images/wallpapers/Wallpaper11.jpeg", "price": 120.00},
+    {"name": "Wallpaper 12", "image": "../assets/images/wallpapers/Wallpaper12.jpeg", "price": 120.00},
+    {"name": "Wallpaper 13", "image": "../assets/images/wallpapers/Wallpaper13.jpeg", "price": 120.00},
+    {"name": "Wallpaper 14", "image": "../assets/images/wallpapers/Wallpaper14.jpeg", "price": 120.00},
+    {"name": "Wallpaper 15", "image": "../assets/images/wallpapers/Wallpaper15.jpeg", "price": 120.00},
+    {"name": "Wallpaper 16", "image": "../assets/images/wallpapers/Wallpaper16.jpeg", "price": 120.00},
+    {"name": "Wallpaper 17", "image": "../assets/images/wallpapers/Wallpaper17.jpeg", "price": 120.00}
+
+  ]
+}

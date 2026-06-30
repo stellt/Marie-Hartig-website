@@ -125,7 +125,7 @@
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">€0.00</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
     </div>
   </div>
 
@@ -152,26 +152,6 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-    const PRINT_PRICE = 35.00; // <- update price here
-    const PRINT_BASE  = '../assets/images/wall stickers/Sticker';
-    const PRINT_EXT   = '.png';
-
-    // Display names — filenames stay Sticker1.png through Sticker12.png
-    const PRINT_NAMES = [
-      'Art Print 1',
-      'Art Print 2',
-      'Art Print 3',
-      'Art Print 4',
-      'Celosia',
-      'Guava',
-      'Belle',
-      'Indian Shot',
-      'Neem',
-      'Twins',
-      'Jasmine',
-      'Henry and the Mangos'
-    ];
-
     let lbItems = [];
     let lbCur   = 0;
     const lb       = document.getElementById('product-lb');
@@ -179,33 +159,35 @@
     const lbName   = document.getElementById('lb-name');
     const lbPrice  = document.getElementById('lb-price');
     const lbAddBtn = document.getElementById('lb-add-btn');
-
     const printGrid = document.getElementById('print-grid');
-    PRINT_NAMES.forEach((name, idx) => {
-      const i   = idx + 1;
-      const src = `${PRINT_BASE}${i}${PRINT_EXT}`;
-      const card = document.createElement('div');
-      card.className = 'tattoo-card';
-      card.innerHTML = `
-        <div class="tattoo-card-top">
-          <div class="tattoo-card-img" onclick="openLb(${idx})">
-            <img src="${src}" alt="${name}" loading="lazy" />
-          </div>
-          <div class="tattoo-card-name">${name}</div>
-          <div class="tattoo-card-price">€${PRINT_PRICE.toFixed(2)}</div>
-        </div>
-        <button class="add-to-cart-btn" onclick="Cart.addItem('print-${i}', '${name}', ${PRINT_PRICE}, '${src}')">Add to Cart</button>
-      `;
-      printGrid.appendChild(card);
-    });
+
+    fetch('../_content/shop-prints.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
+        lbItems = (data.prints || []).map((item, i) => ({ ...item, id: `print-${i}` }));
+        lbItems.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = 'tattoo-card';
+          card.innerHTML = `
+            <div class="tattoo-card-top">
+              <div class="tattoo-card-img" onclick="openLb(${idx})">
+                <img src="${item.image}" alt="${item.name}" loading="lazy" />
+              </div>
+              <div class="tattoo-card-name">${item.name}</div>
+              <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>
+            </div>
+            <button class="add-to-cart-btn" onclick="Cart.addItem('${item.id}', '${item.name}', ${item.price}, '${item.image}')">Add to Cart</button>
+          `;
+          printGrid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load prints:', err);
+        printGrid.innerHTML = '<p style="text-align:center;color:#888;">Unable to load products right now.</p>';
+      });
 
     function openLb(i) {
-      lbItems = PRINT_NAMES.map((name, n) => ({
-        src:   `${PRINT_BASE}${n+1}${PRINT_EXT}`,
-        name:  name,
-        price: PRINT_PRICE,
-        id:    `print-${n+1}`
-      }));
       lbCur = i;
       renderLb();
       lb.classList.add('open');
@@ -214,11 +196,11 @@
 
     function renderLb() {
       const item = lbItems[lbCur];
-      lbImg.src           = item.src;
+      lbImg.src           = item.image;
       lbImg.alt           = item.name;
       lbName.textContent  = item.name;
       lbPrice.textContent = `€${item.price.toFixed(2)}`;
-      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.src);
+      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.image);
     }
 
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }

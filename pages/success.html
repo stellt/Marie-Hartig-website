@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .confirm-wrap {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 6vw;
+    }
+    .confirm-wrap h1 {
+      font-family: 'Velour', serif; font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 2.6rem); letter-spacing: 0.15em;
+      text-transform: uppercase; color: #111; margin: 0 0 1rem;
+    }
+    .confirm-wrap p {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.9rem; letter-spacing: 0.05em; color: #555; max-width: 480px;
+      line-height: 1.6;
+    }
+    .confirm-wrap a {
+      margin-top: 2rem;
+      display: inline-block;
+      border: 1px solid #111;
+      color: #111;
+      padding: 0.8rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .confirm-wrap a:hover { background: #111; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="confirm-wrap">
+    <h1>Thank You</h1>
+    <p>Your order has been received. You'll receive a confirmation email shortly from Stripe with your receipt details.</p>
+    <a href="shop.html">Continue Shopping</a>
+  </div>
+  <script>
+    // Clear the cart now that payment succeeded.
+    try { localStorage.removeItem('mhs_cart'); } catch (e) {}
+  </script>
+</body>
+</html>

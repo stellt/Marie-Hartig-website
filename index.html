@@ -1,47 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Marie Hartig Studio — Bespoke wall painting and mural art." />
-  <title>Marie Hartig Studio</title>
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/slideshow.css" />
-  <!-- Netlify Identity Widget -->
+  <title>Marie Hartig Studio — Admin</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-
-  <!-- Automated fullscreen slideshow — built by JS -->
-  <section class="slideshow" aria-label="Portfolio slideshow"></section>
-
-  <!-- Hero text — centered -->
-  <div class="hero-overlay">
-    <h1 class="hero-title">Marie Hartig Studio</h1>
-    <div class="hero-divider"></div>
-    <p class="hero-subtitle">
-      <a href="pages/about.html">Explore</a>
-    </p>
-  </div>
-
-  <!-- Slide counter — bottom right -->
-  <div class="slide-counter" aria-live="polite"></div>
-
-  <!-- Progress bar — bottom edge -->
-  <div class="progress-bar" aria-hidden="true"></div>
-
-  <script src="js/slideshow.js"></script>
   <script>
-    // Redirect to admin after Netlify Identity invite confirmation
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => {
+      window.netlifyIdentity.on("init", user => {
         if (!user) {
-          window.netlifyIdentity.on('login', () => {
-            document.location.href = '/admin/';
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
           });
         }
       });
     }
   </script>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "heading": "Art Prints",
+  "price": 35.00,
+  "prints": [
+    {"name": "Art Print 1", "image": "../assets/images/wall stickers/Sticker1.png", "price": 35.00},
+    {"name": "Art Print 2", "image": "../assets/images/wall stickers/Sticker2.png", "price": 35.00},
+    {"name": "Art Print 3", "image": "../assets/images/wall stickers/Sticker3.png", "price": 35.00},
+    {"name": "Art Print 4", "image": "../assets/images/wall stickers/Sticker4.png", "price": 35.00},
+    {"name": "Celosia", "image": "../assets/images/wall stickers/Sticker5.png", "price": 35.00},
+    {"name": "Guava", "image": "../assets/images/wall stickers/Sticker6.png", "price": 35.00},
+    {"name": "Belle", "image": "../assets/images/wall stickers/Sticker7.png", "price": 35.00},
+    {"name": "Indian Shot", "image": "../assets/images/wall stickers/Sticker8.png", "price": 35.00},
+    {"name": "Neem", "image": "../assets/images/wall stickers/Sticker9.png", "price": 35.00},
+    {"name": "Twins", "image": "../assets/images/wall stickers/Sticker10.png", "price": 35.00},
+    {"name": "Jasmine", "image": "../assets/images/wall stickers/Sticker11.png", "price": 35.00},
+    {"name": "Henry and the Mangos", "image": "../assets/images/wall stickers/Sticker12.png", "price": 35.00}
+
+  ]
+}
