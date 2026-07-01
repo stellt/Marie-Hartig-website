@@ -6,14 +6,14 @@
       "thumbnail": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-1.jpg"
     },
     {
-      "title": "Creature Comforts",
-      "slug": "creature",
-      "thumbnail": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg"
-    },
-    {
       "title": "Fuschl Rosewood",
       "slug": "fuschl",
       "thumbnail": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg"
+    },
+    {
+      "title": "Creature Comforts",
+      "slug": "creature",
+      "thumbnail": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg"
     },
     {
       "title": "Saint Francis and the Animals",
