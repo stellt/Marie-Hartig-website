@@ -73,10 +73,15 @@
 
       <!-- Newsletter -->
       <div class="connect-newsletter-label">Subscribe to Our Newsletter</div>
-      <div class="connect-newsletter-form">
-        <input type="email" placeholder="Email" />
-        <button type="submit">Sign Up</button>
+      <div class="connect-newsletter-success" id="connect-newsletter-success" style="display:none;">
+        Thank you — you'll hear from us soon.
       </div>
+      <form class="connect-newsletter-form" id="connect-newsletter-form" name="newsletter" method="POST" data-netlify="true" onsubmit="handleConnectSubmit(event)">
+        <input type="hidden" name="form-name" value="newsletter" />
+        <input type="hidden" name="source" value="connect-page" />
+        <input type="email" name="email" placeholder="Email" required />
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
 
   </div>
@@ -88,6 +93,21 @@
   </footer>
 
   <script>
+    function handleConnectSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      })
+        .then(() => {
+          form.style.display = 'none';
+          document.getElementById('connect-newsletter-success').style.display = 'block';
+        })
+        .catch(() => alert("Sorry, something went wrong — please try again or email us directly."));
+    }
+
     fetch('../_content/contact.json')
       .then(res => res.json())
       .then(data => {

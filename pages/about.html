@@ -218,8 +218,10 @@
       <div class="newsletter-success" id="newsletter-success">
         Thank you — you'll hear from us soon.
       </div>
-      <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubmit(event)">
-        <input class="newsletter-input" type="email" placeholder="Your email address" required />
+      <form class="newsletter-form" id="newsletter-form" name="newsletter" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="newsletter" />
+        <input type="hidden" name="source" value="about-popup" />
+        <input class="newsletter-input" type="email" name="email" placeholder="Your email address" required />
         <button class="newsletter-submit" type="submit">Subscribe</button>
       </form>
       <p class="newsletter-privacy">No spam. Unsubscribe at any time.</p>
@@ -260,9 +262,18 @@
 
     function handleSubmit(e) {
       e.preventDefault();
-      document.getElementById('newsletter-form').style.display = 'none';
-      document.getElementById('newsletter-success').style.display = 'block';
-      setTimeout(() => overlay.classList.remove('visible'), 2500);
+      const form = e.target;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      })
+        .then(() => {
+          form.style.display = 'none';
+          document.getElementById('newsletter-success').style.display = 'block';
+          setTimeout(() => overlay.classList.remove('visible'), 2500);
+        })
+        .catch(() => alert("Sorry, something went wrong — please try again or email us directly."));
     }
   </script>
 </body>
