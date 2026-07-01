@@ -1,35 +1,25 @@
 {
   "slides": [
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-1.jpg"
-    },
-    "../assets/images/portfolio/02 HOME PAGE/02.jpeg",
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-4.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-3.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-10.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-7.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-5.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-8.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-2.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-6.jpg"
-    },
-    {
-      "image": "../assets/images/portfolio/02 HOME PAGE/homepage-12.jpg"
-    }
+    {"image": "/assets/images_backup/slides/slide-00.jpg"},
+    {"image": "/assets/images_backup/slides/slide-01.jpg"},
+    {"image": "/assets/images_backup/slides/slide-02.jpg"},
+    {"image": "/assets/images_backup/slides/slide-03.jpg"},
+    {"image": "/assets/images_backup/slides/slide-04.jpg"},
+    {"image": "/assets/images_backup/slides/slide-05.jpg"},
+    {"image": "/assets/images_backup/slides/slide-06.jpg"},
+    {"image": "/assets/images_backup/slides/slide-07.jpg"},
+    {"image": "/assets/images_backup/slides/slide-08.jpg"},
+    {"image": "/assets/images_backup/slides/slide-09.jpg"},
+    {"image": "/assets/images_backup/slides/slide-10.jpg"},
+    {"image": "/assets/images_backup/slides/slide-11.jpg"},
+    {"image": "/assets/images_backup/slides/slide-12.jpg"},
+    {"image": "/assets/images_backup/slides/slide-13.jpg"},
+    {"image": "/assets/images_backup/slides/slide-14.jpg"},
+    {"image": "/assets/images_backup/slides/slide-15.jpg"},
+    {"image": "/assets/images_backup/slides/slide-16.jpg"},
+    {"image": "/assets/images_backup/slides/slide-17.jpg"},
+    {"image": "/assets/images_backup/slides/slide-18.jpg"},
+    {"image": "/assets/images_backup/slides/slide-19.jpg"},
+    {"image": "/assets/images_backup/slides/slide-20.jpg"}
   ]
 }

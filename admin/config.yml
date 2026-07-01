@@ -300,5 +300,5 @@ collections:
               label: "Image"
               name: "image"
               widget: "image"
-              media_folder: "/assets/images/portfolio/02 HOME PAGE"
-              public_folder: "/assets/images/portfolio/02 HOME PAGE"
+              media_folder: "/assets/images_backup/slides"
+              public_folder: "/assets/images_backup/slides"
