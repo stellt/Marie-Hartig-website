@@ -1,0 +1,154 @@
+{
+  "collections": [
+    {
+      "title": "Urban Infinity Pool",
+      "slug": "urban",
+      "thumbnail": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-1.jpg"
+    },
+    {
+      "title": "Fuschl Rosewood",
+      "slug": "fuschl",
+      "thumbnail": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg"
+    },
+    {
+      "title": "Creature Comforts",
+      "slug": "creature",
+      "thumbnail": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg"
+    },
+    {
+      "title": "Saint Francis and the Animals",
+      "slug": "saint-francis",
+      "thumbnail": "/assets/images/portfolio/04 SAINT FRANCIS AND THE ANIMALS/saint-francis-1.jpg"
+    },
+    {
+      "title": "The Map Room",
+      "slug": "map-room",
+      "thumbnail": "/assets/images/portfolio/05 THE MAP ROOM/map-room-1.jpg"
+    },
+    {
+      "title": "Rickatschwende Spa Hotel",
+      "slug": "rickatschwende",
+      "thumbnail": "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg"
+    },
+    {
+      "title": "Sweetest Dreams",
+      "slug": "sweetest",
+      "thumbnail": "/assets/images/portfolio/21 SWEETEST DREAMS/sweetest-1.jpg"
+    },
+    {
+      "title": "Tamsweg Memories",
+      "slug": "tamsweg",
+      "thumbnail": "/assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-1.jpg"
+    },
+    {
+      "title": "Bellaria",
+      "slug": "bellaria",
+      "thumbnail": "/assets/images/portfolio/08 BELLARIA/bellaria-1.jpg"
+    },
+    {
+      "title": "Mixed Worlds Landscape",
+      "slug": "mixed-worlds",
+      "thumbnail": "/assets/images/portfolio/09 MIXED WORLDS LANDSCAPE/mixed-worlds-1.jpg"
+    },
+    {
+      "title": "Safari Vibes",
+      "slug": "safari-vibes",
+      "thumbnail": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
+    },
+    {
+      "title": "Rosewood Vienna",
+      "slug": "rosewood-vienna",
+      "thumbnail": "/assets/images/portfolio/11 ROSEWOOD VIENNA/rosewood-vienna-1.jpg"
+    },
+    {
+      "title": "Sahel Heat",
+      "slug": "sahel-heat",
+      "thumbnail": "/assets/images/portfolio/12 SAHEL HEAT/sahel-heat-1.jpg"
+    },
+    {
+      "title": "Augsburg Tropics",
+      "slug": "augsburg-tropics",
+      "thumbnail": "/assets/images/portfolio/13 AUGSBURG TROPICS/augsburg-tropics-1.jpg"
+    },
+    {
+      "title": "Oversize Bloom",
+      "slug": "oversize-bloom",
+      "thumbnail": "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg"
+    },
+    {
+      "title": "Bodmin Magic",
+      "slug": "bodmin-magic",
+      "thumbnail": "/assets/images/portfolio/15 BODMIN MAGIC/bodmin-magic-1.jpg"
+    },
+    {
+      "title": "Das Buben Bad",
+      "slug": "das-buben-bad",
+      "thumbnail": "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg"
+    },
+    {
+      "title": "Rooftop Pool",
+      "slug": "rooftop-pool",
+      "thumbnail": "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-1.jpg"
+    },
+    {
+      "title": "My Other House",
+      "slug": "my-other-house",
+      "thumbnail": "/assets/images/portfolio/18 MY OTHER HOUSE/my-other-house-1.jpg"
+    },
+    {
+      "title": "Kipplings Eden",
+      "slug": "kipplings-eden",
+      "thumbnail": "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-1.jpg"
+    },
+    {
+      "title": "Traumland",
+      "slug": "traumland",
+      "thumbnail": "/assets/images/portfolio/20 TRAUMLAND/traumland-1.jpg"
+    },
+    {
+      "title": "The Oak Pub",
+      "slug": "oak-pub",
+      "thumbnail": "/assets/images/portfolio/22 THE OAK PUB/oak-pub-1.jpg"
+    },
+    {
+      "title": "Soothing Carmelita",
+      "slug": "soothing-carmelita",
+      "thumbnail": "/assets/images/portfolio/23 SOOTHING CARMELITA/soothing-carmelita-1.jpg"
+    },
+    {
+      "title": "The Best of Two Worlds",
+      "slug": "best-two-worlds",
+      "thumbnail": "/assets/images/portfolio/24 THE BEST OF TWO WORLDS/best-two-worlds-1.jpg"
+    },
+    {
+      "title": "Inside Gardens",
+      "slug": "inside-gardens",
+      "thumbnail": "/assets/images/portfolio/25 INSIDE GARDENS/inside-gardens-1.jpg"
+    },
+    {
+      "title": "Lines and Stripes",
+      "slug": "lines-and-stripes",
+      "thumbnail": "/assets/images/portfolio/26 LINES AND STRIPES/lines-and-stripes-1.jpg"
+    },
+    {
+      "title": "Oaks and Elms",
+      "slug": "oaks-and-elms",
+      "thumbnail": "/assets/images/portfolio/27 OAKS AND ELMS/oaks-and-elms-1.jpg"
+    },
+    {
+      "title": "Cantinetta Antinori Blackbirds",
+      "slug": "cantinetta",
+      "thumbnail": "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-1.jpg"
+    },
+    {
+      "title": "Kids Rooms",
+      "slug": "kids-rooms",
+      "thumbnail": "/assets/images/portfolio/29 KIDS ROOMS/kids-rooms-1.jpg"
+    },
+    {
+      "title": "Nobilis Wallpapers",
+      "slug": "nobilis-wallpapers",
+      "thumbnail": "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-1.jpg"
+    }
+  ]
+}

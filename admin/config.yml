@@ -3,43 +3,33 @@ backend:
   branch: main
 
 media_folder: "assets/images/portfolio"
-public_folder: "../assets/images/portfolio"
+public_folder: "/assets/images/portfolio"
 
 site_url: https://frabjous-macaron-e37dd0.netlify.app
 display_url: https://frabjous-macaron-e37dd0.netlify.app
 
 collections:
 
-  # ── PORTFOLIO PAGE ──────────────────────────────────────────
-  - name: "portfolio"
+  # ── PORTFOLIO COLLECTIONS (individual collection pages) ─────
+  - name: "collections"
     label: "Portfolio Collections"
     label_singular: "Collection"
     folder: "_collections"
     create: true
     delete: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
     fields:
       - label: "Collection Title"
         name: "title"
         widget: "string"
         hint: "e.g. Urban Infinity Pool"
 
-      - label: "Collection Number"
-        name: "number"
-        widget: "number"
-        hint: "Used for ordering on the portfolio page"
-
-      - label: "Folder Name"
-        name: "folder"
+      - label: "Slug"
+        name: "slug"
         widget: "string"
-        hint: "Exact folder name in assets/images/portfolio/ e.g. 01 URBAN INFINITY POOL"
+        hint: "Must match the slug used in the Portfolio Page order list, e.g. urban"
 
-      - label: "Thumbnail Image"
-        name: "thumbnail"
-        widget: "image"
-        hint: "The image shown on the portfolio grid"
-
-      - label: "Collection Images"
+      - label: "Images"
         name: "images"
         widget: "list"
         label_singular: "Image"
@@ -51,9 +41,13 @@ collections:
 
       - label: "Description"
         name: "description"
-        widget: "text"
-        required: false
-        hint: "Short description shown on the collection page"
+        widget: "list"
+        label_singular: "Paragraph"
+        summary: "{{fields.text}}"
+        field:
+          label: "Paragraph"
+          name: "text"
+          widget: "text"
 
       - label: "Location"
         name: "location"
@@ -74,6 +68,28 @@ collections:
   - name: "pages"
     label: "Page Text"
     files:
+
+      - label: "Portfolio Page"
+        name: "portfolio"
+        file: "_content/portfolio.json"
+        fields:
+          - label: "Collections"
+            name: "collections"
+            widget: "list"
+            label_singular: "Collection"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Slug"
+                name: "slug"
+                widget: "string"
+                hint: "Must match the slug on the corresponding entry in Portfolio Collections, e.g. urban"
+              - label: "Thumbnail"
+                name: "thumbnail"
+                widget: "image"
+                hint: "The image shown on the portfolio grid tile"
 
       - label: "Meet Marie"
         name: "meet-marie"

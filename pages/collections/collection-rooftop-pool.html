@@ -54,25 +54,15 @@
   </div>
 
   <div class="collection-wrap">
-    <div class="collection-grid">
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-1.jpg" alt="Rooftop Pool" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-2.jpg" alt="Rooftop Pool" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-3.jpg" alt="Rooftop Pool" loading="lazy" /></div>
-    </div>
+    <div class="collection-grid" id="collection-grid"></div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
-        <h1 class="collection-title">Rooftop Pool</h1>
-        <p class="collection-desc">This fabulous private roof terrace in a stunning apartment in the heart of Vienna, has been decked out with a new gorgeous view. Initially I painted this canopy on a 1.50 x 5 meter canvas in my studio.</p>
-        <p class="collection-desc">It was then photographed with total precision and after some trial and error and color correction it was finally printed on this large waterproof canvas and installed in a light frame — so that you can switch it on and enjoy the view at night… naturally.</p>
-        <div class="collection-meta">
-          <div class="collection-meta-item">Location: Pool Terrace. Private Home. Vienna, Austria</div>
-        </div>
+        <h1 class="collection-title" id="collection-title"></h1>
+        <div id="collection-desc"></div>
+        <div class="collection-meta" id="collection-meta"></div>
       </div>
-      <div class="collection-nav">
-        <a href="collection-das-buben-bad.html">← Previous</a>
-        <a href="collection-my-other-house.html">Next →</a>
-      </div>
+      <div class="collection-nav" id="collection-nav"></div>
     </div>
   </div>
 
@@ -89,14 +79,19 @@
   </div>
 
   <script>
-    const imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+    const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\.html$/, '');
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    let imgs = [];
     let cur = 0;
     const lb = document.getElementById('col-lb');
     const lbImg = document.getElementById('col-lb-img');
     function openLb(i) { cur=i; lbImg.src=imgs[i].src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow=''; }
     function shift(d) { cur=(cur+d+imgs.length)%imgs.length; lbImg.src=imgs[cur].src; }
-    imgs.forEach((img,i) => img.parentElement.onclick=()=>openLb(i));
     document.getElementById('col-lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLb();});
     document.addEventListener('keydown',e=>{
       if(!lb.classList.contains('open'))return;
@@ -104,8 +99,7 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
-  </script>
-  <script>
+
     function fitGrid() {
       const grid = document.querySelector('.collection-grid');
       const wrap = document.querySelector('.collection-wrap');
@@ -127,8 +121,43 @@
       grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
       grid.style.gridAutoRows = `${rowH}px`;
     }
-    fitGrid();
     window.addEventListener('resize', fitGrid);
+
+    Promise.all([
+      fetch('../../_collections/' + SLUG + '.json').then(r => r.json()),
+      fetch('../../_content/portfolio.json').then(r => r.json())
+    ]).then(([data, portfolio]) => {
+      document.title = data.title + ' — Marie Hartig Studio';
+      document.getElementById('collection-title').textContent = data.title;
+
+      const grid = document.getElementById('collection-grid');
+      grid.innerHTML = (data.images || []).map(img =>
+        `<div class="collection-grid-item"><img src="${img.image}" alt="${esc(data.title)}" loading="lazy" /></div>`
+      ).join('');
+
+      document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
+        `<p class="collection-desc">${esc(p.text)}</p>`
+      ).join('');
+
+      const metaEl = document.getElementById('collection-meta');
+      metaEl.innerHTML = data.location
+        ? `<div class="collection-meta-item">Location: ${esc(data.location)}</div>`
+        : '';
+
+      const list = portfolio.collections || [];
+      const idx = list.findIndex(c => c.slug === SLUG);
+      const prev = list[(idx - 1 + list.length) % list.length];
+      const next = list[(idx + 1) % list.length];
+      const navEl = document.getElementById('collection-nav');
+      navEl.innerHTML =
+        (prev ? `<a href="collection-${prev.slug}.html">← Previous</a>` : '') +
+        (next ? `<a href="collection-${next.slug}.html">Next →</a>` : '');
+
+      imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+      imgs.forEach((img, i) => img.parentElement.onclick = () => openLb(i));
+
+      fitGrid();
+    });
   </script>
   <script src="../../js/cart.js"></script>
   <script src="../../js/nav.js"></script>

@@ -1,0 +1,23 @@
+{
+  "title": "The Oak Pub",
+  "slug": "oak-pub",
+  "images": [
+    {
+      "image": "/assets/images/portfolio/22 THE OAK PUB/oak-pub-1.jpg"
+    },
+    {
+      "image": "/assets/images/portfolio/22 THE OAK PUB/oak-pub-2.jpg"
+    },
+    {
+      "image": "/assets/images/portfolio/22 THE OAK PUB/oak-pub-3.jpg"
+    }
+  ],
+  "description": [
+    {
+      "text": "Description coming soon."
+    }
+  ],
+  "location": "",
+  "year": "",
+  "type": ""
+}

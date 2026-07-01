@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""
+Generates pages/collections/collection-<slug>.html for every entry in
+_content/portfolio.json, from a single shared data-driven template.
+
+Run after migrate-portfolio.py (or after adding a new collection via the CMS
+and creating its matching _content/portfolio.json entry):
+  python scripts/generate-collection-pages.py
+"""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+CONTENT = ROOT / "_content" / "portfolio.json"
+OUT_DIR = ROOT / "pages" / "collections"
+
+TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/worlds.css" />
+  <link rel="stylesheet" href="../../css/collection.css" />
+  <link rel="stylesheet" href="../../css/cart.css" />
+</head>
+<body class="worlds-page collection-page">
+
+  <nav class="nav" aria-label="Main navigation">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-toggle-bar"><span></span><span></span><span></span></span>
+    </button>
+    <a class="nav-logo" href="../../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="../about-marie.html">About Marie</a></li>
+      <li><a href="../portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="../shop.html">Shop</a></li>
+      <li><a href="../process.html">Process</a></li>
+      <li><a href="../contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="collection-wrap">
+    <div class="collection-grid" id="collection-grid"></div>
+    <div class="collection-info">
+      <div class="collection-info-top">
+        <div class="collection-rule"></div>
+        <h1 class="collection-title" id="collection-title"></h1>
+        <div id="collection-desc"></div>
+        <div class="collection-meta" id="collection-meta"></div>
+      </div>
+      <div class="collection-nav" id="collection-nav"></div>
+    </div>
+  </div>
+
+  <footer class="collection-footer">
+    <span><a href="../contact.html">Connect</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
+    <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <div class="col-lightbox" id="col-lb">
+    <button class="col-lightbox-close" onclick="closeLb()">✕ &nbsp; Close</button>
+    <button class="col-lightbox-prev" onclick="shift(-1)">&#8592;</button>
+    <img id="col-lb-img" src="" alt="" />
+    <button class="col-lightbox-next" onclick="shift(1)">&#8594;</button>
+  </div>
+
+  <script>
+    const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\\.html$/, '');
+
+    function esc(s) {{
+      return String(s).replace(/[&<>"']/g, c => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));
+    }}
+
+    let imgs = [];
+    let cur = 0;
+    const lb = document.getElementById('col-lb');
+    const lbImg = document.getElementById('col-lb-img');
+    function openLb(i) {{ cur=i; lbImg.src=imgs[i].src; lb.classList.add('open'); document.body.style.overflow='hidden'; }}
+    function closeLb() {{ lb.classList.remove('open'); document.body.style.overflow=''; }}
+    function shift(d) {{ cur=(cur+d+imgs.length)%imgs.length; lbImg.src=imgs[cur].src; }}
+    document.getElementById('col-lb').addEventListener('click',e=>{{if(e.target===e.currentTarget)closeLb();}});
+    document.addEventListener('keydown',e=>{{
+      if(!lb.classList.contains('open'))return;
+      if(e.key==='ArrowRight')shift(1);
+      if(e.key==='ArrowLeft')shift(-1);
+      if(e.key==='Escape')closeLb();
+    }});
+
+    function fitGrid() {{
+      const grid = document.querySelector('.collection-grid');
+      const wrap = document.querySelector('.collection-wrap');
+      if (!grid || !wrap) return;
+
+      // On mobile, images stack one-per-row at natural height; let CSS handle it.
+      if (window.innerWidth <= 768) {{
+        grid.style.gridTemplateRows = '';
+        grid.style.gridAutoRows = '';
+        return;
+      }}
+
+      const items = grid.querySelectorAll('.collection-grid-item');
+      const count = items.length;
+      const cols = window.innerWidth <= 1024 ? 2 : 3;
+      const rows = Math.ceil(count / cols);
+      const availH = wrap.clientHeight;
+      const rowH = Math.floor(availH / rows);
+      grid.style.gridTemplateRows = `repeat(${{rows}}, ${{rowH}}px)`;
+      grid.style.gridAutoRows = `${{rowH}}px`;
+    }}
+    window.addEventListener('resize', fitGrid);
+
+    Promise.all([
+      fetch('../../_collections/' + SLUG + '.json').then(r => r.json()),
+      fetch('../../_content/portfolio.json').then(r => r.json())
+    ]).then(([data, portfolio]) => {{
+      document.title = data.title + ' — Marie Hartig Studio';
+      document.getElementById('collection-title').textContent = data.title;
+
+      const grid = document.getElementById('collection-grid');
+      grid.innerHTML = (data.images || []).map(img =>
+        `<div class="collection-grid-item"><img src="${{img.image}}" alt="${{esc(data.title)}}" loading="lazy" /></div>`
+      ).join('');
+
+      document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
+        `<p class="collection-desc">${{esc(p.text)}}</p>`
+      ).join('');
+
+      const metaEl = document.getElementById('collection-meta');
+      metaEl.innerHTML = data.location
+        ? `<div class="collection-meta-item">Location: ${{esc(data.location)}}</div>`
+        : '';
+
+      const list = portfolio.collections || [];
+      const idx = list.findIndex(c => c.slug === SLUG);
+      const prev = list[(idx - 1 + list.length) % list.length];
+      const next = list[(idx + 1) % list.length];
+      const navEl = document.getElementById('collection-nav');
+      navEl.innerHTML =
+        (prev ? `<a href="collection-${{prev.slug}}.html">← Previous</a>` : '') +
+        (next ? `<a href="collection-${{next.slug}}.html">Next →</a>` : '');
+
+      imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+      imgs.forEach((img, i) => img.parentElement.onclick = () => openLb(i));
+
+      fitGrid();
+    }});
+  </script>
+  <script src="../../js/cart.js"></script>
+  <script src="../../js/nav.js"></script>
+</body>
+</html>
+"""
+
+
+def main():
+    portfolio = json.loads(CONTENT.read_text(encoding='utf-8'))
+    entries = portfolio["collections"]
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    for entry in entries:
+        html = TEMPLATE.format(title=entry["title"])
+        out_path = OUT_DIR / f"collection-{entry['slug']}.html"
+        out_path.write_text(html, encoding='utf-8')
+        print(f"Wrote {out_path.relative_to(ROOT)}")
+
+    print(f"Generated {len(entries)} collection pages")
+
+
+if __name__ == "__main__":
+    main()

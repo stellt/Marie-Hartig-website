@@ -54,29 +54,15 @@
   </div>
 
   <div class="collection-wrap">
-    <div class="collection-grid">
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-1.jpg" alt="Sahel Heat" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-2.jpg" alt="Sahel Heat" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-3.jpg" alt="Sahel Heat" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-4.jpg" alt="Sahel Heat" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-5.jpg" alt="Sahel Heat" loading="lazy" /></div>
-      <div class="collection-grid-item"><img src="../../assets/images/portfolio/12 SAHEL HEAT/sahel-heat-6.jpg" alt="Sahel Heat" loading="lazy" /></div>
-    </div>
+    <div class="collection-grid" id="collection-grid"></div>
     <div class="collection-info">
       <div class="collection-info-top">
         <div class="collection-rule"></div>
-        <h1 class="collection-title">Sahel Heat</h1>
-        <p class="collection-desc">On this fabulous commission, we were able to dive into and be inspired by the beautiful, diverse Sahel Region of Africa.</p>
-        <p class="collection-desc">From where the bed stands, you get to see the coastline in one direction, a distant casbah and palm forests, the mountains as well as the expansive soothing desert. That's the beauty of painting directly on the wall - no repeat patterns anywhere. Every corner a different view.</p>
-        <p class="collection-desc">It was tricky as there are two parts in this room - like a suite - bed and small living room. Dividing the spaces is a natural arch - which we transformed into a classic Marrakesh decorated archway.</p>
-        <div class="collection-meta">
-          <div class="collection-meta-item">Location: Bedroom. Private Home. Rüdenhausen, Germany</div>
-        </div>
+        <h1 class="collection-title" id="collection-title"></h1>
+        <div id="collection-desc"></div>
+        <div class="collection-meta" id="collection-meta"></div>
       </div>
-      <div class="collection-nav">
-        <a href="collection-rosewood-vienna.html">← Previous</a>
-        <a href="collection-augsburg-tropics.html">Next →</a>
-      </div>
+      <div class="collection-nav" id="collection-nav"></div>
     </div>
   </div>
 
@@ -93,14 +79,19 @@
   </div>
 
   <script>
-    const imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+    const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\.html$/, '');
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    let imgs = [];
     let cur = 0;
     const lb = document.getElementById('col-lb');
     const lbImg = document.getElementById('col-lb-img');
     function openLb(i) { cur=i; lbImg.src=imgs[i].src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow=''; }
     function shift(d) { cur=(cur+d+imgs.length)%imgs.length; lbImg.src=imgs[cur].src; }
-    imgs.forEach((img,i) => img.parentElement.onclick=()=>openLb(i));
     document.getElementById('col-lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLb();});
     document.addEventListener('keydown',e=>{
       if(!lb.classList.contains('open'))return;
@@ -108,8 +99,7 @@
       if(e.key==='ArrowLeft')shift(-1);
       if(e.key==='Escape')closeLb();
     });
-  </script>
-  <script>
+
     function fitGrid() {
       const grid = document.querySelector('.collection-grid');
       const wrap = document.querySelector('.collection-wrap');
@@ -131,8 +121,43 @@
       grid.style.gridTemplateRows = `repeat(${rows}, ${rowH}px)`;
       grid.style.gridAutoRows = `${rowH}px`;
     }
-    fitGrid();
     window.addEventListener('resize', fitGrid);
+
+    Promise.all([
+      fetch('../../_collections/' + SLUG + '.json').then(r => r.json()),
+      fetch('../../_content/portfolio.json').then(r => r.json())
+    ]).then(([data, portfolio]) => {
+      document.title = data.title + ' — Marie Hartig Studio';
+      document.getElementById('collection-title').textContent = data.title;
+
+      const grid = document.getElementById('collection-grid');
+      grid.innerHTML = (data.images || []).map(img =>
+        `<div class="collection-grid-item"><img src="${img.image}" alt="${esc(data.title)}" loading="lazy" /></div>`
+      ).join('');
+
+      document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
+        `<p class="collection-desc">${esc(p.text)}</p>`
+      ).join('');
+
+      const metaEl = document.getElementById('collection-meta');
+      metaEl.innerHTML = data.location
+        ? `<div class="collection-meta-item">Location: ${esc(data.location)}</div>`
+        : '';
+
+      const list = portfolio.collections || [];
+      const idx = list.findIndex(c => c.slug === SLUG);
+      const prev = list[(idx - 1 + list.length) % list.length];
+      const next = list[(idx + 1) % list.length];
+      const navEl = document.getElementById('collection-nav');
+      navEl.innerHTML =
+        (prev ? `<a href="collection-${prev.slug}.html">← Previous</a>` : '') +
+        (next ? `<a href="collection-${next.slug}.html">Next →</a>` : '');
+
+      imgs = Array.from(document.querySelectorAll('.collection-grid-item img'));
+      imgs.forEach((img, i) => img.parentElement.onclick = () => openLb(i));
+
+      fitGrid();
+    });
   </script>
   <script src="../../js/cart.js"></script>
   <script src="../../js/nav.js"></script>
