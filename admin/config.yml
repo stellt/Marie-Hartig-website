@@ -18,6 +18,8 @@ collections:
     create: true
     delete: true
     slug: "{{fields.slug}}"
+    extension: "json"
+    format: "json"
     fields:
       - label: "Collection Title"
         name: "title"
