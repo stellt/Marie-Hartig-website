@@ -60,26 +60,16 @@
 
     <!-- LEFT — Portrait -->
     <div class="connect-photo">
-      <img src="../assets/images/connect-portrait.jpg" alt="Marie Hartig" />
+      <img id="connect-portrait" src="" alt="Marie Hartig" />
     </div>
 
     <!-- RIGHT — Connect info -->
     <div class="connect-info">
       <div class="connect-rule"></div>
-      <h1 class="connect-heading">Connect</h1>
+      <h1 class="connect-heading" id="connect-heading">Connect</h1>
 
       <!-- Social links -->
-      <div class="connect-socials">
-        <a href="https://instagram.com/mariehartigstudio" target="_blank" rel="noopener">@mariehartigstudio</a>
-        <span class="sep">|</span>
-        <a href="https://instagram.com/mariehartigstudio" target="_blank" rel="noopener">Instagram</a>
-        <span class="sep">|</span>
-        <a href="https://facebook.com/mariehartigstudio" target="_blank" rel="noopener">Facebook</a>
-        <span class="sep">|</span>
-        <a href="mailto:info@mariespaintedworlds.com">info@mariespaintedworlds.com</a>
-        <span class="sep">|</span>
-        <a href="tel:+4369911325517">+43 699 11325517</a>
-      </div>
+      <div class="connect-socials" id="connect-socials"></div>
 
       <!-- Newsletter -->
       <div class="connect-newsletter-label">Subscribe to Our Newsletter</div>
@@ -97,6 +87,32 @@
     <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 
+  <script>
+    fetch('../_content/contact.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('connect-heading').textContent = data.heading || 'Connect';
+        document.getElementById('connect-portrait').src = data.portrait;
+
+        const links = [];
+        if (data.instagram_handle && data.instagram_url) {
+          links.push(`<a href="${data.instagram_url}" target="_blank" rel="noopener">${data.instagram_handle}</a>`);
+        }
+        if (data.instagram_url) {
+          links.push(`<a href="${data.instagram_url}" target="_blank" rel="noopener">Instagram</a>`);
+        }
+        if (data.facebook_url) {
+          links.push(`<a href="${data.facebook_url}" target="_blank" rel="noopener">Facebook</a>`);
+        }
+        if (data.email) {
+          links.push(`<a href="mailto:${data.email}">${data.email}</a>`);
+        }
+        if (data.phone) {
+          links.push(`<a href="tel:${data.phone.replace(/[^+\d]/g, '')}">${data.phone}</a>`);
+        }
+        document.getElementById('connect-socials').innerHTML = links.join('<span class="sep">|</span>');
+      });
+  </script>
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
 </body>

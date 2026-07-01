@@ -1,8 +1,9 @@
 {
   "heading": "Connect",
   "instagram_handle": "@mariehartigstudio",
-  "instagram_url": "#",
-  "facebook_url": "#",
-  "email": "hello@mariehartig.com",
-  "portrait": "../assets/images/connect-portrait.jpg"
+  "instagram_url": "https://instagram.com/mariehartigstudio",
+  "facebook_url": "https://facebook.com/mariehartigstudio",
+  "email": "info@mariespaintedworlds.com",
+  "phone": "+43 699 11325517",
+  "portrait": "/assets/images/connect-portrait.jpg"
 }

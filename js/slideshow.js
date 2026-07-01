@@ -2,25 +2,18 @@
    MARIE HARTIG STUDIO — Welcome Page Slideshow
    ============================================ */
 
-const SLIDES = [
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-1.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-2.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-3.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-4.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-5.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-6.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-7.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-8.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-9.jpg' },
-  { src: 'assets/images/portfolio/01 OPENING PAGE/open-page-10.jpg' },
-];
-
 const INTERVAL = 3600;
 
+function slideSrc(entry) {
+  const raw = typeof entry === 'string' ? entry : entry.image;
+  return '/' + raw.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+}
+
 class Slideshow {
-  constructor() {
+  constructor(slides) {
     this.current    = 0;
-    this.total      = SLIDES.length;
+    this.slides     = slides;
+    this.total      = slides.length;
     this.container  = document.querySelector('.slideshow');
     this.counterEl  = document.querySelector('.slide-counter');
     this.progressEl = document.querySelector('.progress-bar');
@@ -31,13 +24,13 @@ class Slideshow {
   }
 
   _build() {
-    SLIDES.forEach((data, i) => {
+    this.slides.forEach((entry, i) => {
       const div = document.createElement('div');
       div.className = 'slide' + (i === 0 ? ' active' : '');
 
       const img = document.createElement('img');
       img.className = 'slide__img';
-      img.src = data.src;
+      img.src = slideSrc(entry);
       img.alt = 'Marie Hartig Studio';
       if (i !== 0) img.loading = 'lazy';
 
@@ -77,4 +70,8 @@ class Slideshow {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => new Slideshow());
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('_content/slideshow-opening.json')
+    .then(res => res.json())
+    .then(data => new Slideshow(data.slides || []));
+});

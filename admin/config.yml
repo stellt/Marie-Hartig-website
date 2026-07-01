@@ -93,30 +93,36 @@ collections:
                 widget: "image"
                 hint: "The image shown on the portfolio grid tile"
 
-      - label: "Meet Marie"
-        name: "meet-marie"
-        file: "_content/meet-marie.json"
+      - label: "About Marie"
+        name: "about-marie"
+        file: "_content/about-marie.json"
         fields:
-          - label: "Page Title"
-            name: "heading"
-            widget: "string"
-            default: "Meet Marie"
-
-          - label: "Portrait Photo"
-            name: "portrait"
-            widget: "image"
-            media_folder: "/assets/images"
-            public_folder: "../assets/images"
-
-          - label: "Bio Text"
-            name: "bio"
+          - label: "Sections"
+            name: "sections"
             widget: "list"
-            label_singular: "Paragraph"
-            summary: "{{fields.paragraph}}"
-            field:
-              label: "Paragraph"
-              name: "paragraph"
-              widget: "text"
+            label_singular: "Section"
+            summary: "{{fields.heading}}"
+            hint: "Alternates photo left/right automatically based on position in this list."
+            fields:
+              - label: "Heading"
+                name: "heading"
+                widget: "string"
+                required: false
+                hint: "Leave blank for a section with no heading, e.g. ABOUT or MEET MARIE"
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                media_folder: "/assets/images"
+                public_folder: "/assets/images"
+              - label: "Paragraphs"
+                name: "paragraphs"
+                widget: "list"
+                label_singular: "Paragraph"
+                summary: "{{fields.text}}"
+                field:
+                  label: "Paragraph"
+                  name: "text"
+                  widget: "text"
 
       - label: "Contact / Connect"
         name: "contact"
@@ -143,11 +149,16 @@ collections:
             name: "email"
             widget: "string"
 
+          - label: "Phone Number"
+            name: "phone"
+            widget: "string"
+            required: false
+
           - label: "Portrait Photo"
             name: "portrait"
             widget: "image"
             media_folder: "/assets/images"
-            public_folder: "../assets/images"
+            public_folder: "/assets/images"
 
       - label: "Home / About Page"
         name: "about"
@@ -167,6 +178,63 @@ collections:
             name: "popup_button"
             widget: "string"
             default: "Subscribe"
+
+      - label: "Process Page"
+        name: "process"
+        file: "_content/process.json"
+        fields:
+          - label: "How Marie Works"
+            name: "how_marie_works"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "heading", widget: "string"}
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                media_folder: "/assets/images"
+                public_folder: "/assets/images"
+              - label: "Paragraphs"
+                name: "paragraphs"
+                widget: "list"
+                label_singular: "Paragraph"
+                summary: "{{fields.text}}"
+                field: {label: "Paragraph", name: "text", widget: "text"}
+
+          - label: "Process Steps"
+            name: "process"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "heading", widget: "string"}
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                media_folder: "/assets/images"
+                public_folder: "/assets/images"
+              - {label: "Intro Line", name: "intro", widget: "string"}
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                label_singular: "Step"
+                summary: "{{fields.text}}"
+                field: {label: "Step", name: "text", widget: "text"}
+
+          - label: "Investment"
+            name: "investment"
+            widget: "object"
+            fields:
+              - {label: "Heading", name: "heading", widget: "string"}
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                media_folder: "/assets/images"
+                public_folder: "/assets/images"
+              - {label: "Intro Line", name: "intro", widget: "string"}
+              - label: "Points"
+                name: "points"
+                widget: "list"
+                label_singular: "Point"
+                summary: "{{fields.text}}"
+                field: {label: "Point", name: "text", widget: "text"}
 
       - label: "Shop — Wall Tattoos"
         name: "shop-tattoos"
@@ -217,7 +285,7 @@ collections:
               name: "image"
               widget: "image"
               media_folder: "/assets/images/portfolio/01 OPENING PAGE"
-              public_folder: "../assets/images/portfolio/01 OPENING PAGE"
+              public_folder: "/assets/images/portfolio/01 OPENING PAGE"
 
       - label: "Home Page Slideshow"
         name: "slideshow-home"
@@ -233,4 +301,4 @@ collections:
               name: "image"
               widget: "image"
               media_folder: "/assets/images/portfolio/02 HOME PAGE"
-              public_folder: "../assets/images/portfolio/02 HOME PAGE"
+              public_folder: "/assets/images/portfolio/02 HOME PAGE"

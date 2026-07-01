@@ -3,25 +3,18 @@
    Static crossfade, no text, no controls
    ============================================ */
 
-const WORLDS_SLIDES = [
-  '../assets/images/portfolio/02 HOME PAGE/homepage-1.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-2.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-3.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-4.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-5.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-6.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-7.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-8.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-9.jpg',
-  '../assets/images/portfolio/02 HOME PAGE/homepage-10.jpg',
-];
-
 const WORLDS_INTERVAL = 3600;
 
+function worldsSlideSrc(entry) {
+  const raw = typeof entry === 'string' ? entry : entry.image;
+  return '/' + raw.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+}
+
 class WorldsSlideshow {
-  constructor() {
+  constructor(slides) {
     this.current    = 0;
-    this.total      = WORLDS_SLIDES.length;
+    this.slides     = slides;
+    this.total      = slides.length;
     this.container  = document.querySelector('.worlds-slideshow');
     this.progressEl = document.querySelector('.worlds-progress');
     this.slideEls   = [];
@@ -31,12 +24,12 @@ class WorldsSlideshow {
   }
 
   _build() {
-    WORLDS_SLIDES.forEach((src, i) => {
+    this.slides.forEach((entry, i) => {
       const div = document.createElement('div');
       div.className = 'worlds-slide' + (i === 0 ? ' active' : '');
 
       const img = document.createElement('img');
-      img.src = src;
+      img.src = worldsSlideSrc(entry);
       img.alt = '';
       img.setAttribute('aria-hidden', 'true');
       if (i !== 0) img.loading = 'lazy';
@@ -69,4 +62,8 @@ class WorldsSlideshow {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => new WorldsSlideshow());
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('../_content/slideshow-home.json')
+    .then(res => res.json())
+    .then(data => new WorldsSlideshow(data.slides || []));
+});
