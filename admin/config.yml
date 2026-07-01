@@ -5,8 +5,8 @@ backend:
 media_folder: "assets/images/portfolio"
 public_folder: "/assets/images/portfolio"
 
-site_url: https://frabjous-macaron-e37dd0.netlify.app
-display_url: https://frabjous-macaron-e37dd0.netlify.app
+site_url: https://www.mariespaintedworlds.com
+display_url: https://www.mariespaintedworlds.com
 
 collections:
 
