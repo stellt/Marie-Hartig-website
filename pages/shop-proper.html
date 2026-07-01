@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+  <style>
+    .shop-panels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-top: 64px;
+      background: #ffffff;
+    }
+    .shop-panel {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 3/4;
+      display: block;
+      text-decoration: none;
+    }
+    .shop-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .shop-panel:hover img { transform: scale(1.04); }
+    .shop-panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.45) 100%);
+      transition: background 0.4s ease;
+    }
+    .shop-panel:hover .shop-panel-overlay {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.55) 100%);
+    }
+    .shop-panel-label {
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
+      font-family: 'Velour', serif;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.8vw, 3rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+    }
+    .shop-panel-sub {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.6rem, 0.9vw, 0.8rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      display: block;
+      margin-top: 0.6rem;
+    }
+    .shop-panel-divider { display: none; }
+    .shop-footer-caption {
+      text-align: center;
+      font-family: 'Velour', serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      letter-spacing: 0.04em;
+      color: #555;
+      padding: 1.4rem 6vw 1.8rem;
+    }
+    @media (max-width: 900px) {
+      .shop-panels {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 56px;
+      }
+    }
+    @media (max-width: 580px) {
+      .shop-panels {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="worlds-page">
+  <nav class="nav" aria-label="Main navigation">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-toggle-bar"><span></span><span></span><span></span></span>
+    </button>
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="about-marie.html">About Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="shop-panel-divider"></div>
+  <div class="shop-panels">
+    <a class="shop-panel" href="shop-wall-tattoos.html">
+      <img src="../assets/images/ThumbnailTattoo.jpeg" alt="Wall Tattoos" />
+      <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-label">
+        Wall Tattoos
+        <span class="shop-panel-sub">Shop the collection</span>
+      </div>
+    </a>
+    <a class="shop-panel" href="shop-art-prints.html">
+      <img src="../assets/images/ThumbnailArtPrints.png" alt="Original Art Prints" />
+      <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-label">
+        Original Art Prints
+        <span class="shop-panel-sub">Shop the collection</span>
+      </div>
+    </a>
+    <a class="shop-panel" href="shop-wallpapers.html">
+      <img src="../assets/images/ThumbnailWallpaper.jpeg" alt="Wallpapers" />
+      <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-label">
+        Wallpapers
+        <span class="shop-panel-sub">Shop the collection</span>
+      </div>
+    </a>
+  </div>
+
+  <p class="shop-footer-caption">Create your Own Marie's Painted World Composition</p>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

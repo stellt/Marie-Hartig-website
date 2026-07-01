@@ -88,6 +88,39 @@
         grid-template-columns: 1fr;
       }
     }
+    .shop-panel-coming-soon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      z-index: 2;
+    }
+    .coming-soon-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.55rem, 0.8vw, 0.72rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 0.5rem 1.4rem;
+      backdrop-filter: blur(2px);
+      background: rgba(0,0,0,0.15);
+    }
+    .shop-panel.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+    .shop-panel.disabled img {
+      filter: blur(6px) brightness(0.7);
+      transform: scale(1.06); /* slight zoom to hide blur edges */
+    }
+    .shop-panel.disabled .shop-panel-label {
+      opacity: 0;
+    }
   </style>
 </head>
 <body class="worlds-page">
@@ -134,25 +167,34 @@
 
   <div class="shop-panel-divider"></div>
   <div class="shop-panels">
-    <a class="shop-panel" href="shop-wall-tattoos.html">
+    <a class="shop-panel disabled" href="#">
       <img src="../assets/images/ThumbnailTattoo.jpeg" alt="Wall Tattoos" />
       <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-coming-soon">
+        <span class="coming-soon-label">Coming Soon</span>
+      </div>
       <div class="shop-panel-label">
         Wall Tattoos
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel" href="shop-art-prints.html">
+    <a class="shop-panel disabled" href="#">
       <img src="../assets/images/ThumbnailArtPrints.png" alt="Original Art Prints" />
       <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-coming-soon">
+        <span class="coming-soon-label">Coming Soon</span>
+      </div>
       <div class="shop-panel-label">
         Original Art Prints
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel" href="shop-wallpapers.html">
+    <a class="shop-panel disabled" href="#">
       <img src="../assets/images/ThumbnailWallpaper.jpeg" alt="Wallpapers" />
       <div class="shop-panel-overlay"></div>
+      <div class="shop-panel-coming-soon">
+        <span class="coming-soon-label">Coming Soon</span>
+      </div>
       <div class="shop-panel-label">
         Wallpapers
         <span class="shop-panel-sub">Shop the collection</span>
