@@ -212,6 +212,8 @@
   </footer>
 
   <script>
+    function paraText(item) { return typeof item === 'string' ? item : item.text; }
+
     fetch('../_content/about-marie.json')
       .then(res => res.json())
       .then(data => {
@@ -225,7 +227,7 @@
               <div class="process-text-inner">
                 <div class="process-rule"></div>
                 ${section.heading ? `<${i === 0 ? 'h1' : 'h2'} class="process-heading">${section.heading}</${i === 0 ? 'h1' : 'h2'}>` : ''}
-                ${(section.paragraphs || []).map(p => `<p class="process-body">${p}</p>`).join('')}
+                ${(section.paragraphs || []).map(paraText).map(p => `<p class="process-body">${p}</p>`).join('')}
               </div>
             </div>
           </section>
