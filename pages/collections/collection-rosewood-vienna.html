@@ -132,11 +132,11 @@
 
       const grid = document.getElementById('collection-grid');
       grid.innerHTML = (data.images || []).map(img =>
-        `<div class="collection-grid-item"><img src="${img.image}" alt="${esc(data.title)}" loading="lazy" /></div>`
+        `<div class="collection-grid-item"><img src="${esc(typeof img === 'string' ? img : img.image)}" alt="${esc(data.title)}" loading="lazy" /></div>`
       ).join('');
 
       document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
-        `<p class="collection-desc">${esc(p.text)}</p>`
+        `<p class="collection-desc">${esc(typeof p === 'string' ? p : p.text)}</p>`
       ).join('');
 
       const metaEl = document.getElementById('collection-meta');
