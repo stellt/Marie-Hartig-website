@@ -2,16 +2,16 @@
   "title": "Urban Infinity Pool",
   "slug": "urban",
   "images": [
+    "/assets/images/portfolio/pool3.jpeg",
     {
       "image": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-1.jpg"
     },
     {
-      "image": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-2.jpg"
-    },
-    {
       "image": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-3.jpg"
     },
-    "/assets/images/portfolio/pool3.jpeg",
+    {
+      "image": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-2.jpg"
+    },
     "/assets/images/portfolio/pool.jpg",
     "/assets/images/portfolio/pool.jpeg"
   ],
