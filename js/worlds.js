@@ -29,7 +29,9 @@ class WorldsSlideshow {
       div.className = 'worlds-slide' + (i === 0 ? ' active' : '');
 
       const img = document.createElement('img');
-      img.src = worldsSlideSrc(entry);
+      img.src = imgUrl(worldsSlideSrc(entry), 1600);
+      img.srcset = imgSrcset(worldsSlideSrc(entry));
+      img.sizes = '100vw';
       img.alt = '';
       img.setAttribute('aria-hidden', 'true');
       if (i !== 0) img.loading = 'lazy';

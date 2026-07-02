@@ -92,6 +92,7 @@
     <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 
+  <script src="../js/img.js"></script>
   <script>
     function handleConnectSubmit(e) {
       e.preventDefault();
@@ -112,7 +113,10 @@
       .then(res => res.json())
       .then(data => {
         document.getElementById('connect-heading').textContent = data.heading || 'Connect';
-        document.getElementById('connect-portrait').src = data.portrait;
+        const portrait = document.getElementById('connect-portrait');
+        portrait.src = imgUrl(data.portrait, 1200);
+        portrait.srcset = imgSrcset(data.portrait);
+        portrait.sizes = '(max-width: 900px) 100vw, 42vw';
 
         const links = [];
         if (data.instagram_handle && data.instagram_url) {

@@ -187,6 +187,7 @@
     </div>
   </div>
 
+  <script src="../js/img.js"></script>
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
@@ -196,6 +197,7 @@
     const lbName = document.getElementById('lb-name');
     const lbPrice = document.getElementById('lb-price');
     const lbAddBtn = document.getElementById('lb-add-btn');
+    const cardSizes = '(max-width: 768px) 50vw, 300px';
     let items = [];
     let cur = 0;
 
@@ -210,7 +212,7 @@
           card.innerHTML = `
             <div class="tattoo-card-top">
               <div class="tattoo-card-img" onclick="openLb(${i})">
-                <img src="${item.image}" alt="${item.name}" loading="lazy" />
+                <img ${imgAttrs(item.image, cardSizes)} alt="${item.name}" loading="lazy" />
               </div>
               <div class="tattoo-card-name">${item.name}</div>
               <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>

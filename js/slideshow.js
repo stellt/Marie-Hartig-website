@@ -30,7 +30,9 @@ class Slideshow {
 
       const img = document.createElement('img');
       img.className = 'slide__img';
-      img.src = slideSrc(entry);
+      img.src = imgUrl(slideSrc(entry), 1600);
+      img.srcset = imgSrcset(slideSrc(entry));
+      img.sizes = '100vw';
       img.alt = 'Marie Hartig Studio';
       if (i !== 0) img.loading = 'lazy';
 

@@ -211,8 +211,10 @@
     <span class="about-footer-right">© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 
+  <script src="../js/img.js"></script>
   <script>
     function paraText(item) { return typeof item === 'string' ? item : item.text; }
+    const photoSizes = '(max-width: 900px) 100vw, 42vw';
 
     fetch('../_content/about-marie.json')
       .then(res => res.json())
@@ -221,7 +223,7 @@
         main.innerHTML = (data.sections || []).map((section, i) => `
           <section class="process-section${i % 2 === 1 ? ' photo-right' : ''}">
             <div class="process-photo">
-              <img src="${section.photo}" alt="Marie Hartig" />
+              <img ${imgAttrs(section.photo, photoSizes)} alt="Marie Hartig" />
             </div>
             <div class="process-text">
               <div class="process-text-inner">

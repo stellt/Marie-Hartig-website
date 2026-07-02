@@ -60,14 +60,16 @@
     <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 
+  <script src="../js/img.js"></script>
   <script>
     fetch('../_content/portfolio.json')
       .then(res => res.json())
       .then(data => {
         const grid = document.getElementById('portfolio-grid');
+        const sizes = '(max-width: 580px) 100vw, (max-width: 900px) 50vw, 33vw';
         grid.innerHTML = (data.collections || []).map(item => `
           <a class="portfolio-item" href="collections/collection-${item.slug}.html">
-            <img src="${item.thumbnail}" alt="${item.title}" loading="lazy" />
+            <img ${imgAttrs(item.thumbnail, sizes)} alt="${item.title}" loading="lazy" />
             <div class="portfolio-item-title">${item.title}</div>
           </a>
         `).join('');

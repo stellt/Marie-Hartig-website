@@ -149,6 +149,7 @@
     </div>
   </div>
 
+  <script src="../js/img.js"></script>
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
@@ -160,6 +161,7 @@
     const lbPrice  = document.getElementById('lb-price');
     const lbAddBtn = document.getElementById('lb-add-btn');
     const printGrid = document.getElementById('print-grid');
+    const cardSizes = '(max-width: 768px) 50vw, 300px';
 
     fetch('../_content/shop-prints.json')
       .then(res => res.json())
@@ -172,7 +174,7 @@
           card.innerHTML = `
             <div class="tattoo-card-top">
               <div class="tattoo-card-img" onclick="openLb(${idx})">
-                <img src="${item.image}" alt="${item.name}" loading="lazy" />
+                <img ${imgAttrs(item.image, cardSizes)} alt="${item.name}" loading="lazy" />
               </div>
               <div class="tattoo-card-name">${item.name}</div>
               <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>

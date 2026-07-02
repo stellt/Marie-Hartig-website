@@ -270,8 +270,10 @@
     <span class="about-footer-right">© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 
+  <script src="../js/img.js"></script>
   <script>
     function stepText(item) { return typeof item === 'string' ? item : item.text; }
+    const photoSizes = '(max-width: 900px) 100vw, 42vw';
 
     fetch('../_content/process.json')
       .then(res => res.json())
@@ -283,7 +285,7 @@
         document.getElementById('process-main').innerHTML = `
           <section class="process-section">
             <div class="process-photo">
-              <img src="${hmw.photo}" alt="Marie at work" />
+              <img ${imgAttrs(hmw.photo, photoSizes)} alt="Marie at work" />
             </div>
             <div class="process-text">
               <div class="process-text-inner">
@@ -298,7 +300,7 @@
 
           <section class="process-section photo-right">
             <div class="process-photo">
-              <img src="${proc.photo}" alt="Marie painting" />
+              <img ${imgAttrs(proc.photo, photoSizes)} alt="Marie painting" />
             </div>
             <div class="process-text">
               <div class="process-text-inner">
@@ -321,7 +323,7 @@
 
           <section class="process-section">
             <div class="process-photo">
-              <img src="${inv.photo}" alt="Finished wall painting" />
+              <img ${imgAttrs(inv.photo, photoSizes)} alt="Finished wall painting" />
             </div>
             <div class="process-text">
               <div class="process-text-inner">

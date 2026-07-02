@@ -94,6 +94,7 @@ TEMPLATE = """<!DOCTYPE html>
     <button class="col-lightbox-next" onclick="shift(1)">&#8594;</button>
   </div>
 
+  <script src="../../js/img.js"></script>
   <script>
     const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\\.html$/, '');
 
@@ -147,9 +148,11 @@ TEMPLATE = """<!DOCTYPE html>
       document.getElementById('collection-title').textContent = data.title;
 
       const grid = document.getElementById('collection-grid');
-      grid.innerHTML = (data.images || []).map(img =>
-        `<div class="collection-grid-item"><img src="${{esc(typeof img === 'string' ? img : img.image)}}" alt="${{esc(data.title)}}" loading="lazy" /></div>`
-      ).join('');
+      const gridSizes = '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw';
+      grid.innerHTML = (data.images || []).map(img => {{
+        const src = typeof img === 'string' ? img : img.image;
+        return `<div class="collection-grid-item"><img ${{imgAttrs(src, gridSizes)}} alt="${{esc(data.title)}}" loading="lazy" /></div>`;
+      }}).join('');
 
       document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
         `<p class="collection-desc">${{esc(typeof p === 'string' ? p : p.text)}}</p>`
