@@ -51,14 +51,14 @@
       "thumbnail": "/assets/images/portfolio/09 MIXED WORLDS LANDSCAPE/mixed-worlds-1.jpg"
     },
     {
-      "title": "Safari Vibes",
-      "slug": "safari-vibes",
-      "thumbnail": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
-    },
-    {
       "title": "Rosewood Vienna",
       "slug": "rosewood-vienna",
       "thumbnail": "/assets/images/portfolio/11 ROSEWOOD VIENNA/rosewood-vienna-1.jpg"
+    },
+    {
+      "title": "Safari Vibes",
+      "slug": "safari-vibes",
+      "thumbnail": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
     },
     {
       "title": "Sahel Heat",
