@@ -28,6 +28,10 @@ class Slideshow {
       const div = document.createElement('div');
       div.className = 'slide' + (i === 0 ? ' active' : '');
 
+      const bg = document.createElement('div');
+      bg.className = 'slide-bg';
+      bg.style.backgroundImage = `url("${imgUrl(slideSrc(entry), 800, 40)}")`;
+
       const img = document.createElement('img');
       img.className = 'slide__img';
       img.src = imgUrl(slideSrc(entry), 1600);
@@ -35,7 +39,11 @@ class Slideshow {
       img.sizes = '100vw';
       img.alt = 'Marie Hartig Studio';
       if (i !== 0) img.loading = 'lazy';
+      img.addEventListener('load', () => {
+        if (img.naturalHeight > img.naturalWidth) div.classList.add('portrait');
+      });
 
+      div.appendChild(bg);
       div.appendChild(img);
       this.container.appendChild(div);
       this.slideEls.push(div);
