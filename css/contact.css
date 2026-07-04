@@ -3,7 +3,7 @@
    ============================================ */
 
 .contact-page {
-  background: #f5f2ed;
+  background: var(--site-bg);
 }
 
 /* ============================================
@@ -45,7 +45,7 @@
 
 /* ---- LEFT — Info panel (white) ---- */
 .contact-info {
-  background: #ffffff;
+  background: var(--site-bg);
   padding: 5vw 6vw;
   display: flex;
   flex-direction: column;
@@ -73,9 +73,9 @@
 .contact-body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: clamp(0.82rem, 1vw, 0.95rem);
+  font-size: clamp(calc(0.82rem * var(--text-scale)), calc(1vw * var(--text-scale)), calc(0.95rem * var(--text-scale)));
   line-height: 1.9;
-  color: #444;
+  color: var(--body-text-color);
   margin-bottom: 2.2rem;
 }
 
@@ -110,7 +110,7 @@
 
 /* ---- RIGHT — Form panel (off-white) ---- */
 .contact-form-wrap {
-  background: #f5f2ed;
+  background: var(--site-bg);
   padding: 5vw 6vw;
   display: flex;
   flex-direction: column;
@@ -204,7 +204,7 @@
    FOOTER
    ============================================ */
 .contact-footer {
-  background: #f5f2ed;
+  background: var(--site-bg);
   border-top: 1px solid rgba(0,0,0,0.1);
   display: flex;
   align-items: center;

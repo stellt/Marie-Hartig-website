@@ -79,6 +79,7 @@
   </div>
 
   <script src="../../js/img.js"></script>
+  <script src="../../js/site-design.js"></script>
   <script>
     const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\.html$/, '');
 
@@ -130,6 +131,12 @@
     ]).then(([data, portfolio]) => {
       document.title = data.title + ' — Marie Hartig Studio';
       document.getElementById('collection-title').textContent = data.title;
+      if (data.accent_color) {
+        document.documentElement.style.setProperty('--accent-color', data.accent_color);
+      }
+      if (data.lightbox_color) {
+        document.documentElement.style.setProperty('--lightbox-color', data.lightbox_color);
+      }
 
       const grid = document.getElementById('collection-grid');
       const gridSizes = '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw';

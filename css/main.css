@@ -47,14 +47,30 @@
   font-weight: 400;
   font-style: normal;
 }
-/* Google Fonts — Jost */
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
+/* Google Fonts — Jost (default body font) + the alternate choices
+   offered in the CMS "Site Design" font dropdown. All loaded up front
+   so switching fonts at runtime never needs a page reload. */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&family=Lato:wght@300;400;700&display=swap');
 
 :root {
   --white: #ffffff;
   --off-white: #f9f6f1;
   --black: #0a0a0a;
   --gold: #c9a96e;
+
+  /* Controlled from the CMS "Site Design" entry via js/site-design.js.
+     --site-bg has one sitewide default because every page already used
+     some shade of white/cream. --body-text-color and
+     --content-font-family are deliberately left UNDECLARED here:
+     headings and body text had different original colors/fonts
+     (e.g. #111 headings vs #333 body), so each rule supplies its OWN
+     correct fallback via var(--body-text-color, <original color>) —
+     that only stops applying once Marie actually picks a color/font in
+     the CMS, at which point headings and body intentionally become one
+     shared color/font as requested. --text-scale is safe to default
+     here since 1 is a true no-op multiplier for every rule alike. */
+  --site-bg: #ffffff;
+  --text-scale: 1;
 }
 
 *, *::before, *::after {

@@ -42,7 +42,7 @@
 
     .process-text {
       flex: 1;
-      background: #dedad3;
+      background: var(--accent-color, #dedad3);
       display: flex;
       align-items: center;
       padding: 4vw 6vw;
@@ -73,22 +73,22 @@
     }
 
     .process-heading {
-      font-family: 'Velour', serif;
+      font-family: var(--content-font-family, 'Velour', serif);
       font-weight: 700;
-      font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+      font-size: clamp(calc(1.5rem * var(--text-scale)), calc(2.6vw * var(--text-scale)), calc(2.4rem * var(--text-scale)));
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #111;
+      color: var(--body-text-color, #111);
       margin-bottom: 1.2rem;
       line-height: 1.1;
     }
 
     .process-body {
-      font-family: 'Jost', sans-serif;
+      font-family: var(--content-font-family, 'Jost', sans-serif);
       font-weight: 300;
-      font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+      font-size: clamp(calc(0.72rem * var(--text-scale)), calc(0.85vw * var(--text-scale)), calc(0.82rem * var(--text-scale)));
       line-height: 1.55;
-      color: #333;
+      color: var(--body-text-color, #333);
       margin-bottom: 0.85rem;
     }
 
@@ -123,21 +123,21 @@
     }
 
     .step-title {
-      font-family: 'Velour', serif;
+      font-family: var(--content-font-family, 'Velour', serif);
       font-weight: 500;
-      font-size: clamp(0.7rem, 0.85vw, 0.78rem);
+      font-size: clamp(calc(0.7rem * var(--text-scale)), calc(0.85vw * var(--text-scale)), calc(0.78rem * var(--text-scale)));
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #111;
+      color: var(--body-text-color, #111);
       margin-bottom: 0.3rem;
     }
 
     .step-desc {
-      font-family: 'Jost', sans-serif;
+      font-family: var(--content-font-family, 'Jost', sans-serif);
       font-weight: 300;
-      font-size: clamp(0.72rem, 0.85vw, 0.8rem);
+      font-size: clamp(calc(0.72rem * var(--text-scale)), calc(0.85vw * var(--text-scale)), calc(0.8rem * var(--text-scale)));
       line-height: 1.5;
-      color: #555;
+      color: var(--body-text-color, #555);
     }
 
     /* Investment bullet list */
@@ -271,6 +271,7 @@
   </footer>
 
   <script src="../js/img.js"></script>
+  <script src="../js/site-design.js"></script>
   <script>
     function stepText(item) { return typeof item === 'string' ? item : item.text; }
     const photoSizes = '(max-width: 900px) 100vw, 42vw';
@@ -278,6 +279,9 @@
     fetch('../_content/process.json')
       .then(res => res.json())
       .then(data => {
+        if (data.accent_color) {
+          document.documentElement.style.setProperty('--accent-color', data.accent_color);
+        }
         const hmw = data.how_marie_works || {};
         const proc = data.process || {};
         const inv = data.investment || {};

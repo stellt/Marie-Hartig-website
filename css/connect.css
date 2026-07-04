@@ -3,7 +3,7 @@
    ============================================ */
 
 .connect-page {
-  background: #ffffff;
+  background: var(--site-bg);
 }
 
 /* ---- Main split layout ---- */
@@ -17,7 +17,7 @@
 /* ---- LEFT — Portrait photo (white bg) ---- */
 .connect-photo {
   flex: 0 0 42%;
-  background: #ffffff;
+  background: var(--site-bg);
 }
 
 .connect-photo img {
@@ -31,7 +31,7 @@
 /* ---- RIGHT — Info panel (off-white) ---- */
 .connect-info {
   flex: 1;
-  background: #dedad3;
+  background: var(--accent-color, #dedad3);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,12 +46,12 @@
 }
 
 .connect-heading {
-  font-family: 'Velour', serif;
+  font-family: var(--content-font-family, 'Velour', serif);
   font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-size: clamp(calc(1.6rem * var(--text-scale)), calc(3vw * var(--text-scale)), calc(2.6rem * var(--text-scale)));
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #111;
+  color: var(--body-text-color, #111);
   margin-bottom: 2rem;
   line-height: 1.1;
 }
@@ -144,7 +144,7 @@
 
 /* ---- FOOTER ---- */
 .connect-footer {
-  background: #ffffff;
+  background: var(--site-bg);
   border-top: 1px solid rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
@@ -192,7 +192,7 @@
     margin-bottom: 2rem;
   }
   .connect-heading {
-    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    font-size: clamp(calc(1.8rem * var(--text-scale)), calc(6vw * var(--text-scale)), calc(2.2rem * var(--text-scale)));
     margin-bottom: 1.6rem;
   }
   .connect-socials {

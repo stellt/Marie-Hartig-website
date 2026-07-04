@@ -4,7 +4,7 @@
 
 /* ---- Reset for this page ---- */
 body.worlds-page {
-  background: #fff;
+  background: var(--site-bg);
   color: #111;
   overflow-x: hidden;
 }
@@ -18,7 +18,7 @@ body.worlds-page {
   left: 0;
   right: 0;
   z-index: 100;
-  background: #ffffff;
+  background: var(--site-bg);
   border-bottom: 1px solid rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@ body.worlds-page {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: #ffffff;
+    background: var(--site-bg);
     border-bottom: 1px solid rgba(0,0,0,0.08);
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     max-height: 0;

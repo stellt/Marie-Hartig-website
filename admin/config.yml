@@ -66,6 +66,22 @@ collections:
         widget: "string"
         required: false
 
+      - label: "Accent Panel Color"
+        name: "accent_color"
+        widget: "string"
+        required: false
+        default: "#dedad3"
+        pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
+        hint: "The color behind the title/description panel on this collection's page. Leave blank to use the site's usual beige."
+
+      - label: "Lightbox Background Color"
+        name: "lightbox_color"
+        widget: "string"
+        required: false
+        default: "#ffffff"
+        pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #ffffff"]
+        hint: "The background behind a photo when you click it to view it full-size on this collection's page. Pick a LIGHT color — the close button and arrows are dark and become hard to see on a dark background."
+
   # ── MEET MARIE PAGE ─────────────────────────────────────────
   - name: "pages"
     label: "Page Text"
@@ -124,6 +140,14 @@ collections:
                   name: "text"
                   widget: "text"
 
+          - label: "Accent Panel Color"
+            name: "accent_color"
+            widget: "string"
+            required: false
+            default: "#dedad3"
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
+            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige. Applies to all sections on this page."
+
       - label: "Contact / Connect"
         name: "contact"
         file: "_content/contact.json"
@@ -159,6 +183,14 @@ collections:
             widget: "image"
             media_folder: "/assets/images"
             public_folder: "/assets/images"
+
+          - label: "Accent Panel Color"
+            name: "accent_color"
+            widget: "string"
+            required: false
+            default: "#dedad3"
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
+            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige."
 
       - label: "Home / About Page"
         name: "about"
@@ -235,6 +267,14 @@ collections:
                 label_singular: "Point"
                 summary: "{{fields.text}}"
                 field: {label: "Point", name: "text", widget: "text"}
+
+          - label: "Accent Panel Color"
+            name: "accent_color"
+            widget: "string"
+            required: false
+            default: "#dedad3"
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
+            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige. Applies to all three sections on this page."
 
       - label: "Shop — Wall Tattoos"
         name: "shop-tattoos"
@@ -372,3 +412,45 @@ collections:
               widget: "image"
               media_folder: "/assets/images_backup/slides"
               public_folder: "/assets/images_backup/slides"
+
+      - label: "Site Design"
+        name: "site-design"
+        file: "_content/site-design.json"
+        fields:
+          - label: "Text Size"
+            name: "text_size"
+            widget: "select"
+            options: ["small", "medium", "large"]
+            default: "medium"
+            hint: "Applies to headings and body text everywhere — titles, descriptions, paragraphs. Does not affect the navigation bar or the homepage/welcome page slideshows."
+
+          - label: "Font"
+            name: "font_family"
+            widget: "select"
+            options:
+              - {label: "Original (Velour + Jost)", value: "default"}
+              - {label: "Playfair Display", value: "playfair"}
+              - {label: "Montserrat", value: "montserrat"}
+              - {label: "Poppins", value: "poppins"}
+              - {label: "Merriweather", value: "merriweather"}
+              - {label: "Lato", value: "lato"}
+            default: "default"
+            hint: "Applies to headings and body text everywhere. Does not affect the navigation bar or the homepage/welcome page slideshows."
+
+          - label: "Text Color"
+            name: "text_color"
+            widget: "select"
+            options:
+              - {label: "Original (mixed shades)", value: "default"}
+              - {label: "Charcoal", value: "charcoal"}
+              - {label: "Grey", value: "grey"}
+              - {label: "Black", value: "black"}
+            default: "default"
+            hint: "Applies to headings and body text everywhere — picking one makes them all the same color. Does not affect buttons or the navigation bar."
+
+          - label: "Page Background Color"
+            name: "background_color"
+            widget: "string"
+            default: "#ffffff"
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #ffffff or #fdfcfa"]
+            hint: "The backdrop color behind text on every page. Use a hex code — ask your web developer if you're not sure what that means. e.g. #ffffff is pure white, #fdfcfa is a very soft warm white."

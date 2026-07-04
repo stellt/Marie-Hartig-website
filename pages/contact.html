@@ -93,6 +93,7 @@
   </footer>
 
   <script src="../js/img.js"></script>
+  <script src="../js/site-design.js"></script>
   <script>
     function handleConnectSubmit(e) {
       e.preventDefault();
@@ -112,6 +113,9 @@
     fetch('../_content/contact.json')
       .then(res => res.json())
       .then(data => {
+        if (data.accent_color) {
+          document.documentElement.style.setProperty('--accent-color', data.accent_color);
+        }
         document.getElementById('connect-heading').textContent = data.heading || 'Connect';
         const portrait = document.getElementById('connect-portrait');
         portrait.src = imgUrl(data.portrait, 1200);

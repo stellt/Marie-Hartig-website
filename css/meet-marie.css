@@ -4,7 +4,7 @@
    ============================================ */
 
 .meet-marie-page {
-  background: #ffffff;
+  background: var(--site-bg);
 }
 
 /* ---- Main split layout ---- */
@@ -18,7 +18,7 @@
 /* ---- LEFT — Photo panel (pure white bg) ---- */
 .about-photo {
   flex: 0 0 42%;
-  background: #ffffff;
+  background: var(--site-bg);
   display: flex;
   align-items: stretch;
 }
@@ -66,9 +66,9 @@
 .about-body {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  font-size: clamp(calc(0.85rem * var(--text-scale)), calc(1.1vw * var(--text-scale)), calc(1rem * var(--text-scale)));
   line-height: 1.85;
-  color: #333;
+  color: var(--body-text-color);
   margin-bottom: 1.4rem;
 }
 
@@ -78,7 +78,7 @@
 
 /* ---- FOOTER ---- */
 .about-footer {
-  background: #ffffff;
+  background: var(--site-bg);
   border-top: 1px solid rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
@@ -142,7 +142,7 @@
   }
 
   .about-body {
-    font-size: 0.95rem;
+    font-size: calc(0.95rem * var(--text-scale));
     line-height: 1.8;
   }
 
