@@ -38,21 +38,19 @@ jobs:
           before="${{ github.event.before }}"
           after="${{ github.event.after }}"
           if [ "$before" = "0000000000000000000000000000000000000000" ]; then
-            files=$(git diff-tree --no-commit-id --name-only -r --diff-filter=ACM "$after" -- assets/images)
+            git diff-tree --no-commit-id --name-only -r --diff-filter=ACM "$after" -- assets/images > changed_files.txt
           else
-            files=$(git diff --name-only --diff-filter=ACM "$before" "$after" -- assets/images)
+            git diff --name-only --diff-filter=ACM "$before" "$after" -- assets/images > changed_files.txt
           fi
-          echo "files<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$files" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "count=$(wc -l < changed_files.txt)" >> "$GITHUB_OUTPUT"
 
       - name: Compress changed images
-        if: steps.changed.outputs.files != ''
+        if: steps.changed.outputs.count != '0'
         run: |
-          python scripts/compress_changed_images.py ${{ steps.changed.outputs.files }}
+          python scripts/compress_changed_images.py changed_files.txt
 
       - name: Commit compressed images
-        if: steps.changed.outputs.files != ''
+        if: steps.changed.outputs.count != '0'
         run: |
           if git diff --quiet -- assets/images; then
             echo "Nothing to commit — images already optimal."

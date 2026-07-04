@@ -4,6 +4,12 @@ compress_changed_images.py — Compress a specific list of image files.
 Driven by .github/workflows/compress-images.yml, which passes the paths
 that changed in the triggering push (Marie's CMS uploads land here).
 
+Takes the path to a text file (one image path per line) rather than argv
+entries, because most of this repo's folders have spaces in their names
+(e.g. "21 SWEETEST DREAMS/") — passing paths as separate shell arguments
+via a workflow's `${{ }}` interpolation silently word-splits on those
+spaces and breaks.
+
 Unlike compress_images.py this does NOT write to assets/images_backup/ —
 in CI, git history is the backup, and that folder already has an unrelated,
 unresolved duplicate-content situation (see CLAUDE.md) that a new writer
@@ -18,7 +24,9 @@ from image_compress import compress_image, human_size, SUPPORTED
 
 
 def main():
-    paths = [Path(p) for p in sys.argv[1:]]
+    list_file = Path(sys.argv[1])
+    lines = list_file.read_text(encoding='utf-8-sig').splitlines()
+    paths = [Path(line) for line in lines if line.strip()]
     images = [p for p in paths if p.exists() and p.suffix.lower() in SUPPORTED]
 
     if not images:
