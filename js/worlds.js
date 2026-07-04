@@ -28,10 +28,6 @@ class WorldsSlideshow {
       const div = document.createElement('div');
       div.className = 'worlds-slide' + (i === 0 ? ' active' : '');
 
-      const bg = document.createElement('div');
-      bg.className = 'worlds-slide-bg';
-      bg.style.backgroundImage = `url("${imgUrl(worldsSlideSrc(entry), 800, 40)}")`;
-
       const img = document.createElement('img');
       img.src = imgUrl(worldsSlideSrc(entry), 1600);
       img.srcset = imgSrcset(worldsSlideSrc(entry));
@@ -39,11 +35,7 @@ class WorldsSlideshow {
       img.alt = '';
       img.setAttribute('aria-hidden', 'true');
       if (i !== 0) img.loading = 'lazy';
-      img.addEventListener('load', () => {
-        if (img.naturalHeight > img.naturalWidth) div.classList.add('portrait');
-      });
 
-      div.appendChild(bg);
       div.appendChild(img);
       this.container.appendChild(div);
       this.slideEls.push(div);

@@ -148,16 +148,6 @@ body.worlds-page {
   z-index: 2;
 }
 
-.worlds-slide-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(40px) brightness(0.55);
-  transform: scale(1.15);
-  z-index: 0;
-}
-
 .worlds-slide img {
   position: relative;
   z-index: 1;
@@ -166,12 +156,6 @@ body.worlds-page {
   object-fit: cover;
   object-position: center;
   display: block;
-}
-
-/* Portrait photos: show the full frame instead of cropping to fill
-   the fullscreen landscape stage; blurred backdrop fills the gap. */
-.worlds-slide.portrait img {
-  object-fit: contain;
 }
 
 /* Subtle progress bar */
