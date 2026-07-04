@@ -1,0 +1,65 @@
+name: Auto-compress uploaded images
+
+# Runs after every save Marie makes in the CMS (Decap commits straight to
+# main via git-gateway) so newly-uploaded photos get compressed without
+# anyone touching the CMS itself. See scripts/image_compress.py for the
+# compression logic and why it bakes in EXIF orientation before resizing.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/images/**'
+
+permissions:
+  contents: write
+
+jobs:
+  compress:
+    if: >-
+      github.actor != 'github-actions[bot]' &&
+      !contains(github.event.head_commit.message, '[skip-compress]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: pip install Pillow
+
+      - name: Find changed images in this push
+        id: changed
+        run: |
+          before="${{ github.event.before }}"
+          after="${{ github.event.after }}"
+          if [ "$before" = "0000000000000000000000000000000000000000" ]; then
+            files=$(git diff-tree --no-commit-id --name-only -r --diff-filter=ACM "$after" -- assets/images)
+          else
+            files=$(git diff --name-only --diff-filter=ACM "$before" "$after" -- assets/images)
+          fi
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Compress changed images
+        if: steps.changed.outputs.files != ''
+        run: |
+          python scripts/compress_changed_images.py ${{ steps.changed.outputs.files }}
+
+      - name: Commit compressed images
+        if: steps.changed.outputs.files != ''
+        run: |
+          if git diff --quiet -- assets/images; then
+            echo "Nothing to commit — images already optimal."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/images
+          git commit -m "Auto-compress uploaded images [skip-compress]"
+          git push
