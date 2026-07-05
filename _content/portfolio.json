@@ -21,14 +21,14 @@
       "thumbnail": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg"
     },
     {
-      "title": "The Map Room",
-      "slug": "map-room",
-      "thumbnail": "/assets/images/portfolio/05 THE MAP ROOM/map-room-1.jpg"
-    },
-    {
       "title": "Saint Francis and the Animals",
       "slug": "saint-francis",
       "thumbnail": "/assets/images/portfolio/04 SAINT FRANCIS AND THE ANIMALS/saint-francis-1.jpg"
+    },
+    {
+      "title": "The Map Room",
+      "slug": "map-room",
+      "thumbnail": "/assets/images/portfolio/05 THE MAP ROOM/map-room-1.jpg"
     },
     {
       "title": "Rickatschwende Spa Hotel",
