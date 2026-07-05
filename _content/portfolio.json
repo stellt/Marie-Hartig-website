@@ -3,12 +3,17 @@
     {
       "title": "Urban Infinity Pool",
       "slug": "urban",
-      "thumbnail": "/assets/images/portfolio/01 URBAN INFINITY POOL/urban-new-1.jpg"
+      "thumbnail": "/assets/images/portfolio/05.jpg"
     },
     {
       "title": "Fuschl Rosewood",
       "slug": "fuschl",
       "thumbnail": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg"
+    },
+    {
+      "title": "Bodmin Magic",
+      "slug": "bodmin-magic",
+      "thumbnail": "/assets/images/portfolio/15 BODMIN MAGIC/bodmin-magic-1.jpg"
     },
     {
       "title": "Creature Comforts",
@@ -74,11 +79,6 @@
       "title": "Oversize Bloom",
       "slug": "oversize-bloom",
       "thumbnail": "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg"
-    },
-    {
-      "title": "Bodmin Magic",
-      "slug": "bodmin-magic",
-      "thumbnail": "/assets/images/portfolio/15 BODMIN MAGIC/bodmin-magic-1.jpg"
     },
     {
       "title": "Das Buben Bad",
