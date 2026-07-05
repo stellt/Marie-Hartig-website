@@ -13,7 +13,7 @@
     {
       "title": "Bodmin Magic",
       "slug": "bodmin-magic",
-      "thumbnail": "/assets/images/portfolio/15 BODMIN MAGIC/bodmin-magic-1.jpg"
+      "thumbnail": "/assets/images/portfolio/02.jpg"
     },
     {
       "title": "Creature Comforts",
@@ -46,6 +46,11 @@
       "thumbnail": "/assets/images/portfolio/07 TAMSWEG MEMORIES/tamsweg-1.jpg"
     },
     {
+      "title": "Safari Vibes",
+      "slug": "safari-vibes",
+      "thumbnail": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
+    },
+    {
       "title": "Bellaria",
       "slug": "bellaria",
       "thumbnail": "/assets/images/portfolio/08 BELLARIA/bellaria-1.jpg"
@@ -59,11 +64,6 @@
       "title": "Rosewood Vienna",
       "slug": "rosewood-vienna",
       "thumbnail": "/assets/images/portfolio/11 ROSEWOOD VIENNA/rosewood-vienna-1.jpg"
-    },
-    {
-      "title": "Safari Vibes",
-      "slug": "safari-vibes",
-      "thumbnail": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
     },
     {
       "title": "Sahel Heat",
