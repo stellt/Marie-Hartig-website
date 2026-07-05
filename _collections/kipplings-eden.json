@@ -5,19 +5,13 @@
     {
       "image": "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-1.jpg"
     },
-    {
-      "image": "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-3.jpg"
-    }
+    "/assets/images/portfolio/kippling-1.jpg",
+    "/assets/images/portfolio/kippling-3.jpg"
   ],
   "description": [
-    {
-      "text": "Description coming soon."
-    }
+    "A beautiful home that sits in the picturesque countryside of Berkshire, weaves the old with the new in every way. The wall painting was to compliment the gardens and the furnishings all round. "
   ],
-  "location": "",
+  "location": "Living Room. Private Home. Berkshire, UK",
   "year": "",
   "type": ""
 }
