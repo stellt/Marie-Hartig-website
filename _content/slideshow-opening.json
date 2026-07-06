@@ -1,10 +1,8 @@
 {
   "slides": [
     "/assets/images/portfolio/01 OPENING PAGE/open-page-1.jpg",
-    {
-      "image": "../assets/images/portfolio/01 OPENING PAGE/open-page-2.jpg"
-    },
-    "../assets/images/portfolio/01 OPENING PAGE/03.jpeg",
+    "/assets/images/portfolio/01 OPENING PAGE/fuschl.jpg",
+    "/assets/images/portfolio/01 OPENING PAGE/sweetest.jpg",
     {
       "image": "../assets/images/portfolio/01 OPENING PAGE/open-page-3.jpg"
     },
@@ -20,7 +18,6 @@
     {
       "image": "../assets/images/portfolio/01 OPENING PAGE/open-page-7.jpg"
     },
-    "/assets/images/portfolio/01 OPENING PAGE/fuschl.jpg",
     "/assets/images/portfolio/01 OPENING PAGE/meandzebra.jpg"
   ]
 }
