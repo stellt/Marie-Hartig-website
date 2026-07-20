@@ -6,11 +6,17 @@
    + a convenient way to enter a password before clicking through.
    ============================================ */
 
+/* The backdrop is purely decorative -- it is pointer-events:none, so it
+   never blocks clicks or scrolling. It previously carried a
+   rgba(0,0,0,0.12) tint at z-index 500, which sat ABOVE the nav
+   (z-index 100) and the portfolio grid, washing the white nav bar and
+   the 3px grid gaps to roughly #e0e0e0. Tint removed, and the layer
+   dropped below the nav so it can never discolour chrome again. */
 .portfolio-notice-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 500;
-  background: rgba(0,0,0,0.12);
+  z-index: 90;
+  background: transparent;
   pointer-events: none;
 }
 .portfolio-notice-backdrop[hidden] { display: none; }
