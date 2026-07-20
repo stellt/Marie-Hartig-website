@@ -1,0 +1,170 @@
+/* ============================================
+   MARIE HARTIG STUDIO — Portfolio Access Notice
+   Non-blocking: thumbnails stay fully visible and scrollable. Opening any
+   individual collection is what actually requires a password (enforced by
+   portfolio-gate.css/js on those pages) -- this is just an early heads-up
+   + a convenient way to enter a password before clicking through.
+   ============================================ */
+
+.portfolio-notice-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+.portfolio-notice-backdrop[hidden] { display: none; }
+
+.portfolio-notice-bubble {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 501;
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  padding: 1.5rem 1.6rem 1.6rem;
+  pointer-events: auto;
+}
+.portfolio-notice-bubble[hidden] { display: none; }
+
+.portfolio-notice-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+.portfolio-notice-close:hover { color: #111; }
+
+.portfolio-notice-title {
+  font-family: 'Velour', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-notice-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+}
+
+.portfolio-notice-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.portfolio-notice-form input {
+  flex: 1;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
+  min-width: 0;
+}
+
+.portfolio-notice-form button {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  border: none;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.portfolio-notice-form button:hover { background: #333; }
+
+.portfolio-notice-error {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: #b33;
+  margin-bottom: 0.6rem;
+  min-height: 1em;
+}
+
+.portfolio-notice-toggle {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  color: #555;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  padding: 0;
+}
+.portfolio-notice-toggle:hover { color: #111; }
+
+.portfolio-notice-register {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.portfolio-notice-register[hidden] { display: none; }
+
+.portfolio-notice-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.portfolio-notice-register-form input,
+.portfolio-notice-register-form textarea {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
+  width: 100%;
+  resize: none;
+}
+
+.portfolio-notice-register-form button {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #111;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.35);
+  padding: 0.55rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.portfolio-notice-register-form button:hover { background: #111; color: #fff; }
+
+.portfolio-notice-register-success {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.76rem;
+  color: #333;
+}
+
+@media (max-width: 580px) {
+  .portfolio-notice-bubble {
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+}
