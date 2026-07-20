@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../../css/worlds.css" />
   <link rel="stylesheet" href="../../css/collection.css" />
   <link rel="stylesheet" href="../../css/cart.css" />
+  <link rel="stylesheet" href="../../css/portfolio-gate.css" />
 </head>
 <body class="worlds-page collection-page">
 
@@ -80,11 +81,42 @@
 
   <script src="../../js/img.js"></script>
   <script src="../../js/site-design.js"></script>
+  <script src="../../js/portfolio-gate.js"></script>
   <script>
     const SLUG = location.pathname.split('/').pop().replace(/^collection-/, '').replace(/\.html$/, '');
 
     function esc(s) {
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // Renders a paragraph's own bold/italic formatting (from the CMS's
+    // restricted markdown editor -- only bold/italic marks are ever
+    // produced) as <strong>/<em>. Bold is replaced first so **x** can't
+    // be misread as italic by the single-asterisk pass.
+    function mdFormat(s) {
+      return esc(s)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/_(.+?)_/g, '<em>$1</em>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    }
+
+    const PARA_FONTS = {
+      playfair: "'Playfair Display', serif", montserrat: "'Montserrat', sans-serif",
+      poppins: "'Poppins', sans-serif", merriweather: "'Merriweather', serif", lato: "'Lato', sans-serif"
+    };
+    const PARA_COLORS = { charcoal: '#333333', grey: '#555555', black: '#111111' };
+    const PARA_SIZES = { small: '0.9em', medium: '1em', large: '1.15em' };
+
+    // A paragraph may still be a bare string or a {text}-only object from
+    // before per-paragraph styling existed -- never assume the new fields exist.
+    function paraText(p) { return typeof p === 'string' ? p : (p.text || ''); }
+    function paraStyle(p) {
+      if (typeof p === 'string' || !p) return '';
+      const styles = [];
+      if (PARA_FONTS[p.font_family]) styles.push('font-family: ' + PARA_FONTS[p.font_family]);
+      if (PARA_COLORS[p.text_color]) styles.push('color: ' + PARA_COLORS[p.text_color]);
+      if (PARA_SIZES[p.text_size]) styles.push('font-size: ' + PARA_SIZES[p.text_size]);
+      return styles.length ? ' style="' + styles.join('; ') + '"' : '';
     }
 
     let imgs = [];
@@ -146,7 +178,7 @@
       }).join('');
 
       document.getElementById('collection-desc').innerHTML = (data.description || []).map(p =>
-        `<p class="collection-desc">${esc(typeof p === 'string' ? p : p.text)}</p>`
+        `<p class="collection-desc"${paraStyle(p)}>${mdFormat(paraText(p))}</p>`
       ).join('');
 
       const metaEl = document.getElementById('collection-meta');

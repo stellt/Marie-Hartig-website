@@ -17,7 +17,10 @@ class WorldsSlideshow {
     this.total      = slides.length;
     this.container  = document.querySelector('.worlds-slideshow');
     this.progressEl = document.querySelector('.worlds-progress');
+    this.prevEl     = document.querySelector('.worlds-prev');
+    this.nextEl     = document.querySelector('.worlds-next');
     this.slideEls   = [];
+    this.timer      = null;
 
     this._build();
     this._init();
@@ -44,14 +47,25 @@ class WorldsSlideshow {
 
   _init() {
     this._startProgress();
-    setInterval(() => this._next(), WORLDS_INTERVAL);
+    this._startTimer();
+
+    if (this.prevEl) this.prevEl.addEventListener('click', () => this._go(-1));
+    if (this.nextEl) this.nextEl.addEventListener('click', () => this._go(1));
   }
 
-  _next() {
+  _startTimer() {
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this._go(1), WORLDS_INTERVAL);
+  }
+
+  /** Manual or automatic advance. Manual clicks restart the auto-advance
+      timer so it doesn't immediately jump again right after. */
+  _go(dir) {
     this.slideEls[this.current].classList.remove('active');
-    this.current = (this.current + 1) % this.total;
+    this.current = (this.current + dir + this.total) % this.total;
     this.slideEls[this.current].classList.add('active');
     this._startProgress();
+    this._startTimer();
   }
 
   _startProgress() {

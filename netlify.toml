@@ -9,3 +9,15 @@
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "1; mode=block"
+
+# publish = "." serves the whole repo as static files, which means the raw
+# source under netlify/functions/ (including the portfolio-access password
+# list) would otherwise be directly downloadable at /netlify/functions/...
+# This does NOT affect the real function invocation path, which is
+# /.netlify/functions/... (leading dot) -- a different, Netlify-handled route
+# that this redirect never touches.
+[[redirects]]
+  from = "/netlify/functions/*"
+  to = "/"
+  status = 404
+  force = true

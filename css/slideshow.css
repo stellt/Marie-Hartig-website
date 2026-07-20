@@ -128,7 +128,29 @@
   display: none;
 }
 
+/* ---- Manual prev/next ---- */
+.slide-prev,
+.slide-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 2.2rem;
+  cursor: pointer;
+  padding: 1.2rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.slide-prev { left: 0.5rem; }
+.slide-next { right: 0.5rem; }
+.slide-prev:hover,
+.slide-next:hover { color: #fff; }
+
 @media (max-width: 768px) {
   .hero-title { font-size: clamp(1.4rem, 7vw, 3rem); letter-spacing: 0.06em; }
   .slide-counter { bottom: 1.2rem; right: 1.5rem; }
+  .slide-prev, .slide-next { font-size: 1.6rem; padding: 0.8rem; }
 }

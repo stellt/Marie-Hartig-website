@@ -10,6 +10,27 @@ display_url: https://www.mariespaintedworlds.com
 
 collections:
 
+  # ── PORTFOLIO ACCESS (approved visitors for the password gate) ──
+  - name: "portfolio-access"
+    label: "Portfolio Access"
+    files:
+      - label: "Approved Visitors"
+        name: "approved-visitors"
+        file: "netlify/functions/_data/portfolio-access.json"
+        fields:
+          - label: "Approved"
+            name: "approved"
+            widget: "list"
+            label_singular: "Person"
+            summary: "{{fields.name}} ({{fields.email}})"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Email", name: "email", widget: "string"}
+              - label: "Password"
+                name: "password"
+                widget: "string"
+                hint: "Make up a unique password for this person (e.g. two random words + a number) and send it to them yourself once you save. Don't reuse the same password for different people."
+
   # ── PORTFOLIO COLLECTIONS (individual collection pages) ─────
   - name: "collections"
     label: "Portfolio Collections"
@@ -46,10 +67,43 @@ collections:
         widget: "list"
         label_singular: "Paragraph"
         summary: "{{fields.text}}"
-        field:
-          label: "Paragraph"
-          name: "text"
-          widget: "text"
+        fields:
+          - label: "Text"
+            name: "text"
+            widget: "markdown"
+            buttons: ["bold", "italic"]
+            editor_components: []
+            modes: ["rich_text"]
+            hint: "Select a word or sentence and click Bold to emphasize just that part."
+          - label: "Font"
+            name: "font_family"
+            widget: "select"
+            options:
+              - {label: "Use Site Default", value: "default"}
+              - {label: "Playfair Display", value: "playfair"}
+              - {label: "Montserrat", value: "montserrat"}
+              - {label: "Poppins", value: "poppins"}
+              - {label: "Merriweather", value: "merriweather"}
+              - {label: "Lato", value: "lato"}
+            default: "default"
+          - label: "Size"
+            name: "text_size"
+            widget: "select"
+            options:
+              - {label: "Use Site Default", value: "default"}
+              - {label: "Small", value: "small"}
+              - {label: "Medium", value: "medium"}
+              - {label: "Large", value: "large"}
+            default: "default"
+          - label: "Color"
+            name: "text_color"
+            widget: "select"
+            options:
+              - {label: "Use Site Default", value: "default"}
+              - {label: "Charcoal", value: "charcoal"}
+              - {label: "Grey", value: "grey"}
+              - {label: "Black", value: "black"}
+            default: "default"
 
       - label: "Location"
         name: "location"
@@ -135,10 +189,43 @@ collections:
                 widget: "list"
                 label_singular: "Paragraph"
                 summary: "{{fields.text}}"
-                field:
-                  label: "Paragraph"
-                  name: "text"
-                  widget: "text"
+                fields:
+                  - label: "Text"
+                    name: "text"
+                    widget: "markdown"
+                    buttons: ["bold", "italic"]
+                    editor_components: []
+                    modes: ["rich_text"]
+                    hint: "Select a word or sentence and click Bold to emphasize just that part."
+                  - label: "Font"
+                    name: "font_family"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Playfair Display", value: "playfair"}
+                      - {label: "Montserrat", value: "montserrat"}
+                      - {label: "Poppins", value: "poppins"}
+                      - {label: "Merriweather", value: "merriweather"}
+                      - {label: "Lato", value: "lato"}
+                    default: "default"
+                  - label: "Size"
+                    name: "text_size"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Small", value: "small"}
+                      - {label: "Medium", value: "medium"}
+                      - {label: "Large", value: "large"}
+                    default: "default"
+                  - label: "Color"
+                    name: "text_color"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
+                      - {label: "Black", value: "black"}
+                    default: "default"
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -230,7 +317,43 @@ collections:
                 widget: "list"
                 label_singular: "Paragraph"
                 summary: "{{fields.text}}"
-                field: {label: "Paragraph", name: "text", widget: "text"}
+                fields:
+                  - label: "Text"
+                    name: "text"
+                    widget: "markdown"
+                    buttons: ["bold", "italic"]
+                    editor_components: []
+                    modes: ["rich_text"]
+                    hint: "Select a word or sentence and click Bold to emphasize just that part."
+                  - label: "Font"
+                    name: "font_family"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Playfair Display", value: "playfair"}
+                      - {label: "Montserrat", value: "montserrat"}
+                      - {label: "Poppins", value: "poppins"}
+                      - {label: "Merriweather", value: "merriweather"}
+                      - {label: "Lato", value: "lato"}
+                    default: "default"
+                  - label: "Size"
+                    name: "text_size"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Small", value: "small"}
+                      - {label: "Medium", value: "medium"}
+                      - {label: "Large", value: "large"}
+                    default: "default"
+                  - label: "Color"
+                    name: "text_color"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
+                      - {label: "Black", value: "black"}
+                    default: "default"
 
           - label: "Process Steps"
             name: "process"
@@ -248,7 +371,43 @@ collections:
                 widget: "list"
                 label_singular: "Step"
                 summary: "{{fields.text}}"
-                field: {label: "Step", name: "text", widget: "text"}
+                fields:
+                  - label: "Text"
+                    name: "text"
+                    widget: "markdown"
+                    buttons: ["bold", "italic"]
+                    editor_components: []
+                    modes: ["rich_text"]
+                    hint: "Select a word or sentence and click Bold to emphasize just that part."
+                  - label: "Font"
+                    name: "font_family"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Playfair Display", value: "playfair"}
+                      - {label: "Montserrat", value: "montserrat"}
+                      - {label: "Poppins", value: "poppins"}
+                      - {label: "Merriweather", value: "merriweather"}
+                      - {label: "Lato", value: "lato"}
+                    default: "default"
+                  - label: "Size"
+                    name: "text_size"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Small", value: "small"}
+                      - {label: "Medium", value: "medium"}
+                      - {label: "Large", value: "large"}
+                    default: "default"
+                  - label: "Color"
+                    name: "text_color"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
+                      - {label: "Black", value: "black"}
+                    default: "default"
 
           - label: "Investment"
             name: "investment"
@@ -266,7 +425,43 @@ collections:
                 widget: "list"
                 label_singular: "Point"
                 summary: "{{fields.text}}"
-                field: {label: "Point", name: "text", widget: "text"}
+                fields:
+                  - label: "Text"
+                    name: "text"
+                    widget: "markdown"
+                    buttons: ["bold", "italic"]
+                    editor_components: []
+                    modes: ["rich_text"]
+                    hint: "Select a word or sentence and click Bold to emphasize just that part."
+                  - label: "Font"
+                    name: "font_family"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Playfair Display", value: "playfair"}
+                      - {label: "Montserrat", value: "montserrat"}
+                      - {label: "Poppins", value: "poppins"}
+                      - {label: "Merriweather", value: "merriweather"}
+                      - {label: "Lato", value: "lato"}
+                    default: "default"
+                  - label: "Size"
+                    name: "text_size"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Small", value: "small"}
+                      - {label: "Medium", value: "medium"}
+                      - {label: "Large", value: "large"}
+                    default: "default"
+                  - label: "Color"
+                    name: "text_color"
+                    widget: "select"
+                    options:
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
+                      - {label: "Black", value: "black"}
+                    default: "default"
 
           - label: "Accent Panel Color"
             name: "accent_color"

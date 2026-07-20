@@ -1,0 +1,151 @@
+/* ============================================
+   MARIE HARTIG STUDIO — Portfolio Access Gate
+   ============================================ */
+
+.portfolio-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--site-bg, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vw;
+}
+
+.portfolio-gate[hidden] { display: none; }
+
+.portfolio-gate-box {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.portfolio-gate-title {
+  font-family: 'Velour', serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 0.6rem;
+}
+
+.portfolio-gate-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 1.8rem;
+  line-height: 1.6;
+}
+
+.portfolio-gate-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.portfolio-gate-form input {
+  flex: 1;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
+}
+
+.portfolio-gate-form button {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  border: none;
+  padding: 0 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.portfolio-gate-form button:hover { background: #333; }
+
+.portfolio-gate-error {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  color: #b33;
+  margin-bottom: 1rem;
+  min-height: 1em;
+}
+
+.portfolio-gate-toggle {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: #555;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  padding: 0;
+}
+.portfolio-gate-toggle:hover { color: #111; }
+
+.portfolio-gate-register {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  text-align: left;
+}
+.portfolio-gate-register[hidden] { display: none; }
+
+.portfolio-gate-register-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.portfolio-gate-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.portfolio-gate-register-form input,
+.portfolio-gate-register-form textarea {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
+  width: 100%;
+  resize: none;
+}
+
+.portfolio-gate-register-form button {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #111;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.35);
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.portfolio-gate-register-form button:hover { background: #111; color: #fff; }
+
+.portfolio-gate-register-success {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  color: #333;
+}

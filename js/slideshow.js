@@ -17,7 +17,10 @@ class Slideshow {
     this.container  = document.querySelector('.slideshow');
     this.counterEl  = document.querySelector('.slide-counter');
     this.progressEl = document.querySelector('.progress-bar');
+    this.prevEl     = document.querySelector('.slide-prev');
+    this.nextEl     = document.querySelector('.slide-next');
     this.slideEls   = [];
+    this.timer      = null;
 
     this._build();
     this._init();
@@ -45,15 +48,26 @@ class Slideshow {
   _init() {
     this._updateCounter();
     this._startProgress();
-    setInterval(() => this._next(), INTERVAL);
+    this._startTimer();
+
+    if (this.prevEl) this.prevEl.addEventListener('click', () => this._go(-1));
+    if (this.nextEl) this.nextEl.addEventListener('click', () => this._go(1));
   }
 
-  _next() {
+  _startTimer() {
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this._go(1), INTERVAL);
+  }
+
+  /** Manual or automatic advance. Manual clicks restart the auto-advance
+      timer so it doesn't immediately jump again right after. */
+  _go(dir) {
     this.slideEls[this.current].classList.remove('active');
-    this.current = (this.current + 1) % this.total;
+    this.current = (this.current + dir + this.total) % this.total;
     this.slideEls[this.current].classList.add('active');
     this._updateCounter();
     this._startProgress();
+    this._startTimer();
   }
 
   _startProgress() {

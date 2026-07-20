@@ -150,11 +150,11 @@
     }
 
     .process-list li {
-      font-family: 'Jost', sans-serif;
+      font-family: var(--content-font-family, 'Jost', sans-serif);
       font-weight: 300;
-      font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+      font-size: clamp(calc(0.72rem * var(--text-scale)), calc(0.85vw * var(--text-scale)), calc(0.82rem * var(--text-scale)));
       line-height: 1.5;
-      color: #333;
+      color: var(--body-text-color, #333);
       display: flex;
       align-items: flex-start;
       gap: 0.7rem;
@@ -273,7 +273,36 @@
   <script src="../js/img.js"></script>
   <script src="../js/site-design.js"></script>
   <script>
-    function stepText(item) { return typeof item === 'string' ? item : item.text; }
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    // Renders a paragraph's own bold/italic formatting (from the CMS's
+    // restricted markdown editor -- only bold/italic marks are ever
+    // produced) as <strong>/<em>. Bold is replaced first so **x** can't
+    // be misread as italic by the single-asterisk pass.
+    function mdFormat(s) {
+      return esc(s)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/_(.+?)_/g, '<em>$1</em>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    }
+    const PARA_FONTS = {
+      playfair: "'Playfair Display', serif", montserrat: "'Montserrat', sans-serif",
+      poppins: "'Poppins', sans-serif", merriweather: "'Merriweather', serif", lato: "'Lato', sans-serif"
+    };
+    const PARA_COLORS = { charcoal: '#333333', grey: '#555555', black: '#111111' };
+    const PARA_SIZES = { small: '0.9em', medium: '1em', large: '1.15em' };
+    // A paragraph may still be a bare string or a {text}-only object from
+    // before per-paragraph styling existed -- never assume the new fields exist.
+    function stepText(item) { return typeof item === 'string' ? item : (item.text || ''); }
+    function paraStyle(p) {
+      if (typeof p === 'string' || !p) return '';
+      const styles = [];
+      if (PARA_FONTS[p.font_family]) styles.push('font-family: ' + PARA_FONTS[p.font_family]);
+      if (PARA_COLORS[p.text_color]) styles.push('color: ' + PARA_COLORS[p.text_color]);
+      if (PARA_SIZES[p.text_size]) styles.push('font-size: ' + PARA_SIZES[p.text_size]);
+      return styles.length ? ' style="' + styles.join('; ') + '"' : '';
+    }
     const photoSizes = '(max-width: 900px) 100vw, 42vw';
 
     fetch('../_content/process.json')
@@ -294,8 +323,8 @@
             <div class="process-text">
               <div class="process-text-inner">
                 <div class="process-rule"></div>
-                <h1 class="process-heading">${hmw.heading || ''}</h1>
-                ${(hmw.paragraphs || []).map(stepText).map(p => `<p class="process-body">${p}</p>`).join('')}
+                <h1 class="process-heading">${esc(hmw.heading || '')}</h1>
+                ${(hmw.paragraphs || []).map(p => `<p class="process-body"${paraStyle(p)}>${mdFormat(stepText(p))}</p>`).join('')}
               </div>
             </div>
           </section>
@@ -309,13 +338,13 @@
             <div class="process-text">
               <div class="process-text-inner">
                 <div class="process-rule"></div>
-                <h2 class="process-heading">${proc.heading || ''}</h2>
-                <p class="process-body">${proc.intro || ''}</p>
+                <h2 class="process-heading">${esc(proc.heading || '')}</h2>
+                <p class="process-body">${esc(proc.intro || '')}</p>
                 <div class="process-steps">
-                  ${(proc.steps || []).map(stepText).map((step, i) => `
+                  ${(proc.steps || []).map((step, i) => `
                     <div class="process-step">
                       <span class="step-num">${String(i + 1).padStart(2, '0')}</span>
-                      <div><p class="step-desc">${step}</p></div>
+                      <div><p class="step-desc"${paraStyle(step)}>${mdFormat(stepText(step))}</p></div>
                     </div>
                   `).join('')}
                 </div>
@@ -332,10 +361,10 @@
             <div class="process-text">
               <div class="process-text-inner">
                 <div class="process-rule"></div>
-                <h2 class="process-heading">${inv.heading || ''}</h2>
-                <p class="process-body">${inv.intro || ''}</p>
+                <h2 class="process-heading">${esc(inv.heading || '')}</h2>
+                <p class="process-body">${esc(inv.intro || '')}</p>
                 <ul class="process-list">
-                  ${(inv.points || []).map(stepText).map(point => `<li>${point}</li>`).join('')}
+                  ${(inv.points || []).map(point => `<li${paraStyle(point)}>${mdFormat(stepText(point))}</li>`).join('')}
                 </ul>
               </div>
             </div>
