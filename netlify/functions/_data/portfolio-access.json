@@ -1,3 +1,9 @@
 {
-  "approved": []
+  "approved": [
+    {
+      "name": "TEMP VERIFICATION TEST - DELETE ME",
+      "email": "test@example.com",
+      "password": "temp-verify-x7k29q"
+    }
+  ]
 }
