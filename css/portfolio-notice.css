@@ -17,8 +17,9 @@
 
 .portfolio-notice-bubble {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 501;
   width: 100%;
   max-width: 320px;
@@ -162,9 +163,10 @@
 
 @media (max-width: 580px) {
   .portfolio-notice-bubble {
-    right: 1rem;
     left: 1rem;
-    bottom: 1rem;
+    right: 1rem;
+    width: auto;
     max-width: none;
+    transform: translateY(-50%);
   }
 }
