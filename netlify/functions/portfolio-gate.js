@@ -18,8 +18,6 @@
 // portfolio site, not a bank vault.
 
 const crypto = require('crypto');
-const fs = require('fs');
-const path = require('path');
 
 const TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 const SECRET = process.env.PORTFOLIO_GATE_SECRET;
@@ -35,8 +33,11 @@ function fromBase64Url(str) {
 }
 
 function loadApproved() {
-  const file = path.join(__dirname, '_data', 'portfolio-access.json');
-  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  // A static require() (not a dynamically-built fs path) so Netlify's
+  // function bundler can actually detect this file and include it in the
+  // deployed bundle -- a dynamic fs.readFileSync path here silently doesn't
+  // get bundled at all, which is exactly what broke on first deploy.
+  const data = require('./_data/portfolio-access.json');
   return Array.isArray(data.approved) ? data.approved : [];
 }
 

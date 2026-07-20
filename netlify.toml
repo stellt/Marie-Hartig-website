@@ -4,6 +4,11 @@
 [functions]
   directory = "netlify/functions"
 
+[functions.portfolio-gate]
+  # Belt-and-suspenders alongside the static require() in portfolio-gate.js:
+  # explicitly force this data file into the deployed function bundle.
+  included_files = ["netlify/functions/_data/portfolio-access.json"]
+
 [[headers]]
   for = "/admin/*"
   [headers.values]
