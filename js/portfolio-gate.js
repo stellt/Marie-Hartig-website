@@ -93,6 +93,13 @@ function wireGate(el) {
 
     const granted = await submitRegister(registerEmailInput.value, registerPasswordInput.value);
     if (granted) {
+      // Track registration via Netlify Forms
+      const formData = new FormData();
+      formData.append('form-name', 'portfolio-registration');
+      formData.append('email', registerEmailInput.value);
+      formData.append('registered-at', new Date().toISOString());
+      fetch('/', { method: 'POST', body: formData }).catch(() => {});
+
       registerForm.style.display = 'none';
       registerSuccess.style.display = 'block';
       setTimeout(() => {
