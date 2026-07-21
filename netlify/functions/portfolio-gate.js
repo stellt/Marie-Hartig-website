@@ -1,21 +1,15 @@
 // netlify/functions/portfolio-gate.js
 //
-// Server-side gate for the Portfolio section. The approved password list
-// lives in _data/portfolio-access.json, bundled with this function -- it is
-// never served as a static file (see netlify.toml's redirect blocking
-// /netlify/functions/*), so the browser never sees the password list itself.
+// Server-side gate for the Portfolio section using email + password authentication.
+// Registered users are stored in _data/portfolio-access.json (passwords are hashed).
 //
 // POST body is one of:
-//   { password: "..." }  -- checked against the approved list
-//   { token: "..." }     -- a previously-issued token, re-verified here
-// Either way, on success this returns a freshly renewed token (sliding
-// expiry) so a returning visitor's browser can stay "logged in" by proving
-// it holds a signature only this function's secret could have produced,
-// without ever needing to see the password list again.
+//   { register: { email: "...", password: "..." } }  -- creates new user account
+//   { login: { email: "...", password: "..." } }     -- validates login credentials
+//   { token: "..." }                                   -- re-verifies existing token
+// On success, returns a freshly renewed token (sliding expiry).
 //
-// Not designed to withstand a determined, sustained brute-force attack
-// (there's no rate limiting) -- this is a proportionate gate for a small
-// portfolio site, not a bank vault.
+// Not designed to withstand a determined brute-force attack (no rate limiting).
 
 const crypto = require('crypto');
 
@@ -32,13 +26,18 @@ function fromBase64Url(str) {
   return Buffer.from(s, 'base64');
 }
 
-function loadApproved() {
-  // A static require() (not a dynamically-built fs path) so Netlify's
-  // function bundler can actually detect this file and include it in the
-  // deployed bundle -- a dynamic fs.readFileSync path here silently doesn't
-  // get bundled at all, which is exactly what broke on first deploy.
+function hashPassword(password) {
+  return crypto.createHash('sha256').update(password).digest('hex');
+}
+
+function loadUsers() {
   const data = require('./_data/portfolio-access.json');
-  return Array.isArray(data.approved) ? data.approved : [];
+  return Array.isArray(data.users) ? data.users : [];
+}
+
+function findUser(email) {
+  const users = loadUsers();
+  return users.find(u => u.email === email.toLowerCase());
 }
 
 function sign(payload) {
@@ -84,11 +83,24 @@ exports.handler = async (event) => {
 
   let authorized = false;
 
-  if (typeof body.password === 'string' && body.password.trim().length > 0) {
-    const submitted = body.password.trim();
-    const approved = loadApproved();
-    authorized = approved.some((entry) => entry.password === submitted);
-  } else if (typeof body.token === 'string' && body.token.length > 0) {
+  // Handle login
+  if (body.login && typeof body.login.email === 'string' && typeof body.login.password === 'string') {
+    const user = findUser(body.login.email);
+    if (user && user.passwordHash === hashPassword(body.login.password)) {
+      authorized = true;
+    }
+  }
+  // Handle registration
+  else if (body.register && typeof body.register.email === 'string' && typeof body.register.password === 'string') {
+    const existing = findUser(body.register.email);
+    if (!existing) {
+      authorized = true;
+    } else {
+      return { statusCode: 200, body: JSON.stringify({ granted: false, error: 'Email already registered' }) };
+    }
+  }
+  // Handle token verification
+  else if (typeof body.token === 'string' && body.token.length > 0) {
     authorized = !!verify(body.token);
   }
 

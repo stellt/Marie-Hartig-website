@@ -42,6 +42,7 @@
 
 .portfolio-gate-form {
   display: flex;
+  flex-direction: column;
   gap: 0.6rem;
   margin-bottom: 1rem;
 }
@@ -54,6 +55,7 @@
   border: 1px solid rgba(0,0,0,0.25);
   background: transparent;
   outline: none;
+  width: 100%;
 }
 
 .portfolio-gate-form button {
@@ -65,7 +67,7 @@
   color: #fff;
   background: #111;
   border: none;
-  padding: 0 1.4rem;
+  padding: 0.7rem 1.4rem;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -143,6 +145,14 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 .portfolio-gate-register-form button:hover { background: #111; color: #fff; }
+
+.portfolio-gate-register-error {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  color: #b33;
+  margin-bottom: 0.8rem;
+  min-height: 1em;
+}
 
 .portfolio-gate-register-success {
   font-family: 'Jost', sans-serif;

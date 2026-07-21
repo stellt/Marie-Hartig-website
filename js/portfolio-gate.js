@@ -1,8 +1,9 @@
 /* ============================================
    MARIE HARTIG STUDIO — Portfolio Access Gate
-   Covers the whole viewport until a valid access token is confirmed by
-   netlify/functions/portfolio-gate.js. The real page content underneath
-   still loads normally -- this overlay just sits on top of it.
+   Email + password authentication. Covers the whole viewport until a valid
+   access token is confirmed by netlify/functions/portfolio-gate.js.
+   The real page content underneath still loads normally -- this overlay
+   just sits on top of it.
    ============================================ */
 
 const GATE_TOKEN_KEY = 'portfolioAccessToken';
@@ -17,25 +18,26 @@ function buildGate() {
   el.innerHTML = `
     <div class="portfolio-gate-box">
       <div class="portfolio-gate-title">Portfolio</div>
-      <div class="portfolio-gate-sub">This section is available to invited visitors. Enter your password below.</div>
+      <div class="portfolio-gate-sub">Sign in or create an account to view the portfolio.</div>
       <form class="portfolio-gate-form" id="portfolio-gate-form">
+        <input type="email" id="portfolio-gate-email" placeholder="Email" autocomplete="email" required />
         <input type="password" id="portfolio-gate-password" placeholder="Password" autocomplete="current-password" required />
-        <button type="submit">Enter</button>
+        <button type="submit">Sign In</button>
       </form>
       <div class="portfolio-gate-error" id="portfolio-gate-error"></div>
-      <button type="button" class="portfolio-gate-toggle" id="portfolio-gate-toggle">Don't have a password? Request access</button>
+      <button type="button" class="portfolio-gate-toggle" id="portfolio-gate-toggle">Don't have an account? Create one</button>
 
       <div class="portfolio-gate-register" id="portfolio-gate-register" hidden>
-        <div class="portfolio-gate-register-label">Request Access</div>
-        <form class="portfolio-gate-register-form" id="portfolio-gate-register-form" name="portfolio-access-request" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="portfolio-access-request" />
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email" required />
-          <textarea name="message" rows="3" placeholder="A little about you (optional)"></textarea>
-          <button type="submit">Request Access</button>
+        <div class="portfolio-gate-register-label">Create Account</div>
+        <form class="portfolio-gate-register-form" id="portfolio-gate-register-form">
+          <input type="email" id="portfolio-gate-register-email" placeholder="Email" autocomplete="email" required />
+          <input type="password" id="portfolio-gate-register-password" placeholder="Password" autocomplete="new-password" required />
+          <input type="password" id="portfolio-gate-register-password-confirm" placeholder="Confirm Password" autocomplete="new-password" required />
+          <button type="submit">Create Account</button>
         </form>
+        <div class="portfolio-gate-register-error" id="portfolio-gate-register-error"></div>
         <div class="portfolio-gate-register-success" id="portfolio-gate-register-success" style="display:none;">
-          Thank you — Marie will be in touch if she approves your request.
+          Account created! You can now sign in above.
         </div>
       </div>
     </div>
@@ -46,40 +48,64 @@ function buildGate() {
 
 function wireGate(el) {
   const form = el.querySelector('#portfolio-gate-form');
+  const emailInput = el.querySelector('#portfolio-gate-email');
   const passwordInput = el.querySelector('#portfolio-gate-password');
   const errorEl = el.querySelector('#portfolio-gate-error');
   const toggleBtn = el.querySelector('#portfolio-gate-toggle');
   const registerBox = el.querySelector('#portfolio-gate-register');
   const registerForm = el.querySelector('#portfolio-gate-register-form');
+  const registerEmailInput = el.querySelector('#portfolio-gate-register-email');
+  const registerPasswordInput = el.querySelector('#portfolio-gate-register-password');
+  const registerPasswordConfirmInput = el.querySelector('#portfolio-gate-register-password-confirm');
+  const registerErrorEl = el.querySelector('#portfolio-gate-register-error');
   const registerSuccess = el.querySelector('#portfolio-gate-register-success');
 
   toggleBtn.addEventListener('click', () => {
     registerBox.hidden = !registerBox.hidden;
+    errorEl.textContent = '';
+    registerErrorEl.textContent = '';
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
-    const granted = await submitPassword(passwordInput.value);
+    const granted = await submitLogin(emailInput.value, passwordInput.value);
     if (granted) {
       el.hidden = true;
     } else {
-      errorEl.textContent = 'Incorrect password — please try again.';
+      errorEl.textContent = 'Invalid email or password — please try again.';
     }
   });
 
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(registerForm)).toString(),
-    })
-      .then(() => {
-        registerForm.style.display = 'none';
-        registerSuccess.style.display = 'block';
-      })
-      .catch(() => alert('Sorry, something went wrong — please try again or contact Marie directly.'));
+    registerErrorEl.textContent = '';
+
+    if (registerPasswordInput.value !== registerPasswordConfirmInput.value) {
+      registerErrorEl.textContent = 'Passwords do not match.';
+      return;
+    }
+
+    if (registerPasswordInput.value.length < 6) {
+      registerErrorEl.textContent = 'Password must be at least 6 characters.';
+      return;
+    }
+
+    const granted = await submitRegister(registerEmailInput.value, registerPasswordInput.value);
+    if (granted) {
+      registerForm.style.display = 'none';
+      registerSuccess.style.display = 'block';
+      setTimeout(() => {
+        registerBox.hidden = true;
+        registerForm.style.display = '';
+        registerSuccess.style.display = 'none';
+        registerEmailInput.value = '';
+        registerPasswordInput.value = '';
+        registerPasswordConfirmInput.value = '';
+      }, 2000);
+    } else {
+      registerErrorEl.textContent = 'This email is already registered. Please sign in above.';
+    }
   });
 }
 
@@ -89,8 +115,12 @@ async function checkStoredToken() {
   return requestGate({ token: stored });
 }
 
-async function submitPassword(password) {
-  return requestGate({ password });
+async function submitLogin(email, password) {
+  return requestGate({ login: { email, password } });
+}
+
+async function submitRegister(email, password) {
+  return requestGate({ register: { email, password } });
 }
 
 async function requestGate(payload) {

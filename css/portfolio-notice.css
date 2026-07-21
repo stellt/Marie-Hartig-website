@@ -71,6 +71,7 @@
 
 .portfolio-notice-form {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 0.7rem;
 }
@@ -95,7 +96,7 @@
   color: #fff;
   background: #111;
   border: none;
-  padding: 0 1rem;
+  padding: 0.55rem 1rem;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -160,6 +161,14 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 .portfolio-notice-register-form button:hover { background: #111; color: #fff; }
+
+.portfolio-notice-register-error {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: #b33;
+  margin-bottom: 0.6rem;
+  min-height: 1em;
+}
 
 .portfolio-notice-register-success {
   font-family: 'Jost', sans-serif;

@@ -1,11 +1,10 @@
 /* ============================================
    MARIE HARTIG STUDIO — Portfolio Access Notice
-   Non-blocking bubble on the Portfolio thumbnail grid: lets a visitor enter
-   a password (or request one) before clicking into a collection, without
-   hiding the thumbnails or blocking scroll. The actual gate that blocks
-   real content lives on the individual collection pages (portfolio-gate.js)
-   -- this reuses the same server-side check/token so a password entered
-   here also grants access once they click through.
+   Non-blocking bubble on the Portfolio thumbnail grid: lets a visitor sign in
+   or create an account, without hiding the thumbnails or blocking scroll.
+   The actual gate that blocks real content lives on the individual collection
+   pages (portfolio-gate.js) -- this reuses the same server-side check/token
+   so credentials entered here also grant access once they click through.
    ============================================ */
 
 const NOTICE_TOKEN_KEY = 'portfolioAccessToken';
@@ -22,25 +21,26 @@ function buildNotice() {
   bubble.hidden = true;
   bubble.innerHTML = `
     <button type="button" class="portfolio-notice-close" id="portfolio-notice-close" aria-label="Dismiss">&times;</button>
-    <div class="portfolio-notice-title">Request Access</div>
-    <div class="portfolio-notice-sub">Viewing a collection in full requires a password. Enter yours below, or request one.</div>
+    <div class="portfolio-notice-title">Portfolio Access</div>
+    <div class="portfolio-notice-sub">Sign in or create an account to view collections.</div>
     <form class="portfolio-notice-form" id="portfolio-notice-form">
+      <input type="email" id="portfolio-notice-email" placeholder="Email" autocomplete="email" required />
       <input type="password" id="portfolio-notice-password" placeholder="Password" autocomplete="current-password" required />
-      <button type="submit">Enter</button>
+      <button type="submit">Sign In</button>
     </form>
     <div class="portfolio-notice-error" id="portfolio-notice-error"></div>
-    <button type="button" class="portfolio-notice-toggle" id="portfolio-notice-toggle">Don't have a password? Request access</button>
+    <button type="button" class="portfolio-notice-toggle" id="portfolio-notice-toggle">Don't have an account? Create one</button>
 
     <div class="portfolio-notice-register" id="portfolio-notice-register" hidden>
-      <form class="portfolio-notice-register-form" id="portfolio-notice-register-form" name="portfolio-access-request" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="portfolio-access-request" />
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
-        <textarea name="message" rows="2" placeholder="A little about you (optional)"></textarea>
-        <button type="submit">Request Access</button>
+      <form class="portfolio-notice-register-form" id="portfolio-notice-register-form">
+        <input type="email" id="portfolio-notice-register-email" placeholder="Email" autocomplete="email" required />
+        <input type="password" id="portfolio-notice-register-password" placeholder="Password" autocomplete="new-password" required />
+        <input type="password" id="portfolio-notice-register-password-confirm" placeholder="Confirm Password" autocomplete="new-password" required />
+        <button type="submit">Create Account</button>
       </form>
+      <div class="portfolio-notice-register-error" id="portfolio-notice-register-error"></div>
       <div class="portfolio-notice-register-success" id="portfolio-notice-register-success" style="display:none;">
-        Thank you — Marie will be in touch if she approves your request.
+        Account created! You can now sign in above.
       </div>
     </div>
   `;
@@ -53,11 +53,16 @@ function buildNotice() {
 function wireNotice({ backdrop, bubble }) {
   const closeBtn = bubble.querySelector('#portfolio-notice-close');
   const form = bubble.querySelector('#portfolio-notice-form');
+  const emailInput = bubble.querySelector('#portfolio-notice-email');
   const passwordInput = bubble.querySelector('#portfolio-notice-password');
   const errorEl = bubble.querySelector('#portfolio-notice-error');
   const toggleBtn = bubble.querySelector('#portfolio-notice-toggle');
   const registerBox = bubble.querySelector('#portfolio-notice-register');
   const registerForm = bubble.querySelector('#portfolio-notice-register-form');
+  const registerEmailInput = bubble.querySelector('#portfolio-notice-register-email');
+  const registerPasswordInput = bubble.querySelector('#portfolio-notice-register-password');
+  const registerPasswordConfirmInput = bubble.querySelector('#portfolio-notice-register-password-confirm');
+  const registerErrorEl = bubble.querySelector('#portfolio-notice-register-error');
   const registerSuccess = bubble.querySelector('#portfolio-notice-register-success');
 
   function hideNotice() {
@@ -72,31 +77,50 @@ function wireNotice({ backdrop, bubble }) {
 
   toggleBtn.addEventListener('click', () => {
     registerBox.hidden = !registerBox.hidden;
+    errorEl.textContent = '';
+    registerErrorEl.textContent = '';
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
-    const granted = await requestGate({ password: passwordInput.value });
+    const granted = await requestGate({ login: { email: emailInput.value, password: passwordInput.value } });
     if (granted) {
       hideNotice();
     } else {
-      errorEl.textContent = 'Incorrect password — please try again.';
+      errorEl.textContent = 'Invalid email or password — please try again.';
     }
   });
 
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(registerForm)).toString(),
-    })
-      .then(() => {
-        registerForm.style.display = 'none';
-        registerSuccess.style.display = 'block';
-      })
-      .catch(() => alert('Sorry, something went wrong — please try again or contact Marie directly.'));
+    registerErrorEl.textContent = '';
+
+    if (registerPasswordInput.value !== registerPasswordConfirmInput.value) {
+      registerErrorEl.textContent = 'Passwords do not match.';
+      return;
+    }
+
+    if (registerPasswordInput.value.length < 6) {
+      registerErrorEl.textContent = 'Password must be at least 6 characters.';
+      return;
+    }
+
+    const granted = await requestGate({ register: { email: registerEmailInput.value, password: registerPasswordInput.value } });
+    if (granted) {
+      registerForm.style.display = 'none';
+      registerSuccess.style.display = 'block';
+      setTimeout(() => {
+        registerBox.hidden = true;
+        registerForm.style.display = '';
+        registerSuccess.style.display = 'none';
+        registerEmailInput.value = '';
+        registerPasswordInput.value = '';
+        registerPasswordConfirmInput.value = '';
+      }, 2000);
+    } else {
+      registerErrorEl.textContent = 'This email is already registered. Please sign in above.';
+    }
   });
 }
 
