@@ -2,15 +2,6 @@ const crypto = require('crypto');
 
 const TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const SECRET = process.env.PORTFOLIO_GATE_SECRET;
-const ADMIN_PASSWORD = process.env.PORTFOLIO_ADMIN_PASSWORD || 'admin';
-
-// Netlify Blobs for storing registrations
-let blobs = null;
-try {
-  blobs = require('@netlify/blobs');
-} catch {
-  // Not available in this context
-}
 
 function toBase64Url(buf) {
   return buf.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -47,68 +38,9 @@ function verify(token) {
   return payload;
 }
 
-async function trackRegistration(email) {
-  if (!blobs) return;
-  try {
-    const store = blobs.getBlobsClient({ token: process.env.NETLIFY_API_TOKEN });
-    let registrations = [];
-    try {
-      const existing = await store.get('portfolio-registrations', { type: 'json' });
-      if (existing && existing.registrations) {
-        registrations = existing.registrations;
-      }
-    } catch {
-      // File doesn't exist yet
-    }
-
-    const lowerEmail = email.toLowerCase();
-    if (!registrations.some(r => r.email === lowerEmail)) {
-      registrations.push({
-        email: lowerEmail,
-        registeredAt: new Date().toISOString(),
-      });
-      await store.set('portfolio-registrations', JSON.stringify({ registrations }, null, 2));
-    }
-  } catch (err) {
-    console.log('Could not track registration:', err.message);
-  }
-}
-
-async function getRegistrations(password) {
-  if (password !== ADMIN_PASSWORD) {
-    return { error: 'Unauthorized' };
-  }
-
-  if (!blobs) {
-    return { registrations: [], note: 'Netlify Blobs not available' };
-  }
-
-  try {
-    const store = blobs.getBlobsClient({ token: process.env.NETLIFY_API_TOKEN });
-    const data = await store.get('portfolio-registrations', { type: 'json' });
-    return data || { registrations: [] };
-  } catch (err) {
-    return { registrations: [], error: err.message };
-  }
-}
-
 exports.handler = async (event) => {
   if (!SECRET) {
     return { statusCode: 500, body: JSON.stringify({ error: 'Server misconfigured' }) };
-  }
-
-  // Admin endpoint to check registrations
-  if (event.httpMethod === 'GET') {
-    const password = event.queryStringParameters?.password || '';
-    const data = await getRegistrations(password);
-    if (data.error) {
-      return { statusCode: 401, body: JSON.stringify(data) };
-    }
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    };
   }
 
   if (event.httpMethod !== 'POST') {
@@ -123,24 +55,17 @@ exports.handler = async (event) => {
   }
 
   let authorized = false;
-  let registeredEmail = null;
 
   if (typeof body.token === 'string' && body.token.length > 0) {
     authorized = !!verify(body.token);
   } else if (body.register && typeof body.register.email === 'string' && typeof body.register.password === 'string') {
     authorized = true;
-    registeredEmail = body.register.email;
   } else if (body.login && typeof body.login.email === 'string' && typeof body.login.password === 'string') {
     authorized = true;
   }
 
   if (!authorized) {
     return { statusCode: 200, body: JSON.stringify({ granted: false }) };
-  }
-
-  // Track registration
-  if (registeredEmail) {
-    await trackRegistration(registeredEmail);
   }
 
   const token = sign({ exp: Date.now() + TOKEN_TTL_MS });
