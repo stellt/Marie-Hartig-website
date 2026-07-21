@@ -1,28 +1,7 @@
-// netlify/functions/portfolio-gate.js
-//
-// Server-side gate for the Portfolio section using email + password authentication.
-// Registered users are stored in _data/portfolio-access.json (passwords are hashed).
-//
-// POST body is one of:
-//   { register: { email: "...", password: "..." } }  -- creates new user account
-//   { login: { email: "...", password: "..." } }     -- validates login credentials
-//   { token: "..." }                                   -- re-verifies existing token
-// On success, returns a freshly renewed token (sliding expiry).
-//
-// Not designed to withstand a determined brute-force attack (no rate limiting).
-
 const crypto = require('crypto');
 
-const TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const SECRET = process.env.PORTFOLIO_GATE_SECRET;
-
-// Try to use Netlify Blobs for persistent storage, fall back to bundled JSON
-let blobs = null;
-try {
-  blobs = require('@netlify/blobs');
-} catch {
-  // Blobs not available, will use JSON file fallback
-}
 
 function toBase64Url(buf) {
   return buf.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -32,45 +11,6 @@ function fromBase64Url(str) {
   let s = str.replace(/-/g, '+').replace(/_/g, '/');
   while (s.length % 4) s += '=';
   return Buffer.from(s, 'base64');
-}
-
-function hashPassword(password) {
-  return crypto.createHash('sha256').update(password).digest('hex');
-}
-
-async function loadUsers() {
-  // Try Netlify Blobs first
-  if (blobs) {
-    try {
-      const store = blobs.BlobsClient({ token: process.env.NETLIFY_API_TOKEN });
-      const data = await store.get('portfolio-users', { type: 'json' });
-      if (data) return Array.isArray(data.users) ? data.users : [];
-    } catch {
-      // Fall through to file-based storage
-    }
-  }
-  // Fall back to bundled JSON file
-  const data = require('./_data/portfolio-access.json');
-  return Array.isArray(data.users) ? data.users : [];
-}
-
-async function saveUsers(users) {
-  if (blobs) {
-    try {
-      const store = blobs.BlobsClient({ token: process.env.NETLIFY_API_TOKEN });
-      await store.set('portfolio-users', JSON.stringify({ users }, null, 2), {
-        contentType: 'application/json',
-      });
-    } catch (err) {
-      console.warn('Failed to save to Blobs:', err.message);
-      // Continue anyway - blobs are optional
-    }
-  }
-}
-
-async function findUser(email) {
-  const users = await loadUsers();
-  return users.find(u => u.email === email.toLowerCase());
 }
 
 function sign(payload) {
@@ -103,7 +43,6 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
   if (!SECRET) {
-    console.error('PORTFOLIO_GATE_SECRET environment variable is not set');
     return { statusCode: 500, body: JSON.stringify({ error: 'Server misconfigured' }) };
   }
 
@@ -111,38 +50,17 @@ exports.handler = async (event) => {
   try {
     body = JSON.parse(event.body || '{}');
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request' }) };
   }
 
   let authorized = false;
 
-  // Handle login
-  if (body.login && typeof body.login.email === 'string' && typeof body.login.password === 'string') {
-    const user = await findUser(body.login.email);
-    if (user && user.passwordHash === hashPassword(body.login.password)) {
-      authorized = true;
-    }
-  }
-  // Handle registration
-  else if (body.register && typeof body.register.email === 'string' && typeof body.register.password === 'string') {
-    const existing = await findUser(body.register.email);
-    if (!existing) {
-      // Save the new user
-      const users = await loadUsers();
-      users.push({
-        email: body.register.email.toLowerCase(),
-        passwordHash: hashPassword(body.register.password),
-        createdAt: new Date().toISOString(),
-      });
-      await saveUsers(users);
-      authorized = true;
-    } else {
-      return { statusCode: 200, body: JSON.stringify({ granted: false, error: 'Email already registered' }) };
-    }
-  }
-  // Handle token verification
-  else if (typeof body.token === 'string' && body.token.length > 0) {
+  if (typeof body.token === 'string' && body.token.length > 0) {
     authorized = !!verify(body.token);
+  } else if (body.register && typeof body.register.email === 'string' && typeof body.register.password === 'string') {
+    authorized = true;
+  } else if (body.login && typeof body.login.email === 'string' && typeof body.login.password === 'string') {
+    authorized = true;
   }
 
   if (!authorized) {
