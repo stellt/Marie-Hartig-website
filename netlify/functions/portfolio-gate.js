@@ -48,12 +48,15 @@ function verify(token) {
 }
 
 async function trackRegistration(email) {
+  if (!blobs) return;
   try {
-    const store = blobs.getBlobsClient();
+    const store = blobs.getBlobsClient({ token: process.env.NETLIFY_API_TOKEN });
     let registrations = [];
     try {
-      const data = await store.get('portfolio-registrations', { type: 'json' });
-      registrations = Array.isArray(data?.registrations) ? data.registrations : [];
+      const existing = await store.get('portfolio-registrations', { type: 'json' });
+      if (existing && existing.registrations) {
+        registrations = existing.registrations;
+      }
     } catch {
       // File doesn't exist yet
     }
@@ -64,9 +67,7 @@ async function trackRegistration(email) {
         email: lowerEmail,
         registeredAt: new Date().toISOString(),
       });
-      await store.set('portfolio-registrations', JSON.stringify({ registrations }, null, 2), {
-        contentType: 'application/json',
-      });
+      await store.set('portfolio-registrations', JSON.stringify({ registrations }, null, 2));
     }
   } catch (err) {
     console.log('Could not track registration:', err.message);
@@ -78,12 +79,16 @@ async function getRegistrations(password) {
     return { error: 'Unauthorized' };
   }
 
+  if (!blobs) {
+    return { registrations: [], note: 'Netlify Blobs not available' };
+  }
+
   try {
-    const store = blobs.getBlobsClient();
+    const store = blobs.getBlobsClient({ token: process.env.NETLIFY_API_TOKEN });
     const data = await store.get('portfolio-registrations', { type: 'json' });
     return data || { registrations: [] };
-  } catch {
-    return { registrations: [] };
+  } catch (err) {
+    return { registrations: [], error: err.message };
   }
 }
 
