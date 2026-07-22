@@ -98,7 +98,10 @@ function wireGate(el) {
       formData.append('form-name', 'portfolio-registration');
       formData.append('email', registerEmailInput.value);
       formData.append('registered-at', new Date().toISOString());
-      fetch('/', { method: 'POST', body: formData }).catch(() => {});
+      console.log('Submitting registration:', registerEmailInput.value);
+      fetch('/', { method: 'POST', body: formData })
+        .then(() => console.log('Registration submitted successfully'))
+        .catch((err) => console.error('Registration submission failed:', err));
 
       registerForm.style.display = 'none';
       registerSuccess.style.display = 'block';
