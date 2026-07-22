@@ -153,8 +153,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (sessionStorage.getItem(NOTICE_DISMISS_KEY)) return;
 
   const stored = localStorage.getItem(NOTICE_TOKEN_KEY);
-  if (stored && (await requestGate({ token: stored }))) return; // already has valid access -- no nag needed
+  if (stored && (await requestGate({ token: stored }))) {
+    // Already has valid access — don't show notice
+    return;
+  }
 
+  // Only show notice if not already logged in
   const els = buildNotice();
   wireNotice(els);
   els.backdrop.hidden = false;

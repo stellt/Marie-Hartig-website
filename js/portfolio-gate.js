@@ -153,11 +153,12 @@ async function requestGate(payload) {
 // covers the screen before any real content has a chance to render --
 // waiting for DOMContentLoaded would be strictly later than that.
 (async () => {
-  const el = buildGate();
-  wireGate(el);
-
+  // Check if already logged in BEFORE showing gate
   const alreadyGranted = await checkStoredToken();
-  if (alreadyGranted) {
-    el.hidden = true;
+
+  if (!alreadyGranted) {
+    // Only show gate if not already logged in
+    const el = buildGate();
+    wireGate(el);
   }
 })();
