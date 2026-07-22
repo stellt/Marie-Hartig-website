@@ -9,7 +9,36 @@
 
 const NOTICE_TOKEN_KEY = 'portfolioAccessToken';
 const NOTICE_DISMISS_KEY = 'portfolioNoticeDismissed';
+const NOTICE_REGISTERED_USERS_KEY = 'portfolioRegisteredUsers';
 const NOTICE_ENDPOINT = '/.netlify/functions/portfolio-gate';
+
+function hashPassword(password) {
+  let hash = 0;
+  for (let i = 0; i < password.length; i++) {
+    const char = password.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return hash.toString(36);
+}
+
+function getRegisteredUsers() {
+  const stored = localStorage.getItem(NOTICE_REGISTERED_USERS_KEY);
+  return stored ? JSON.parse(stored) : {};
+}
+
+function registerUser(email, password) {
+  const users = getRegisteredUsers();
+  const lowerEmail = email.toLowerCase();
+  users[lowerEmail] = hashPassword(password);
+  localStorage.setItem(NOTICE_REGISTERED_USERS_KEY, JSON.stringify(users));
+}
+
+function isRegistered(email, password) {
+  const users = getRegisteredUsers();
+  const lowerEmail = email.toLowerCase();
+  return users[lowerEmail] === hashPassword(password);
+}
 
 function buildNotice() {
   const backdrop = document.createElement('div');
@@ -84,6 +113,13 @@ function wireNotice({ backdrop, bubble }) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
+
+    // Check if email is registered with that password
+    if (!isRegistered(emailInput.value, passwordInput.value)) {
+      errorEl.textContent = 'Invalid email or password — please register first.';
+      return;
+    }
+
     const granted = await requestGate({ login: { email: emailInput.value, password: passwordInput.value } });
     if (granted) {
       hideNotice();
@@ -106,18 +142,32 @@ function wireNotice({ backdrop, bubble }) {
       return;
     }
 
-    const granted = await requestGate({ register: { email: registerEmailInput.value, password: registerPasswordInput.value } });
-    if (granted) {
-      // Track registration via Netlify Forms
-      const formData = new FormData();
-      formData.append('form-name', 'portfolio-registration');
-      formData.append('email', registerEmailInput.value);
-      formData.append('registered-at', new Date().toISOString());
-      console.log('Submitting registration:', registerEmailInput.value);
-      fetch('/', { method: 'POST', body: formData })
-        .then(() => console.log('Registration submitted successfully'))
-        .catch((err) => console.error('Registration submission failed:', err));
+    const email = registerEmailInput.value;
+    const password = registerPasswordInput.value;
 
+    // Check if already registered
+    const users = getRegisteredUsers();
+    if (users[email.toLowerCase()]) {
+      registerErrorEl.textContent = 'This email is already registered. Please sign in above.';
+      return;
+    }
+
+    // Register the user
+    registerUser(email, password);
+
+    // Track registration via Netlify Forms
+    const formData = new FormData();
+    formData.append('form-name', 'portfolio-registration');
+    formData.append('email', email);
+    formData.append('registered-at', new Date().toISOString());
+    console.log('Submitting registration:', email);
+    fetch('/', { method: 'POST', body: formData })
+      .then(() => console.log('Registration submitted successfully'))
+      .catch((err) => console.error('Registration submission failed:', err));
+
+    // Grant access immediately
+    const granted = await requestGate({ register: { email: email, password: password } });
+    if (granted) {
       registerForm.style.display = 'none';
       registerSuccess.style.display = 'block';
       setTimeout(() => {
@@ -129,7 +179,7 @@ function wireNotice({ backdrop, bubble }) {
         registerPasswordConfirmInput.value = '';
       }, 2000);
     } else {
-      registerErrorEl.textContent = 'This email is already registered. Please sign in above.';
+      registerErrorEl.textContent = 'Registration failed. Please try again.';
     }
   });
 }
