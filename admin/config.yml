@@ -36,8 +36,8 @@ collections:
     widget: list
     label_singular: Image
     summary: '{{fields.image}}'
-    field:
-      label: Image
+    fields:
+    - label: Image
       name: image
       widget: image
   - label: Description
