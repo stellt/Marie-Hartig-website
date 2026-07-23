@@ -684,9 +684,10 @@ collections:
 
           - label: "Custom Color (Optional)"
             name: "text_color_custom"
-            widget: "color"
+            widget: "string"
             required: false
-            hint: "Use the color picker to choose any color, or paste a hex code. This overrides the color above."
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
+            hint: "Paste a hex code here to override the color above (e.g., #ff5733)."
 
           - label: "Page Background Color"
             name: "background_color"
