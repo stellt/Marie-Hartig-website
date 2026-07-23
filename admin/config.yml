@@ -235,8 +235,7 @@ collections:
                     name: "text_color_custom"
                     widget: "string"
                     required: false
-                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
-                    hint: "Paste a hex code here to override the color above."
+                    hint: "Paste a hex code here to override the color above, or leave blank."
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -380,8 +379,7 @@ collections:
                     name: "text_color_custom"
                     widget: "string"
                     required: false
-                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
-                    hint: "Paste a hex code here to override the color above."
+                    hint: "Paste a hex code here to override the color above, or leave blank."
 
           - label: "Process Steps"
             name: "process"
@@ -448,8 +446,7 @@ collections:
                     name: "text_color_custom"
                     widget: "string"
                     required: false
-                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
-                    hint: "Paste a hex code here to override the color above."
+                    hint: "Paste a hex code here to override the color above, or leave blank."
 
           - label: "Investment"
             name: "investment"
@@ -516,8 +513,7 @@ collections:
                     name: "text_color_custom"
                     widget: "string"
                     required: false
-                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
-                    hint: "Paste a hex code here to override the color above."
+                    hint: "Paste a hex code here to override the color above, or leave blank."
 
           - label: "Accent Panel Color"
             name: "accent_color"
