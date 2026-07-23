@@ -603,10 +603,21 @@ collections:
 
           - label: "Text Color"
             name: "text_color"
-            widget: "string"
+            widget: "select"
+            options:
+              - {label: "Black", value: "#000000"}
+              - {label: "White", value: "#ffffff"}
+              - {label: "Charcoal", value: "#333333"}
+              - {label: "Dark Grey", value: "#666666"}
+              - {label: "Grey", value: "#999999"}
+              - {label: "Light Grey", value: "#cccccc"}
+              - {label: "Navy Blue", value: "#001f3f"}
+              - {label: "Blue", value: "#0074d9"}
+              - {label: "Dark Green", value: "#2d5016"}
+              - {label: "Green", value: "#2ecc40"}
+              - {label: "Red", value: "#ff4136"}
+              - {label: "Brown", value: "#8b4513"}
             default: "#000000"
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code"]
-            hint: "Enter a hex color code (e.g., #000000 for black, #ffffff for white, #ff0000 for red)"
 
           - label: "Page Background Color"
             name: "background_color"
