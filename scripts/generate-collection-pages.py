@@ -120,7 +120,18 @@ TEMPLATE = """<!DOCTYPE html>
       playfair: "'Playfair Display', serif", montserrat: "'Montserrat', sans-serif",
       poppins: "'Poppins', sans-serif", merriweather: "'Merriweather', serif", lato: "'Lato', sans-serif"
     }};
-    const PARA_COLORS = {{ charcoal: '#333333', grey: '#555555', black: '#111111' }};
+    const PARA_COLORS = {{
+      charcoal: '#333333',
+      grey: '#555555',
+      black: '#111111',
+      white: '#ffffff',
+      navy: '#001f3f',
+      blue: '#0074d9',
+      darkgreen: '#2d5016',
+      green: '#2ecc40',
+      red: '#ff4136',
+      brown: '#8b4513'
+    }};
     const PARA_SIZES = {{ small: '0.9em', medium: '1em', large: '1.15em' }};
 
     // A paragraph may still be a bare string or a {{text}}-only object from

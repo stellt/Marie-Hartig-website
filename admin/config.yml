@@ -223,6 +223,13 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
+                      - {label: "White", value: "white"}
+                      - {label: "Navy Blue", value: "navy"}
+                      - {label: "Blue", value: "blue"}
+                      - {label: "Dark Green", value: "darkgreen"}
+                      - {label: "Green", value: "green"}
+                      - {label: "Red", value: "red"}
+                      - {label: "Brown", value: "brown"}
                     default: "default"
 
                   - label: "Custom Color (Optional)"
@@ -361,6 +368,13 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
+                      - {label: "White", value: "white"}
+                      - {label: "Navy Blue", value: "navy"}
+                      - {label: "Blue", value: "blue"}
+                      - {label: "Dark Green", value: "darkgreen"}
+                      - {label: "Green", value: "green"}
+                      - {label: "Red", value: "red"}
+                      - {label: "Brown", value: "brown"}
                     default: "default"
 
                   - label: "Custom Color (Optional)"
@@ -422,6 +436,13 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
+                      - {label: "White", value: "white"}
+                      - {label: "Navy Blue", value: "navy"}
+                      - {label: "Blue", value: "blue"}
+                      - {label: "Dark Green", value: "darkgreen"}
+                      - {label: "Green", value: "green"}
+                      - {label: "Red", value: "red"}
+                      - {label: "Brown", value: "brown"}
                     default: "default"
 
                   - label: "Custom Color (Optional)"
@@ -483,6 +504,13 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
+                      - {label: "White", value: "white"}
+                      - {label: "Navy Blue", value: "navy"}
+                      - {label: "Blue", value: "blue"}
+                      - {label: "Dark Green", value: "darkgreen"}
+                      - {label: "Green", value: "green"}
+                      - {label: "Red", value: "red"}
+                      - {label: "Brown", value: "brown"}
                     default: "default"
 
                   - label: "Custom Color (Optional)"
@@ -670,6 +698,13 @@ collections:
               - {label: "Black", value: "black"}
               - {label: "Charcoal", value: "charcoal"}
               - {label: "Grey", value: "grey"}
+              - {label: "White", value: "white"}
+              - {label: "Navy Blue", value: "navy"}
+              - {label: "Blue", value: "blue"}
+              - {label: "Dark Green", value: "darkgreen"}
+              - {label: "Green", value: "green"}
+              - {label: "Red", value: "red"}
+              - {label: "Brown", value: "brown"}
             default: "default"
             hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
 

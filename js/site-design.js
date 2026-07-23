@@ -14,6 +14,13 @@ const TEXT_COLORS = {
   charcoal: '#333333',
   grey: '#555555',
   black: '#111111',
+  white: '#ffffff',
+  navy: '#001f3f',
+  blue: '#0074d9',
+  darkgreen: '#2d5016',
+  green: '#2ecc40',
+  red: '#ff4136',
+  brown: '#8b4513',
 };
 
 const TEXT_SCALES = {
