@@ -14,10 +14,18 @@
   ],
   "description": [
     {
-      "text": "Nestled in a breathtaking valley, embraced by pristine mountains, winding rivers, and rolling meadows, this commission came to life - a true labor of love."
+      "text": "Nestled in a breathtaking valley, embraced by pristine mountains, winding rivers, and rolling meadows, this commission came to life - a true labor of love.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     },
     {
-      "text": "Every brushstroke held meaning. The towering trees, delicate flowers, the house itself with its familiar warmth, the breathtaking views that stretch beyond the doorstep - all captured in paint. The animals, the beloved pets, even the smallest objects and symbols that carry significance, each detail was carefully placed."
+      "text": "Every brushstroke held meaning. The towering trees, delicate flowers, the house itself with its familiar warmth, the breathtaking views that stretch beyond the doorstep - all captured in paint. The animals, the beloved pets, even the smallest objects and symbols that carry significance, each detail was carefully placed.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Entertainment Space. Private Home. Tamsweg, Austria",

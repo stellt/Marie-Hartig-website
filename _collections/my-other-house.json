@@ -23,7 +23,11 @@
   ],
   "description": [
     {
-      "text": "Description coming soon."
+      "text": "Description coming soon.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Dining Room. Private Residence. Rüdenhausen, Germany",

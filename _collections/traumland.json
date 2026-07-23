@@ -14,7 +14,11 @@
   ],
   "description": [
     {
-      "text": "Description coming soon."
+      "text": "Description coming soon.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Master Bedroom. Private Estate. Rüdenhausen, Germany",

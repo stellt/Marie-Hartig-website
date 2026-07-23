@@ -23,10 +23,18 @@
   ],
   "description": [
     {
-      "text": "A new world has been created. This time in a beautiful sun flooded dining room of an elegant home, high in the mountains surrounded by snow and incredible views."
+      "text": "A new world has been created. This time in a beautiful sun flooded dining room of an elegant home, high in the mountains surrounded by snow and incredible views.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     },
     {
-      "text": "Totally personal and unique - this wall painting tells a family story and combines all their favourite places. Bagan, Bauhina blossoms, mangos, monkeys, sleeping Buddhas, and the alps all around…this is a mix of worlds where they feel totally at home and can recall and share their most cherished memories."
+      "text": "Totally personal and unique - this wall painting tells a family story and combines all their favourite places. Bagan, Bauhina blossoms, mangos, monkeys, sleeping Buddhas, and the alps all around…this is a mix of worlds where they feel totally at home and can recall and share their most cherished memories.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Dining Room. Private Home. Hinterthal, Austria",

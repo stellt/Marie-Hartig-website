@@ -14,10 +14,18 @@
   ],
   "description": [
     {
-      "text": "The Bahamas surely is a slice of paradise..but it does not have everything! The fabulous fauna and flora of the African Savannah for example — and we were able to bring those in, in this fresh and cheerful design with a very considered colour palette."
+      "text": "The Bahamas surely is a slice of paradise..but it does not have everything! The fabulous fauna and flora of the African Savannah for example — and we were able to bring those in, in this fresh and cheerful design with a very considered colour palette.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     },
     {
-      "text": "Zebra, Giraffe, leopard, cheetahs, Dung beetles and even an Elephant…if you can find it…all framed with a beautiful pattern inspired by west African wall art."
+      "text": "Zebra, Giraffe, leopard, cheetahs, Dung beetles and even an Elephant…if you can find it…all framed with a beautiful pattern inspired by west African wall art.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Children's Room. Private Home. Nassau, Bahamas",

@@ -10,10 +10,18 @@
   ],
   "description": [
     {
-      "text": "The location: A gorgeous bedroom, in the most wonderful modern home on the foot of the lush green hills in a town, close to Zurich."
+      "text": "The location: A gorgeous bedroom, in the most wonderful modern home on the foot of the lush green hills in a town, close to Zurich.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     },
     {
-      "text": "The concept: a popular one: a stunning background colour of choice and then I go for it and paint all your favourite trees, birds and plants into the room in a composition and colour scheme that really works for the space. It has a chinoiserie feel to it. I love to do this style and the room ends up looking cosy, warm, elevated and lovely. Positive vibes all round."
+      "text": "The concept: a popular one: a stunning background colour of choice and then I go for it and paint all your favourite trees, birds and plants into the room in a composition and colour scheme that really works for the space. It has a chinoiserie feel to it. I love to do this style and the room ends up looking cosy, warm, elevated and lovely. Positive vibes all round.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Bedroom. Private Home. Feusisberg, Switzerland",

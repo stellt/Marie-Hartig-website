@@ -17,7 +17,11 @@
   ],
   "description": [
     {
-      "text": "On the top floor of a new build in Vienna. The client wanted a view to swim towards. Something familiar, local but special. So I painted a part of the Danube-Auen National Park that is very close by as well as a few birds from the area."
+      "text": "On the top floor of a new build in Vienna. The client wanted a view to swim towards. Something familiar, local but special. So I painted a part of the Danube-Auen National Park that is very close by as well as a few birds from the area.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Private Home. Vienna, Austria",

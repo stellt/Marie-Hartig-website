@@ -14,10 +14,18 @@
   ],
   "description": [
     {
-      "text": "What was once called 'das Buben Bad' or \"the Boys bathroom\" has now been totally transformed….it is now THE Bathroom."
+      "text": "What was once called 'das Buben Bad' or \"the Boys bathroom\" has now been totally transformed….it is now THE Bathroom.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     },
     {
-      "text": "Deep in the forest in south western Germany, in a beautiful home full of history and memories, they now have wonderful new views all round: lush faraway landscapes, soft trees and flowers and even a hoopoe for company. Summer is not going anywhere. In this space, it's here to stay."
+      "text": "Deep in the forest in south western Germany, in a beautiful home full of history and memories, they now have wonderful new views all round: lush faraway landscapes, soft trees and flowers and even a hoopoe for company. Summer is not going anywhere. In this space, it's here to stay.",
+      "text_color": "default",
+      "text_size": "default",
+      "font_family": "default",
+      "text_color_custom": ""
     }
   ],
   "location": "Bathroom. Private Home. Breitenau, Germany",
