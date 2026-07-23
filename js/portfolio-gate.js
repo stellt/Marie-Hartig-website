@@ -55,7 +55,10 @@ function buildGate() {
         <button type="submit">Sign In</button>
       </form>
       <div class="portfolio-gate-error" id="portfolio-gate-error"></div>
-      <button type="button" class="portfolio-gate-toggle" id="portfolio-gate-toggle">Don't have an account? Create one</button>
+      <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; justify-content: center; flex-wrap: wrap;">
+        <button type="button" class="portfolio-gate-toggle" id="portfolio-gate-toggle">Don't have an account? Create one</button>
+        <button type="button" class="portfolio-gate-toggle" id="portfolio-gate-forgot">Forgot Password?</button>
+      </div>
 
       <div class="portfolio-gate-register" id="portfolio-gate-register" hidden>
         <div class="portfolio-gate-register-label">Create Account</div>
@@ -96,13 +99,18 @@ function wireGate(el) {
     registerErrorEl.textContent = '';
   });
 
+  const forgotBtn = el.querySelector('#portfolio-gate-forgot');
+  forgotBtn.addEventListener('click', () => {
+    alert('To reset your password, please contact Marie directly or use the email you registered with to create a new account.');
+  });
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
 
     // Check if email is registered with that password
     if (!isRegistered(emailInput.value, passwordInput.value)) {
-      errorEl.textContent = 'Invalid email or password — please register first.';
+      errorEl.textContent = 'Invalid login. Please register your account first.';
       return;
     }
 
