@@ -10,27 +10,6 @@ display_url: https://www.mariespaintedworlds.com
 
 collections:
 
-  # ── PORTFOLIO ACCESS (approved visitors for the password gate) ──
-  - name: "portfolio-access"
-    label: "Portfolio Access"
-    files:
-      - label: "Approved Visitors"
-        name: "approved-visitors"
-        file: "netlify/functions/_data/portfolio-access.json"
-        fields:
-          - label: "Approved"
-            name: "approved"
-            widget: "list"
-            label_singular: "Person"
-            summary: "{{fields.name}} ({{fields.email}})"
-            fields:
-              - {label: "Name", name: "name", widget: "string"}
-              - {label: "Email", name: "email", widget: "string"}
-              - label: "Password"
-                name: "password"
-                widget: "string"
-                hint: "Make up a unique password for this person (e.g. two random words + a number) and send it to them yourself once you save. Don't reuse the same password for different people."
-
   # ── PORTFOLIO COLLECTIONS (individual collection pages) ─────
   - name: "collections"
     label: "Portfolio Collections"
