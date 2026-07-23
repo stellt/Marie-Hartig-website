@@ -94,10 +94,34 @@
     "photo": "/assets/images/process-detail.png",
     "intro": "Are you ready to transform your space ?",
     "points": [
-      "Final investment depends on the scale of the project, complexity of the design, and/or overall project conditions.",
-      "Commissions normally begin at €10,000",
-      "Marie welcomes commissions internationally",
-      "Lead times typically range from 3–6 months, so early booking is recommended"
+      {
+        "text": "Final investment depends on the scale of the project, complexity of the design, and/or overall project conditions.",
+        "text_color": "default",
+        "text_size": "default",
+        "font_family": "default",
+        "text_color_custom": ""
+      },
+      {
+        "text": "Commissions normally begin at €10,000",
+        "text_color": "default",
+        "text_size": "default",
+        "font_family": "default",
+        "text_color_custom": ""
+      },
+      {
+        "text": "Marie welcomes commissions internationally",
+        "text_color": "default",
+        "text_size": "default",
+        "font_family": "default",
+        "text_color_custom": ""
+      },
+      {
+        "text": "Lead times typically range from 3–6 months, so early booking is recommended",
+        "text_color": "default",
+        "text_size": "default",
+        "font_family": "default",
+        "text_color_custom": ""
+      }
     ]
   }
 }
