@@ -8,7 +8,6 @@ site_url: https://www.mariespaintedworlds.com
 display_url: https://www.mariespaintedworlds.com
 show_preview_links: true
 netlify_cms_backend_name: git-gateway
-# publish_mode: editorial_workflow
 slug:
   encoding: ascii
   clean_accents: true
