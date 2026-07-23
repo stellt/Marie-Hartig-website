@@ -603,11 +603,10 @@ collections:
 
           - label: "Text Color"
             name: "text_color"
-            widget: "color"
-            enableAlpha: false
-            allowInput: true
+            widget: "string"
             default: "#000000"
-            hint: "Pick any color for headings and body text everywhere. Use the color picker or enter a hex code (e.g., #000000 for black, #ffffff for white)."
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code"]
+            hint: "Enter a hex color code (e.g., #000000 for black, #ffffff for white, #ff0000 for red)"
 
           - label: "Page Background Color"
             name: "background_color"
