@@ -1,27 +1,13 @@
 {
   "slides": [
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-1.jpg"
-    },
-    {
-      "image": "/assets/images_backup/slides/slide-21.jpg"
-    },
+    "/assets/images/portfolio/02 HOME PAGE/homepage-1.jpg",
+    "/assets/images_backup/slides/slide-21.jpg",
     "/assets/images_backup/slides/02.jpg",
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-3.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-4.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-10.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-7.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 HOME PAGE/homepage-5.jpg"
-    },
+    "/assets/images/portfolio/02 HOME PAGE/homepage-3.jpg",
+    "/assets/images/portfolio/02 HOME PAGE/homepage-4.jpg",
+    "/assets/images/portfolio/02 HOME PAGE/homepage-10.jpg",
+    "/assets/images/portfolio/02 HOME PAGE/homepage-7.jpg",
+    "/assets/images/portfolio/02 HOME PAGE/homepage-5.jpg",
     "/assets/images_backup/slides/2.jpg",
     "/assets/images_backup/slides/1.jpg"
   ]
