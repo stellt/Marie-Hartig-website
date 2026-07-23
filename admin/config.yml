@@ -1,7 +1,5 @@
 backend:
-  name: git-gateway
-  branch: main
-  squash_merges: true
+  name: local
 media_folder: assets/images/portfolio
 public_folder: /assets/images/portfolio
 site_url: https://www.mariespaintedworlds.com
