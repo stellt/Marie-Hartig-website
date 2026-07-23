@@ -47,9 +47,9 @@
       },
       {
         "text": "READY TO TRANSFORM YOUR SPACE ? Marie would love to hear your ideas and begin creating something truly extraordinary together.",
-        "font_family": "default",
-        "text_size": "default",
-        "text_color": "default",
+        "font_family": "lato",
+        "text_size": "medium",
+        "text_color": "red",
         "text_color_custom": ""
       }
     ]
