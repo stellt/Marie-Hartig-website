@@ -98,8 +98,7 @@ collections:
             name: "text_color_custom"
             widget: "string"
             required: false
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
-            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)"
+            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red) or leave blank"
 
       - label: "Location"
         name: "location"
@@ -712,8 +711,7 @@ collections:
             name: "text_color_custom"
             widget: "string"
             required: false
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
-            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)"
+            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red) or leave blank"
 
           - label: "Page Background Color"
             name: "background_color"
