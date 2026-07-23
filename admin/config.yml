@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
   branch: main
+  squash_merges: true
 
 media_folder: "assets/images/portfolio"
 public_folder: "/assets/images/portfolio"
@@ -8,9 +9,15 @@ public_folder: "/assets/images/portfolio"
 site_url: https://www.mariespaintedworlds.com
 display_url: https://www.mariespaintedworlds.com
 
-# Enable live preview pane
+# Enable Netlify Deploy Previews
 show_preview_links: true
-live_preview: true
+netlify_cms_backend_name: git-gateway
+
+# Preview settings
+publish_mode: editorial_workflow
+slug:
+  encoding: "ascii"
+  clean_accents: true
 
 collections:
 
