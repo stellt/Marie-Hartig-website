@@ -689,11 +689,12 @@ collections:
             default: "#000000"
             hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
 
-          - label: "Custom Color"
+          - label: "Custom Color (Optional)"
             name: "text_color_custom"
-            widget: "color"
+            widget: "string"
             required: false
-            hint: "Pick any color you want, or leave blank to use the selected color above."
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
+            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)"
 
           - label: "Page Background Color"
             name: "background_color"
