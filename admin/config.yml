@@ -8,6 +8,10 @@ public_folder: "/assets/images/portfolio"
 site_url: https://www.mariespaintedworlds.com
 display_url: https://www.mariespaintedworlds.com
 
+# Enable live preview pane
+show_preview_links: true
+live_preview: true
+
 collections:
 
   # ── PORTFOLIO COLLECTIONS (individual collection pages) ─────
@@ -121,6 +125,7 @@ collections:
       - label: "Portfolio Page"
         name: "portfolio"
         file: "_content/portfolio.json"
+        preview_path: "/pages/portfolio.html"
         fields:
           - label: "Collections"
             name: "collections"
@@ -143,6 +148,7 @@ collections:
       - label: "About Marie"
         name: "about-marie"
         file: "_content/about-marie.json"
+        preview_path: "/pages/about-marie.html"
         fields:
           - label: "Sections"
             name: "sections"
@@ -226,6 +232,7 @@ collections:
       - label: "Contact / Connect"
         name: "contact"
         file: "_content/contact.json"
+        preview_path: "/pages/contact.html"
         fields:
           - label: "Heading"
             name: "heading"
@@ -270,6 +277,7 @@ collections:
       - label: "Home / About Page"
         name: "about"
         file: "_content/about.json"
+        preview_path: "/pages/about.html"
         fields:
           - label: "Newsletter Popup Heading"
             name: "popup_heading"
@@ -289,6 +297,7 @@ collections:
       - label: "Process Page"
         name: "process"
         file: "_content/process.json"
+        preview_path: "/pages/process.html"
         fields:
           - label: "How Marie Works"
             name: "how_marie_works"
@@ -632,6 +641,7 @@ collections:
       - label: "Site Design"
         name: "site-design"
         file: "_content/site-design.json"
+        preview_path: "/"
         fields:
           - label: "Text Size"
             name: "text_size"
