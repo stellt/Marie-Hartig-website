@@ -211,12 +211,10 @@ collections:
                     name: "text_color"
                     widget: "select"
                     options:
-                      - {label: "Black", value: "#000000"}
-                      - {label: "White", value: "#ffffff"}
-                      - {label: "Charcoal", value: "#333333"}
-                      - {label: "Grey", value: "#999999"}
-                      - {label: "Blue", value: "#0074d9"}
-                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Black", value: "black"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
                       - {label: "Red", value: "#ff4136"}
                       - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
@@ -353,12 +351,10 @@ collections:
                     name: "text_color"
                     widget: "select"
                     options:
-                      - {label: "Black", value: "#000000"}
-                      - {label: "White", value: "#ffffff"}
-                      - {label: "Charcoal", value: "#333333"}
-                      - {label: "Grey", value: "#999999"}
-                      - {label: "Blue", value: "#0074d9"}
-                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Black", value: "black"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
                       - {label: "Red", value: "#ff4136"}
                       - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
@@ -418,12 +414,10 @@ collections:
                     name: "text_color"
                     widget: "select"
                     options:
-                      - {label: "Black", value: "#000000"}
-                      - {label: "White", value: "#ffffff"}
-                      - {label: "Charcoal", value: "#333333"}
-                      - {label: "Grey", value: "#999999"}
-                      - {label: "Blue", value: "#0074d9"}
-                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Black", value: "black"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
                       - {label: "Red", value: "#ff4136"}
                       - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
@@ -483,12 +477,10 @@ collections:
                     name: "text_color"
                     widget: "select"
                     options:
-                      - {label: "Black", value: "#000000"}
-                      - {label: "White", value: "#ffffff"}
-                      - {label: "Charcoal", value: "#333333"}
-                      - {label: "Grey", value: "#999999"}
-                      - {label: "Blue", value: "#0074d9"}
-                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Use Site Default", value: "default"}
+                      - {label: "Black", value: "black"}
+                      - {label: "Charcoal", value: "charcoal"}
+                      - {label: "Grey", value: "grey"}
                       - {label: "Red", value: "#ff4136"}
                       - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
@@ -674,12 +666,10 @@ collections:
             name: "text_color"
             widget: "select"
             options:
-              - {label: "Black", value: "#000000"}
-              - {label: "White", value: "#ffffff"}
-              - {label: "Charcoal", value: "#333333"}
-              - {label: "Dark Grey", value: "#666666"}
-              - {label: "Grey", value: "#999999"}
-              - {label: "Light Grey", value: "#cccccc"}
+              - {label: "Default", value: "default"}
+              - {label: "Black", value: "black"}
+              - {label: "Charcoal", value: "charcoal"}
+              - {label: "Grey", value: "grey"}
               - {label: "Navy Blue", value: "#001f3f"}
               - {label: "Blue", value: "#0074d9"}
               - {label: "Dark Green", value: "#2d5016"}
