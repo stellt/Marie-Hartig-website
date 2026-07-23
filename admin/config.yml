@@ -223,9 +223,7 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
-                      - {label: "Red", value: "#ff4136"}
-                      - {label: "Brown", value: "#8b4513"}
-                    default: "#000000"
+                    default: "default"
 
                   - label: "Custom Color (Optional)"
                     name: "text_color_custom"
@@ -363,9 +361,7 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
-                      - {label: "Red", value: "#ff4136"}
-                      - {label: "Brown", value: "#8b4513"}
-                    default: "#000000"
+                    default: "default"
 
                   - label: "Custom Color (Optional)"
                     name: "text_color_custom"
@@ -426,9 +422,7 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
-                      - {label: "Red", value: "#ff4136"}
-                      - {label: "Brown", value: "#8b4513"}
-                    default: "#000000"
+                    default: "default"
 
                   - label: "Custom Color (Optional)"
                     name: "text_color_custom"
@@ -489,9 +483,7 @@ collections:
                       - {label: "Black", value: "black"}
                       - {label: "Charcoal", value: "charcoal"}
                       - {label: "Grey", value: "grey"}
-                      - {label: "Red", value: "#ff4136"}
-                      - {label: "Brown", value: "#8b4513"}
-                    default: "#000000"
+                    default: "default"
 
                   - label: "Custom Color (Optional)"
                     name: "text_color_custom"
@@ -678,13 +670,7 @@ collections:
               - {label: "Black", value: "black"}
               - {label: "Charcoal", value: "charcoal"}
               - {label: "Grey", value: "grey"}
-              - {label: "Navy Blue", value: "#001f3f"}
-              - {label: "Blue", value: "#0074d9"}
-              - {label: "Dark Green", value: "#2d5016"}
-              - {label: "Green", value: "#2ecc40"}
-              - {label: "Red", value: "#ff4136"}
-              - {label: "Brown", value: "#8b4513"}
-            default: "#000000"
+            default: "default"
             hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
 
           - label: "Custom Color (Optional)"
