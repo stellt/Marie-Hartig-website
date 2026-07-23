@@ -196,11 +196,24 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "color"
-                    enableAlpha: false
-                    allowInput: true
+                    widget: "select"
+                    options:
+                      - {label: "Black", value: "#000000"}
+                      - {label: "White", value: "#ffffff"}
+                      - {label: "Charcoal", value: "#333333"}
+                      - {label: "Grey", value: "#999999"}
+                      - {label: "Blue", value: "#0074d9"}
+                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Red", value: "#ff4136"}
+                      - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
-                    hint: "Use any color, or leave as black (#000000) to match the site default."
+
+                  - label: "Custom Color (Optional)"
+                    name: "text_color_custom"
+                    widget: "string"
+                    required: false
+                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
+                    hint: "Paste a hex code here to override the color above."
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -322,11 +335,24 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "color"
-                    enableAlpha: false
-                    allowInput: true
+                    widget: "select"
+                    options:
+                      - {label: "Black", value: "#000000"}
+                      - {label: "White", value: "#ffffff"}
+                      - {label: "Charcoal", value: "#333333"}
+                      - {label: "Grey", value: "#999999"}
+                      - {label: "Blue", value: "#0074d9"}
+                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Red", value: "#ff4136"}
+                      - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
-                    hint: "Use any color, or leave as black (#000000) to match the site default."
+
+                  - label: "Custom Color (Optional)"
+                    name: "text_color_custom"
+                    widget: "string"
+                    required: false
+                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
+                    hint: "Paste a hex code here to override the color above."
 
           - label: "Process Steps"
             name: "process"
@@ -374,11 +400,24 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "color"
-                    enableAlpha: false
-                    allowInput: true
+                    widget: "select"
+                    options:
+                      - {label: "Black", value: "#000000"}
+                      - {label: "White", value: "#ffffff"}
+                      - {label: "Charcoal", value: "#333333"}
+                      - {label: "Grey", value: "#999999"}
+                      - {label: "Blue", value: "#0074d9"}
+                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Red", value: "#ff4136"}
+                      - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
-                    hint: "Use any color, or leave as black (#000000) to match the site default."
+
+                  - label: "Custom Color (Optional)"
+                    name: "text_color_custom"
+                    widget: "string"
+                    required: false
+                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
+                    hint: "Paste a hex code here to override the color above."
 
           - label: "Investment"
             name: "investment"
@@ -426,11 +465,24 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "color"
-                    enableAlpha: false
-                    allowInput: true
+                    widget: "select"
+                    options:
+                      - {label: "Black", value: "#000000"}
+                      - {label: "White", value: "#ffffff"}
+                      - {label: "Charcoal", value: "#333333"}
+                      - {label: "Grey", value: "#999999"}
+                      - {label: "Blue", value: "#0074d9"}
+                      - {label: "Green", value: "#2ecc40"}
+                      - {label: "Red", value: "#ff4136"}
+                      - {label: "Brown", value: "#8b4513"}
                     default: "#000000"
-                    hint: "Use any color, or leave as black (#000000) to match the site default."
+
+                  - label: "Custom Color (Optional)"
+                    name: "text_color_custom"
+                    widget: "string"
+                    required: false
+                    pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be hex like #ffffff"]
+                    hint: "Paste a hex code here to override the color above."
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -618,6 +670,14 @@ collections:
               - {label: "Red", value: "#ff4136"}
               - {label: "Brown", value: "#8b4513"}
             default: "#000000"
+            hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
+
+          - label: "Custom Color (Optional)"
+            name: "text_color_custom"
+            widget: "string"
+            required: false
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
+            hint: "If you find a color online you like, paste the hex code here (e.g., #ff5733). This overrides the color above."
 
           - label: "Page Background Color"
             name: "background_color"
