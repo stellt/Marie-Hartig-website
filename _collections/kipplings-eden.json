@@ -9,7 +9,13 @@
     "/assets/images/portfolio/kippling-3.jpg"
   ],
   "description": [
-    "A beautiful home that sits in the picturesque countryside of Berkshire, weaves the old with the new in every way. The wall painting was to compliment the gardens and the furnishings all round. "
+    {
+      "text": "A beautiful home that sits in the picturesque countryside of Berkshire, weaves the old with the new in every way. The wall painting was to compliment the gardens and the furnishings all round. ",
+      "font_family": "default",
+      "text_size": "default",
+      "text_color": "default",
+      "text_color_custom": ""
+    }
   ],
   "location": "Living Room. Private Home. Berkshire, UK",
   "year": "",

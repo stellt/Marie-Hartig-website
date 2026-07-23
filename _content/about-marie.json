@@ -4,43 +4,157 @@
       "heading": "ABOUT",
       "photo": "/assets/images/marie-portrait5.jpg",
       "paragraphs": [
-        "\n\nWelcome to the enchanting realm of Marie Hartig's Painted Worlds.",
-        "Marie immerses you within exotic scenes, bringing far flung realities onto your walls. The talented Austrian artist weaves whimsical tableaux, elevating any space into the extraordinary.",
-        "Marie creates site-specific painted environments for private residences and architectural spaces. Each project is conceived as a bespoke artwork, developed in close dialogue with the client and in response to the character of the space.",
-        "She creates immersive painted environments that bring atmosphere, narrative and artistry into architectural spaces. Her work is known for its sense of storytelling and sensitivity to place, resulting in interiors that feel both personal and timeless.",
-        "Her versatile repertoire includes designs painted directly onto walls, exquisite wallpaper, as well as hand-painted panels and canvas.",
-        "\"EVERY WALL PAINTING IS CONCEIVED TO FEEL AS THOUGH IT WAS ALWAYS MEANT TO BE THERE - ELEVATING THE ATMOSPHERE, ENRICHING THE ENERGY, AND SEAMLESSLY COMPLEMENTING THE CHARACTER AND LIVED EXPERIENCE OF THE SPACE.\""
+        {
+          "text": "\n\nWelcome to the enchanting realm of Marie Hartig's Painted Worlds.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Marie immerses you within exotic scenes, bringing far flung realities onto your walls. The talented Austrian artist weaves whimsical tableaux, elevating any space into the extraordinary.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Marie creates site-specific painted environments for private residences and architectural spaces. Each project is conceived as a bespoke artwork, developed in close dialogue with the client and in response to the character of the space.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "She creates immersive painted environments that bring atmosphere, narrative and artistry into architectural spaces. Her work is known for its sense of storytelling and sensitivity to place, resulting in interiors that feel both personal and timeless.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Her versatile repertoire includes designs painted directly onto walls, exquisite wallpaper, as well as hand-painted panels and canvas.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "\"EVERY WALL PAINTING IS CONCEIVED TO FEEL AS THOUGH IT WAS ALWAYS MEANT TO BE THERE - ELEVATING THE ATMOSPHERE, ENRICHING THE ENERGY, AND SEAMLESSLY COMPLEMENTING THE CHARACTER AND LIVED EXPERIENCE OF THE SPACE.\"",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        }
       ]
     },
     {
       "heading": "",
       "photo": "/assets/images/3.jpg",
       "paragraphs": [
-        "\n\nMarie has created vast murals in the dining rooms of Austrian and German castles, fashionable restaurants and Five Star hotels, in stunning Caribbean beach homes and even in a Buenos Aires children's hospital as well as a pre-school in Mathare, Nairobi.",
-        "She has painted living rooms in holiday homes on Mallorca, in stylish London and Milanese apartments and also delivered striking designs in the tiniest of WCs.",
-        "Each Wall Painting is a one-of-a-kind creation that carefully reflects the individual tastes and dreams of her clients. Her designs are never replicated, ensuring a distinctive touch for every space.",
-        "Drawing on her background in the Fine Arts, Marie's work is also imbued with a passion for natural history and rich cultural influences from across the globe. Her signature style features vibrant menageries of hyper-realistic flora and fauna, alongside graphic abstracts and more landscape painting. Her playful chinoiserie, filled with lively birds and diverse plants against striking backgrounds, remains a favourite.",
-        "\"THOSE WHO COMMISSION A WALL PAINTING VALUE THE CARE, CRAFTSMANSHIP AND ATTENTION TO DETAIL THAT GO INTO CREATING SOMETHING TRULY UNIQUE. \n\nTHEY SEEK A PIECE THAT FEELS DEEPLY PERSONAL - CREATED WITH SKILL, DEDICATION AND, ABOVE ALL, LOVE.\""
+        {
+          "text": "\n\nMarie has created vast murals in the dining rooms of Austrian and German castles, fashionable restaurants and Five Star hotels, in stunning Caribbean beach homes and even in a Buenos Aires children's hospital as well as a pre-school in Mathare, Nairobi.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "She has painted living rooms in holiday homes on Mallorca, in stylish London and Milanese apartments and also delivered striking designs in the tiniest of WCs.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Each Wall Painting is a one-of-a-kind creation that carefully reflects the individual tastes and dreams of her clients. Her designs are never replicated, ensuring a distinctive touch for every space.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Drawing on her background in the Fine Arts, Marie's work is also imbued with a passion for natural history and rich cultural influences from across the globe. Her signature style features vibrant menageries of hyper-realistic flora and fauna, alongside graphic abstracts and more landscape painting. Her playful chinoiserie, filled with lively birds and diverse plants against striking backgrounds, remains a favourite.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "\"THOSE WHO COMMISSION A WALL PAINTING VALUE THE CARE, CRAFTSMANSHIP AND ATTENTION TO DETAIL THAT GO INTO CREATING SOMETHING TRULY UNIQUE. \n\nTHEY SEEK A PIECE THAT FEELS DEEPLY PERSONAL - CREATED WITH SKILL, DEDICATION AND, ABOVE ALL, LOVE.\"",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        }
       ]
     },
     {
       "heading": "MEET MARIE",
       "photo": "/assets/images/4.jpg",
       "paragraphs": [
-        "Born in Tokyo in 1977, Marie spent her childhood moving across continents with her siblings and parents, Austrian diplomats. She grew up between Japan, Pakistan and Kenya before eventually settling in the United Kingdom. This international upbringing — shaped by diverse landscapes, cultures and visual traditions — continues to influence the poetic and narrative qualities of her work.",
-        "Marie studied at the Kent Institute of Art and Design before completing a BA in Fine Arts and Communication at London Guildhall University. Her interest in global culture and politics later led her to pursue a Master's degree in Global Politics at Birkbeck, University of London.",
-        "Following her studies, Marie spent more than a decade working in film production. In 2006 she started HOBEN.TV, an international film directors' agency based in London, where she remained a partner until 2021. Throughout her years in advertising and production, painting remained a constant creative thread - a practice she returned to whenever possible.",
-        "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create painted environments that become an integral part of the spaces they inhabit."
+        {
+          "text": "Born in Tokyo in 1977, Marie spent her childhood moving across continents with her siblings and parents, Austrian diplomats. She grew up between Japan, Pakistan and Kenya before eventually settling in the United Kingdom. This international upbringing — shaped by diverse landscapes, cultures and visual traditions — continues to influence the poetic and narrative qualities of her work.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Marie studied at the Kent Institute of Art and Design before completing a BA in Fine Arts and Communication at London Guildhall University. Her interest in global culture and politics later led her to pursue a Master's degree in Global Politics at Birkbeck, University of London.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Following her studies, Marie spent more than a decade working in film production. In 2006 she started HOBEN.TV, an international film directors' agency based in London, where she remained a partner until 2021. Throughout her years in advertising and production, painting remained a constant creative thread - a practice she returned to whenever possible.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create painted environments that become an integral part of the spaces they inhabit.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        }
       ]
     },
     {
       "heading": "",
       "photo": "/assets/images/marie-portrait.jpg",
       "paragraphs": [
-        "\"NO TWO COMMISSIONS ARE EVER THE SAME. THEY MAY GROW FROM A FAMILY'S STORY, FARAWAY PLACES - REAL OR IMAGINED - THE NATURAL WORLD, ARCHITECTURE OR A SIMPLE FEELING. WHATEVER THE INSPIRATION, EVERY DESIGN IS BESPOKE AND CREATED EXCLUSIVELY FOR ITS SPACE.\"",
-        "In 2012, a personal project unexpectedly opened a new artistic direction. Wanting to create a special gift for her young goddaughter, Marie painted the walls of the child's bedroom, transforming the white room into a soft jungle landscape — complete with a lion dozing on the branch of a tree and a curious monkey climbing down to peer into the crib.",
-        "The experience was revelatory. While the traditional canvas had always felt somewhat confined, painting within an entire room opened a new dimension of creative freedom. The architecture itself became part of the artwork. She had discovered her medium.",
-        "\"I LOVE TO WORK CLOSELY WITH MY CLIENTS, EXPLORING THEIR VISIONS FOR THE SPACE AND BRINGING IT TO LIFE.\"\n"
+        {
+          "text": "\"NO TWO COMMISSIONS ARE EVER THE SAME. THEY MAY GROW FROM A FAMILY'S STORY, FARAWAY PLACES - REAL OR IMAGINED - THE NATURAL WORLD, ARCHITECTURE OR A SIMPLE FEELING. WHATEVER THE INSPIRATION, EVERY DESIGN IS BESPOKE AND CREATED EXCLUSIVELY FOR ITS SPACE.\"",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "In 2012, a personal project unexpectedly opened a new artistic direction. Wanting to create a special gift for her young goddaughter, Marie painted the walls of the child's bedroom, transforming the white room into a soft jungle landscape — complete with a lion dozing on the branch of a tree and a curious monkey climbing down to peer into the crib.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "The experience was revelatory. While the traditional canvas had always felt somewhat confined, painting within an entire room opened a new dimension of creative freedom. The architecture itself became part of the artwork. She had discovered her medium.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        },
+        {
+          "text": "\"I LOVE TO WORK CLOSELY WITH MY CLIENTS, EXPLORING THEIR VISIONS FOR THE SPACE AND BRINGING IT TO LIFE.\"\n",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": ""
+        }
       ]
     }
   ]

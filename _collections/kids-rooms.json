@@ -9,7 +9,13 @@
     "/assets/images/portfolio/kidsroom-copy.jpg"
   ],
   "description": [
-    "Marie has painted so many children's rooms all over. Of course! Here are a few. "
+    {
+      "text": "Marie has painted so many children's rooms all over. Of course! Here are a few. ",
+      "font_family": "default",
+      "text_size": "default",
+      "text_color": "default",
+      "text_color_custom": ""
+    }
   ],
   "location": "",
   "year": "",
