@@ -87,11 +87,19 @@ collections:
             default: "default"
           - label: "Color"
             name: "text_color"
-            widget: "color"
-            enableAlpha: false
-            allowInput: true
-            default: "#000000"
-            hint: "Use any color, or leave as black (#000000) to match the site default."
+            widget: "select"
+            options:
+              - {label: "Use Site Default", value: "default"}
+              - {label: "Black", value: "black"}
+              - {label: "Charcoal", value: "charcoal"}
+              - {label: "Grey", value: "grey"}
+            default: "default"
+          - label: "Custom Color (Optional)"
+            name: "text_color_custom"
+            widget: "string"
+            required: false
+            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
+            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)"
 
       - label: "Location"
         name: "location"
