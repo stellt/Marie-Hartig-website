@@ -682,12 +682,11 @@ collections:
             default: "#000000"
             hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
 
-          - label: "Custom Color (Optional)"
+          - label: "Custom Color"
             name: "text_color_custom"
-            widget: "string"
+            widget: "color"
             required: false
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex code like #ffffff"]
-            hint: "Paste a hex code here to override the color above (e.g., #ff5733)."
+            hint: "Pick any color you want, or leave blank to use the selected color above."
 
           - label: "Page Background Color"
             name: "background_color"
