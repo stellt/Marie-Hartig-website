@@ -97,13 +97,11 @@ collections:
             default: "default"
           - label: "Color"
             name: "text_color"
-            widget: "select"
-            options:
-              - {label: "Use Site Default", value: "default"}
-              - {label: "Charcoal", value: "charcoal"}
-              - {label: "Grey", value: "grey"}
-              - {label: "Black", value: "black"}
-            default: "default"
+            widget: "color"
+            enableAlpha: false
+            allowInput: true
+            default: "#000000"
+            hint: "Use any color, or leave as black (#000000) to match the site default."
 
       - label: "Location"
         name: "location"
@@ -219,13 +217,11 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "Black", value: "black"}
-                    default: "default"
+                    widget: "color"
+                    enableAlpha: false
+                    allowInput: true
+                    default: "#000000"
+                    hint: "Use any color, or leave as black (#000000) to match the site default."
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -347,13 +343,11 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "Black", value: "black"}
-                    default: "default"
+                    widget: "color"
+                    enableAlpha: false
+                    allowInput: true
+                    default: "#000000"
+                    hint: "Use any color, or leave as black (#000000) to match the site default."
 
           - label: "Process Steps"
             name: "process"
@@ -401,13 +395,11 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "Black", value: "black"}
-                    default: "default"
+                    widget: "color"
+                    enableAlpha: false
+                    allowInput: true
+                    default: "#000000"
+                    hint: "Use any color, or leave as black (#000000) to match the site default."
 
           - label: "Investment"
             name: "investment"
@@ -455,13 +447,11 @@ collections:
                     default: "default"
                   - label: "Color"
                     name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "Black", value: "black"}
-                    default: "default"
+                    widget: "color"
+                    enableAlpha: false
+                    allowInput: true
+                    default: "#000000"
+                    hint: "Use any color, or leave as black (#000000) to match the site default."
 
           - label: "Accent Panel Color"
             name: "accent_color"
@@ -634,14 +624,11 @@ collections:
 
           - label: "Text Color"
             name: "text_color"
-            widget: "select"
-            options:
-              - {label: "Original (mixed shades)", value: "default"}
-              - {label: "Charcoal", value: "charcoal"}
-              - {label: "Grey", value: "grey"}
-              - {label: "Black", value: "black"}
-            default: "default"
-            hint: "Applies to headings and body text everywhere — picking one makes them all the same color. Does not affect buttons or the navigation bar."
+            widget: "color"
+            enableAlpha: false
+            allowInput: true
+            default: "#000000"
+            hint: "Pick any color for headings and body text everywhere. Use the color picker or enter a hex code (e.g., #000000 for black, #ffffff for white)."
 
           - label: "Page Background Color"
             name: "background_color"
