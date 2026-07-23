@@ -2,716 +2,830 @@ backend:
   name: git-gateway
   branch: main
   squash_merges: true
-
-media_folder: "assets/images/portfolio"
-public_folder: "/assets/images/portfolio"
-
+media_folder: assets/images/portfolio
+public_folder: /assets/images/portfolio
 site_url: https://www.mariespaintedworlds.com
 display_url: https://www.mariespaintedworlds.com
-
-# Enable Netlify Deploy Previews
 show_preview_links: true
 netlify_cms_backend_name: git-gateway
-
-# Preview settings
 publish_mode: editorial_workflow
 slug:
-  encoding: "ascii"
+  encoding: ascii
   clean_accents: true
-
 collections:
-
-  # ── PORTFOLIO COLLECTIONS (individual collection pages) ─────
-  - name: "collections"
-    label: "Portfolio Collections"
-    label_singular: "Collection"
-    folder: "_collections"
-    create: true
-    delete: true
-    slug: "{{fields.slug}}"
-    extension: "json"
-    format: "json"
+- name: collections
+  label: Portfolio Collections
+  label_singular: Collection
+  folder: _collections
+  create: true
+  delete: true
+  slug: '{{fields.slug}}'
+  extension: json
+  format: json
+  fields:
+  - label: Collection Title
+    name: title
+    widget: string
+    hint: e.g. Urban Infinity Pool
+  - label: Slug
+    name: slug
+    widget: string
+    hint: Must match the slug used in the Portfolio Page order list, e.g. urban
+  - label: Images
+    name: images
+    widget: list
+    label_singular: Image
+    summary: '{{fields.image}}'
+    field:
+      label: Image
+      name: image
+      widget: image
+  - label: Description
+    name: description
+    widget: list
+    label_singular: Paragraph
+    summary: '{{fields.text}}'
     fields:
-      - label: "Collection Title"
-        name: "title"
-        widget: "string"
-        hint: "e.g. Urban Infinity Pool"
-
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-        hint: "Must match the slug used in the Portfolio Page order list, e.g. urban"
-
-      - label: "Images"
-        name: "images"
-        widget: "list"
-        label_singular: "Image"
-        summary: "{{fields.image}}"
-        field:
-          label: "Image"
-          name: "image"
-          widget: "image"
-
-      - label: "Description"
-        name: "description"
-        widget: "list"
-        label_singular: "Paragraph"
-        summary: "{{fields.text}}"
-        fields:
-          - label: "Text"
-            name: "text"
-            widget: "markdown"
-            buttons: ["bold", "italic"]
-            editor_components: []
-            modes: ["rich_text"]
-            hint: "Select a word or sentence and click Bold to emphasize just that part."
-          - label: "Font"
-            name: "font_family"
-            widget: "select"
-            options:
-              - {label: "Use Site Default", value: "default"}
-              - {label: "Playfair Display", value: "playfair"}
-              - {label: "Montserrat", value: "montserrat"}
-              - {label: "Poppins", value: "poppins"}
-              - {label: "Merriweather", value: "merriweather"}
-              - {label: "Lato", value: "lato"}
-            default: "default"
-          - label: "Size"
-            name: "text_size"
-            widget: "select"
-            options:
-              - {label: "Use Site Default", value: "default"}
-              - {label: "Small", value: "small"}
-              - {label: "Medium", value: "medium"}
-              - {label: "Large", value: "large"}
-            default: "default"
-          - label: "Color"
-            name: "text_color"
-            widget: "select"
-            options:
-              - {label: "Use Site Default", value: "default"}
-              - {label: "Black", value: "black"}
-              - {label: "Charcoal", value: "charcoal"}
-              - {label: "Grey", value: "grey"}
-            default: "default"
-          - label: "Custom Color (Optional)"
-            name: "text_color_custom"
-            widget: "string"
-            required: false
-            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red) or leave blank"
-
-      - label: "Location"
-        name: "location"
-        widget: "string"
+    - label: Text
+      name: text
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      editor_components: []
+      modes:
+      - rich_text
+      hint: Select a word or sentence and click Bold to emphasize just that part.
+    - label: Font
+      name: font_family
+      widget: select
+      options:
+      - label: Use Site Default
+        value: default
+      - label: Playfair Display
+        value: playfair
+      - label: Montserrat
+        value: montserrat
+      - label: Poppins
+        value: poppins
+      - label: Merriweather
+        value: merriweather
+      - label: Lato
+        value: lato
+      default: default
+    - label: Size
+      name: text_size
+      widget: select
+      options:
+      - label: Use Site Default
+        value: default
+      - label: Small
+        value: small
+      - label: Medium
+        value: medium
+      - label: Large
+        value: large
+      default: default
+    - label: Color
+      name: text_color
+      widget: select
+      options:
+      - label: Use Site Default
+        value: default
+      - label: Black
+        value: black
+      - label: Charcoal
+        value: charcoal
+      - label: Grey
+        value: grey
+      default: default
+    - label: Custom Color (Optional)
+      name: text_color_custom
+      widget: string
+      required: false
+      hint: 'Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)
+        or leave blank'
+  - label: Location
+    name: location
+    widget: string
+    required: false
+  - label: Year
+    name: year
+    widget: string
+    required: false
+  - label: Type
+    name: type
+    widget: string
+    required: false
+  - label: Accent Panel Color
+    name: accent_color
+    widget: string
+    required: false
+    default: '#dedad3'
+    pattern:
+    - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+    - 'Must be a hex color code, e.g. #dedad3'
+    hint: The color behind the title/description panel on this collection's page.
+      Leave blank to use the site's usual beige.
+  - label: Lightbox Background Color
+    name: lightbox_color
+    widget: string
+    required: false
+    default: '#ffffff'
+    pattern:
+    - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+    - 'Must be a hex color code, e.g. #ffffff'
+    hint: The background behind a photo when you click it to view it full-size on
+      this collection's page. Pick a LIGHT color — the close button and arrows are
+      dark and become hard to see on a dark background.
+- name: pages
+  label: Page Text
+  files:
+  - label: Portfolio Page
+    name: portfolio
+    file: _content/portfolio.json
+    preview_path: /pages/portfolio.html
+    fields:
+    - label: Collections
+      name: collections
+      widget: list
+      label_singular: Collection
+      summary: '{{fields.title}}'
+      fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+        hint: Must match the slug on the corresponding entry in Portfolio Collections,
+          e.g. urban
+      - label: Thumbnail
+        name: thumbnail
+        widget: image
+        hint: The image shown on the portfolio grid tile
+  - label: About Marie
+    name: about-marie
+    file: _content/about-marie.json
+    preview_path: /pages/about-marie.html
+    fields:
+    - label: Sections
+      name: sections
+      widget: list
+      label_singular: Section
+      summary: '{{fields.heading}}'
+      hint: Alternates photo left/right automatically based on position in this list.
+      fields:
+      - label: Heading
+        name: heading
+        widget: string
         required: false
-
-      - label: "Year"
-        name: "year"
-        widget: "string"
-        required: false
-
-      - label: "Type"
-        name: "type"
-        widget: "string"
-        required: false
-
-      - label: "Accent Panel Color"
-        name: "accent_color"
-        widget: "string"
-        required: false
-        default: "#dedad3"
-        pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
-        hint: "The color behind the title/description panel on this collection's page. Leave blank to use the site's usual beige."
-
-      - label: "Lightbox Background Color"
-        name: "lightbox_color"
-        widget: "string"
-        required: false
-        default: "#ffffff"
-        pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #ffffff"]
-        hint: "The background behind a photo when you click it to view it full-size on this collection's page. Pick a LIGHT color — the close button and arrows are dark and become hard to see on a dark background."
-
-  # ── MEET MARIE PAGE ─────────────────────────────────────────
-  - name: "pages"
-    label: "Page Text"
-    files:
-
-      - label: "Portfolio Page"
-        name: "portfolio"
-        file: "_content/portfolio.json"
-        preview_path: "/pages/portfolio.html"
+        hint: Leave blank for a section with no heading, e.g. ABOUT or MEET MARIE
+      - label: Photo
+        name: photo
+        widget: image
+        media_folder: /assets/images
+        public_folder: /assets/images
+      - label: Paragraphs
+        name: paragraphs
+        widget: list
+        label_singular: Paragraph
+        summary: '{{fields.text}}'
         fields:
-          - label: "Collections"
-            name: "collections"
-            widget: "list"
-            label_singular: "Collection"
-            summary: "{{fields.title}}"
-            fields:
-              - label: "Title"
-                name: "title"
-                widget: "string"
-              - label: "Slug"
-                name: "slug"
-                widget: "string"
-                hint: "Must match the slug on the corresponding entry in Portfolio Collections, e.g. urban"
-              - label: "Thumbnail"
-                name: "thumbnail"
-                widget: "image"
-                hint: "The image shown on the portfolio grid tile"
-
-      - label: "About Marie"
-        name: "about-marie"
-        file: "_content/about-marie.json"
-        preview_path: "/pages/about-marie.html"
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
+          hint: Select a word or sentence and click Bold to emphasize just that part.
+        - label: Font
+          name: font_family
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Playfair Display
+            value: playfair
+          - label: Montserrat
+            value: montserrat
+          - label: Poppins
+            value: poppins
+          - label: Merriweather
+            value: merriweather
+          - label: Lato
+            value: lato
+          default: default
+        - label: Size
+          name: text_size
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+        - label: Color
+          name: text_color
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Black
+            value: black
+          - label: Charcoal
+            value: charcoal
+          - label: Grey
+            value: grey
+          - label: White
+            value: white
+          - label: Navy Blue
+            value: navy
+          - label: Blue
+            value: blue
+          - label: Dark Green
+            value: darkgreen
+          - label: Green
+            value: green
+          - label: Red
+            value: red
+          - label: Brown
+            value: brown
+          default: default
+        - label: Custom Color (Optional)
+          name: text_color_custom
+          widget: string
+          required: false
+          hint: Paste a hex code here to override the color above, or leave blank.
+    - label: Accent Panel Color
+      name: accent_color
+      widget: string
+      required: false
+      default: '#dedad3'
+      pattern:
+      - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+      - 'Must be a hex color code, e.g. #dedad3'
+      hint: The color behind the text panel on this page. Leave blank to use the site's
+        usual beige. Applies to all sections on this page.
+  - label: Contact / Connect
+    name: contact
+    file: _content/contact.json
+    preview_path: /pages/contact.html
+    fields:
+    - label: Heading
+      name: heading
+      widget: string
+      default: Connect
+    - label: Instagram Handle
+      name: instagram_handle
+      widget: string
+    - label: Instagram URL
+      name: instagram_url
+      widget: string
+    - label: Facebook URL
+      name: facebook_url
+      widget: string
+    - label: Email Address
+      name: email
+      widget: string
+    - label: Phone Number
+      name: phone
+      widget: string
+      required: false
+    - label: Portrait Photo
+      name: portrait
+      widget: image
+      media_folder: /assets/images
+      public_folder: /assets/images
+    - label: Accent Panel Color
+      name: accent_color
+      widget: string
+      required: false
+      default: '#dedad3'
+      pattern:
+      - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+      - 'Must be a hex color code, e.g. #dedad3'
+      hint: The color behind the text panel on this page. Leave blank to use the site's
+        usual beige.
+  - label: Home / About Page
+    name: about
+    file: _content/about.json
+    preview_path: /pages/about.html
+    fields:
+    - label: Newsletter Popup Heading
+      name: popup_heading
+      widget: string
+      default: Notes from Marie's Studio
+    - label: Newsletter Popup Body Text
+      name: popup_body
+      widget: text
+      default: Subscribe to receive notes from Marie Hartig's studio — glimpses of
+        works in progress, stories behind each piece, and the inspirations that shape
+        her murals and canvases.
+    - label: Newsletter Button Text
+      name: popup_button
+      widget: string
+      default: Subscribe
+  - label: Process Page
+    name: process
+    file: _content/process.json
+    preview_path: /pages/process.html
+    fields:
+    - label: How Marie Works
+      name: how_marie_works
+      widget: object
+      fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Photo
+        name: photo
+        widget: image
+        media_folder: /assets/images
+        public_folder: /assets/images
+      - label: Paragraphs
+        name: paragraphs
+        widget: list
+        label_singular: Paragraph
+        summary: '{{fields.text}}'
         fields:
-          - label: "Sections"
-            name: "sections"
-            widget: "list"
-            label_singular: "Section"
-            summary: "{{fields.heading}}"
-            hint: "Alternates photo left/right automatically based on position in this list."
-            fields:
-              - label: "Heading"
-                name: "heading"
-                widget: "string"
-                required: false
-                hint: "Leave blank for a section with no heading, e.g. ABOUT or MEET MARIE"
-              - label: "Photo"
-                name: "photo"
-                widget: "image"
-                media_folder: "/assets/images"
-                public_folder: "/assets/images"
-              - label: "Paragraphs"
-                name: "paragraphs"
-                widget: "list"
-                label_singular: "Paragraph"
-                summary: "{{fields.text}}"
-                fields:
-                  - label: "Text"
-                    name: "text"
-                    widget: "markdown"
-                    buttons: ["bold", "italic"]
-                    editor_components: []
-                    modes: ["rich_text"]
-                    hint: "Select a word or sentence and click Bold to emphasize just that part."
-                  - label: "Font"
-                    name: "font_family"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Playfair Display", value: "playfair"}
-                      - {label: "Montserrat", value: "montserrat"}
-                      - {label: "Poppins", value: "poppins"}
-                      - {label: "Merriweather", value: "merriweather"}
-                      - {label: "Lato", value: "lato"}
-                    default: "default"
-                  - label: "Size"
-                    name: "text_size"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Small", value: "small"}
-                      - {label: "Medium", value: "medium"}
-                      - {label: "Large", value: "large"}
-                    default: "default"
-                  - label: "Color"
-                    name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Black", value: "black"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "White", value: "white"}
-                      - {label: "Navy Blue", value: "navy"}
-                      - {label: "Blue", value: "blue"}
-                      - {label: "Dark Green", value: "darkgreen"}
-                      - {label: "Green", value: "green"}
-                      - {label: "Red", value: "red"}
-                      - {label: "Brown", value: "brown"}
-                    default: "default"
-
-                  - label: "Custom Color (Optional)"
-                    name: "text_color_custom"
-                    widget: "string"
-                    required: false
-                    hint: "Paste a hex code here to override the color above, or leave blank."
-
-          - label: "Accent Panel Color"
-            name: "accent_color"
-            widget: "string"
-            required: false
-            default: "#dedad3"
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
-            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige. Applies to all sections on this page."
-
-      - label: "Contact / Connect"
-        name: "contact"
-        file: "_content/contact.json"
-        preview_path: "/pages/contact.html"
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
+          hint: Select a word or sentence and click Bold to emphasize just that part.
+        - label: Font
+          name: font_family
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Playfair Display
+            value: playfair
+          - label: Montserrat
+            value: montserrat
+          - label: Poppins
+            value: poppins
+          - label: Merriweather
+            value: merriweather
+          - label: Lato
+            value: lato
+          default: default
+        - label: Size
+          name: text_size
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+        - label: Color
+          name: text_color
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Black
+            value: black
+          - label: Charcoal
+            value: charcoal
+          - label: Grey
+            value: grey
+          - label: White
+            value: white
+          - label: Navy Blue
+            value: navy
+          - label: Blue
+            value: blue
+          - label: Dark Green
+            value: darkgreen
+          - label: Green
+            value: green
+          - label: Red
+            value: red
+          - label: Brown
+            value: brown
+          default: default
+        - label: Custom Color (Optional)
+          name: text_color_custom
+          widget: string
+          required: false
+          hint: Paste a hex code here to override the color above, or leave blank.
+    - label: Process Steps
+      name: process
+      widget: object
+      fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Photo
+        name: photo
+        widget: image
+        media_folder: /assets/images
+        public_folder: /assets/images
+      - label: Intro Line
+        name: intro
+        widget: string
+      - label: Steps
+        name: steps
+        widget: list
+        label_singular: Step
+        summary: '{{fields.text}}'
         fields:
-          - label: "Heading"
-            name: "heading"
-            widget: "string"
-            default: "Connect"
-
-          - label: "Instagram Handle"
-            name: "instagram_handle"
-            widget: "string"
-
-          - label: "Instagram URL"
-            name: "instagram_url"
-            widget: "string"
-
-          - label: "Facebook URL"
-            name: "facebook_url"
-            widget: "string"
-
-          - label: "Email Address"
-            name: "email"
-            widget: "string"
-
-          - label: "Phone Number"
-            name: "phone"
-            widget: "string"
-            required: false
-
-          - label: "Portrait Photo"
-            name: "portrait"
-            widget: "image"
-            media_folder: "/assets/images"
-            public_folder: "/assets/images"
-
-          - label: "Accent Panel Color"
-            name: "accent_color"
-            widget: "string"
-            required: false
-            default: "#dedad3"
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
-            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige."
-
-      - label: "Home / About Page"
-        name: "about"
-        file: "_content/about.json"
-        preview_path: "/pages/about.html"
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
+          hint: Select a word or sentence and click Bold to emphasize just that part.
+        - label: Font
+          name: font_family
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Playfair Display
+            value: playfair
+          - label: Montserrat
+            value: montserrat
+          - label: Poppins
+            value: poppins
+          - label: Merriweather
+            value: merriweather
+          - label: Lato
+            value: lato
+          default: default
+        - label: Size
+          name: text_size
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+        - label: Color
+          name: text_color
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Black
+            value: black
+          - label: Charcoal
+            value: charcoal
+          - label: Grey
+            value: grey
+          - label: White
+            value: white
+          - label: Navy Blue
+            value: navy
+          - label: Blue
+            value: blue
+          - label: Dark Green
+            value: darkgreen
+          - label: Green
+            value: green
+          - label: Red
+            value: red
+          - label: Brown
+            value: brown
+          default: default
+        - label: Custom Color (Optional)
+          name: text_color_custom
+          widget: string
+          required: false
+          hint: Paste a hex code here to override the color above, or leave blank.
+    - label: Investment
+      name: investment
+      widget: object
+      fields:
+      - label: Heading
+        name: heading
+        widget: string
+      - label: Photo
+        name: photo
+        widget: image
+        media_folder: /assets/images
+        public_folder: /assets/images
+      - label: Intro Line
+        name: intro
+        widget: string
+      - label: Points
+        name: points
+        widget: list
+        label_singular: Point
+        summary: '{{fields.text}}'
         fields:
-          - label: "Newsletter Popup Heading"
-            name: "popup_heading"
-            widget: "string"
-            default: "Notes from Marie's Studio"
-
-          - label: "Newsletter Popup Body Text"
-            name: "popup_body"
-            widget: "text"
-            default: "Subscribe to receive notes from Marie Hartig's studio — glimpses of works in progress, stories behind each piece, and the inspirations that shape her murals and canvases."
-
-          - label: "Newsletter Button Text"
-            name: "popup_button"
-            widget: "string"
-            default: "Subscribe"
-
-      - label: "Process Page"
-        name: "process"
-        file: "_content/process.json"
-        preview_path: "/pages/process.html"
-        fields:
-          - label: "How Marie Works"
-            name: "how_marie_works"
-            widget: "object"
-            fields:
-              - {label: "Heading", name: "heading", widget: "string"}
-              - label: "Photo"
-                name: "photo"
-                widget: "image"
-                media_folder: "/assets/images"
-                public_folder: "/assets/images"
-              - label: "Paragraphs"
-                name: "paragraphs"
-                widget: "list"
-                label_singular: "Paragraph"
-                summary: "{{fields.text}}"
-                fields:
-                  - label: "Text"
-                    name: "text"
-                    widget: "markdown"
-                    buttons: ["bold", "italic"]
-                    editor_components: []
-                    modes: ["rich_text"]
-                    hint: "Select a word or sentence and click Bold to emphasize just that part."
-                  - label: "Font"
-                    name: "font_family"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Playfair Display", value: "playfair"}
-                      - {label: "Montserrat", value: "montserrat"}
-                      - {label: "Poppins", value: "poppins"}
-                      - {label: "Merriweather", value: "merriweather"}
-                      - {label: "Lato", value: "lato"}
-                    default: "default"
-                  - label: "Size"
-                    name: "text_size"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Small", value: "small"}
-                      - {label: "Medium", value: "medium"}
-                      - {label: "Large", value: "large"}
-                    default: "default"
-                  - label: "Color"
-                    name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Black", value: "black"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "White", value: "white"}
-                      - {label: "Navy Blue", value: "navy"}
-                      - {label: "Blue", value: "blue"}
-                      - {label: "Dark Green", value: "darkgreen"}
-                      - {label: "Green", value: "green"}
-                      - {label: "Red", value: "red"}
-                      - {label: "Brown", value: "brown"}
-                    default: "default"
-
-                  - label: "Custom Color (Optional)"
-                    name: "text_color_custom"
-                    widget: "string"
-                    required: false
-                    hint: "Paste a hex code here to override the color above, or leave blank."
-
-          - label: "Process Steps"
-            name: "process"
-            widget: "object"
-            fields:
-              - {label: "Heading", name: "heading", widget: "string"}
-              - label: "Photo"
-                name: "photo"
-                widget: "image"
-                media_folder: "/assets/images"
-                public_folder: "/assets/images"
-              - {label: "Intro Line", name: "intro", widget: "string"}
-              - label: "Steps"
-                name: "steps"
-                widget: "list"
-                label_singular: "Step"
-                summary: "{{fields.text}}"
-                fields:
-                  - label: "Text"
-                    name: "text"
-                    widget: "markdown"
-                    buttons: ["bold", "italic"]
-                    editor_components: []
-                    modes: ["rich_text"]
-                    hint: "Select a word or sentence and click Bold to emphasize just that part."
-                  - label: "Font"
-                    name: "font_family"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Playfair Display", value: "playfair"}
-                      - {label: "Montserrat", value: "montserrat"}
-                      - {label: "Poppins", value: "poppins"}
-                      - {label: "Merriweather", value: "merriweather"}
-                      - {label: "Lato", value: "lato"}
-                    default: "default"
-                  - label: "Size"
-                    name: "text_size"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Small", value: "small"}
-                      - {label: "Medium", value: "medium"}
-                      - {label: "Large", value: "large"}
-                    default: "default"
-                  - label: "Color"
-                    name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Black", value: "black"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "White", value: "white"}
-                      - {label: "Navy Blue", value: "navy"}
-                      - {label: "Blue", value: "blue"}
-                      - {label: "Dark Green", value: "darkgreen"}
-                      - {label: "Green", value: "green"}
-                      - {label: "Red", value: "red"}
-                      - {label: "Brown", value: "brown"}
-                    default: "default"
-
-                  - label: "Custom Color (Optional)"
-                    name: "text_color_custom"
-                    widget: "string"
-                    required: false
-                    hint: "Paste a hex code here to override the color above, or leave blank."
-
-          - label: "Investment"
-            name: "investment"
-            widget: "object"
-            fields:
-              - {label: "Heading", name: "heading", widget: "string"}
-              - label: "Photo"
-                name: "photo"
-                widget: "image"
-                media_folder: "/assets/images"
-                public_folder: "/assets/images"
-              - {label: "Intro Line", name: "intro", widget: "string"}
-              - label: "Points"
-                name: "points"
-                widget: "list"
-                label_singular: "Point"
-                summary: "{{fields.text}}"
-                fields:
-                  - label: "Text"
-                    name: "text"
-                    widget: "markdown"
-                    buttons: ["bold", "italic"]
-                    editor_components: []
-                    modes: ["rich_text"]
-                    hint: "Select a word or sentence and click Bold to emphasize just that part."
-                  - label: "Font"
-                    name: "font_family"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Playfair Display", value: "playfair"}
-                      - {label: "Montserrat", value: "montserrat"}
-                      - {label: "Poppins", value: "poppins"}
-                      - {label: "Merriweather", value: "merriweather"}
-                      - {label: "Lato", value: "lato"}
-                    default: "default"
-                  - label: "Size"
-                    name: "text_size"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Small", value: "small"}
-                      - {label: "Medium", value: "medium"}
-                      - {label: "Large", value: "large"}
-                    default: "default"
-                  - label: "Color"
-                    name: "text_color"
-                    widget: "select"
-                    options:
-                      - {label: "Use Site Default", value: "default"}
-                      - {label: "Black", value: "black"}
-                      - {label: "Charcoal", value: "charcoal"}
-                      - {label: "Grey", value: "grey"}
-                      - {label: "White", value: "white"}
-                      - {label: "Navy Blue", value: "navy"}
-                      - {label: "Blue", value: "blue"}
-                      - {label: "Dark Green", value: "darkgreen"}
-                      - {label: "Green", value: "green"}
-                      - {label: "Red", value: "red"}
-                      - {label: "Brown", value: "brown"}
-                    default: "default"
-
-                  - label: "Custom Color (Optional)"
-                    name: "text_color_custom"
-                    widget: "string"
-                    required: false
-                    hint: "Paste a hex code here to override the color above, or leave blank."
-
-          - label: "Accent Panel Color"
-            name: "accent_color"
-            widget: "string"
-            required: false
-            default: "#dedad3"
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #dedad3"]
-            hint: "The color behind the text panel on this page. Leave blank to use the site's usual beige. Applies to all three sections on this page."
-
-      - label: "Shop — Wall Tattoos"
-        name: "shop-tattoos"
-        file: "_content/shop-tattoos.json"
-        fields:
-          - label: "Page Heading"
-            name: "heading"
-            widget: "string"
-            default: "Wall Tattoos"
-
-          - label: "Price per Tattoo (€)"
-            name: "price"
-            widget: "number"
-            value_type: "float"
-            default: 45.00
-
-          - label: "Tattoos"
-            name: "tattoos"
-            widget: "list"
-            label_singular: "Tattoo"
-            summary: "{{fields.name}}"
-            fields:
-              - label: "Name"
-                name: "name"
-                widget: "string"
-                hint: "e.g. Wall Tattoo 1"
-              - label: "Image"
-                name: "image"
-                widget: "image"
-                media_folder: "/assets/images/wall tattoos no bg"
-                public_folder: "/assets/images/wall tattoos no bg"
-              - label: "Price (€)"
-                name: "price"
-                widget: "number"
-                value_type: "float"
-
-      - label: "Shop — Art Prints"
-        name: "shop-prints"
-        file: "_content/shop-prints.json"
-        fields:
-          - label: "Page Heading"
-            name: "heading"
-            widget: "string"
-            default: "Art Prints"
-
-          - label: "Default Price per Print (€)"
-            name: "price"
-            widget: "number"
-            value_type: "float"
-            default: 35.00
-
-          - label: "Prints"
-            name: "prints"
-            widget: "list"
-            label_singular: "Print"
-            summary: "{{fields.name}}"
-            fields:
-              - label: "Name"
-                name: "name"
-                widget: "string"
-                hint: "e.g. Celosia"
-              - label: "Image"
-                name: "image"
-                widget: "image"
-                media_folder: "/assets/images/wall stickers"
-                public_folder: "/assets/images/wall stickers"
-              - label: "Price (€)"
-                name: "price"
-                widget: "number"
-                value_type: "float"
-
-      - label: "Shop — Wallpapers"
-        name: "shop-wallpapers"
-        file: "_content/shop-wallpapers.json"
-        fields:
-          - label: "Page Heading"
-            name: "heading"
-            widget: "string"
-            default: "Wallpapers"
-
-          - label: "Default Price per Wallpaper (€)"
-            name: "price"
-            widget: "number"
-            value_type: "float"
-            default: 120.00
-
-          - label: "Wallpapers"
-            name: "wallpapers"
-            widget: "list"
-            label_singular: "Wallpaper"
-            summary: "{{fields.name}}"
-            fields:
-              - label: "Name"
-                name: "name"
-                widget: "string"
-                hint: "e.g. Wallpaper 1"
-              - label: "Image"
-                name: "image"
-                widget: "image"
-                media_folder: "/assets/images/wallpapers"
-                public_folder: "/assets/images/wallpapers"
-              - label: "Price (€)"
-                name: "price"
-                widget: "number"
-                value_type: "float"
-
-      - label: "Opening Page Slideshow"
-        name: "slideshow-opening"
-        file: "_content/slideshow-opening.json"
-        fields:
-          - label: "Slides"
-            name: "slides"
-            widget: "list"
-            label_singular: "Slide"
-            summary: "{{fields.image}}"
-            field:
-              label: "Image"
-              name: "image"
-              widget: "image"
-              media_folder: "/assets/images/portfolio/01 OPENING PAGE"
-              public_folder: "/assets/images/portfolio/01 OPENING PAGE"
-
-      - label: "Home Page Slideshow"
-        name: "slideshow-home"
-        file: "_content/slideshow-home.json"
-        fields:
-          - label: "Slides"
-            name: "slides"
-            widget: "list"
-            label_singular: "Slide"
-            summary: "{{fields.image}}"
-            field:
-              label: "Image"
-              name: "image"
-              widget: "image"
-              media_folder: "/assets/images_backup/slides"
-              public_folder: "/assets/images_backup/slides"
-
-      - label: "Site Design"
-        name: "site-design"
-        file: "_content/site-design.json"
-        preview_path: "/"
-        fields:
-          - label: "Text Size"
-            name: "text_size"
-            widget: "select"
-            options: ["small", "medium", "large"]
-            default: "medium"
-            hint: "Applies to headings and body text everywhere — titles, descriptions, paragraphs. Does not affect the navigation bar or the homepage/welcome page slideshows."
-
-          - label: "Font"
-            name: "font_family"
-            widget: "select"
-            options:
-              - {label: "Original (Velour + Jost)", value: "default"}
-              - {label: "Playfair Display", value: "playfair"}
-              - {label: "Montserrat", value: "montserrat"}
-              - {label: "Poppins", value: "poppins"}
-              - {label: "Merriweather", value: "merriweather"}
-              - {label: "Lato", value: "lato"}
-            default: "default"
-            hint: "Applies to headings and body text everywhere. Does not affect the navigation bar or the homepage/welcome page slideshows."
-
-          - label: "Text Color"
-            name: "text_color"
-            widget: "select"
-            options:
-              - {label: "Default", value: "default"}
-              - {label: "Black", value: "black"}
-              - {label: "Charcoal", value: "charcoal"}
-              - {label: "Grey", value: "grey"}
-              - {label: "White", value: "white"}
-              - {label: "Navy Blue", value: "navy"}
-              - {label: "Blue", value: "blue"}
-              - {label: "Dark Green", value: "darkgreen"}
-              - {label: "Green", value: "green"}
-              - {label: "Red", value: "red"}
-              - {label: "Brown", value: "brown"}
-            default: "default"
-            hint: "Pick a color, or use the custom hex code field below to enter any color you find online."
-
-          - label: "Custom Color (Optional)"
-            name: "text_color_custom"
-            widget: "string"
-            required: false
-            hint: "Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red) or leave blank"
-
-          - label: "Page Background Color"
-            name: "background_color"
-            widget: "string"
-            default: "#ffffff"
-            pattern: ['^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', "Must be a hex color code, e.g. #ffffff or #fdfcfa"]
-            hint: "The backdrop color behind text on every page. Use a hex code — ask your web developer if you're not sure what that means. e.g. #ffffff is pure white, #fdfcfa is a very soft warm white."
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
+          hint: Select a word or sentence and click Bold to emphasize just that part.
+        - label: Font
+          name: font_family
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Playfair Display
+            value: playfair
+          - label: Montserrat
+            value: montserrat
+          - label: Poppins
+            value: poppins
+          - label: Merriweather
+            value: merriweather
+          - label: Lato
+            value: lato
+          default: default
+        - label: Size
+          name: text_size
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+        - label: Color
+          name: text_color
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Black
+            value: black
+          - label: Charcoal
+            value: charcoal
+          - label: Grey
+            value: grey
+          - label: White
+            value: white
+          - label: Navy Blue
+            value: navy
+          - label: Blue
+            value: blue
+          - label: Dark Green
+            value: darkgreen
+          - label: Green
+            value: green
+          - label: Red
+            value: red
+          - label: Brown
+            value: brown
+          default: default
+        - label: Custom Color (Optional)
+          name: text_color_custom
+          widget: string
+          required: false
+          hint: Paste a hex code here to override the color above, or leave blank.
+    - label: Accent Panel Color
+      name: accent_color
+      widget: string
+      required: false
+      default: '#dedad3'
+      pattern:
+      - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+      - 'Must be a hex color code, e.g. #dedad3'
+      hint: The color behind the text panel on this page. Leave blank to use the site's
+        usual beige. Applies to all three sections on this page.
+  - label: Shop — Wall Tattoos
+    name: shop-tattoos
+    file: _content/shop-tattoos.json
+    fields:
+    - label: Page Heading
+      name: heading
+      widget: string
+      default: Wall Tattoos
+    - label: Price per Tattoo (€)
+      name: price
+      widget: number
+      value_type: float
+      default: 45.0
+    - label: Tattoos
+      name: tattoos
+      widget: list
+      label_singular: Tattoo
+      summary: '{{fields.name}}'
+      fields:
+      - label: Name
+        name: name
+        widget: string
+        hint: e.g. Wall Tattoo 1
+      - label: Image
+        name: image
+        widget: image
+        media_folder: /assets/images/wall tattoos no bg
+        public_folder: /assets/images/wall tattoos no bg
+      - label: Price (€)
+        name: price
+        widget: number
+        value_type: float
+  - label: Shop — Art Prints
+    name: shop-prints
+    file: _content/shop-prints.json
+    fields:
+    - label: Page Heading
+      name: heading
+      widget: string
+      default: Art Prints
+    - label: Default Price per Print (€)
+      name: price
+      widget: number
+      value_type: float
+      default: 35.0
+    - label: Prints
+      name: prints
+      widget: list
+      label_singular: Print
+      summary: '{{fields.name}}'
+      fields:
+      - label: Name
+        name: name
+        widget: string
+        hint: e.g. Celosia
+      - label: Image
+        name: image
+        widget: image
+        media_folder: /assets/images/wall stickers
+        public_folder: /assets/images/wall stickers
+      - label: Price (€)
+        name: price
+        widget: number
+        value_type: float
+  - label: Shop — Wallpapers
+    name: shop-wallpapers
+    file: _content/shop-wallpapers.json
+    fields:
+    - label: Page Heading
+      name: heading
+      widget: string
+      default: Wallpapers
+    - label: Default Price per Wallpaper (€)
+      name: price
+      widget: number
+      value_type: float
+      default: 120.0
+    - label: Wallpapers
+      name: wallpapers
+      widget: list
+      label_singular: Wallpaper
+      summary: '{{fields.name}}'
+      fields:
+      - label: Name
+        name: name
+        widget: string
+        hint: e.g. Wallpaper 1
+      - label: Image
+        name: image
+        widget: image
+        media_folder: /assets/images/wallpapers
+        public_folder: /assets/images/wallpapers
+      - label: Price (€)
+        name: price
+        widget: number
+        value_type: float
+  - label: Opening Page Slideshow
+    name: slideshow-opening
+    file: _content/slideshow-opening.json
+    fields:
+    - label: Slides
+      name: slides
+      widget: list
+      label_singular: Slide
+      summary: '{{fields.image}}'
+      field:
+        label: Image
+        name: image
+        widget: image
+        media_folder: /assets/images/portfolio/01 OPENING PAGE
+        public_folder: /assets/images/portfolio/01 OPENING PAGE
+  - label: Home Page Slideshow
+    name: slideshow-home
+    file: _content/slideshow-home.json
+    fields:
+    - label: Slides
+      name: slides
+      widget: list
+      label_singular: Slide
+      summary: '{{fields.image}}'
+      field:
+        label: Image
+        name: image
+        widget: image
+        media_folder: /assets/images_backup/slides
+        public_folder: /assets/images_backup/slides
+  - label: Site Design
+    name: site-design
+    file: _content/site-design.json
+    preview_path: /
+    fields:
+    - label: Text Size
+      name: text_size
+      widget: select
+      options:
+      - small
+      - medium
+      - large
+      default: medium
+      hint: Applies to headings and body text everywhere — titles, descriptions, paragraphs.
+        Does not affect the navigation bar or the homepage/welcome page slideshows.
+    - label: Font
+      name: font_family
+      widget: select
+      options:
+      - label: Original (Velour + Jost)
+        value: default
+      - label: Playfair Display
+        value: playfair
+      - label: Montserrat
+        value: montserrat
+      - label: Poppins
+        value: poppins
+      - label: Merriweather
+        value: merriweather
+      - label: Lato
+        value: lato
+      default: default
+      hint: Applies to headings and body text everywhere. Does not affect the navigation
+        bar or the homepage/welcome page slideshows.
+    - label: Text Color
+      name: text_color
+      widget: select
+      options:
+      - label: Default
+        value: default
+      - label: Black
+        value: black
+      - label: Charcoal
+        value: charcoal
+      - label: Grey
+        value: grey
+      - label: White
+        value: white
+      - label: Navy Blue
+        value: navy
+      - label: Blue
+        value: blue
+      - label: Dark Green
+        value: darkgreen
+      - label: Green
+        value: green
+      - label: Red
+        value: red
+      - label: Brown
+        value: brown
+      default: default
+      hint: Pick a color, or use the custom hex code field below to enter any color
+        you find online.
+    - label: Custom Color (Optional)
+      name: text_color_custom
+      widget: string
+      required: false
+      hint: 'Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)
+        or leave blank'
+    - label: Page Background Color
+      name: background_color
+      widget: string
+      default: '#ffffff'
+      pattern:
+      - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+      - 'Must be a hex color code, e.g. #ffffff or #fdfcfa'
+      hint: 'The backdrop color behind text on every page. Use a hex code — ask your
+        web developer if you''re not sure what that means. e.g. #ffffff is pure white,
+        #fdfcfa is a very soft warm white.'
