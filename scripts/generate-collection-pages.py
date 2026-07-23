@@ -130,7 +130,9 @@ TEMPLATE = """<!DOCTYPE html>
       if (typeof p === 'string' || !p) return '';
       const styles = [];
       if (PARA_FONTS[p.font_family]) styles.push('font-family: ' + PARA_FONTS[p.font_family]);
-      if (PARA_COLORS[p.text_color]) styles.push('color: ' + PARA_COLORS[p.text_color]);
+      // Use custom hex color if provided, otherwise use preset color
+      if (p.text_color_custom) styles.push('color: ' + p.text_color_custom);
+      else if (PARA_COLORS[p.text_color]) styles.push('color: ' + PARA_COLORS[p.text_color]);
       if (PARA_SIZES[p.text_size]) styles.push('font-size: ' + PARA_SIZES[p.text_size]);
       return styles.length ? ' style="' + styles.join('; ') + '"' : '';
     }}

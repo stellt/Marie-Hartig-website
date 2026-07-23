@@ -39,7 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.background_color) {
         root.setProperty('--site-bg', data.background_color);
       }
-      if (TEXT_COLORS[data.text_color]) {
+      // Use custom color if provided, otherwise use preset colors
+      if (data.text_color_custom) {
+        root.setProperty('--body-text-color', data.text_color_custom);
+      } else if (TEXT_COLORS[data.text_color]) {
         root.setProperty('--body-text-color', TEXT_COLORS[data.text_color]);
       }
       if (TEXT_SCALES[data.text_size] != null) {

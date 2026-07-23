@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Registrations — Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { color: #333; }
+    .stat {
+      font-size: 48px;
+      font-weight: bold;
+      color: #0066cc;
+      margin: 20px 0;
+    }
+    .info {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Portfolio Registrations</h1>
+    <p class="info">This page shows the number of people who have signed up for portfolio access.</p>
+
+    <div>
+      <p>Total Registrations:</p>
+      <div class="stat" id="count">0</div>
+    </div>
+
+    <p class="info" id="lastReg"></p>
+
+    <button onclick="resetCounter()">Reset Counter</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'portfolioRegistrationCount';
+    const LAST_REG_KEY = 'portfolioLastRegistration';
+
+    function getCount() {
+      return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    }
+
+    function incrementCount() {
+      const count = getCount();
+      localStorage.setItem(STORAGE_KEY, count + 1);
+      localStorage.setItem(LAST_REG_KEY, new Date().toLocaleString());
+    }
+
+    function resetCounter() {
+      if (confirm('Reset the registration counter?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(LAST_REG_KEY);
+        location.reload();
+      }
+    }
+
+    function updateDisplay() {
+      const count = getCount();
+      document.getElementById('count').textContent = count;
+
+      const lastReg = localStorage.getItem(LAST_REG_KEY);
+      if (lastReg) {
+        document.getElementById('lastReg').textContent = `Last registration: ${lastReg}`;
+      } else {
+        document.getElementById('lastReg').textContent = 'No registrations yet.';
+      }
+    }
+
+    // Make this accessible globally so the gate pages can call it
+    window.incrementPortfolioRegistrationCount = incrementCount;
+
+    updateDisplay();
+  </script>
+</body>
+</html>
