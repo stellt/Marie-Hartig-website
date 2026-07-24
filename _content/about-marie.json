@@ -8,7 +8,7 @@
           "text": "\n\nWelcome to the enchanting realm of Marie Hartig's Painted Worlds.",
           "font_family": "montserrat",
           "text_size": "default",
-          "text_color": "default",
+          "text_color": "white",
           "text_color_custom": ""
         },
         {
@@ -40,10 +40,10 @@
           "text_color_custom": ""
         },
         {
-          "text": "\"EVERY WALL PAINTING IS CONCEIVED TO FEEL AS THOUGH IT WAS ALWAYS MEANT TO BE THERE - ELEVATING THE ATMOSPHERE, ENRICHING THE ENERGY, AND SEAMLESSLY COMPLEMENTING THE CHARACTER AND LIVED EXPERIENCE OF THE SPACE.\"",
+          "text": "*\"Every wall painting is conceived to feel as though it was always meant to be there - elevating the atmosphere, enriching the energy, and seamlessly complementing the character and lived experience of the space.\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         }
       ]
@@ -81,10 +81,10 @@
           "text_color_custom": ""
         },
         {
-          "text": "\"THOSE WHO COMMISSION A WALL PAINTING VALUE THE CARE, CRAFTSMANSHIP AND ATTENTION TO DETAIL THAT GO INTO CREATING SOMETHING TRULY UNIQUE. \n\nTHEY SEEK A PIECE THAT FEELS DEEPLY PERSONAL - CREATED WITH SKILL, DEDICATION AND, ABOVE ALL, LOVE.\"",
+          "text": "*\"Those who commission a wall painting value the care, craftsmanship and attention to detail that go into creating something truly unique.*\n\n*They seek a piece that feels deeply personal - creative with skill, dedication and, above all, love.\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         }
       ]
@@ -128,10 +128,10 @@
       "photo": "/assets/images/marie-portrait.jpg",
       "paragraphs": [
         {
-          "text": "\"NO TWO COMMISSIONS ARE EVER THE SAME. THEY MAY GROW FROM A FAMILY'S STORY, FARAWAY PLACES - REAL OR IMAGINED - THE NATURAL WORLD, ARCHITECTURE OR A SIMPLE FEELING. WHATEVER THE INSPIRATION, EVERY DESIGN IS BESPOKE AND CREATED EXCLUSIVELY FOR ITS SPACE.\"",
+          "text": "*\"No two commissions are ever the same. They may grown from a family's story, faraway places - real or imagined - the natural world, design and* architecture *or a simple feeling. Whatever the inspiration, every design is bespoke and created exclusively for its space.\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         },
         {
@@ -149,10 +149,10 @@
           "text_color_custom": ""
         },
         {
-          "text": "\"I LOVE TO WORK CLOSELY WITH MY CLIENTS, EXPLORING THEIR VISIONS FOR THE SPACE AND BRINGING IT TO LIFE.\"\n",
+          "text": "*\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         }
       ]

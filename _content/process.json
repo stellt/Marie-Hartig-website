@@ -4,10 +4,10 @@
     "photo": "/assets/images/process-studio.png",
     "paragraphs": [
       {
-        "text": "\"TOGETHER, WE CREATE MORE THAN A WALL PAINTING. EACH COMMISSION IS A CREATIVE COLLABORATION, RESULTING IN AN ARTWORK THAT BECOMES AN INTEGRAL PART OF THE SPACE.\"",
+        "text": "*\"Together, we create more than a wall painting. Each commission is a creative collaboration, resulting in an artwork that becomes an integral part of the space.\"*",
         "font_family": "default",
-        "text_size": "default",
-        "text_color": "default",
+        "text_size": "medium",
+        "text_color": "white",
         "text_color_custom": ""
       },
       {
@@ -46,7 +46,7 @@
         "text_color_custom": ""
       },
       {
-        "text": "READY TO TRANSFORM YOUR SPACE ? Marie would love to hear your ideas and begin creating something truly extraordinary together.",
+        "text": "Ready to Transform your space ? \n\nMarie would love to hear your ideas and begin creating something truly extraordinary together.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
