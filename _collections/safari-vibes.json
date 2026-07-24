@@ -2,15 +2,9 @@
   "title": "Safari Vibes",
   "slug": "safari-vibes",
   "images": [
-    {
-      "image": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-3.jpg"
-    }
+    "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg",
+    "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-2.jpg",
+    "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-3.jpg"
   ],
   "description": [
     {

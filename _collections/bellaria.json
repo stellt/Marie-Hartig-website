@@ -2,15 +2,9 @@
   "title": "Bellaria",
   "slug": "bellaria",
   "images": [
-    {
-      "image": "/assets/images/portfolio/08 BELLARIA/bellaria-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/08 BELLARIA/bellaria-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/08 BELLARIA/bellaria-3.jpg"
-    }
+    "/assets/images/portfolio/08 BELLARIA/bellaria-2.jpg",
+    "/assets/images/portfolio/08 BELLARIA/bellaria-1.jpg",
+    "/assets/images/portfolio/08 BELLARIA/bellaria-3.jpg"
   ],
   "description": [
     {

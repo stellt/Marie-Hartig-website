@@ -2,9 +2,7 @@
   "title": "Kipplings Eden",
   "slug": "kipplings-eden",
   "images": [
-    {
-      "image": "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-1.jpg"
-    },
+    "/assets/images/portfolio/19 KIPPLINGS EDEN/kipplings-eden-1.jpg",
     "/assets/images/portfolio/kippling-1.jpg",
     "/assets/images/portfolio/kippling-3.jpg"
   ],

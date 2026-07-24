@@ -2,15 +2,9 @@
   "title": "Oversize Bloom",
   "slug": "oversize-bloom",
   "images": [
-    {
-      "image": "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-3.jpg"
-    }
+    "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-1.jpg",
+    "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-2.jpg",
+    "/assets/images/portfolio/14 OVERSIZE BLOOM/oversize-bloom-3.jpg"
   ],
   "description": [
     {

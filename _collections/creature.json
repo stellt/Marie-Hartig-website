@@ -2,15 +2,9 @@
   "title": "Creature Comforts",
   "slug": "creature",
   "images": [
-    {
-      "image": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-3.jpg"
-    }
+    "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-1.jpg",
+    "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-2.jpg",
+    "/assets/images/portfolio/03 CREATURE COMFORTS/creature-new-3.jpg"
   ],
   "description": [
     {

@@ -2,24 +2,12 @@
   "title": "Fuschl Rosewood",
   "slug": "fuschl",
   "images": [
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-3.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-4.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-5.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-6.jpg"
-    }
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-1.jpg",
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-2.jpg",
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-3.jpg",
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-4.jpg",
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-5.jpg",
+    "/assets/images/portfolio/02 FUSCHL ROSEWOOD/fuschl-new-6.jpg"
   ],
   "description": [
     {

@@ -2,15 +2,9 @@
   "title": "Rooftop Pool",
   "slug": "rooftop-pool",
   "images": [
-    {
-      "image": "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-3.jpg"
-    }
+    "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-1.jpg",
+    "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-2.jpg",
+    "/assets/images/portfolio/17 ROOFTOP POOL/rooftop-pool-3.jpg"
   ],
   "description": [
     {

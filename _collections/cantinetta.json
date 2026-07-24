@@ -2,15 +2,9 @@
   "title": "Cantinetta Antinori Blackbirds",
   "slug": "cantinetta",
   "images": [
-    {
-      "image": "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-3.jpg"
-    }
+    "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-1.jpg",
+    "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-2.jpg",
+    "/assets/images/portfolio/28 CANTINETTA ANTINORI/cantinetta-new-3.jpg"
   ],
   "description": [
     {

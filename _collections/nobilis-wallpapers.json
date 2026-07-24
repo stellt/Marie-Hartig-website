@@ -2,15 +2,9 @@
   "title": "Nobilis Wallpapers",
   "slug": "nobilis-wallpapers",
   "images": [
-    {
-      "image": "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-3.jpg"
-    }
+    "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-1.jpg",
+    "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-2.jpg",
+    "/assets/images/portfolio/30 NOBILIS WALLPAPERS/nobilis-wallpapers-3.jpg"
   ],
   "description": [
     {

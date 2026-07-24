@@ -2,15 +2,9 @@
   "title": "Rickatschwende Spa Hotel",
   "slug": "rickatschwende",
   "images": [
-    {
-      "image": "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-3.jpg"
-    }
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg",
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-2.jpg",
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-3.jpg"
   ],
   "description": [
     {

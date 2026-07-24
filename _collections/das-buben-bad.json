@@ -2,15 +2,9 @@
   "title": "Das Buben Bad",
   "slug": "das-buben-bad",
   "images": [
-    {
-      "image": "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-2.jpg"
-    },
-    {
-      "image": "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-3.jpg"
-    }
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg",
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-2.jpg",
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-3.jpg"
   ],
   "description": [
     {
