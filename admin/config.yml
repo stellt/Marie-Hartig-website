@@ -38,8 +38,6 @@ collections:
     - label: Image
       name: image
       widget: image
-      media_folder: /assets/images/portfolio
-      public_folder: /assets/images/portfolio
   - label: Description
     name: description
     widget: list
