@@ -40,10 +40,10 @@
           "text_color_custom": ""
         },
         {
-          "text": "\"EVERY WALL PAINTING IS CONCEIVED TO FEEL AS THOUGH IT WAS ALWAYS MEANT TO BE THERE - ELEVATING THE ATMOSPHERE, ENRICHING THE ENERGY, AND SEAMLESSLY COMPLEMENTING THE CHARACTER AND LIVED EXPERIENCE OF THE SPACE.\"",
+          "text": "*\"EVERY WALL PAINTING IS CONCEIVED TO FEEL AS THOUGH IT WAS ALWAYS MEANT TO BE THERE - ELEVATING THE ATMOSPHERE, ENRICHING THE ENERGY, AND SEAMLESSLY COMPLEMENTING THE CHARACTER AND LIVED EXPERIENCE OF THE SPACE.\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         }
       ]
@@ -128,10 +128,10 @@
       "photo": "/assets/images/marie-portrait.jpg",
       "paragraphs": [
         {
-          "text": "\"NO TWO COMMISSIONS ARE EVER THE SAME. THEY MAY GROW FROM A FAMILY'S STORY, FARAWAY PLACES - REAL OR IMAGINED - THE NATURAL WORLD, ARCHITECTURE OR A SIMPLE FEELING. WHATEVER THE INSPIRATION, EVERY DESIGN IS BESPOKE AND CREATED EXCLUSIVELY FOR ITS SPACE.\"",
+          "text": "*\"NO TWO COMMISSIONS ARE EVER THE SAME. THEY MAY GROW FROM A FAMILY'S STORY, FARAWAY PLACES - REAL OR IMAGINED - THE NATURAL WORLD, ARCHITECTURE OR A SIMPLE FEELING. WHATEVER THE INSPIRATION, EVERY DESIGN IS BESPOKE AND CREATED EXCLUSIVELY FOR ITS SPACE.\"*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         },
         {
@@ -151,8 +151,8 @@
         {
           "text": "\"I LOVE TO WORK CLOSELY WITH MY CLIENTS, EXPLORING THEIR VISIONS FOR THE SPACE AND BRINGING IT TO LIFE.\"\n",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
+          "text_size": "medium",
+          "text_color": "white",
           "text_color_custom": ""
         }
       ]
