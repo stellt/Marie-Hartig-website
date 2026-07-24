@@ -17,6 +17,7 @@ collections:
   folder: _collections
   create: true
   delete: true
+  publish: false
   slug: '{{fields.slug}}'
   extension: json
   format: json
