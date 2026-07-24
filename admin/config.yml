@@ -38,7 +38,7 @@ collections:
     fields:
     - label: Image
       name: image
-      widget: string
+      widget: image
   - label: Description
     name: description
     widget: list
