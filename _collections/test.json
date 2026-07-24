@@ -1,0 +1,14 @@
+{
+  "description": [
+    {
+      "font_family": "default",
+      "text_size": "default",
+      "text_color": "default",
+      "text": "test"
+    }
+  ],
+  "accent_color": "#dedad3",
+  "lightbox_color": "#ffffff",
+  "title": "Test",
+  "slug": "test"
+}
