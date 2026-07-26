@@ -33,16 +33,34 @@ class Slideshow {
 
       const img = document.createElement('img');
       img.className = 'slide__img';
-      img.src = imgUrl(slideSrc(entry), 1600);
-      img.srcset = imgSrcset(slideSrc(entry));
       img.sizes = '100vw';
       img.alt = 'Marie Hartig Studio';
-      if (i !== 0) img.loading = 'lazy';
 
       div.appendChild(img);
       this.container.appendChild(div);
       this.slideEls.push(div);
     });
+
+    /* All slides sit stacked on top of each other (position: fixed /
+       absolute) to crossfade, so they're all technically "in the
+       viewport" at once -- native <img loading="lazy"> can't tell any
+       of them apart and loads everything immediately regardless of the
+       attribute. Load images ourselves instead: only the active slide
+       plus the one coming up next, so a full page load never fetches
+       more than two of these multi-hundred-KB images at a time. */
+    this._loadSlide(0);
+    if (this.total > 1) this._loadSlide(1);
+  }
+
+  /** Sets an <img>'s real src/srcset the first time it's needed (current
+      slide, or the one about to become current) and never again. */
+  _loadSlide(i) {
+    const img = this.slideEls[i].querySelector('img');
+    if (img.dataset.loaded) return;
+    img.dataset.loaded = '1';
+    const src = slideSrc(this.slides[i]);
+    img.src = imgUrl(src, 1600);
+    img.srcset = imgSrcset(src);
   }
 
   _init() {
@@ -65,6 +83,8 @@ class Slideshow {
     this.slideEls[this.current].classList.remove('active');
     this.current = (this.current + dir + this.total) % this.total;
     this.slideEls[this.current].classList.add('active');
+    this._loadSlide(this.current);
+    this._loadSlide((this.current + 1) % this.total);
     this._updateCounter();
     this._startProgress();
     this._startTimer();

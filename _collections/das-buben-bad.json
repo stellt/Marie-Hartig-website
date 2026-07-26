@@ -1,7 +1,11 @@
 {
   "title": "Das Buben Bad",
   "slug": "das-buben-bad",
-  "images": [],
+  "images": [
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-1.jpg",
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-2.jpg",
+    "/assets/images/portfolio/16 DAS BUBEN BAD/das-buben-bad-3.jpg"
+  ],
   "description": [
     {
       "text": "What was once called 'das Buben Bad' or \"the Boys bathroom\" has now been totally transformed….it is now THE Bathroom.",

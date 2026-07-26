@@ -1,7 +1,11 @@
 {
   "title": "Rickatschwende Spa Hotel",
   "slug": "rickatschwende",
-  "images": [],
+  "images": [
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-1.jpg",
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-2.jpg",
+    "/assets/images/portfolio/06 RICKATSCHWENDE SPA HOTEL/rickatschwende-3.jpg"
+  ],
   "description": [
     {
       "text": "The call here was from the west of Austria…close to Switzerland…at a fabulous Spa Hotel with a strange name, tucked away in the mountains with the most beautiful views all round.",

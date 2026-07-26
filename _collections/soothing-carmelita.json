@@ -1,7 +1,11 @@
 {
   "title": "Soothing Carmelita",
   "slug": "soothing-carmelita",
-  "images": [],
+  "images": [
+    "/assets/images/portfolio/23 SOOTHING CARMELITA/soothing-carmelita-1.jpg",
+    "/assets/images/portfolio/23 SOOTHING CARMELITA/soothing-carmelita-2.jpg",
+    "/assets/images/portfolio/23 SOOTHING CARMELITA/soothing-carmelita-3.jpg"
+  ],
   "description": [
     {
       "text": "Description coming soon.",

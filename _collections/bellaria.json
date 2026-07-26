@@ -1,7 +1,11 @@
 {
   "title": "Bellaria",
   "slug": "bellaria",
-  "images": [],
+  "images": [
+    "/assets/images/portfolio/08 BELLARIA/bellaria-2.jpg",
+    "/assets/images/portfolio/08 BELLARIA/bellaria-1.jpg",
+    "/assets/images/portfolio/08 BELLARIA/bellaria-3.jpg"
+  ],
   "description": [
     {
       "text": "Sometimes even the tiniest of spaces need to be adorned with beauty…like a jewelry box or treasure chest! That was the plan for this Guest WC in a gorgeous apartment overlooking the city.",

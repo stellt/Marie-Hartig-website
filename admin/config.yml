@@ -663,8 +663,8 @@ collections:
       - label: Image
         name: image
         widget: image
-        media_folder: /assets/images/wall%20tattoos%20no%20bg
-        public_folder: /assets/images/wall%20tattoos%20no%20bg
+        media_folder: /assets/images/wall tattoos no bg
+        public_folder: /assets/images/wall tattoos no bg
       - label: Price (€)
         name: price
         widget: number
@@ -695,8 +695,8 @@ collections:
       - label: Image
         name: image
         widget: image
-        media_folder: /assets/images/wall%20stickers
-        public_folder: /assets/images/wall%20stickers
+        media_folder: /assets/images/wall stickers
+        public_folder: /assets/images/wall stickers
       - label: Price (€)
         name: price
         widget: number
@@ -746,8 +746,8 @@ collections:
       - label: Image
         name: image
         widget: image
-        media_folder: /assets/images/portfolio/01%20OPENING%20PAGE
-        public_folder: /assets/images/portfolio/01%20OPENING%20PAGE
+        media_folder: /assets/images/portfolio/01 OPENING PAGE
+        public_folder: /assets/images/portfolio/01 OPENING PAGE
   - label: Home Page Slideshow
     name: slideshow-home
     file: _content/slideshow-home.json
