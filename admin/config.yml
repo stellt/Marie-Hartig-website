@@ -119,6 +119,34 @@ collections:
       required: false
       hint: 'Paste a hex color code here (e.g., #ffffff for white, #ff0000 for red)
         or leave blank'
+    - label: Indent
+      name: indent
+      widget: select
+      options:
+      - label: No Indent
+        value: default
+      - label: Small
+        value: small
+      - label: Medium
+        value: medium
+      - label: Large
+        value: large
+      default: default
+      hint: Pushes this paragraph in from the left edge.
+    - label: Paragraph Spacing
+      name: spacing
+      widget: select
+      options:
+      - label: Use Site Default
+        value: default
+      - label: Small
+        value: small
+      - label: Medium
+        value: medium
+      - label: Large
+        value: large
+      default: default
+      hint: Adds extra space below this paragraph, before the next one.
   - label: Location
     name: location
     widget: string
@@ -278,6 +306,34 @@ collections:
           widget: string
           required: false
           hint: Paste a hex code here to override the color above, or leave blank.
+        - label: Indent
+          name: indent
+          widget: select
+          options:
+          - label: No Indent
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Pushes this paragraph in from the left edge.
+        - label: Paragraph Spacing
+          name: spacing
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Adds extra space below this paragraph, before the next one.
     - label: Accent Panel Color
       name: accent_color
       widget: string
@@ -442,6 +498,34 @@ collections:
           widget: string
           required: false
           hint: Paste a hex code here to override the color above, or leave blank.
+        - label: Indent
+          name: indent
+          widget: select
+          options:
+          - label: No Indent
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Pushes this paragraph in from the left edge.
+        - label: Paragraph Spacing
+          name: spacing
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Adds extra space below this paragraph, before the next one.
     - label: Process Steps
       name: process
       widget: object
@@ -535,6 +619,34 @@ collections:
           widget: string
           required: false
           hint: Paste a hex code here to override the color above, or leave blank.
+        - label: Indent
+          name: indent
+          widget: select
+          options:
+          - label: No Indent
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Pushes this paragraph in from the left edge.
+        - label: Paragraph Spacing
+          name: spacing
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Adds extra space below this paragraph, before the next one.
     - label: Investment
       name: investment
       widget: object
@@ -628,6 +740,34 @@ collections:
           widget: string
           required: false
           hint: Paste a hex code here to override the color above, or leave blank.
+        - label: Indent
+          name: indent
+          widget: select
+          options:
+          - label: No Indent
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Pushes this paragraph in from the left edge.
+        - label: Paragraph Spacing
+          name: spacing
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Adds extra space below this paragraph, before the next one.
     - label: Accent Panel Color
       name: accent_color
       widget: string

@@ -296,6 +296,8 @@
       darkgreen: '#2d5016', green: '#2ecc40', red: '#ff4136', brown: '#8b4513'
     };
     const PARA_SIZES = { small: '0.9em', medium: '1em', large: '1.15em' };
+    const PARA_INDENTS = { small: '1.5em', medium: '3em', large: '4.5em' };
+    const PARA_SPACING = { small: '1.4rem', medium: '2.4rem', large: '4rem' };
     function stepText(item) { return typeof item === 'string' ? item : (item.text || ''); }
     function paraStyle(p) {
       if (typeof p === 'string' || !p) return '';
@@ -304,6 +306,8 @@
       if (p.text_color_custom) styles.push('color: ' + p.text_color_custom);
       else if (PARA_COLORS[p.text_color]) styles.push('color: ' + PARA_COLORS[p.text_color]);
       if (PARA_SIZES[p.text_size]) styles.push('font-size: ' + PARA_SIZES[p.text_size]);
+      if (PARA_INDENTS[p.indent]) styles.push('margin-left: ' + PARA_INDENTS[p.indent]);
+      if (PARA_SPACING[p.spacing]) styles.push('margin-bottom: ' + PARA_SPACING[p.spacing]);
       return styles.length ? ' style="' + styles.join('; ') + '"' : '';
     }
     const photoSizes = '(max-width: 900px) 100vw, 42vw';
