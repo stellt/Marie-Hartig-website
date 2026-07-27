@@ -167,7 +167,7 @@
 
   <div class="shop-panel-divider"></div>
   <div class="shop-panels">
-    <a class="shop-panel disabled" href="#">
+    <a class="shop-panel disabled" href="#" data-live-href="shop-wall-tattoos.html">
       <img src="../assets/images/ThumbnailTattoo.jpeg" alt="Wall Tattoos" />
       <div class="shop-panel-overlay"></div>
       <div class="shop-panel-coming-soon">
@@ -178,7 +178,7 @@
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel disabled" href="#">
+    <a class="shop-panel disabled" href="#" data-live-href="shop-art-prints.html">
       <img src="../assets/images/ThumbnailArtPrints.png" alt="Original Art Prints" />
       <div class="shop-panel-overlay"></div>
       <div class="shop-panel-coming-soon">
@@ -189,7 +189,7 @@
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel disabled" href="#">
+    <a class="shop-panel disabled" href="#" data-live-href="shop-wallpapers.html">
       <img src="../assets/images/ThumbnailWallpaper.jpeg" alt="Wallpapers" />
       <div class="shop-panel-overlay"></div>
       <div class="shop-panel-coming-soon">
@@ -207,5 +207,22 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/site-design.js"></script>
+  <script>
+    // "Shop is Live" toggle, set in the CMS under Page Text > Shop Settings.
+    // Off by default: tiles stay disabled/"Coming Soon" exactly as before.
+    // On: each tile becomes a real link and the Coming Soon badge disappears.
+    fetch('../_content/shop-settings.json')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.is_live) return;
+        document.querySelectorAll('.shop-panel[data-live-href]').forEach(panel => {
+          panel.classList.remove('disabled');
+          panel.href = panel.dataset.liveHref;
+          const badge = panel.querySelector('.shop-panel-coming-soon');
+          if (badge) badge.remove();
+        });
+      })
+      .catch(() => {});
+  </script>
 </body>
 </html>

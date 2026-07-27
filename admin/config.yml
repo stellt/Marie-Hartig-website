@@ -874,6 +874,18 @@ collections:
         name: price
         widget: number
         value_type: float
+  - label: Shop Settings
+    name: shop-settings
+    file: _content/shop-settings.json
+    fields:
+    - label: Shop is Live
+      name: is_live
+      widget: boolean
+      default: false
+      hint: Off = the Shop page shows "Coming Soon" tiles that don't link anywhere.
+        On = visitors can click through to Wall Tattoos, Art Prints, and Wallpapers
+        and actually buy. Turn this on once you're ready to launch -- no developer
+        needed.
   - label: Opening Page Slideshow
     name: slideshow-opening
     file: _content/slideshow-opening.json
