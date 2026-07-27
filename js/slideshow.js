@@ -35,6 +35,10 @@ class Slideshow {
       img.className = 'slide__img';
       img.sizes = '100vw';
       img.alt = 'Marie Hartig Studio';
+      // Make sure the very first photo wins the browser's bandwidth/priority
+      // race against everything else on the page (fonts, other scripts) --
+      // it's the only thing standing between the visitor and a black screen.
+      img.fetchPriority = i === 0 ? 'high' : 'low';
 
       div.appendChild(img);
       this.container.appendChild(div);

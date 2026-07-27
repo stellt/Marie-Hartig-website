@@ -7,6 +7,14 @@
   <title>Marie Hartig Studio</title>
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/slideshow.css" />
+  <!-- Start fetching the slideshow's JS and data immediately instead of
+       waiting for the browser to parse all the way down to the bottom of
+       <body> -- shaves a full round-trip off how long the black loading
+       background shows before the first photo can even start downloading. -->
+  <link rel="preload" href="js/img.js" as="script" />
+  <link rel="preload" href="js/site-design.js" as="script" />
+  <link rel="preload" href="js/slideshow.js" as="script" />
+  <link rel="preload" href="_content/slideshow-opening.json" as="fetch" crossorigin="anonymous" />
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
