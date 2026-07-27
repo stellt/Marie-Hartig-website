@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   branch: main
-media_folder: assets/images/portfolio
+media_folder: /assets/images/portfolio
 public_folder: /assets/images/portfolio
 site_url: https://www.mariespaintedworlds.com
 display_url: https://www.mariespaintedworlds.com
@@ -17,7 +17,6 @@ collections:
   folder: _collections
   create: true
   delete: true
-  publish: false
   slug: '{{fields.slug}}'
   extension: json
   format: json
@@ -39,6 +38,8 @@ collections:
     - label: Image
       name: image
       widget: image
+      media_folder: /assets/images/portfolio
+      public_folder: /assets/images/portfolio
   - label: Description
     name: description
     widget: list
