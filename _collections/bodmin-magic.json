@@ -5,7 +5,9 @@
     "/assets/images/portfolio/img_1935.jpeg",
     "/assets/images/portfolio/img_1854.jpeg",
     "/assets/images/portfolio/img_1831.jpeg",
-    "/assets/images/portfolio/img_1818.jpeg"
+    "/assets/images/portfolio/img_1818.jpeg",
+    "/assets/images/portfolio/05cornwall.jpg",
+    "/assets/images/portfolio/06cornwall.jpg"
   ],
   "description": [
     {
@@ -13,14 +15,18 @@
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     },
     {
       "text": "I love tapping into and exploring the worlds and energies of the places I paint in and people that commission me to do so. It really makes every project I do so different and unique as it is customized for that specific space. It's one of a kind.",
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     }
   ],
   "location": "Dining Room. Private Home. Cornwall, UK",
