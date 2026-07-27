@@ -32,17 +32,32 @@ class WorldsSlideshow {
       div.className = 'worlds-slide' + (i === 0 ? ' active' : '');
 
       const img = document.createElement('img');
-      img.src = imgUrl(worldsSlideSrc(entry), 1600);
-      img.srcset = imgSrcset(worldsSlideSrc(entry));
       img.sizes = '100vw';
       img.alt = '';
       img.setAttribute('aria-hidden', 'true');
-      if (i !== 0) img.loading = 'lazy';
+      img.fetchPriority = i === 0 ? 'high' : 'low';
 
       div.appendChild(img);
       this.container.appendChild(div);
       this.slideEls.push(div);
     });
+
+    /* Same fix as js/slideshow.js: these slides are stacked on top of each
+       other (position: absolute, inset: 0) so native <img loading="lazy">
+       can't distinguish any of them from the active one and loads
+       everything at once. Load only the active slide plus the one coming
+       up next, ourselves. */
+    this._loadSlide(0);
+    if (this.total > 1) this._loadSlide(1);
+  }
+
+  _loadSlide(i) {
+    const img = this.slideEls[i].querySelector('img');
+    if (img.dataset.loaded) return;
+    img.dataset.loaded = '1';
+    const src = worldsSlideSrc(this.slides[i]);
+    img.src = imgUrl(src, 1600);
+    img.srcset = imgSrcset(src);
   }
 
   _init() {
@@ -64,6 +79,8 @@ class WorldsSlideshow {
     this.slideEls[this.current].classList.remove('active');
     this.current = (this.current + dir + this.total) % this.total;
     this.slideEls[this.current].classList.add('active');
+    this._loadSlide(this.current);
+    this._loadSlide((this.current + 1) % this.total);
     this._startProgress();
     this._startTimer();
   }
