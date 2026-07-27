@@ -34,8 +34,8 @@ collections:
     widget: list
     label_singular: Image
     summary: '{{fields.image}}'
-    fields:
-    - label: Image
+    field:
+      label: Image
       name: image
       widget: image
       media_folder: /assets/images/portfolio
@@ -743,8 +743,8 @@ collections:
       widget: list
       label_singular: Slide
       summary: '{{fields.image}}'
-      fields:
-      - label: Image
+      field:
+        label: Image
         name: image
         widget: image
         media_folder: /assets/images/portfolio/01 OPENING PAGE
@@ -758,8 +758,8 @@ collections:
       widget: list
       label_singular: Slide
       summary: '{{fields.image}}'
-      fields:
-      - label: Image
+      field:
+        label: Image
         name: image
         widget: image
         media_folder: /assets/images_backup/slides
