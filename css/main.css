@@ -50,7 +50,7 @@
 /* Google Fonts — Jost (default body font) + the alternate choices
    offered in the CMS "Site Design" font dropdown. All loaded up front
    so switching fonts at runtime never needs a page reload. */
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&family=Lato:wght@300;400;700&display=swap');
 
 :root {
   --white: #ffffff;
