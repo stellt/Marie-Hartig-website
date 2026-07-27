@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Site Maintenance — Marie Hartig Studio</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .maintenance-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 6vw;
+    }
+    .maintenance-wrap h1 {
+      font-family: 'Velour', serif; font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 2.6rem); letter-spacing: 0.15em;
+      text-transform: uppercase; color: #111; margin: 0 0 1rem;
+    }
+    .maintenance-wrap p {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.9rem; letter-spacing: 0.05em; color: #555; max-width: 480px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="maintenance-wrap">
+    <h1>Marie Hartig Studio</h1>
+    <p id="maintenance-message">We're currently making some updates to the site. Please check back shortly — thank you for your patience.</p>
+  </div>
+  <script>
+    // If maintenance mode gets switched off while someone is sitting on this
+    // page, send them back to the homepage instead of leaving them stranded.
+    // Also lets the CMS-edited message (if any) override the default above.
+    fetch('_content/site-maintenance.json')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.maintenance_mode) {
+          window.location.href = 'index.html';
+          return;
+        }
+        if (data.message) {
+          document.getElementById('maintenance-message').textContent = data.message;
+        }
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>

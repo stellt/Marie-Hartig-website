@@ -916,6 +916,25 @@ collections:
         widget: image
         media_folder: /assets/images_backup/slides
         public_folder: /assets/images_backup/slides
+  - label: Site Maintenance
+    name: site-maintenance
+    file: _content/site-maintenance.json
+    preview_path: /maintenance.html
+    fields:
+    - label: Maintenance Mode
+      name: maintenance_mode
+      widget: boolean
+      default: false
+      hint: 'Off = the site works normally. On = every page redirects visitors
+        to a "we''ll be back soon" page while you work. Turning this on does
+        NOT lock you out of this dashboard -- you can always come back here
+        to switch it off again.'
+    - label: Message
+      name: message
+      widget: text
+      default: We're currently making some updates to the site. Please check
+        back shortly — thank you for your patience.
+      hint: What visitors see on the maintenance page.
   - label: Site Design
     name: site-design
     file: _content/site-design.json
