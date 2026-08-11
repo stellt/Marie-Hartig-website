@@ -8,49 +8,63 @@
         "font_family": "default",
         "text_size": "medium",
         "text_color": "white",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Every project begins with a conversation about your space, the atmosphere you wish to create, and the story it might tell. After receiving photographs and dimensions, Marie meets with you - either in person or online - to explore ideas, inspiration and possibilities.",
+        "text": "Every Painted World begins with a conversation - about your space, the atmosphere you wish to create and the story it might tell.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "From these conversations, she develops a bespoke mood board of imagery, colour palettes and references, accompanied by an initial project estimate. Once the artistic direction is established, a concept sketch or colour study allows you to see how the artwork will live within the architecture before painting begins. \n\n",
+        "text": "From photographs, dimensions and an exchange of ideas, Marie develops a bespoke visual direction, bringing together imagery, colour and inspiration alongside an initial project estimate. Once the direction is agreed, a concept sketch or colour study shows how the artwork will sit within the architecture.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "The design is then refined together until every element feels balanced and entirely at home. A timeline is agreed, and the transformation begins.\n",
+        "text": "The design is refined together until everything feels entirely at home. A timeline is agreed - and the transformation begins.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Working exclusively with carefully selected water-based paints - including emulsion, acrylic, mineral and chalk finishes - Marie creates each artwork either directly onto the wall or on bespoke panels in her studio, depending on the project. Fast drying and low in odour, these finishes allow the space to remain comfortable throughout the process.\n",
+        "text": "Using carefully selected water-based paints and finishes, Marie paints either directly onto the walls or onto bespoke panels in her studio, depending on the project.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Every commission is entirely bespoke, created specifically for the people who live in or move through the space, and for the place it was always meant to inhabit.\n\n",
+        "text": "Every commission is entirely one of a kind - created for its people, its place and the life that unfolds around it.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Ready to Transform your space ? \n\nMarie would love to hear your ideas and begin creating something truly extraordinary together.",
+        "text": "**Ready to transform your space?**\n\n\nMarie would love to hear your ideas and start imagining what your own Painted World might become.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       }
     ]
   },
@@ -60,32 +74,40 @@
     "intro": "Each project is developed individually and typically includes:",
     "steps": [
       {
-        "text": "Discovery -\nA conversation to explore the space, the client's vision, and the atmosphere they wish to create.",
+        "text": "DISCOVERY -\nA conversation to explore the space, the client's vision, and the atmosphere they wish to create.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Concept Design - \nMarie develops a bespoke artistic concept together with a detailed project proposal with a cost estimate.",
+        "text": "CONCEPT DESIGN - \nMarie develops a bespoke artistic concept together with a detailed project proposal with a cost estimate.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Refinement - \nThe design evolves through a creative dialogue until every element feels perfectly at home within the space.",
+        "text": "REFINEMENT - \nThe design evolves through a creative dialogue until every element feels perfectly at home within the space.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
-        "text": "Creation - \nThe artwork is brought to life either on-site as a hand-painted mural or in the studio as painted panels or canvas, depending on the project.",
+        "text": "CREATION - \nThe artwork is brought to life either on-site as a hand-painted mural or in the studio as painted panels or canvas, depending on the project.",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       }
     ]
   },
@@ -99,28 +121,36 @@
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "medium",
+        "spacing": "default"
       },
       {
         "text": "Commissions normally begin at €10,000",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "default",
+        "spacing": "default"
       },
       {
         "text": "Marie welcomes commissions internationally",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "medium",
+        "spacing": "default"
       },
       {
         "text": "Lead times typically range from 3–6 months, so early booking is recommended",
         "font_family": "default",
         "text_size": "default",
         "text_color": "default",
-        "text_color_custom": ""
+        "text_color_custom": "",
+        "indent": "medium",
+        "spacing": "default"
       }
     ]
   }
