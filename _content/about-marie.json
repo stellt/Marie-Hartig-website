@@ -102,15 +102,15 @@
           "text_color": "default",
           "text_color_custom": "",
           "indent": "default",
-          "spacing": "default"
+          "spacing": "large"
         },
         {
-          "text": "*\\*\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"\\**",
+          "text": "\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"",
           "font_family": "default",
           "text_size": "medium",
           "text_color": "white",
           "text_color_custom": "",
-          "indent": "default",
+          "indent": "small",
           "spacing": "default"
         }
       ]
