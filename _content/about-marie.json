@@ -122,8 +122,8 @@
         {
           "text": "In 2012, a gift for her young goddaughter changed everything. Marie transformed the child’s white bedroom into a jungle - complete with a lion dozing on a branch and a curious monkey peering into the crib. \n\nIt was a revelation. Where canvas had sometimes felt confined, an entire room offered limitless possibility. The architecture became part of the artwork. She had found her medium.",
           "font_family": "default",
-          "text_size": "medium",
-          "text_color": "white",
+          "text_size": "default",
+          "text_color": "black",
           "text_color_custom": "",
           "indent": "default",
           "spacing": "default"
