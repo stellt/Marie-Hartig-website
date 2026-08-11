@@ -27,7 +27,7 @@
           "text_size": "default",
           "text_color": "default",
           "indent": "default",
-          "spacing": "default",
+          "spacing": "large",
           "text": "Developed in close dialogue with each client and in response to the character of the space, her work brings atmosphere, narrative and artistry into interiors - transforming the familiar into something extraordinary."
         },
         {
@@ -36,7 +36,7 @@
           "text_size": "medium",
           "text_color": "white",
           "text_color_custom": "",
-          "indent": "default",
+          "indent": "small",
           "spacing": "default"
         }
       ]
@@ -46,20 +46,6 @@
       "photo": "/assets/images/3.jpg",
       "paragraphs": [
         {
-          "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "Every Painted World is one of a kind, created especially for its setting and never replicated.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
@@ -68,7 +54,25 @@
           "text": "Marie has created vast murals in Austrian and German castles, five-star hotels and fashionable restaurants, Caribbean beach homes, a children’s hospital in Buenos Aires and a pre-school in Mathare, Nairobi. She has painted holiday homes in Mallorca, stylish London and Milanese apartments - and even the tiniest of WCs."
         },
         {
-          "text": "“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique - created with skill, dedication and, above all, love.”",
+          "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
+        },
+        {
+          "text": "Every Painted World is one of a kind, created especially for its setting and never replicated.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": "",
+          "spacing": "large",
+          "indent": "default"
+        },
+        {
+          "text": "*“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique - created with skill, dedication and, above all, love.”*",
           "font_family": "default",
           "text_size": "medium",
           "text_color": "white",
