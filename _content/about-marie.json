@@ -116,14 +116,6 @@
       "photo": "/assets/images/marie-portrait.jpg",
       "paragraphs": [
         {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds."
-        },
-        {
           "text": "In 2012, a gift for her young goddaughter changed everything. Marie transformed the child’s white bedroom into a jungle - complete with a lion dozing on a branch and a curious monkey peering into the crib. \n\nIt was a revelation. Where canvas had sometimes felt confined, an entire room offered limitless possibility. The architecture became part of the artwork. She had found her medium.",
           "font_family": "default",
           "text_size": "medium",
@@ -131,6 +123,14 @@
           "text_color_custom": "",
           "indent": "default",
           "spacing": "default"
+        },
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds."
         }
       ]
     }
