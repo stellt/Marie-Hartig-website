@@ -39,30 +39,6 @@
           "text_color_custom": "",
           "indent": "default",
           "spacing": "default"
-        },
-        {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions."
-        },
-        {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "Every Painted World is one of a kind, created especially for its setting and never replicated."
-        },
-        {
-          "font_family": "default",
-          "text_size": "medium",
-          "text_color": "white",
-          "indent": "default",
-          "spacing": "default",
-          "text": "*“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique — created with skill, dedication and, above all, love.”*"
         }
       ]
     },
@@ -71,38 +47,24 @@
       "photo": "/assets/images/3.jpg",
       "paragraphs": [
         {
-          "text": "\n\nMarie has created vast murals in the dining rooms of Austrian and German castles, fashionable restaurants and Five Star hotels, in stunning Caribbean beach homes and even in a Buenos Aires children's hospital as well as a pre-school in Mathare, Nairobi.",
+          "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
           "text_color_custom": ""
         },
         {
-          "text": "She has painted living rooms in holiday homes on Mallorca, in stylish London and Milanese apartments and also delivered striking designs in the tiniest of WCs.",
+          "text": "Every Painted World is one of a kind, created especially for its setting and never replicated.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
           "text_color_custom": ""
         },
         {
-          "text": "Each Wall Painting is a one-of-a-kind creation that carefully reflects the individual tastes and dreams of her clients. Her designs are never replicated, ensuring a distinctive touch for every space.",
+          "text": "“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique - created with skill, dedication and, above all, love.”",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "Drawing on her background in the Fine Arts, Marie's work is also imbued with a passion for natural history and rich cultural influences from across the globe. Her signature style features vibrant menageries of hyper-realistic flora and fauna, alongside graphic abstracts and more landscape painting. Her playful chinoiserie, filled with lively birds and diverse plants against striking backgrounds, remains a favourite.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "*\"Those who commission a wall painting value the care, craftsmanship and attention to detail that go into creating something truly unique.*\n\n*They seek a piece that feels deeply personal - creative with skill, dedication and, above all, love.\"*",
-          "font_family": "default",
-          "text_size": "medium",
-          "text_color": "white",
           "text_color_custom": ""
         }
       ]
@@ -112,32 +74,40 @@
       "photo": "/assets/images/4.jpg",
       "paragraphs": [
         {
-          "text": "Born in Tokyo in 1977, Marie spent her childhood moving across continents with her siblings and parents, Austrian diplomats. She grew up between Japan, Pakistan and Kenya before eventually settling in the United Kingdom. This international upbringing — shaped by diverse landscapes, cultures and visual traditions — continues to influence the poetic and narrative qualities of her work.",
+          "text": "Born in Tokyo to Austrian diplomat parents, Marie grew up between Japan, Pakistan and Kenya the UK before settling into Austria. This international childhood - shaped by changing landscapes, cultures and visual traditions - continues to weave its way into her work today.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         },
         {
-          "text": "Marie studied at the Kent Institute of Art and Design before completing a BA in Fine Arts and Communication at London Guildhall University. Her interest in global culture and politics later led her to pursue a Master's degree in Global Politics at Birkbeck, University of London.",
+          "text": "After studying Fine Arts and Communication in London, followed by a Master’s in Global Politics at Birkbeck, Marie spent more than a decade in film and advertising. In 2006, she co-founded the international film directors’ agency HOBEN.TV, remaining a partner until 2021. Painting, however, was always in the background.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         },
         {
-          "text": "Following her studies, Marie spent more than a decade working in film production. In 2006 she started HOBEN.TV, an international film directors' agency based in London, where she remained a partner until 2021. Throughout her years in advertising and production, painting remained a constant creative thread - a practice she returned to whenever possible.",
+          "text": "In 2012, a gift for her young goddaughter changed everything. Marie transformed the child’s white bedroom into a jungle - complete with a lion dozing on a branch and a curious monkey peering into the crib. \n\nIt was a revelation. Where canvas had sometimes felt confined, an entire room offered limitless possibility. The architecture became part of the artwork. She had found her medium.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         },
         {
-          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create painted environments that become an integral part of the spaces they inhabit.",
+          "text": "\\*\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"\\*",
           "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
+          "text_size": "medium",
+          "text_color": "white",
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         }
       ]
     },
@@ -146,32 +116,21 @@
       "photo": "/assets/images/marie-portrait.jpg",
       "paragraphs": [
         {
-          "text": "*\"No two commissions are ever the same. They may grown from a family's story, faraway places - real or imagined - the natural world, design and* architecture *or a simple feeling. Whatever the inspiration, every design is bespoke and created exclusively for its space.\"*",
-          "font_family": "default",
-          "text_size": "medium",
-          "text_color": "white",
-          "text_color_custom": ""
-        },
-        {
-          "text": "In 2012, a personal project unexpectedly opened a new artistic direction. Wanting to create a special gift for her young goddaughter, Marie painted the walls of the child's bedroom, transforming the white room into a soft jungle landscape — complete with a lion dozing on the branch of a tree and a curious monkey climbing down to peer into the crib.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
+          "indent": "default",
+          "spacing": "default",
+          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds."
         },
         {
-          "text": "The experience was revelatory. While the traditional canvas had always felt somewhat confined, painting within an entire room opened a new dimension of creative freedom. The architecture itself became part of the artwork. She had discovered her medium.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "*\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"*",
+          "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds.",
           "font_family": "default",
           "text_size": "medium",
           "text_color": "white",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         }
       ]
     }
