@@ -9,42 +9,60 @@
           "font_family": "montserrat",
           "text_size": "default",
           "text_color": "charcoal",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         },
         {
-          "text": "\n\nMarie immerses you within exotic scenes, bringing far flung realities onto your walls. The talented Austrian artist weaves whimsical tableaux, elevating any space into the extraordinary.",
+          "text": "Marie creates site-specific painted environments for private residences and architectural spaces, immersing you in exotic scenes and bringing far-flung realities onto your walls. Developed in close dialogue with each client and in response to the character of the space, her work brings atmosphere, narrative and artistry into interiors - transforming the familiar into something extraordinary.",
           "font_family": "default",
           "text_size": "default",
           "text_color": "default",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
         },
         {
-          "text": "Marie creates site-specific painted environments for private residences and architectural spaces. Each project is conceived as a bespoke artwork, developed in close dialogue with the client and in response to the character of the space. test",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "She creates immersive painted environments that bring atmosphere, narrative and artistry into architectural spaces. Her work is known for its sense of storytelling and sensitivity to place, resulting in interiors that feel both personal and timeless.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "Her versatile repertoire includes designs painted directly onto walls, exquisite wallpaper, as well as hand-painted panels and canvas.",
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "text_color_custom": ""
-        },
-        {
-          "text": "*\"Every wall painting is conceived to feel as though it was always meant to be there - elevating the atmosphere, enriching the energy, and seamlessly complementing the character and lived experience of the space.\"*",
+          "text": "*“Every wall painting is conceived to feel as though it was always meant to be there — elevating the atmosphere, enriching the energy and becoming part of the life of the space.”*",
           "font_family": "default",
           "text_size": "medium",
           "text_color": "white",
-          "text_color_custom": ""
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
+        },
+        {
+          "text": "Marie has created vast murals in Austrian and German castles, five-star hotels and fashionable restaurants, Caribbean beach homes, a children’s hospital in Buenos Aires and a pre-school in Mathare, Nairobi. She has painted holiday homes in Mallorca, stylish London and Milanese apartments - and even the tiniest of WCs.",
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "text_color_custom": "",
+          "indent": "default",
+          "spacing": "default"
+        },
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions."
+        },
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Every Painted World is one of a kind, created especially for its setting and never replicated."
+        },
+        {
+          "font_family": "default",
+          "text_size": "medium",
+          "text_color": "white",
+          "indent": "default",
+          "spacing": "default",
+          "text": "*“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique — created with skill, dedication and, above all, love.”*"
         }
       ]
     },
