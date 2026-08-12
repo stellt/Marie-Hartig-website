@@ -4,7 +4,7 @@
     "photo": "/assets/images/process-studio.png",
     "paragraphs": [
       {
-        "text": "*\"Together, we create more than a wall painting. Each commission is a creative collaboration, resulting in an artwork that becomes an integral part of the space.\"*",
+        "text": "\"Together, we create more than a wall painting. Each commission is a creative collaboration, resulting in an artwork that becomes an integral part of the space.\"",
         "font_family": "default",
         "text_size": "large",
         "text_color": "white",
@@ -15,7 +15,7 @@
       {
         "text": "Every Painted World begins with a conversation - about your space, the atmosphere you wish to create and the story it might tell.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -24,7 +24,7 @@
       {
         "text": "From photographs, dimensions and an exchange of ideas, Marie develops a bespoke visual direction, bringing together imagery, colour and inspiration alongside an initial project estimate. Once the direction is agreed, a concept sketch or colour study shows how the artwork will sit within the architecture.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -33,7 +33,7 @@
       {
         "text": "The design is refined together until everything feels entirely at home. A timeline is agreed - and the transformation begins.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -42,7 +42,7 @@
       {
         "text": "Using carefully selected water-based paints and finishes, Marie paints either directly onto the walls or onto bespoke panels in her studio, depending on the project.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -51,16 +51,7 @@
       {
         "text": "Every commission is entirely one of a kind - created for its people, its place and the life that unfolds around it.",
         "font_family": "default",
-        "text_size": "medium",
-        "text_color": "default",
-        "text_color_custom": "",
-        "indent": "default",
-        "spacing": "default"
-      },
-      {
-        "text": "**Ready to transform your space?**\n\n\nMarie would love to hear your ideas and start imagining what your own Painted World might become.",
-        "font_family": "default",
-        "text_size": "large",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -151,6 +142,14 @@
         "text_color_custom": "",
         "indent": "medium",
         "spacing": "default"
+      },
+      {
+        "font_family": "default",
+        "text_size": "default",
+        "text_color": "default",
+        "indent": "default",
+        "spacing": "default",
+        "text": "**Ready to transform your space?**\n\nMarie would love to hear your ideas and start imagining what your own Painted World might become."
       }
     ]
   }
