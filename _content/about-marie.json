@@ -7,7 +7,7 @@
         {
           "text": "\n\nWelcome to the enchanting realm of Marie Hartig's Painted Worlds.",
           "font_family": "montserrat",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "charcoal",
           "text_color_custom": "",
           "indent": "default",
@@ -16,7 +16,7 @@
         {
           "text": "Marie creates site-specific painted environments for private residences and architectural spaces, immersing you in exotic scenes and bringing far-flung realities onto your walls.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "text_color_custom": "",
           "indent": "default",
@@ -24,7 +24,7 @@
         },
         {
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "indent": "default",
           "spacing": "large",
@@ -47,7 +47,7 @@
       "paragraphs": [
         {
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "indent": "default",
           "spacing": "default",
@@ -56,7 +56,7 @@
         {
           "text": "Drawing on her background in Fine Arts, a passion for natural history and cultural influences from around the globe, Marie’s work ranges from sweeping landscapes and playful chinoiserie to vibrant menageries of flora and fauna and more graphic compositions.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "text_color_custom": "",
           "indent": "default",
@@ -65,7 +65,7 @@
         {
           "text": "Every Painted World is one of a kind, created especially for its setting and never replicated.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "text_color_custom": "",
           "spacing": "large",
@@ -89,7 +89,7 @@
         {
           "text": "Born in Tokyo to Austrian diplomat parents, Marie grew up between Japan, Pakistan and Kenya the UK before settling into Austria. This international childhood - shaped by changing landscapes, cultures and visual traditions - continues to weave its way into her work today.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "text_color_custom": "",
           "indent": "default",
@@ -98,7 +98,7 @@
         {
           "text": "After studying Fine Arts and Communication in London, followed by a Master’s in Global Politics at Birkbeck, Marie spent more than a decade in film and advertising. In 2006, she co-founded the international film directors’ agency HOBEN.TV, remaining a partner until 2021. Painting, however, was always in the background.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "text_color_custom": "",
           "indent": "default",
@@ -122,7 +122,7 @@
         {
           "text": "In 2012, a gift for her young goddaughter changed everything. Marie transformed the child’s white bedroom into a jungle - complete with a lion dozing on a branch and a curious monkey peering into the crib. \n\nIt was a revelation. Where canvas had sometimes felt confined, an entire room offered limitless possibility. The architecture became part of the artwork. She had found her medium.",
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "black",
           "text_color_custom": "",
           "indent": "default",
@@ -130,7 +130,7 @@
         },
         {
           "font_family": "default",
-          "text_size": "medium",
+          "text_size": "small",
           "text_color": "default",
           "indent": "default",
           "spacing": "large",
