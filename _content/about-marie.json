@@ -133,8 +133,16 @@
           "text_size": "default",
           "text_color": "default",
           "indent": "default",
-          "spacing": "default",
+          "spacing": "large",
           "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds."
+        },
+        {
+          "font_family": "default",
+          "text_size": "medium",
+          "text_color": "white",
+          "indent": "small",
+          "spacing": "default",
+          "text": "*“Hand-painted walls: It is wall jewellery. It’s the new bling !”*"
         }
       ]
     }
