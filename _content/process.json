@@ -67,7 +67,7 @@
       {
         "text": "DISCOVERY -\nA conversation to explore the space, the client's vision, and the atmosphere they wish to create.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -76,7 +76,7 @@
       {
         "text": "CONCEPT DESIGN - \nMarie develops a bespoke artistic concept together with a detailed project proposal with a cost estimate.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -85,7 +85,7 @@
       {
         "text": "REFINEMENT - \nThe design evolves through a creative dialogue until every element feels perfectly at home within the space.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -94,7 +94,7 @@
       {
         "text": "CREATION - \nThe artwork is brought to life either on-site as a hand-painted mural or in the studio as painted panels or canvas, depending on the project.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "default",
@@ -110,7 +110,7 @@
       {
         "text": "Final investment depends on the scale of the project, complexity of the design, and/or overall project conditions.",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "medium",
@@ -119,7 +119,7 @@
       {
         "text": "Commissions normally begin at €10,000",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "medium",
@@ -128,7 +128,7 @@
       {
         "text": "Marie welcomes commissions internationally",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "medium",
@@ -137,7 +137,7 @@
       {
         "text": "Lead times typically range from 3–6 months, so early booking is recommended",
         "font_family": "default",
-        "text_size": "medium",
+        "text_size": "small",
         "text_color": "default",
         "text_color_custom": "",
         "indent": "medium",
