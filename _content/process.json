@@ -4,8 +4,8 @@
     "photo": "/assets/images/process-studio.png",
     "paragraphs": [
       {
-        "text": "\"Together, we create more than a wall painting. Each commission is a creative collaboration, resulting in an artwork that becomes an integral part of the space.\"",
-        "font_family": "default",
+        "text": "*\"Together, we create more than a wall painting. Each commission is a creative collaboration, resulting in an artwork that becomes an integral part of the space.\"*",
+        "font_family": "merriweather",
         "text_size": "large",
         "text_color": "white",
         "text_color_custom": "",
