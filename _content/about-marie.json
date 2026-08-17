@@ -73,7 +73,7 @@
         },
         {
           "text": "*“Those who commission a wall painting value the care, craftsmanship and imagination behind something truly unique - created with skill, dedication and, above all, love.”*",
-          "font_family": "default",
+          "font_family": "playfair",
           "text_size": "large",
           "text_color": "white",
           "text_color_custom": "",
@@ -87,7 +87,7 @@
       "photo": "/assets/images/4.jpg",
       "paragraphs": [
         {
-          "text": "Born in Tokyo to Austrian diplomat parents, Marie grew up between Japan, Pakistan and Kenya the UK before settling into Austria. This international childhood - shaped by changing landscapes, cultures and visual traditions - continues to weave its way into her work today.",
+          "text": "Born in Tokyo to Austrian diplomat parents, Marie grew up between Japan, Pakistan, Kenya and then then London, UK before settling into Austria. This international childhood - shaped by changing landscapes, cultures and visual traditions - continues to weave its way into her work today.",
           "font_family": "default",
           "text_size": "small",
           "text_color": "default",
@@ -96,7 +96,7 @@
           "spacing": "default"
         },
         {
-          "text": "After studying Fine Arts and Communication in London, followed by a Master’s in Global Politics at Birkbeck, Marie spent more than a decade in film and advertising. In 2006, she co-founded the international film directors’ agency HOBEN.TV, remaining a partner until 2021. Painting, however, was always in the background.",
+          "text": "After studying Fine Arts and Communication in London, followed by a Master’s in Global Politics at Birkbeck, Marie spent more than a decade in film and advertising. In 2006, she co-founded the international film directors’ agency HOBEN.TV, remaining a partner until 2021. Her own creativity and painting, however, was always there in the background.",
           "font_family": "default",
           "text_size": "small",
           "text_color": "default",
@@ -105,8 +105,8 @@
           "spacing": "large"
         },
         {
-          "text": "*\"I love to work closely with my clients, exploring their visions for the space and brining it to life\"*",
-          "font_family": "default",
+          "text": "\"Every wall painting is a one-of-a-kind creation that carefully reflects the individual tastes, styles and dreams of my clients.\"",
+          "font_family": "playfair",
           "text_size": "large",
           "text_color": "white",
           "text_color_custom": "",
@@ -137,7 +137,7 @@
           "text": "Today, Marie lives in Vienna and works internationally, collaborating with private clients, interior designers and architects to create one-of-a-kind Painted Worlds."
         },
         {
-          "font_family": "default",
+          "font_family": "playfair",
           "text_size": "large",
           "text_color": "white",
           "indent": "small",
