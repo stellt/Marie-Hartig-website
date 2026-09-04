@@ -358,10 +358,7 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-    const TOTAL = 28;
-    const BASE  = '../assets/images/wall tattoos no bg/Tattoo';
-    const PRICE = 45.00;
-    const COMPOSITION_PRICE = 45.00; // per tattoo in composition
+    const COMPOSITION_PRICE = 45.00; // fallback price per tattoo in composition
 
     const canvas    = document.getElementById('compose-canvas');
     const hint      = document.getElementById('canvas-hint');
@@ -369,33 +366,50 @@
     const addBtn    = document.getElementById('add-composition-btn');
     const pickerGrid = document.getElementById('picker-grid');
 
-    let placed = []; // { id, src, el }
+    let placed = []; // { id, src, name, price, el }
 
-    // ---- Build picker thumbnails ----
-    for (let i = 1; i <= TOTAL; i++) {
-      const src = `${BASE}${i}.png`;
-      const thumb = document.createElement('div');
-      thumb.className = 'picker-thumb';
-      thumb.draggable = true;
-      thumb.dataset.src = src;
-      thumb.dataset.id  = i;
-      thumb.innerHTML = `
-        <img src="${src}" alt="Tattoo ${i}" loading="lazy" />
-        <span class="picker-num">${i}</span>
-      `;
+    // ---- Build picker thumbnails from the same data the shop page uses ----
+    fetch('../_content/shop-tattoos.json')
+      .then(res => res.json())
+      .then(data => {
+        const tattoos = data.tattoos || [];
+        const basePrice = typeof data.price === 'number' ? data.price : COMPOSITION_PRICE;
+        tattoos.forEach((item, idx) => {
+          const src   = item.image;
+          const name  = item.name || `Wall Tattoo ${idx + 1}`;
+          const price = typeof item.price === 'number' ? item.price : basePrice;
 
-      // Desktop drag
-      thumb.addEventListener('dragstart', e => {
-        e.dataTransfer.setData('tattoo-src', src);
-        e.dataTransfer.setData('tattoo-id', i);
-        e.dataTransfer.effectAllowed = 'copy';
+          const thumb = document.createElement('div');
+          thumb.className = 'picker-thumb';
+          thumb.draggable = true;
+          thumb.dataset.src   = src;
+          thumb.dataset.id    = idx;
+          thumb.dataset.name  = name;
+          thumb.dataset.price = price;
+          thumb.innerHTML = `
+            <img src="${src}" alt="${name}" loading="lazy" />
+            <span class="picker-num">${idx + 1}</span>
+          `;
+
+          // Desktop drag
+          thumb.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('tattoo-src', src);
+            e.dataTransfer.setData('tattoo-id', idx);
+            e.dataTransfer.setData('tattoo-name', name);
+            e.dataTransfer.setData('tattoo-price', price);
+            e.dataTransfer.effectAllowed = 'copy';
+          });
+
+          // Mobile / touch — clone and drag
+          thumb.addEventListener('touchstart', handleTouchStart, { passive: false });
+
+          pickerGrid.appendChild(thumb);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load tattoos:', err);
+        pickerGrid.innerHTML = '<p style="padding:1rem;color:#888;font-size:0.8rem;">Unable to load tattoos right now.</p>';
       });
-
-      // Mobile / touch — clone and drag
-      thumb.addEventListener('touchstart', handleTouchStart, { passive: false });
-
-      pickerGrid.appendChild(thumb);
-    }
 
     // ---- Desktop drag onto canvas ----
     canvas.addEventListener('dragover', e => {
@@ -405,24 +419,30 @@
 
     canvas.addEventListener('drop', e => {
       e.preventDefault();
-      const src = e.dataTransfer.getData('tattoo-src');
-      const id  = e.dataTransfer.getData('tattoo-id');
+      const src   = e.dataTransfer.getData('tattoo-src');
+      const id    = e.dataTransfer.getData('tattoo-id');
+      const name  = e.dataTransfer.getData('tattoo-name');
+      const price = parseFloat(e.dataTransfer.getData('tattoo-price'));
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left - 60;
       const y = e.clientY - rect.top  - 60;
-      placeTattoo(src, id, clamp(x, 0, rect.width - 120), clamp(y, 0, rect.height - 120));
+      placeTattoo(src, id, name, price, clamp(x, 0, rect.width - 120), clamp(y, 0, rect.height - 120));
     });
 
     // ---- Touch drag ----
     let touchClone = null;
     let touchSrc   = null;
     let touchId    = null;
+    let touchName  = null;
+    let touchPrice = null;
 
     function handleTouchStart(e) {
       e.preventDefault();
       const thumb = e.currentTarget;
-      touchSrc = thumb.dataset.src;
-      touchId  = thumb.dataset.id;
+      touchSrc   = thumb.dataset.src;
+      touchId    = thumb.dataset.id;
+      touchName  = thumb.dataset.name;
+      touchPrice = parseFloat(thumb.dataset.price);
 
       touchClone = document.createElement('img');
       touchClone.src = touchSrc;
@@ -462,7 +482,7 @@
             touch.clientY >= rect.top  && touch.clientY <= rect.bottom) {
           const x = touch.clientX - rect.left - 50;
           const y = touch.clientY - rect.top  - 50;
-          placeTattoo(touchSrc, touchId, clamp(x, 0, rect.width - 120), clamp(y, 0, rect.height - 120));
+          placeTattoo(touchSrc, touchId, touchName, touchPrice, clamp(x, 0, rect.width - 120), clamp(y, 0, rect.height - 120));
         }
 
         touchClone.remove();
@@ -471,7 +491,7 @@
     }
 
     // ---- Place a tattoo on the canvas ----
-    function placeTattoo(src, id, x, y) {
+    function placeTattoo(src, id, name, price, x, y) {
       hint.style.display = 'none';
 
       const el = document.createElement('div');
@@ -479,14 +499,14 @@
       el.style.left = x + 'px';
       el.style.top  = y + 'px';
       el.innerHTML  = `
-        <img src="${src}" alt="Tattoo ${id}" />
+        <img src="${src}" alt="${name || 'Wall tattoo'}" />
         <button class="tattoo-delete" onclick="removeTattoo(this.parentElement, '${src}')">&#215;</button>
       `;
 
       makeDraggable(el);
       canvas.appendChild(el);
 
-      placed.push({ id, src, el });
+      placed.push({ id, src, name, price, el });
       updateFooter();
     }
 
@@ -581,8 +601,8 @@
       placed.forEach(p => {
         Cart.addItem(
           `tattoo-${p.id}`,
-          `Wall Tattoo ${p.id}`,
-          COMPOSITION_PRICE,
+          p.name || `Wall Tattoo ${Number(p.id) + 1}`,
+          (typeof p.price === 'number' && !isNaN(p.price)) ? p.price : COMPOSITION_PRICE,
           p.src
         );
       });
