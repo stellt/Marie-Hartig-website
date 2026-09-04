@@ -3,143 +3,173 @@
   "price": 45.0,
   "tattoos": [
     {
-      "name": "Wall Tattoo 1",
-      "image": "../assets/images/wall tattoos no bg/Tattoo1.png",
+      "name": "Roe Deer",
+      "image": "/assets/images/wall tattoos no bg/roe-deer.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 2",
-      "image": "../assets/images/wall tattoos no bg/Tattoo2.png",
+      "name": "Banana Plant",
+      "image": "/assets/images/wall tattoos no bg/banana-plant.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 3",
-      "image": "../assets/images/wall tattoos no bg/Tattoo3.png",
+      "name": "Butterflies",
+      "image": "/assets/images/wall tattoos no bg/butterflies.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 4",
-      "image": "../assets/images/wall tattoos no bg/Tattoo4.png",
+      "name": "Cactus",
+      "image": "/assets/images/wall tattoos no bg/cactus.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 5",
-      "image": "../assets/images/wall tattoos no bg/Tattoo5.png",
+      "name": "Cockatoo",
+      "image": "/assets/images/wall tattoos no bg/cockatoo.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 6",
-      "image": "../assets/images/wall tattoos no bg/Tattoo6.png",
+      "name": "Victoria the Fox",
+      "image": "/assets/images/wall tattoos no bg/fox-victoria.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 7",
-      "image": "../assets/images/wall tattoos no bg/Tattoo7.png",
+      "name": "Foxgloves",
+      "image": "/assets/images/wall tattoos no bg/foxgloves.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 8",
-      "image": "../assets/images/wall tattoos no bg/Tattoo8.png",
+      "name": "Green Twins",
+      "image": "/assets/images/wall tattoos no bg/green-twins.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 9",
-      "image": "../assets/images/wall tattoos no bg/Tattoo9.png",
+      "name": "Gustav the Spider Monkey",
+      "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 10",
-      "image": "../assets/images/wall tattoos no bg/Tattoo10.png",
+      "name": "Heron",
+      "image": "/assets/images/wall tattoos no bg/heron.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 11",
-      "image": "../assets/images/wall tattoos no bg/Tattoo11.png",
+      "name": "Hornbill",
+      "image": "/assets/images/wall tattoos no bg/hornbill.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 12",
-      "image": "../assets/images/wall tattoos no bg/Tattoo12.png",
+      "name": "Impala",
+      "image": "/assets/images/wall tattoos no bg/impala.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 13",
-      "image": "../assets/images/wall tattoos no bg/Tattoo13.png",
+      "name": "Jossefine the Giraffe",
+      "image": "/assets/images/wall tattoos no bg/jossefine-the-giraffe.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 14",
-      "image": "../assets/images/wall tattoos no bg/Tattoo14.png",
+      "name": "Jungle Plant 2",
+      "image": "/assets/images/wall tattoos no bg/jungle-plant-2.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 15",
-      "image": "../assets/images/wall tattoos no bg/Tattoo15.png",
+      "name": "Jungle Plant 2b",
+      "image": "/assets/images/wall tattoos no bg/jungle-plant-2b.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 16",
-      "image": "../assets/images/wall tattoos no bg/Tattoo16.png",
+      "name": "Lamb",
+      "image": "/assets/images/wall tattoos no bg/lamb.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 17",
-      "image": "../assets/images/wall tattoos no bg/Tattoo17.png",
+      "name": "Lemurs",
+      "image": "/assets/images/wall tattoos no bg/lemurs.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 18",
-      "image": "../assets/images/wall tattoos no bg/Tattoo18.png",
+      "name": "Louis and the Butterfly",
+      "image": "/assets/images/wall tattoos no bg/louis-and-the-butterfly.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 19",
-      "image": "../assets/images/wall tattoos no bg/Tattoo19.png",
+      "name": "Monkey Max and the Papaya",
+      "image": "/assets/images/wall tattoos no bg/monkey-max-and-the-papaya.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 20",
-      "image": "../assets/images/wall tattoos no bg/Tattoo20.png",
+      "name": "Monkey Morris",
+      "image": "/assets/images/wall tattoos no bg/monkey-morris.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 21",
-      "image": "../assets/images/wall tattoos no bg/Tattoo21.png",
+      "name": "Monstera Plant",
+      "image": "/assets/images/wall tattoos no bg/monstera-plant.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 22",
-      "image": "../assets/images/wall tattoos no bg/Tattoo22.png",
+      "name": "Mr & Mrs Feather",
+      "image": "/assets/images/wall tattoos no bg/mr-mrs-feather.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 23",
-      "image": "../assets/images/wall tattoos no bg/Tattoo23.png",
+      "name": "Mushrooms",
+      "image": "/assets/images/wall tattoos no bg/mushrooms.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 24",
-      "image": "../assets/images/wall tattoos no bg/Tattoo24.png",
+      "name": "Mze the Monkey",
+      "image": "/assets/images/wall tattoos no bg/mze-monkey.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 25",
-      "image": "../assets/images/wall tattoos no bg/Tattoo25.png",
+      "name": "Ocelot",
+      "image": "/assets/images/wall tattoos no bg/ocelot.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 26",
-      "image": "../assets/images/wall tattoos no bg/Tattoo26.png",
+      "name": "Pink Hydrangea",
+      "image": "/assets/images/wall tattoos no bg/pink-hydrangea.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 27",
-      "image": "../assets/images/wall tattoos no bg/Tattoo27.png",
+      "name": "Red Parrot",
+      "image": "/assets/images/wall tattoos no bg/red-parrot.png",
       "price": 45.0
     },
     {
-      "name": "Wall Tattoo 28",
-      "image": "../assets/images/wall tattoos no bg/Tattoo28.png",
+      "name": "Red Plant",
+      "image": "/assets/images/wall tattoos no bg/red-plant.png",
+      "price": 45.0
+    },
+    {
+      "name": "Red Plant 2",
+      "image": "/assets/images/wall tattoos no bg/red-plant-2.png",
+      "price": 45.0
+    },
+    {
+      "name": "Red Plant Stems",
+      "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
+      "price": 45.0
+    },
+    {
+      "name": "Rubber Plant",
+      "image": "/assets/images/wall tattoos no bg/rubber-plant.png",
+      "price": 45.0
+    },
+    {
+      "name": "Sophie the Hen",
+      "image": "/assets/images/wall tattoos no bg/sophie-the-hen.png",
+      "price": 45.0
+    },
+    {
+      "name": "Squirrels",
+      "image": "/assets/images/wall tattoos no bg/squirrels.png",
+      "price": 45.0
+    },
+    {
+      "name": "Toucan",
+      "image": "/assets/images/wall tattoos no bg/toucan.png",
       "price": 45.0
     }
   ]
