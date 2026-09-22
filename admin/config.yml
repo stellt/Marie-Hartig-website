@@ -949,6 +949,19 @@ collections:
       required: false
       default: '*delivery up to 3 weeks'
       hint: Shown under the Add to Cart button in each tattoo's popup.
+    - label: Setup Instructions PDF
+      name: setup_instructions_pdf
+      widget: file
+      media_folder: /assets/downloads
+      public_folder: /assets/downloads
+      required: false
+      hint: The PDF customers can download from each tattoo's popup (application
+        and care instructions). Upload a new file here any time to replace it.
+    - label: Setup Instructions Link Text
+      name: setup_instructions_text
+      widget: string
+      required: false
+      default: Setup Instructions
     - label: Print — Paper Note
       name: print_paper_note
       widget: string

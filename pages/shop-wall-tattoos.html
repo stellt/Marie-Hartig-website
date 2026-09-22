@@ -169,6 +169,14 @@
       font-family: 'Jost', sans-serif; font-weight: 300;
       font-size: 0.68rem; color: #999; margin: -0.5rem 0 0;
     }
+    .tattoo-popup-setup-link {
+      display: inline-flex; align-self: flex-start; align-items: center; gap: 0.35rem;
+      font-family: 'Jost', sans-serif; font-weight: 400;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #111; text-decoration: underline; text-underline-offset: 3px;
+    }
+    .tattoo-popup-setup-link:hover { color: #555; }
+    .tattoo-popup-setup-link:empty, .tattoo-popup-setup-link[hidden] { display: none; }
     .tattoo-popup-price { display: flex; align-items: baseline; gap: 0.5rem; }
     .tattoo-popup-price-amount {
       font-family: 'Jost', sans-serif; font-weight: 500;
@@ -294,6 +302,7 @@
             <button type="button" class="tilt-btn" id="popup-tilt-mirrored" data-tilt="mirrored">Mirrored</button>
           </div>
         </div>
+        <a class="tattoo-popup-setup-link" id="popup-setup-link" href="" download target="_blank" rel="noopener">Setup Instructions</a>
         <div class="tattoo-popup-price"><span class="tattoo-popup-price-amount" id="popup-price"></span></div>
         <button class="add-to-cart-btn" id="popup-add-btn" type="button">Add to Cart</button>
         <p class="tattoo-popup-delivery" id="popup-delivery"></p>
@@ -381,6 +390,7 @@
     const popupPrice    = document.getElementById('popup-price');
     const popupAddBtn   = document.getElementById('popup-add-btn');
     const popupDelivery = document.getElementById('popup-delivery');
+    const popupSetupLink = document.getElementById('popup-setup-link');
 
     let popupItem = null;
     let popupPageData = null;
@@ -475,6 +485,16 @@
       applyMirrorAvailability();
       setTilt('standard');
       popupDelivery.textContent = popupPageData.delivery_note || '';
+
+      // Download link for the application/care PDF -- hidden entirely until
+      // Marie uploads one via the CMS, rather than showing a dead link.
+      if (popupPageData.setup_instructions_pdf) {
+        popupSetupLink.href = popupPageData.setup_instructions_pdf;
+        popupSetupLink.textContent = popupPageData.setup_instructions_text || 'Setup Instructions';
+        popupSetupLink.hidden = false;
+      } else {
+        popupSetupLink.hidden = true;
+      }
 
       popupOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';

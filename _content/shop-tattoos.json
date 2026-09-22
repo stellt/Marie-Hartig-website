@@ -10,6 +10,8 @@
   "compose_canvas_hint": "Drag tattoos here to build your composition",
   "compose_add_button_text": "Add Composition to Cart",
   "delivery_note": "*delivery up to 3 weeks",
+  "setup_instructions_pdf": "/assets/downloads/marie-wall-tattoo-setup-instructions.pdf",
+  "setup_instructions_text": "Setup Instructions",
   "print_paper_note": "Printed on Hahnemühle Matt Fibre 200 Inkjet Paper",
   "print_sizes": [
     { "label": "30 × 40 cm" },
