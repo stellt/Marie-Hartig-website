@@ -317,7 +317,7 @@
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">€0.00</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
     </div>
   </div>
 
@@ -326,20 +326,20 @@
     <!-- LEFT: Picker -->
     <div class="compose-picker">
       <div class="compose-picker-header">
-        <h2>Choose Tattoos</h2>
-        <p>Drag onto your wall</p>
+        <h2 id="compose-title">Choose Tattoos</h2>
+        <p id="compose-hint">Drag onto your wall</p>
       </div>
       <div class="compose-picker-grid" id="picker-grid"></div>
     </div>
 
     <!-- RIGHT: Canvas -->
     <div class="compose-canvas-wrap">
-      <div class="compose-canvas-label">Your Wall</div>
+      <div class="compose-canvas-label" id="compose-canvas-label">Your Wall</div>
 
       <div class="compose-canvas" id="compose-canvas">
         <div class="canvas-hint" id="canvas-hint">
           <div class="canvas-hint-icon">🖼</div>
-          <div class="canvas-hint-text">Drag tattoos here to build your composition</div>
+          <div class="canvas-hint-text" id="compose-canvas-hint">Drag tattoos here to build your composition</div>
         </div>
       </div>
 
@@ -372,6 +372,14 @@
     fetch('../_content/shop-tattoos.json')
       .then(res => res.json())
       .then(data => {
+        // Page wording is editable in the CMS (Wall Tattoos > Custom Composition
+        // Page); the HTML above is the fallback if a field is blank.
+        [['compose-title', data.compose_title], ['compose-hint', data.compose_picker_hint],
+         ['compose-canvas-label', data.compose_canvas_label], ['compose-canvas-hint', data.compose_canvas_hint],
+         ['add-composition-btn', data.compose_add_button_text]].forEach(([id, text]) => {
+          if (text) document.getElementById(id).textContent = text;
+        });
+
         const tattoos = data.tattoos || [];
         const basePrice = typeof data.price === 'number' ? data.price : COMPOSITION_PRICE;
         tattoos.forEach((item, idx) => {
@@ -600,7 +608,7 @@
       // Add each tattoo in the composition as a separate cart line
       placed.forEach(p => {
         Cart.addItem(
-          `tattoo-${p.id}`,
+          tattooId(p.src),
           p.name || `Wall Tattoo ${Number(p.id) + 1}`,
           (typeof p.price === 'number' && !isNaN(p.price)) ? p.price : COMPOSITION_PRICE,
           p.src
@@ -611,6 +619,12 @@
     }
 
     // ---- Helpers ----
+    // Same stable cart id shop-wall-tattoos.html uses (built from the artwork's
+    // file name), so a tattoo added from either page is one cart line.
+    function tattooId(src) {
+      return 'tattoo-' + String(src || '').split('/').pop().replace(/\.[^.]+$/, '');
+    }
+
     function clamp(val, min, max) {
       return Math.min(Math.max(val, min), max);
     }
