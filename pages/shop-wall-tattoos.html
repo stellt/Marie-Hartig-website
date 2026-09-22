@@ -288,11 +288,11 @@
           <select id="popup-size-select"></select>
         </div>
         <div class="tattoo-popup-field" id="popup-format-field">
-          <label for="popup-format-select">Format</label>
-          <select id="popup-format-select">
-            <option value="tattoo">Wall Tattoo</option>
-            <option value="print">Print</option>
-          </select>
+          <label>Format</label>
+          <div class="tattoo-tilt-options">
+            <button type="button" class="tilt-btn active" id="popup-format-tattoo" data-format="tattoo">Wall Tattoo</button>
+            <button type="button" class="tilt-btn" id="popup-format-print" data-format="print">Print</button>
+          </div>
         </div>
         <p class="tattoo-popup-note" id="popup-print-note"></p>
         <div class="tattoo-popup-field" id="popup-tilt-field">
@@ -383,7 +383,8 @@
     const popupName    = document.getElementById('popup-name');
     const popupDesc    = document.getElementById('popup-desc');
     const sizeSelect     = document.getElementById('popup-size-select');
-    const formatSelect   = document.getElementById('popup-format-select');
+    const formatTattooBtn = document.getElementById('popup-format-tattoo');
+    const formatPrintBtn  = document.getElementById('popup-format-print');
     const printNote      = document.getElementById('popup-print-note');
     const tiltStandardBtn = document.getElementById('popup-tilt-standard');
     const tiltMirroredBtn = document.getElementById('popup-tilt-mirrored');
@@ -395,6 +396,7 @@
     let popupItem = null;
     let popupPageData = null;
     let popupTilt = 'standard';
+    let popupFormat = 'tattoo';
     let popupPriceValue = null; // last price updatePopupPrice() computed, reused by Add to Cart
 
     // The size options for the currently chosen format, or null when none
@@ -409,7 +411,7 @@
     }
 
     function populateSizeSelect() {
-      const sizes = sizeOptionsFor(formatSelect.value);
+      const sizes = sizeOptionsFor(popupFormat);
       if (sizes) {
         sizeSelect.innerHTML = sizes.map(s => `<option>${esc(s.label)}</option>`).join('');
         sizeSelect.disabled = false;
@@ -421,14 +423,14 @@
     }
 
     function currentSize() {
-      const sizes = sizeOptionsFor(formatSelect.value);
+      const sizes = sizeOptionsFor(popupFormat);
       if (!sizes) return null;
       return sizes[sizeSelect.selectedIndex] || sizes[0];
     }
 
     function updatePopupPrice() {
       const size = currentSize();
-      const isPrint = formatSelect.value === 'print';
+      const isPrint = popupFormat === 'print';
       const price = isPrint
         ? ((size && typeof size.price === 'number') ? size.price : null) // no fallback -- a print's price is never guessed
         : ((size && typeof size.price === 'number') ? size.price : itemPrice(popupItem, popupPageData));
@@ -462,8 +464,17 @@
       if (!canMirror) setTilt('standard');
     }
 
+    // Format is a Standard/Mirrored-style button pair, not a dropdown.
+    function setFormat(format) {
+      popupFormat = format;
+      formatTattooBtn.classList.toggle('active', format === 'tattoo');
+      formatPrintBtn.classList.toggle('active', format === 'print');
+      populateSizeSelect();
+      updatePrintNote();
+    }
+
     function updatePrintNote() {
-      const isPrint = formatSelect.value === 'print';
+      const isPrint = popupFormat === 'print';
       printNote.textContent = isPrint ? (popupPageData.print_paper_note || '') : '';
       printNote.style.display = (isPrint && printNote.textContent) ? '' : 'none';
     }
@@ -479,9 +490,7 @@
         `<p${paraStyle(p)}>${mdFormat(paraText(p))}</p>`
       ).join('');
 
-      formatSelect.value = 'tattoo';
-      populateSizeSelect();
-      updatePrintNote();
+      setFormat('tattoo');
       applyMirrorAvailability();
       setTilt('standard');
       popupDelivery.textContent = popupPageData.delivery_note || '';
@@ -507,7 +516,8 @@
     }
 
     sizeSelect.addEventListener('change', updatePopupPrice);
-    formatSelect.addEventListener('change', () => { populateSizeSelect(); updatePrintNote(); });
+    formatTattooBtn.addEventListener('click', () => setFormat('tattoo'));
+    formatPrintBtn.addEventListener('click', () => setFormat('print'));
     tiltStandardBtn.addEventListener('click', () => setTilt('standard'));
     tiltMirroredBtn.addEventListener('click', () => setTilt('mirrored'));
     document.getElementById('tattoo-popup-close').addEventListener('click', closePopup);
@@ -519,7 +529,7 @@
     popupAddBtn.addEventListener('click', () => {
       if (!popupItem || popupAddBtn.disabled || typeof popupPriceValue !== 'number') return;
       const size = currentSize();
-      const isPrint = formatSelect.value === 'print';
+      const isPrint = popupFormat === 'print';
       const mirrored = popupTilt === 'mirrored';
 
       let id = 'tattoo-' + tattooFile(popupItem);
