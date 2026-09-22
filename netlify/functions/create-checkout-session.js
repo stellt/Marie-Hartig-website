@@ -117,7 +117,11 @@ exports.handler = async (event) => {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
+      // No payment_method_types here on purpose: Stripe then shows whichever
+      // methods are turned on in the Dashboard (Settings > Payment methods)
+      // automatically -- card, Apple Pay, Google Pay, Link, PayPal, etc.
+      // Hardcoding the list here would mean coming back to this file every
+      // time a payment method gets turned on/off in the Dashboard.
       line_items,
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
