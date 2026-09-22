@@ -10,6 +10,11 @@
   "compose_canvas_hint": "Drag tattoos here to build your composition",
   "compose_add_button_text": "Add Composition to Cart",
   "delivery_note": "*delivery up to 3 weeks",
+  "print_paper_note": "Printed on Hahnemühle Matt Fibre 200 Inkjet Paper",
+  "print_sizes": [
+    { "label": "30 × 40 cm" },
+    { "label": "40 × 50 cm" }
+  ],
   "price": 45.0,
   "tattoos": [
     {

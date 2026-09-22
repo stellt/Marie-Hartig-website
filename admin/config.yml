@@ -949,6 +949,33 @@ collections:
       required: false
       default: '*delivery up to 3 weeks'
       hint: Shown under the Add to Cart button in each tattoo's popup.
+    - label: Print — Paper Note
+      name: print_paper_note
+      widget: string
+      required: false
+      default: Printed on Hahnemühle Matt Fibre 200 Inkjet Paper
+      hint: Shown in the popup when a customer switches the Format to Print.
+    - label: Print — Available Sizes
+      name: print_sizes
+      widget: list
+      required: false
+      label_singular: Print Size
+      summary: '{{fields.label}}'
+      hint: The same size choices apply to every design when a customer picks
+        "Print" instead of "Wall Tattoo" — these are not set per tattoo. Leave a
+        size's price blank until you've decided it; customers can't add a print
+        to their cart until it has a price.
+      fields:
+      - label: Size Label
+        name: label
+        widget: string
+        hint: e.g. 30 × 40 cm
+      - label: Price (€)
+        name: price
+        widget: number
+        value_type: float
+        required: false
+        hint: 'Leave blank while you''re still deciding — the popup will show "Price: TBD" and disable Add to Cart for this size until you set one.'
     - label: Default Price per Tattoo (€)
       name: price
       widget: number

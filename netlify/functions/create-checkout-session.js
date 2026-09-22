@@ -6,9 +6,9 @@
 // Prices are NEVER trusted from the client. Each cart item's id is looked up
 // in a catalog built from the site's own shop data (the same _content/
 // shop-*.json files the CMS edits), and that catalog price is what actually
-// gets charged. An id that doesn't match a real product/size/orientation
-// combination fails the whole request rather than silently using whatever
-// price the browser sent.
+// gets charged. An id that doesn't match a real product/format/size/
+// orientation combination fails the whole request rather than silently
+// using whatever price the browser sent.
 
 const Stripe = require('stripe');
 const shopTattoos = require('../../_content/shop-tattoos.json');
@@ -29,11 +29,16 @@ function tattooFile(item) {
 function buildCatalog() {
   const catalog = {};
 
+  const printSizes = (shopTattoos.print_sizes || []).filter(s => typeof s.price === 'number');
+
   (shopTattoos.tattoos || []).forEach(item => {
     const basePrice = typeof item.price === 'number' ? item.price : Number(shopTattoos.price) || 0;
     const baseId = 'tattoo-' + tattooFile(item);
     const canMirror = item.mirror_available !== false;
 
+    // ---- Wall Tattoo format (own size list, defaults to the tattoo's own
+    // price when no size is chosen yet -- matches the popup allowing
+    // add-to-cart on an unconfirmed size) ----
     const variants = [['', basePrice]];
     if (canMirror) variants.push(['-mirrored', basePrice]);
     (item.sizes || []).forEach(size => {
@@ -42,8 +47,15 @@ function buildCatalog() {
       variants.push([sizeSuffix, sizePrice]);
       if (canMirror) variants.push([sizeSuffix + '-mirrored', sizePrice]);
     });
-
     variants.forEach(([suffix, price]) => { catalog[baseId + suffix] = price; });
+
+    // ---- Print format (page-wide sizes; only ones with a real price are
+    // purchasable -- the popup disables Add to Cart for the rest) ----
+    printSizes.forEach(size => {
+      const suffix = '-print-' + slug(size.label);
+      catalog[baseId + suffix] = size.price;
+      if (canMirror) catalog[baseId + suffix + '-mirrored'] = size.price;
+    });
   });
 
   (shopPrints.prints || []).forEach((item, i) => {

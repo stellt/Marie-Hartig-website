@@ -152,6 +152,7 @@
       font-size: 0.8rem; border: 1px solid rgba(0,0,0,0.18); border-radius: 2px;
       background: #fff; color: #111;
     }
+    .tattoo-popup-field select:disabled { color: #aaa; background: #f7f7f5; cursor: not-allowed; }
     .tattoo-tilt-options { display: flex; gap: 0.6rem; }
     .tilt-btn {
       flex: 1; padding: 0.6rem 0.5rem; background: none;
@@ -162,11 +163,20 @@
     }
     .tilt-btn:hover { border-color: #111; color: #111; }
     .tilt-btn.active { background: #111; border-color: #111; color: #fff; }
-    .tattoo-popup-price {
+    .tilt-btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    /* Print-only paper note, shown/hidden by JS under the Format field. */
+    .tattoo-popup-note {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.68rem; color: #999; margin: -0.5rem 0 0;
+    }
+    .tattoo-popup-price { display: flex; align-items: baseline; gap: 0.5rem; }
+    .tattoo-popup-price-amount {
       font-family: 'Jost', sans-serif; font-weight: 500;
       font-size: 1.05rem; letter-spacing: 0.05em; color: #111;
     }
+    .tattoo-popup-price-amount.tbd { color: #aaa; font-weight: 300; font-size: 0.85rem; }
     .tattoo-popup-info .add-to-cart-btn { width: 100%; }
+    .tattoo-popup-info .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
     .tattoo-popup-delivery {
       font-family: 'Jost', sans-serif; font-weight: 300;
       font-size: 0.68rem; letter-spacing: 0.04em; color: #999; margin: 0;
@@ -269,6 +279,14 @@
           <label for="popup-size-select">Size</label>
           <select id="popup-size-select"></select>
         </div>
+        <div class="tattoo-popup-field" id="popup-format-field">
+          <label for="popup-format-select">Format</label>
+          <select id="popup-format-select">
+            <option value="tattoo">Wall Tattoo</option>
+            <option value="print">Print</option>
+          </select>
+        </div>
+        <p class="tattoo-popup-note" id="popup-print-note"></p>
         <div class="tattoo-popup-field" id="popup-tilt-field">
           <label>Orientation</label>
           <div class="tattoo-tilt-options">
@@ -276,7 +294,7 @@
             <button type="button" class="tilt-btn" id="popup-tilt-mirrored" data-tilt="mirrored">Mirrored</button>
           </div>
         </div>
-        <div class="tattoo-popup-price" id="popup-price"></div>
+        <div class="tattoo-popup-price"><span class="tattoo-popup-price-amount" id="popup-price"></span></div>
         <button class="add-to-cart-btn" id="popup-add-btn" type="button">Add to Cart</button>
         <p class="tattoo-popup-delivery" id="popup-delivery"></p>
       </div>
@@ -346,14 +364,18 @@
       return typeof item.price === 'number' ? item.price : (Number(pageData.price) || 0);
     }
 
-    // ---- Detail popup: description, size and mirror/orientation choice ----
+    // ---- Detail popup: description, format, size and orientation ----
+    // Every tattoo gets the same set of controls (Size, Format, Orientation,
+    // Add to Cart) whether or not Marie has filled in every field yet -- a
+    // size or price that isn't set shows as TBD rather than the control
+    // disappearing, so the popup looks and works the same for every design.
     const popupOverlay = document.getElementById('tattoo-popup-overlay');
     const popupImg     = document.getElementById('popup-img');
     const popupName    = document.getElementById('popup-name');
     const popupDesc    = document.getElementById('popup-desc');
-    const sizeField     = document.getElementById('popup-size-field');
-    const sizeSelect    = document.getElementById('popup-size-select');
-    const tiltField      = document.getElementById('popup-tilt-field');
+    const sizeSelect     = document.getElementById('popup-size-select');
+    const formatSelect   = document.getElementById('popup-format-select');
+    const printNote      = document.getElementById('popup-print-note');
     const tiltStandardBtn = document.getElementById('popup-tilt-standard');
     const tiltMirroredBtn = document.getElementById('popup-tilt-mirrored');
     const popupPrice    = document.getElementById('popup-price');
@@ -363,17 +385,56 @@
     let popupItem = null;
     let popupPageData = null;
     let popupTilt = 'standard';
+    let popupPriceValue = null; // last price updatePopupPrice() computed, reused by Add to Cart
+
+    // The size options for the currently chosen format, or null when none
+    // are defined yet (shown as a single disabled "TBD" option).
+    function sizeOptionsFor(format) {
+      if (format === 'print') {
+        const sizes = popupPageData.print_sizes || [];
+        return sizes.length ? sizes : null;
+      }
+      const sizes = popupItem.sizes || [];
+      return sizes.length ? sizes : null;
+    }
+
+    function populateSizeSelect() {
+      const sizes = sizeOptionsFor(formatSelect.value);
+      if (sizes) {
+        sizeSelect.innerHTML = sizes.map(s => `<option>${esc(s.label)}</option>`).join('');
+        sizeSelect.disabled = false;
+      } else {
+        sizeSelect.innerHTML = '<option>TBD</option>';
+        sizeSelect.disabled = true;
+      }
+      updatePopupPrice();
+    }
 
     function currentSize() {
-      const sizes = (popupItem && popupItem.sizes) || [];
-      if (!sizes.length) return null;
+      const sizes = sizeOptionsFor(formatSelect.value);
+      if (!sizes) return null;
       return sizes[sizeSelect.selectedIndex] || sizes[0];
     }
 
     function updatePopupPrice() {
       const size = currentSize();
-      const price = (size && typeof size.price === 'number') ? size.price : itemPrice(popupItem, popupPageData);
-      popupPrice.textContent = '€' + price.toFixed(2);
+      const isPrint = formatSelect.value === 'print';
+      const price = isPrint
+        ? ((size && typeof size.price === 'number') ? size.price : null) // no fallback -- a print's price is never guessed
+        : ((size && typeof size.price === 'number') ? size.price : itemPrice(popupItem, popupPageData));
+
+      popupPriceValue = price;
+      if (typeof price === 'number') {
+        popupPrice.textContent = '€' + price.toFixed(2);
+        popupPrice.classList.remove('tbd');
+        popupAddBtn.disabled = false;
+        popupAddBtn.textContent = 'Add to Cart';
+      } else {
+        popupPrice.textContent = 'Price: TBD';
+        popupPrice.classList.add('tbd');
+        popupAddBtn.disabled = true;
+        popupAddBtn.textContent = 'Pricing Coming Soon';
+      }
     }
 
     function setTilt(tilt) {
@@ -382,6 +443,19 @@
       popupImg.classList.toggle('mirrored', mirrored);
       tiltStandardBtn.classList.toggle('active', !mirrored);
       tiltMirroredBtn.classList.toggle('active', mirrored);
+    }
+
+    function applyMirrorAvailability() {
+      const canMirror = popupItem.mirror_available !== false;
+      tiltMirroredBtn.disabled = !canMirror;
+      tiltMirroredBtn.title = canMirror ? '' : 'Not available for this design';
+      if (!canMirror) setTilt('standard');
+    }
+
+    function updatePrintNote() {
+      const isPrint = formatSelect.value === 'print';
+      printNote.textContent = isPrint ? (popupPageData.print_paper_note || '') : '';
+      printNote.style.display = (isPrint && printNote.textContent) ? '' : 'none';
     }
 
     function openPopup(item, pageData) {
@@ -395,16 +469,11 @@
         `<p${paraStyle(p)}>${mdFormat(paraText(p))}</p>`
       ).join('');
 
-      const sizes = item.sizes || [];
-      sizeField.style.display = sizes.length ? '' : 'none';
-      sizeSelect.innerHTML = sizes.map(s => `<option>${esc(s.label)}</option>`).join('');
-      sizeSelect.onchange = updatePopupPrice;
-
-      const canMirror = item.mirror_available !== false;
-      tiltField.style.display = canMirror ? '' : 'none';
+      formatSelect.value = 'tattoo';
+      populateSizeSelect();
+      updatePrintNote();
+      applyMirrorAvailability();
       setTilt('standard');
-
-      updatePopupPrice();
       popupDelivery.textContent = popupPageData.delivery_note || '';
 
       popupOverlay.classList.add('open');
@@ -417,6 +486,8 @@
       popupItem = null;
     }
 
+    sizeSelect.addEventListener('change', updatePopupPrice);
+    formatSelect.addEventListener('change', () => { populateSizeSelect(); updatePrintNote(); });
     tiltStandardBtn.addEventListener('click', () => setTilt('standard'));
     tiltMirroredBtn.addEventListener('click', () => setTilt('mirrored'));
     document.getElementById('tattoo-popup-close').addEventListener('click', closePopup);
@@ -426,17 +497,19 @@
     });
 
     popupAddBtn.addEventListener('click', () => {
-      if (!popupItem) return;
+      if (!popupItem || popupAddBtn.disabled || typeof popupPriceValue !== 'number') return;
       const size = currentSize();
-      const price = (size && typeof size.price === 'number') ? size.price : itemPrice(popupItem, popupPageData);
+      const isPrint = formatSelect.value === 'print';
       const mirrored = popupTilt === 'mirrored';
 
       let id = 'tattoo-' + tattooFile(popupItem);
       let name = popupItem.name;
+      if (isPrint) { id += '-print'; name += ' (Print)'; }
       if (size) { id += '-' + slug(size.label); name += ' — ' + size.label; }
+      else { name += ' — Size TBD'; }
       if (mirrored) { id += '-mirrored'; name += ' (Mirrored)'; }
 
-      Cart.addItem(id, name, price, popupItem.image);
+      Cart.addItem(id, name, popupPriceValue, popupItem.image);
       closePopup();
     });
 
