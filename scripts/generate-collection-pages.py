@@ -66,7 +66,7 @@ TEMPLATE = """<!DOCTYPE html>
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">€0.00</span>
       </div>
-      <button class="cart-checkout-btn" onclick="alert('Stripe integration coming soon!')">Proceed to Checkout</button>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
     </div>
   </div>
 
