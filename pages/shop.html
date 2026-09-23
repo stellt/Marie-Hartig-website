@@ -167,12 +167,9 @@
 
   <div class="shop-panel-divider"></div>
   <div class="shop-panels">
-    <a class="shop-panel disabled" href="#" data-live-href="shop-wall-tattoos.html">
+    <a class="shop-panel" href="shop-wall-tattoos.html">
       <img src="../assets/images/ThumbnailTattoo.jpeg" alt="Wall Tattoos" />
       <div class="shop-panel-overlay"></div>
-      <div class="shop-panel-coming-soon">
-        <span class="coming-soon-label">Coming Soon</span>
-      </div>
       <div class="shop-panel-label">
         Wall Tattoos
         <span class="shop-panel-sub">Shop the collection</span>
@@ -210,8 +207,10 @@
   <script src="../js/site-design.js"></script>
   <script>
     // "Shop is Live" toggle, set in the CMS under Page Text > Shop Settings.
-    // Off by default: tiles stay disabled/"Coming Soon" exactly as before.
-    // On: each tile becomes a real link and the Coming Soon badge disappears.
+    // Wall Tattoos launched and is a plain, always-active link above (no
+    // longer gated by this). This toggle now only covers the remaining two
+    // tiles (Art Prints, Wallpapers): off = "Coming Soon" as before, on =
+    // each becomes a real link and its Coming Soon badge disappears.
     fetch('../_content/shop-settings.json')
       .then(res => res.json())
       .then(data => {
