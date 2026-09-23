@@ -781,16 +781,220 @@ collections:
   - label: Shop — Wall Tattoos
     name: shop-tattoos
     file: _content/shop-tattoos.json
+    preview_path: /pages/shop-wall-tattoos.html
     fields:
     - label: Page Heading
       name: heading
       widget: string
       default: Wall Tattoos
-    - label: Price per Tattoo (€)
+    - label: Subtitle
+      name: subtitle
+      widget: string
+      required: false
+      default: Create your own Marie’s Painted world’s composition
+      hint: The small line under the heading. Leave blank to hide it.
+    - label: Intro Text
+      name: intro
+      widget: list
+      required: false
+      label_singular: Paragraph
+      summary: '{{fields.text}}'
+      hint: Optional paragraphs shown between the subtitle and the tattoos. Leave
+        empty for none.
+      fields:
+      - label: Text
+        name: text
+        widget: markdown
+        buttons:
+        - bold
+        - italic
+        editor_components: []
+        modes:
+        - rich_text
+        hint: Select a word or sentence and click Bold to emphasize just that part.
+      - label: Font
+        name: font_family
+        widget: select
+        options:
+        - label: Use Site Default
+          value: default
+        - label: Playfair Display
+          value: playfair
+        - label: Montserrat
+          value: montserrat
+        - label: Poppins
+          value: poppins
+        - label: Merriweather
+          value: merriweather
+        - label: Lato
+          value: lato
+        default: default
+      - label: Size
+        name: text_size
+        widget: select
+        options:
+        - label: Use Site Default
+          value: default
+        - label: Small
+          value: small
+        - label: Medium
+          value: medium
+        - label: Large
+          value: large
+        default: default
+      - label: Color
+        name: text_color
+        widget: select
+        options:
+        - label: Use Site Default
+          value: default
+        - label: Black
+          value: black
+        - label: Charcoal
+          value: charcoal
+        - label: Grey
+          value: grey
+        - label: White
+          value: white
+        - label: Navy Blue
+          value: navy
+        - label: Blue
+          value: blue
+        - label: Dark Green
+          value: darkgreen
+        - label: Green
+          value: green
+        - label: Red
+          value: red
+        - label: Brown
+          value: brown
+        default: default
+      - label: Custom Color (Optional)
+        name: text_color_custom
+        widget: string
+        required: false
+        hint: Paste a hex code here to override the color above, or leave blank.
+      - label: Indent
+        name: indent
+        widget: select
+        options:
+        - label: No Indent
+          value: default
+        - label: Small
+          value: small
+        - label: Medium
+          value: medium
+        - label: Large
+          value: large
+        default: default
+        hint: Pushes this paragraph in from the left edge.
+      - label: Paragraph Spacing
+        name: spacing
+        widget: select
+        options:
+        - label: Use Site Default
+          value: default
+        - label: Small
+          value: small
+        - label: Medium
+          value: medium
+        - label: Large
+          value: large
+        default: default
+        hint: Adds extra space below this paragraph, before the next one.
+    - label: Custom Compositions Button Text
+      name: compose_button_text
+      widget: string
+      required: false
+      default: ✦   Click Here for Custom Compositions
+      hint: The button that opens the "build your own wall" page.
+    - label: Page Background Color
+      name: background_color
+      widget: string
+      required: false
+      default: '#dedad3'
+      pattern:
+      - ^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$
+      - 'Must be a hex color code, e.g. #dedad3'
+      hint: The backdrop color of the Wall Tattoos page. Leave blank to use the
+        usual beige.
+    - label: Custom Composition Page — Picker Title
+      name: compose_title
+      widget: string
+      required: false
+      default: Choose Tattoos
+    - label: Custom Composition Page — Picker Hint
+      name: compose_picker_hint
+      widget: string
+      required: false
+      default: Drag onto your wall
+    - label: Custom Composition Page — Canvas Label
+      name: compose_canvas_label
+      widget: string
+      required: false
+      default: Your Wall
+    - label: Custom Composition Page — Canvas Hint
+      name: compose_canvas_hint
+      widget: string
+      required: false
+      default: Drag tattoos here to build your composition
+    - label: Custom Composition Page — Add to Cart Button
+      name: compose_add_button_text
+      widget: string
+      required: false
+      default: Add Composition to Cart
+    - label: Delivery Note
+      name: delivery_note
+      widget: string
+      required: false
+      default: '*delivery up to 3 weeks'
+      hint: Shown under the Add to Cart button in each tattoo's popup.
+    - label: Setup Instructions PDF
+      name: setup_instructions_pdf
+      widget: file
+      media_folder: /assets/downloads
+      public_folder: /assets/downloads
+      required: false
+      hint: The PDF customers can download from each tattoo's popup (application
+        and care instructions). Upload a new file here any time to replace it.
+    - label: Setup Instructions Link Text
+      name: setup_instructions_text
+      widget: string
+      required: false
+      default: Setup Instructions
+    - label: Print — Paper Note
+      name: print_paper_note
+      widget: string
+      required: false
+      default: Printed on Hahnemühle Matt Fibre 200 Inkjet Paper
+      hint: Shown in the popup when a customer switches the Format to Print.
+    - label: Print — Available Sizes
+      name: print_sizes
+      widget: list
+      required: false
+      label_singular: Print Size
+      summary: '{{fields.label}}'
+      hint: The same size choices apply to every design when a customer picks
+        "Print" instead of "Wall Tattoo" — these are not set per tattoo. Leave a
+        size's price blank until you've decided it; customers can't add a print
+        to their cart until it has a price.
+      fields:
+      - label: Size Label
+        name: label
+        widget: string
+        hint: e.g. 30 × 40 cm
+      - label: Price (€)
+        name: price
+        widget: number
+        value_type: float
+        required: false
+        hint: 'Leave blank while you''re still deciding — the popup will show "Price: TBD" and disable Add to Cart for this size until you set one.'
+    - label: Default Price per Tattoo (€)
       name: price
       widget: number
       value_type: float
       default: 45.0
+      hint: Used for any tattoo below whose own price is left blank.
     - label: Tattoos
       name: tattoos
       widget: list
@@ -810,6 +1014,143 @@ collections:
         name: price
         widget: number
         value_type: float
+        required: false
+        hint: Leave blank to use the default price above.
+      - label: Description
+        name: description
+        widget: list
+        required: false
+        label_singular: Paragraph
+        summary: '{{fields.text}}'
+        hint: Shown in the popup when a customer clicks this tattoo. Leave empty
+          for none.
+        fields:
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
+          hint: Select a word or sentence and click Bold to emphasize just that part.
+        - label: Font
+          name: font_family
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Playfair Display
+            value: playfair
+          - label: Montserrat
+            value: montserrat
+          - label: Poppins
+            value: poppins
+          - label: Merriweather
+            value: merriweather
+          - label: Lato
+            value: lato
+          default: default
+        - label: Size
+          name: text_size
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+        - label: Color
+          name: text_color
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Black
+            value: black
+          - label: Charcoal
+            value: charcoal
+          - label: Grey
+            value: grey
+          - label: White
+            value: white
+          - label: Navy Blue
+            value: navy
+          - label: Blue
+            value: blue
+          - label: Dark Green
+            value: darkgreen
+          - label: Green
+            value: green
+          - label: Red
+            value: red
+          - label: Brown
+            value: brown
+          default: default
+        - label: Custom Color (Optional)
+          name: text_color_custom
+          widget: string
+          required: false
+          hint: Paste a hex code here to override the color above, or leave blank.
+        - label: Indent
+          name: indent
+          widget: select
+          options:
+          - label: No Indent
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Pushes this paragraph in from the left edge.
+        - label: Paragraph Spacing
+          name: spacing
+          widget: select
+          options:
+          - label: Use Site Default
+            value: default
+          - label: Small
+            value: small
+          - label: Medium
+            value: medium
+          - label: Large
+            value: large
+          default: default
+          hint: Adds extra space below this paragraph, before the next one.
+      - label: Sizes
+        name: sizes
+        widget: list
+        required: false
+        label_singular: Size
+        summary: '{{fields.label}}'
+        hint: The size option(s) a customer can pick in the popup. Leave empty to
+          hide the size selector for this tattoo (e.g. while you're still confirming
+          its size).
+        fields:
+        - label: Size Label
+          name: label
+          widget: string
+          hint: e.g. 53 × 45 cm
+        - label: Price for This Size (€)
+          name: price
+          widget: number
+          value_type: float
+          required: false
+          hint: Leave blank to use this tattoo's own price above.
+      - label: Mirrored Version Available
+        name: mirror_available
+        widget: boolean
+        default: true
+        hint: On = customers can order this design mirrored (flipped left/right)
+          in the popup. Off = only the standard orientation is offered.
   - label: Shop — Art Prints
     name: shop-prints
     file: _content/shop-prints.json

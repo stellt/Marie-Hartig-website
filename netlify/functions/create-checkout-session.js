@@ -2,14 +2,81 @@
 //
 // Creates a Stripe Checkout Session from the cart items sent by the client.
 // Expects POST body: { items: [{ id, name, price, image, qty }, ...] }
+//
+// Prices are NEVER trusted from the client. Each cart item's id is looked up
+// in a catalog built from the site's own shop data (the same _content/
+// shop-*.json files the CMS edits), and that catalog price is what actually
+// gets charged. An id that doesn't match a real product/format/size/
+// orientation combination fails the whole request rather than silently
+// using whatever price the browser sent.
 
 const Stripe = require('stripe');
+const shopTattoos = require('../../_content/shop-tattoos.json');
+const shopPrints = require('../../_content/shop-prints.json');
+const shopWallpapers = require('../../_content/shop-wallpapers.json');
+
+// Mirrors the id-building logic in pages/shop-wall-tattoos.html and
+// pages/shop-compose.html -- keep these in sync if that logic ever changes.
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function tattooFile(item) {
+  return String(item.image || item.name || '').split('/').pop().replace(/\.[^.]+$/, '');
+}
+
+// Builds { cartId: price } for every real product/size/orientation
+// combination currently in the shop data.
+function buildCatalog() {
+  const catalog = {};
+
+  const printSizes = (shopTattoos.print_sizes || []).filter(s => typeof s.price === 'number');
+
+  (shopTattoos.tattoos || []).forEach(item => {
+    const basePrice = typeof item.price === 'number' ? item.price : Number(shopTattoos.price) || 0;
+    const baseId = 'tattoo-' + tattooFile(item);
+    const canMirror = item.mirror_available !== false;
+
+    // ---- Wall Tattoo format (own size list, defaults to the tattoo's own
+    // price when no size is chosen yet -- matches the popup allowing
+    // add-to-cart on an unconfirmed size) ----
+    const variants = [['', basePrice]];
+    if (canMirror) variants.push(['-mirrored', basePrice]);
+    (item.sizes || []).forEach(size => {
+      const sizePrice = typeof size.price === 'number' ? size.price : basePrice;
+      const sizeSuffix = '-' + slug(size.label);
+      variants.push([sizeSuffix, sizePrice]);
+      if (canMirror) variants.push([sizeSuffix + '-mirrored', sizePrice]);
+    });
+    variants.forEach(([suffix, price]) => { catalog[baseId + suffix] = price; });
+
+    // ---- Print format (page-wide sizes; only ones with a real price are
+    // purchasable -- the popup disables Add to Cart for the rest) ----
+    printSizes.forEach(size => {
+      const suffix = '-print-' + slug(size.label);
+      catalog[baseId + suffix] = size.price;
+      if (canMirror) catalog[baseId + suffix + '-mirrored'] = size.price;
+    });
+  });
+
+  (shopPrints.prints || []).forEach((item, i) => {
+    catalog['print-' + i] = typeof item.price === 'number' ? item.price : Number(shopPrints.price) || 0;
+  });
+
+  (shopWallpapers.wallpapers || []).forEach((item, i) => {
+    catalog['wallpaper-' + i] = typeof item.price === 'number' ? item.price : Number(shopWallpapers.price) || 0;
+  });
+
+  return catalog;
+}
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return { statusCode: 500, body: JSON.stringify({ error: 'Server misconfigured' }) };
+  }
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
   let items;
@@ -20,38 +87,44 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
 
-  if (!Array.isArray(items) || items.length === 0) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Cart is empty' }) };
+  if (!Array.isArray(items) || items.length === 0 || items.length > 50) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Cart is empty or too large' }) };
   }
 
-  // IMPORTANT: Never trust prices sent from the client in a real production
-  // setup long-term — someone could edit cart.js in devtools and send a
-  // price of €0.01. For now this matches your current site (prices live in
-  // your HTML/JS), but the more robust fix later is to look prices up
-  // server-side from a fixed product list. Flagging this so you know the
-  // tradeoff — happy to build that lookup table next if you want it.
-
-  const line_items = items.map((item) => ({
-    price_data: {
-      currency: 'eur',
-      product_data: {
-        name: item.name,
-        images: item.image ? [absoluteImageUrl(item.image, event)] : undefined,
+  const catalog = buildCatalog();
+  const line_items = [];
+  for (const item of items) {
+    const price = catalog[item && item.id];
+    if (typeof price !== 'number') {
+      return { statusCode: 400, body: JSON.stringify({ error: `Unknown product: ${item && item.id}` }) };
+    }
+    const qty = Math.min(Math.max(1, Math.round(Number(item.qty) || 1)), 20);
+    line_items.push({
+      price_data: {
+        currency: 'eur',
+        product_data: {
+          name: String(item.name || '').slice(0, 200),
+          images: item.image ? [absoluteImageUrl(item.image, event)] : undefined,
+        },
+        unit_amount: Math.round(price * 100), // catalog-verified price, in cents
       },
-      unit_amount: Math.round(item.price * 100), // Stripe expects cents
-    },
-    quantity: item.qty || 1,
-  }));
+      quantity: qty,
+    });
+  }
 
   const origin = event.headers.origin || `https://${event.headers.host}`;
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
+      // No payment_method_types here on purpose: Stripe then shows whichever
+      // methods are turned on in the Dashboard (Settings > Payment methods)
+      // automatically -- card, Apple Pay, Google Pay, Link, PayPal, etc.
+      // Hardcoding the list here would mean coming back to this file every
+      // time a payment method gets turned on/off in the Dashboard.
       line_items,
-      success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/cancel.html`,
+      success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/pages/cancel.html`,
       // Optional: collect shipping address if you sell physical goods
       shipping_address_collection: { allowed_countries: ['DE', 'AT', 'CH', 'FR', 'NL', 'BE', 'IT', 'ES', 'GB', 'US'] },
     });
