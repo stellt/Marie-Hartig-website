@@ -1,28 +1,20 @@
 {
-  "heading": "Wall Tattoos",
-  "subtitle": "Create your own Marie’s Painted world’s composition",
-  "intro": [],
-  "compose_button_text": "✦   Click Here for Custom Compositions",
-  "background_color": "#dedad3",
-  "compose_title": "Choose Tattoos",
-  "compose_picker_hint": "Drag onto your wall",
-  "compose_canvas_label": "Your Wall",
-  "compose_canvas_hint": "Drag tattoos here to build your composition",
-  "compose_add_button_text": "Add Composition to Cart",
-  "delivery_note": "*delivery up to 3 weeks",
-  "setup_instructions_pdf": "/assets/downloads/marie-wall-tattoo-setup-instructions.pdf",
-  "setup_instructions_text": "Setup Instructions",
-  "print_paper_note": "Printed on Hahnemühle Matt Fibre 200 Inkjet Paper",
   "print_sizes": [
-    { "label": "30 × 40 cm" },
-    { "label": "40 × 50 cm" }
+    {
+      "label": "30 × 40 cm"
+    },
+    {
+      "label": "40 × 50 cm"
+    }
   ],
-  "price": 45.0,
+  "compose_canvas_hint": "Drag tattoos here to build your composition",
+  "heading": "Wall Tattoos",
+  "setup_instructions_text": "Setup Instructions",
   "tattoos": [
     {
       "name": "Roe Deer",
       "image": "/assets/images/wall tattoos no bg/roe-deer.png",
-      "price": 45.0,
+      "price": 55,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -30,7 +22,7 @@
     {
       "name": "Banana Plant",
       "image": "/assets/images/wall tattoos no bg/banana-plant.png",
-      "price": 45.0,
+      "price": 75,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -38,7 +30,7 @@
     {
       "name": "Butterflies",
       "image": "/assets/images/wall tattoos no bg/butterflies.png",
-      "price": 45.0,
+      "price": 40,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -46,17 +38,19 @@
     {
       "name": "Cactus",
       "image": "/assets/images/wall tattoos no bg/cactus.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "48 × 37 cm" }
+        {
+          "label": "48 × 37 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Cockatoo",
       "image": "/assets/images/wall tattoos no bg/cockatoo.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -64,47 +58,55 @@
     {
       "name": "Victoria the Fox",
       "image": "/assets/images/wall tattoos no bg/fox-victoria.png",
-      "price": 45.0,
+      "price": 50,
       "description": [],
       "sizes": [
-        { "label": "44 × 35 cm" }
+        {
+          "label": "44 × 35 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Foxgloves",
       "image": "/assets/images/wall tattoos no bg/foxgloves.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "60 × 42.5 cm" }
+        {
+          "label": "60 × 42.5 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Green Twins",
       "image": "/assets/images/wall tattoos no bg/green-twins.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "52 × 40 cm" }
+        {
+          "label": "52 × 40 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Gustav the Spider Monkey",
       "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "52 × 39 cm" }
+        {
+          "label": "52 × 39 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Heron",
       "image": "/assets/images/wall tattoos no bg/heron.png",
-      "price": 45.0,
+      "price": 50,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -112,113 +114,149 @@
     {
       "name": "Hornbill",
       "image": "/assets/images/wall tattoos no bg/hornbill.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "52 × 39 cm" }
+        {
+          "label": "52 × 39 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Impala",
       "image": "/assets/images/wall tattoos no bg/impala.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "59 × 37 cm (portrait)" }
+        {
+          "label": "59 × 37 cm (portrait)"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Jossefine the Giraffe",
       "image": "/assets/images/wall tattoos no bg/jossefine-the-giraffe.png",
-      "price": 45.0,
+      "price": 50,
       "description": [],
       "sizes": [
-        { "label": "53 × 45 cm" }
+        {
+          "label": "53 × 45 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Jungle Plant 2",
       "image": "/assets/images/wall tattoos no bg/jungle-plant-2.png",
-      "price": 45.0,
-      "description": [],
+      "price": 45,
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "This lovely Jungle plant can also be made taller by adding Jungle Plant 2 underneath it…they fit together seamlessly."
+        }
+      ],
       "sizes": [],
       "mirror_available": true
     },
     {
       "name": "Jungle Plant 2b",
       "image": "/assets/images/wall tattoos no bg/jungle-plant-2b.png",
-      "price": 45.0,
-      "description": [],
+      "price": 45,
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "This lovely Jungle plant can also be made taller by adding Jungle Plant 2 above it…they fit together seamlessly."
+        }
+      ],
       "sizes": [],
       "mirror_available": true
     },
     {
       "name": "Lamb",
       "image": "/assets/images/wall tattoos no bg/lamb.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "44 × 31 cm" }
+        {
+          "label": "44 × 31 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Lemurs",
       "image": "/assets/images/wall tattoos no bg/lemurs.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "42 × 24 cm" }
+        {
+          "label": "42 × 24 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Louis and the Butterfly",
       "image": "/assets/images/wall tattoos no bg/louis-and-the-butterfly.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "33 × 28 cm" }
+        {
+          "label": "33 × 28 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Monkey Max and the Papaya",
       "image": "/assets/images/wall tattoos no bg/monkey-max-and-the-papaya.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "38 × 26 cm" }
+        {
+          "label": "38 × 26 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Monkey Morris",
       "image": "/assets/images/wall tattoos no bg/monkey-morris.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "28 × 50 cm" }
+        {
+          "label": "28 × 50 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Monstera Plant",
       "image": "/assets/images/wall tattoos no bg/monstera-plant.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "59 × 36 cm" }
+        {
+          "label": "59 × 36 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Mr & Mrs Feather",
       "image": "/assets/images/wall tattoos no bg/mr-mrs-feather.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -226,7 +264,7 @@
     {
       "name": "Mushrooms",
       "image": "/assets/images/wall tattoos no bg/mushrooms.png",
-      "price": 45.0,
+      "price": 40,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -234,47 +272,55 @@
     {
       "name": "Mze the Monkey",
       "image": "/assets/images/wall tattoos no bg/mze-monkey.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "45 × 26 cm" }
+        {
+          "label": "45 × 26 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Ocelot",
       "image": "/assets/images/wall tattoos no bg/ocelot.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "46 × 29 cm" }
+        {
+          "label": "46 × 29 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Pink Hydrangea",
       "image": "/assets/images/wall tattoos no bg/pink-hydrangea.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "60 × 40.5 cm" }
+        {
+          "label": "60 × 40.5 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Red Parrot",
       "image": "/assets/images/wall tattoos no bg/red-parrot.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "60 × 35 cm" }
+        {
+          "label": "60 × 35 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Red Plant",
       "image": "/assets/images/wall tattoos no bg/red-plant.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -282,17 +328,19 @@
     {
       "name": "Red Plant 2",
       "image": "/assets/images/wall tattoos no bg/red-plant-2.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "59 × 41 cm" }
+        {
+          "label": "59 × 41 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Red Plant Stems",
       "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -300,7 +348,7 @@
     {
       "name": "Rubber Plant",
       "image": "/assets/images/wall tattoos no bg/rubber-plant.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -308,17 +356,19 @@
     {
       "name": "Sophie the Hen",
       "image": "/assets/images/wall tattoos no bg/sophie-the-hen.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "38 × 26 cm" }
+        {
+          "label": "38 × 26 cm"
+        }
       ],
       "mirror_available": true
     },
     {
       "name": "Squirrels",
       "image": "/assets/images/wall tattoos no bg/squirrels.png",
-      "price": 45.0,
+      "price": 40,
       "description": [],
       "sizes": [],
       "mirror_available": true
@@ -326,12 +376,26 @@
     {
       "name": "Toucan",
       "image": "/assets/images/wall tattoos no bg/toucan.png",
-      "price": 45.0,
+      "price": 45,
       "description": [],
       "sizes": [
-        { "label": "50 × 40 cm" }
+        {
+          "label": "50 × 40 cm"
+        }
       ],
       "mirror_available": true
     }
-  ]
+  ],
+  "price": 45,
+  "compose_picker_hint": "Drag onto your wall",
+  "compose_title": "Choose Tattoos",
+  "intro": [],
+  "compose_button_text": "✦   Click Here for Custom Compositions",
+  "compose_add_button_text": "Add Composition to Cart",
+  "background_color": "#dedad3",
+  "print_paper_note": "Printed on Hahnemühle Matt Fibre 200 Inkjet Paper",
+  "subtitle": "Create your own Marie’s Painted world’s composition",
+  "setup_instructions_pdf": "/assets/downloads/marie-wall-tattoo-setup-instructions.pdf",
+  "compose_canvas_label": "Your Wall",
+  "delivery_note": "*delivery up to 3 weeks"
 }
