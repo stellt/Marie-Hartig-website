@@ -116,15 +116,26 @@ exports.handler = async (event) => {
   const origin = event.headers.origin || `https://${event.headers.host}`;
 
   // Shipping is priced by region, set in the CMS under Page Text > Shop
-  // Settings. Stripe's hosted Checkout page (the redirect-to-Stripe flow
-  // this site uses) can't detect the customer's country and auto-select a
-  // rate -- that needs Stripe's embedded/Elements checkout instead, a bigger
+  // Settings, based on Marie's real Austrian Post rates by country (consolidated
+  // into 4 tiers, each rounded UP to the highest real rate in that group, so
+  // the flat fee never falls short of the real cost -- see git history for
+  // her original per-country numbers).
+  //
+  // Stripe's hosted Checkout page (the redirect-to-Stripe flow this site
+  // uses) can't detect the customer's country and auto-select a rate --
+  // that needs Stripe's embedded/Elements checkout instead, a bigger
   // integration change. So instead every priced region is offered as its
   // own clearly-labeled option, and the customer picks the one matching
   // where they live. A region with no price set (0 or unset) is left out
   // entirely, rather than showing a confusing "€0.00" option.
-  const EUROPE_COUNTRIES = ['DE', 'AT', 'CH', 'FR', 'NL', 'BE', 'IT', 'ES', 'GB'];
-  const US_SOUTH_AMERICA_COUNTRIES = ['US', 'AR', 'BO', 'BR', 'CL', 'CO', 'EC', 'GY', 'PY', 'PE', 'SR', 'UY', 'VE'];
+  //
+  // Stripe hard-caps shipping_options at 5 entries per session -- we're
+  // using 4, so there's exactly one more slot free if a 5th tier is ever
+  // needed. More than 5 would need consolidating further, not just adding.
+  const AUSTRIA = ['AT'];
+  const EUROPE_REST = ['DE', 'HU', 'CZ', 'HR', 'FR', 'IT', 'NL', 'BE', 'ES', 'PT', 'GR', 'SE', 'IE', 'GB', 'CH', 'NO'];
+  const AMERICAS_ASIA = ['CA', 'US', 'MX', 'BR', 'AR', 'JP', 'SG'];
+  const AUSTRALIA_ROW = ['AU', 'NZ', 'ZA', 'KR', 'CN', 'HK', 'TW', 'IN', 'TH', 'PH', 'VN', 'ID', 'MY', 'AE', 'IL', 'SA', 'QA', 'KW'];
 
   function shippingRate(label, fee, weeksMin, weeksMax) {
     if (!(fee > 0)) return null;
@@ -142,8 +153,10 @@ exports.handler = async (event) => {
   }
 
   const shippingTiers = [
-    { rate: shippingRate('Shipping — Europe', Number(shopSettings.shipping_europe) || 0, 2, 3), countries: EUROPE_COUNTRIES },
-    { rate: shippingRate('Shipping — US & South America', Number(shopSettings.shipping_us_south_america) || 0, 3, 5), countries: US_SOUTH_AMERICA_COUNTRIES },
+    { rate: shippingRate('Shipping — Austria', Number(shopSettings.shipping_austria) || 0, 1, 2), countries: AUSTRIA },
+    { rate: shippingRate('Shipping — Rest of Europe', Number(shopSettings.shipping_europe) || 0, 2, 3), countries: EUROPE_REST },
+    { rate: shippingRate('Shipping — Americas & Asia', Number(shopSettings.shipping_americas_asia) || 0, 3, 5), countries: AMERICAS_ASIA },
+    { rate: shippingRate('Shipping — Australia & Rest of World', Number(shopSettings.shipping_australia_row) || 0, 4, 6), countries: AUSTRALIA_ROW },
   ].filter(t => t.rate);
 
   const shipping_options = shippingTiers.length ? shippingTiers.map(t => t.rate) : undefined;
@@ -151,7 +164,7 @@ exports.handler = async (event) => {
   // shipping price for -- no point collecting an address we can't quote.
   const allowedCountries = shippingTiers.length
     ? [...new Set(shippingTiers.flatMap(t => t.countries))]
-    : [...EUROPE_COUNTRIES, ...US_SOUTH_AMERICA_COUNTRIES]; // both tiers unpriced (0) -- still let anyone through since shipping's free
+    : [...AUSTRIA, ...EUROPE_REST, ...AMERICAS_ASIA, ...AUSTRALIA_ROW]; // all tiers unpriced (0) -- still let anyone through since shipping's free
 
   try {
     const session = await stripe.checkout.sessions.create({

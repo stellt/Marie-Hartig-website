@@ -1227,26 +1227,43 @@ collections:
         On = visitors can click through to Wall Tattoos, Art Prints, and Wallpapers
         and actually buy. Turn this on once you're ready to launch -- no developer
         needed.
-    - label: Shipping — Europe (€)
+    - label: Shipping — Austria (€)
+      name: shipping_austria
+      widget: number
+      value_type: float
+      default: 0
+      hint: 'Added once at checkout, on top of the order total -- not per item.
+        Set to 0 for free shipping within Austria.'
+    - label: Shipping — Rest of Europe (€)
       name: shipping_europe
       widget: number
       value_type: float
       default: 0
       hint: 'Added once at checkout, on top of the order total -- not per item.
-        For orders shipping to Austria, Germany, Switzerland, France, the
-        Netherlands, Belgium, Italy, Spain, or the UK. Set to 0 for free
-        shipping to these countries.'
-    - label: Shipping — US & South America (€)
-      name: shipping_us_south_america
+        For Germany, Hungary, Czech Republic, Croatia, France, Italy, the
+        Netherlands, Belgium, Spain, Portugal, Greece, Sweden, Ireland, the
+        UK, Switzerland, and Norway. Set to 0 for free shipping to these
+        countries.'
+    - label: Shipping — Americas & Asia (€)
+      name: shipping_americas_asia
       widget: number
       value_type: float
       default: 0
       hint: 'Added once at checkout, on top of the order total -- not per item.
-        For orders shipping to the US or South America. Set to 0 for free
-        shipping to these countries. Customers pick the option matching
-        where they live themselves at checkout -- Stripe can''t auto-detect
-        this on our current checkout setup, so both prices are shown and
-        labeled by region.'
+        For Canada, the US, Mexico, Brazil, Argentina, Japan, and Singapore.
+        Set to 0 for free shipping to these countries.'
+    - label: Shipping — Australia & Rest of World (€)
+      name: shipping_australia_row
+      widget: number
+      value_type: float
+      default: 0
+      hint: 'Added once at checkout, on top of the order total -- not per item.
+        For Australia, New Zealand, and everywhere else not covered by the
+        other three shipping options above. Set to 0 for free shipping.
+        Customers pick whichever of these four options matches where they
+        live themselves at checkout -- Stripe can''t auto-detect this on our
+        current checkout setup, so all priced options are shown and labeled
+        by region.'
   - label: Opening Page Slideshow
     name: slideshow-opening
     file: _content/slideshow-opening.json

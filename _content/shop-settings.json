@@ -1,5 +1,7 @@
 {
   "is_live": false,
-  "shipping_europe": 5.0,
-  "shipping_us_south_america": 22.0
+  "shipping_austria": 5.0,
+  "shipping_europe": 23.0,
+  "shipping_americas_asia": 40.0,
+  "shipping_australia_row": 50.0
 }
