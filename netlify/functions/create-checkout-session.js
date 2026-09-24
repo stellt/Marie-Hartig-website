@@ -115,22 +115,43 @@ exports.handler = async (event) => {
 
   const origin = event.headers.origin || `https://${event.headers.host}`;
 
-  // Shipping Fee, set in the CMS under Page Text > Shop Settings. A flat fee
-  // added once per order (not per item), same as most small shops charge.
-  // 0 or unset means free shipping -- no shipping_options line added at all,
-  // rather than showing a redundant "Shipping: €0.00".
-  const shippingFee = Number(shopSettings.shipping_fee) || 0;
-  const shipping_options = shippingFee > 0 ? [{
-    shipping_rate_data: {
-      type: 'fixed_amount',
-      fixed_amount: { amount: Math.round(shippingFee * 100), currency: 'eur' },
-      display_name: 'Shipping',
-      delivery_estimate: {
-        minimum: { unit: 'week', value: 2 },
-        maximum: { unit: 'week', value: 3 },
+  // Shipping is priced by region, set in the CMS under Page Text > Shop
+  // Settings. Stripe's hosted Checkout page (the redirect-to-Stripe flow
+  // this site uses) can't detect the customer's country and auto-select a
+  // rate -- that needs Stripe's embedded/Elements checkout instead, a bigger
+  // integration change. So instead every priced region is offered as its
+  // own clearly-labeled option, and the customer picks the one matching
+  // where they live. A region with no price set (0 or unset) is left out
+  // entirely, rather than showing a confusing "€0.00" option.
+  const EUROPE_COUNTRIES = ['DE', 'AT', 'CH', 'FR', 'NL', 'BE', 'IT', 'ES', 'GB'];
+  const US_SOUTH_AMERICA_COUNTRIES = ['US', 'AR', 'BO', 'BR', 'CL', 'CO', 'EC', 'GY', 'PY', 'PE', 'SR', 'UY', 'VE'];
+
+  function shippingRate(label, fee, weeksMin, weeksMax) {
+    if (!(fee > 0)) return null;
+    return {
+      shipping_rate_data: {
+        type: 'fixed_amount',
+        fixed_amount: { amount: Math.round(fee * 100), currency: 'eur' },
+        display_name: label,
+        delivery_estimate: {
+          minimum: { unit: 'week', value: weeksMin },
+          maximum: { unit: 'week', value: weeksMax },
+        },
       },
-    },
-  }] : undefined;
+    };
+  }
+
+  const shippingTiers = [
+    { rate: shippingRate('Shipping — Europe', Number(shopSettings.shipping_europe) || 0, 2, 3), countries: EUROPE_COUNTRIES },
+    { rate: shippingRate('Shipping — US & South America', Number(shopSettings.shipping_us_south_america) || 0, 3, 5), countries: US_SOUTH_AMERICA_COUNTRIES },
+  ].filter(t => t.rate);
+
+  const shipping_options = shippingTiers.length ? shippingTiers.map(t => t.rate) : undefined;
+  // Only let the customer enter an address in a country we actually have a
+  // shipping price for -- no point collecting an address we can't quote.
+  const allowedCountries = shippingTiers.length
+    ? [...new Set(shippingTiers.flatMap(t => t.countries))]
+    : [...EUROPE_COUNTRIES, ...US_SOUTH_AMERICA_COUNTRIES]; // both tiers unpriced (0) -- still let anyone through since shipping's free
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -145,7 +166,7 @@ exports.handler = async (event) => {
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
       // Optional: collect shipping address if you sell physical goods
-      shipping_address_collection: { allowed_countries: ['DE', 'AT', 'CH', 'FR', 'NL', 'BE', 'IT', 'ES', 'GB', 'US'] },
+      shipping_address_collection: { allowed_countries: allowedCountries },
     });
 
     return {

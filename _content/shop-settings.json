@@ -1,4 +1,5 @@
 {
   "is_live": false,
-  "shipping_fee": 5.0
+  "shipping_europe": 5.0,
+  "shipping_us_south_america": 22.0
 }
