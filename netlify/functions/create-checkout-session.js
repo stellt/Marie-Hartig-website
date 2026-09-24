@@ -25,8 +25,15 @@ function tattooFile(item) {
   return String(item.image || item.name || '').split('/').pop().replace(/\.[^.]+$/, '');
 }
 
-// Builds { cartId: price } for every real product/size/orientation
-// combination currently in the shop data.
+function rootAbsolute(p) {
+  return '/' + String(p || '').replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+}
+
+// Builds { cartId: { price, meta } } for every real product/format/size/
+// orientation combination currently in the shop data. `meta` is the
+// structured description of what the customer bought. It gets attached to
+// each Stripe line item, so the order emails (stripe-webhook.js) can tell
+// the printer exactly what to print without guessing from display names.
 function buildCatalog() {
   const catalog = {};
 
@@ -36,35 +43,48 @@ function buildCatalog() {
     const basePrice = typeof item.price === 'number' ? item.price : Number(shopTattoos.price) || 0;
     const baseId = 'tattoo-' + tattooFile(item);
     const canMirror = item.mirror_available !== false;
+    const image = rootAbsolute(item.image);
+
+    const add = (suffix, price, format, size, mirrored) => {
+      catalog[baseId + suffix] = {
+        price,
+        meta: { type: 'wall_tattoo', design: item.name, format, size, orientation: mirrored ? 'Mirrored' : 'Standard', image },
+      };
+    };
 
     // ---- Wall Tattoo format (own size list, defaults to the tattoo's own
     // price when no size is chosen yet -- matches the popup allowing
-    // add-to-cart on an unconfirmed size) ----
-    const variants = [['', basePrice]];
-    if (canMirror) variants.push(['-mirrored', basePrice]);
+    // add-to-cart on an unconfirmed size; size is '' in that case) ----
+    add('', basePrice, 'Wall Tattoo', '', false);
+    if (canMirror) add('-mirrored', basePrice, 'Wall Tattoo', '', true);
     (item.sizes || []).forEach(size => {
       const sizePrice = typeof size.price === 'number' ? size.price : basePrice;
       const sizeSuffix = '-' + slug(size.label);
-      variants.push([sizeSuffix, sizePrice]);
-      if (canMirror) variants.push([sizeSuffix + '-mirrored', sizePrice]);
+      add(sizeSuffix, sizePrice, 'Wall Tattoo', size.label, false);
+      if (canMirror) add(sizeSuffix + '-mirrored', sizePrice, 'Wall Tattoo', size.label, true);
     });
-    variants.forEach(([suffix, price]) => { catalog[baseId + suffix] = price; });
 
     // ---- Print format (page-wide sizes; only ones with a real price are
     // purchasable -- the popup disables Add to Cart for the rest) ----
     printSizes.forEach(size => {
       const suffix = '-print-' + slug(size.label);
-      catalog[baseId + suffix] = size.price;
-      if (canMirror) catalog[baseId + suffix + '-mirrored'] = size.price;
+      add(suffix, size.price, 'Print', size.label, false);
+      if (canMirror) add(suffix + '-mirrored', size.price, 'Print', size.label, true);
     });
   });
 
   (shopPrints.prints || []).forEach((item, i) => {
-    catalog['print-' + i] = typeof item.price === 'number' ? item.price : Number(shopPrints.price) || 0;
+    catalog['print-' + i] = {
+      price: typeof item.price === 'number' ? item.price : Number(shopPrints.price) || 0,
+      meta: { type: 'art_print', design: item.name, format: 'Art Print', size: '', orientation: 'Standard', image: rootAbsolute(item.image) },
+    };
   });
 
   (shopWallpapers.wallpapers || []).forEach((item, i) => {
-    catalog['wallpaper-' + i] = typeof item.price === 'number' ? item.price : Number(shopWallpapers.price) || 0;
+    catalog['wallpaper-' + i] = {
+      price: typeof item.price === 'number' ? item.price : Number(shopWallpapers.price) || 0,
+      meta: { type: 'wallpaper', design: item.name, format: 'Wallpaper', size: '', orientation: 'Standard', image: rootAbsolute(item.image) },
+    };
   });
 
   return catalog;
@@ -95,19 +115,24 @@ exports.handler = async (event) => {
   const catalog = buildCatalog();
   const line_items = [];
   for (const item of items) {
-    const price = catalog[item && item.id];
-    if (typeof price !== 'number') {
+    const entry = catalog[item && item.id];
+    if (!entry || typeof entry.price !== 'number') {
       return { statusCode: 400, body: JSON.stringify({ error: `Unknown product: ${item && item.id}` }) };
     }
     const qty = Math.min(Math.max(1, Math.round(Number(item.qty) || 1)), 20);
+    // Stripe metadata values must be strings (max 500 chars).
+    const metadata = Object.fromEntries(
+      Object.entries({ cart_id: item.id, ...entry.meta }).map(([k, v]) => [k, String(v).slice(0, 500)])
+    );
     line_items.push({
       price_data: {
         currency: 'eur',
         product_data: {
           name: String(item.name || '').slice(0, 200),
           images: item.image ? [absoluteImageUrl(item.image, event)] : undefined,
+          metadata,
         },
-        unit_amount: Math.round(price * 100), // catalog-verified price, in cents
+        unit_amount: Math.round(entry.price * 100), // catalog-verified price, in cents
       },
       quantity: qty,
     });
