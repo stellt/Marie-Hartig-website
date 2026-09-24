@@ -14,6 +14,7 @@ const Stripe = require('stripe');
 const shopTattoos = require('../../_content/shop-tattoos.json');
 const shopPrints = require('../../_content/shop-prints.json');
 const shopWallpapers = require('../../_content/shop-wallpapers.json');
+const shopSettings = require('../../_content/shop-settings.json');
 
 // Mirrors the id-building logic in pages/shop-wall-tattoos.html and
 // pages/shop-compose.html -- keep these in sync if that logic ever changes.
@@ -114,6 +115,23 @@ exports.handler = async (event) => {
 
   const origin = event.headers.origin || `https://${event.headers.host}`;
 
+  // Shipping Fee, set in the CMS under Page Text > Shop Settings. A flat fee
+  // added once per order (not per item), same as most small shops charge.
+  // 0 or unset means free shipping -- no shipping_options line added at all,
+  // rather than showing a redundant "Shipping: €0.00".
+  const shippingFee = Number(shopSettings.shipping_fee) || 0;
+  const shipping_options = shippingFee > 0 ? [{
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      fixed_amount: { amount: Math.round(shippingFee * 100), currency: 'eur' },
+      display_name: 'Shipping',
+      delivery_estimate: {
+        minimum: { unit: 'week', value: 2 },
+        maximum: { unit: 'week', value: 3 },
+      },
+    },
+  }] : undefined;
+
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -123,6 +141,7 @@ exports.handler = async (event) => {
       // Hardcoding the list here would mean coming back to this file every
       // time a payment method gets turned on/off in the Dashboard.
       line_items,
+      shipping_options,
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
       // Optional: collect shipping address if you sell physical goods

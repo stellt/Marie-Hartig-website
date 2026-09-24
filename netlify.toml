@@ -13,7 +13,7 @@
   # Belt-and-suspenders alongside the static require() calls in
   # create-checkout-session.js: explicitly force the shop data files (its
   # server-side price catalog) into the deployed function bundle.
-  included_files = ["_content/shop-tattoos.json", "_content/shop-prints.json", "_content/shop-wallpapers.json"]
+  included_files = ["_content/shop-tattoos.json", "_content/shop-prints.json", "_content/shop-wallpapers.json", "_content/shop-settings.json"]
 
 [[headers]]
   for = "/admin/*"

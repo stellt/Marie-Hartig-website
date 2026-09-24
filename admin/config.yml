@@ -1227,6 +1227,14 @@ collections:
         On = visitors can click through to Wall Tattoos, Art Prints, and Wallpapers
         and actually buy. Turn this on once you're ready to launch -- no developer
         needed.
+    - label: Shipping Fee (€)
+      name: shipping_fee
+      widget: number
+      value_type: float
+      default: 0
+      hint: 'Added once at checkout, on top of the order total -- not per item.
+        Set to 0 for free shipping. Applies to every order, regardless of what''s
+        in the cart.'
   - label: Opening Page Slideshow
     name: slideshow-opening
     file: _content/slideshow-opening.json
