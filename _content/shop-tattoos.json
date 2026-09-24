@@ -22,9 +22,14 @@
     {
       "name": "Banana Plant",
       "image": "/assets/images/wall tattoos no bg/banana-plant.png",
-      "price": 75,
+      "price": 80,
       "description": [],
-      "sizes": [],
+      "sizes": [
+        {
+          "price": "",
+          "label": "120 x 55"
+        }
+      ],
       "mirror_available": true
     },
     {
