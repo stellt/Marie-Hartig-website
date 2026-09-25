@@ -219,6 +219,10 @@
   </style>
 </head>
 <body class="worlds-page shop-page">
+  <script>
+    // Shop switched off in the CMS (Shop Settings > Shop is Live) -> back to the Coming Soon shop page.
+    fetch('../_content/shop-settings.json').then(r => r.json()).then(d => { if (!d.is_live) location.replace('shop.html'); }).catch(() => {});
+  </script>
   <nav class="nav" aria-label="Main navigation">
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span class="nav-toggle-bar"><span></span><span></span><span></span></span>

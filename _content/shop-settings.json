@@ -1,5 +1,5 @@
 {
-  "is_live": false,
+  "is_live": true,
   "shipping_austria": 5.0,
   "shipping_europe": 23.0,
   "shipping_americas_asia": 40.0,
