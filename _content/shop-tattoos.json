@@ -20,6 +20,62 @@
       "mirror_available": true
     },
     {
+      "name": "Cockatoo",
+      "image": "/assets/images/wall tattoos no bg/cockatoo.png",
+      "price": 45,
+      "description": [],
+      "sizes": [],
+      "mirror_available": true
+    },
+    {
+      "name": "Foxgloves",
+      "image": "/assets/images/wall tattoos no bg/foxgloves.png",
+      "price": 45,
+      "description": [],
+      "sizes": [
+        {
+          "label": "60 × 42.5 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
+      "name": "Jossefine the Giraffe",
+      "image": "/assets/images/wall tattoos no bg/jossefine-the-giraffe.png",
+      "price": 50,
+      "description": [],
+      "sizes": [
+        {
+          "label": "53 × 45 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
+      "name": "Victoria the Fox",
+      "image": "/assets/images/wall tattoos no bg/fox-victoria.png",
+      "price": 50,
+      "description": [],
+      "sizes": [
+        {
+          "label": "44 × 35 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
+      "name": "Gustav the Spider Monkey",
+      "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
+      "price": 45,
+      "description": [],
+      "sizes": [
+        {
+          "label": "52 × 39 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
       "name": "Banana Plant",
       "image": "/assets/images/wall tattoos no bg/banana-plant.png",
       "price": 80,
@@ -41,50 +97,6 @@
       "mirror_available": true
     },
     {
-      "name": "Cactus",
-      "image": "/assets/images/wall tattoos no bg/cactus.png",
-      "price": 45,
-      "description": [],
-      "sizes": [
-        {
-          "label": "48 × 37 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
-      "name": "Cockatoo",
-      "image": "/assets/images/wall tattoos no bg/cockatoo.png",
-      "price": 45,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
-      "name": "Victoria the Fox",
-      "image": "/assets/images/wall tattoos no bg/fox-victoria.png",
-      "price": 50,
-      "description": [],
-      "sizes": [
-        {
-          "label": "44 × 35 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
-      "name": "Foxgloves",
-      "image": "/assets/images/wall tattoos no bg/foxgloves.png",
-      "price": 45,
-      "description": [],
-      "sizes": [
-        {
-          "label": "60 × 42.5 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
       "name": "Green Twins",
       "image": "/assets/images/wall tattoos no bg/green-twins.png",
       "price": 45,
@@ -97,13 +109,13 @@
       "mirror_available": true
     },
     {
-      "name": "Gustav the Spider Monkey",
-      "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
+      "name": "Cactus",
+      "image": "/assets/images/wall tattoos no bg/cactus.png",
       "price": 45,
       "description": [],
       "sizes": [
         {
-          "label": "52 × 39 cm"
+          "label": "48 × 37 cm"
         }
       ],
       "mirror_available": true
@@ -114,18 +126,6 @@
       "price": 50,
       "description": [],
       "sizes": [],
-      "mirror_available": true
-    },
-    {
-      "name": "Hornbill",
-      "image": "/assets/images/wall tattoos no bg/hornbill.png",
-      "price": 45,
-      "description": [],
-      "sizes": [
-        {
-          "label": "52 × 39 cm"
-        }
-      ],
       "mirror_available": true
     },
     {
@@ -141,13 +141,13 @@
       "mirror_available": true
     },
     {
-      "name": "Jossefine the Giraffe",
-      "image": "/assets/images/wall tattoos no bg/jossefine-the-giraffe.png",
-      "price": 50,
+      "name": "Hornbill",
+      "image": "/assets/images/wall tattoos no bg/hornbill.png",
+      "price": 45,
       "description": [],
       "sizes": [
         {
-          "label": "53 × 45 cm"
+          "label": "52 × 39 cm"
         }
       ],
       "mirror_available": true
@@ -199,6 +199,18 @@
       "mirror_available": true
     },
     {
+      "name": "Red Parrot",
+      "image": "/assets/images/wall tattoos no bg/red-parrot.png",
+      "price": 45,
+      "description": [],
+      "sizes": [
+        {
+          "label": "60 × 35 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
       "name": "Lemurs",
       "image": "/assets/images/wall tattoos no bg/lemurs.png",
       "price": 45,
@@ -208,6 +220,14 @@
           "label": "42 × 24 cm"
         }
       ],
+      "mirror_available": true
+    },
+    {
+      "name": "Mr & Mrs Feather",
+      "image": "/assets/images/wall tattoos no bg/mr-mrs-feather.png",
+      "price": 45,
+      "description": [],
+      "sizes": [],
       "mirror_available": true
     },
     {
@@ -235,6 +255,34 @@
       "mirror_available": true
     },
     {
+      "name": "Ocelot",
+      "image": "/assets/images/wall tattoos no bg/ocelot.png",
+      "price": 45,
+      "description": [],
+      "sizes": [
+        {
+          "label": "46 × 29 cm"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
+      "name": "Rubber Plant",
+      "image": "/assets/images/wall tattoos no bg/rubber-plant.png",
+      "price": 45,
+      "description": [],
+      "sizes": [],
+      "mirror_available": true
+    },
+    {
+      "name": "Mushrooms",
+      "image": "/assets/images/wall tattoos no bg/mushrooms.png",
+      "price": 40,
+      "description": [],
+      "sizes": [],
+      "mirror_available": true
+    },
+    {
       "name": "Monkey Morris",
       "image": "/assets/images/wall tattoos no bg/monkey-morris.png",
       "price": 45,
@@ -259,22 +307,6 @@
       "mirror_available": true
     },
     {
-      "name": "Mr & Mrs Feather",
-      "image": "/assets/images/wall tattoos no bg/mr-mrs-feather.png",
-      "price": 45,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
-      "name": "Mushrooms",
-      "image": "/assets/images/wall tattoos no bg/mushrooms.png",
-      "price": 40,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
       "name": "Mze the Monkey",
       "image": "/assets/images/wall tattoos no bg/mze-monkey.png",
       "price": 45,
@@ -282,18 +314,6 @@
       "sizes": [
         {
           "label": "45 × 26 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
-      "name": "Ocelot",
-      "image": "/assets/images/wall tattoos no bg/ocelot.png",
-      "price": 45,
-      "description": [],
-      "sizes": [
-        {
-          "label": "46 × 29 cm"
         }
       ],
       "mirror_available": true
@@ -311,13 +331,21 @@
       "mirror_available": true
     },
     {
-      "name": "Red Parrot",
-      "image": "/assets/images/wall tattoos no bg/red-parrot.png",
+      "name": "Squirrels",
+      "image": "/assets/images/wall tattoos no bg/squirrels.png",
+      "price": 40,
+      "description": [],
+      "sizes": [],
+      "mirror_available": true
+    },
+    {
+      "name": "Toucan",
+      "image": "/assets/images/wall tattoos no bg/toucan.png",
       "price": 45,
       "description": [],
       "sizes": [
         {
-          "label": "60 × 35 cm"
+          "label": "50 × 40 cm"
         }
       ],
       "mirror_available": true
@@ -343,22 +371,6 @@
       "mirror_available": true
     },
     {
-      "name": "Red Plant Stems",
-      "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
-      "price": 45,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
-      "name": "Rubber Plant",
-      "image": "/assets/images/wall tattoos no bg/rubber-plant.png",
-      "price": 45,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
       "name": "Sophie the Hen",
       "image": "/assets/images/wall tattoos no bg/sophie-the-hen.png",
       "price": 45,
@@ -371,23 +383,11 @@
       "mirror_available": true
     },
     {
-      "name": "Squirrels",
-      "image": "/assets/images/wall tattoos no bg/squirrels.png",
-      "price": 40,
-      "description": [],
-      "sizes": [],
-      "mirror_available": true
-    },
-    {
-      "name": "Toucan",
-      "image": "/assets/images/wall tattoos no bg/toucan.png",
+      "name": "Red Plant Stems",
+      "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
       "price": 45,
       "description": [],
-      "sizes": [
-        {
-          "label": "50 × 40 cm"
-        }
-      ],
+      "sizes": [],
       "mirror_available": true
     }
   ],
