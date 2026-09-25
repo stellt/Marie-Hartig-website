@@ -64,18 +64,6 @@
       "mirror_available": true
     },
     {
-      "name": "Gustav the Spider Monkey",
-      "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
-      "price": 45,
-      "description": [],
-      "sizes": [
-        {
-          "label": "52 × 39 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
       "name": "Banana Plant",
       "image": "/assets/images/wall tattoos no bg/banana-plant.png",
       "price": 80,
@@ -84,6 +72,18 @@
         {
           "price": "",
           "label": "120 x 55"
+        }
+      ],
+      "mirror_available": true
+    },
+    {
+      "name": "Gustav the Spider Monkey",
+      "image": "/assets/images/wall tattoos no bg/gustav-spider-monkey.png",
+      "price": 45,
+      "description": [],
+      "sizes": [
+        {
+          "label": "52 × 39 cm"
         }
       ],
       "mirror_available": true
@@ -109,6 +109,14 @@
       "mirror_available": true
     },
     {
+      "name": "Heron",
+      "image": "/assets/images/wall tattoos no bg/heron.png",
+      "price": 50,
+      "description": [],
+      "sizes": [],
+      "mirror_available": true
+    },
+    {
       "name": "Cactus",
       "image": "/assets/images/wall tattoos no bg/cactus.png",
       "price": 45,
@@ -118,14 +126,6 @@
           "label": "48 × 37 cm"
         }
       ],
-      "mirror_available": true
-    },
-    {
-      "name": "Heron",
-      "image": "/assets/images/wall tattoos no bg/heron.png",
-      "price": 50,
-      "description": [],
-      "sizes": [],
       "mirror_available": true
     },
     {
@@ -385,8 +385,17 @@
     {
       "name": "Red Plant Stems",
       "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
-      "price": 45,
-      "description": [],
+      "price": 5,
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "These Stems go with Red Plant 1 and 2 in case you want to make them longer!"
+        }
+      ],
       "sizes": [],
       "mirror_available": true
     }
