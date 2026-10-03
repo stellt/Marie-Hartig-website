@@ -8,14 +8,23 @@
     }
   ],
   "compose_canvas_hint": "Drag tattoos here to build your composition",
-  "heading": "Wall Tattoos",
+  "heading": "Original Marie’s Painted Worlds Wall Tattoos",
   "setup_instructions_text": "Setup Instructions",
   "tattoos": [
     {
       "name": "Roe Deer",
       "image": "/assets/images/wall tattoos no bg/roe-deer.png",
       "price": 55,
-      "description": [],
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
+        }
+      ],
       "sizes": [],
       "mirror_available": true
     },
@@ -408,7 +417,7 @@
   "compose_add_button_text": "Add Composition to Cart",
   "background_color": "#dedad3",
   "print_paper_note": "Printed on Hahnemühle Matt Fibre 200 Inkjet Paper",
-  "subtitle": "Create your own Marie’s Painted world’s composition",
+  "subtitle": "Create your own Marie’s Painted World’s composition !",
   "setup_instructions_pdf": "/assets/downloads/marie-wall-tattoo-setup-instructions.pdf",
   "compose_canvas_label": "Your Wall",
   "delivery_note": "*delivery up to 3 weeks"
