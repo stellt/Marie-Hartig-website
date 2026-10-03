@@ -523,8 +523,8 @@
       "mirror_available": true
     },
     {
-      "name": "Mze the Monkey",
-      "image": "/assets/images/wall tattoos no bg/mze-monkey.png",
+      "name": "Toucan",
+      "image": "/assets/images/wall tattoos no bg/toucan.png",
       "price": 45,
       "description": [
         {
@@ -538,7 +538,7 @@
       ],
       "sizes": [
         {
-          "label": "45 × 26 cm"
+          "label": "50 × 40 cm"
         }
       ],
       "mirror_available": true
@@ -582,27 +582,6 @@
       "mirror_available": true
     },
     {
-      "name": "Toucan",
-      "image": "/assets/images/wall tattoos no bg/toucan.png",
-      "price": 45,
-      "description": [
-        {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
-        }
-      ],
-      "sizes": [
-        {
-          "label": "50 × 40 cm"
-        }
-      ],
-      "mirror_available": true
-    },
-    {
       "name": "Red Plant",
       "image": "/assets/images/wall tattoos no bg/red-plant.png",
       "price": 45,
@@ -617,6 +596,27 @@
         }
       ],
       "sizes": [],
+      "mirror_available": true
+    },
+    {
+      "name": "Mze the Monkey",
+      "image": "/assets/images/wall tattoos no bg/mze-monkey.png",
+      "price": 45,
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
+        }
+      ],
+      "sizes": [
+        {
+          "label": "45 × 26 cm"
+        }
+      ],
       "mirror_available": true
     },
     {
