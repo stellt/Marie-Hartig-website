@@ -1031,8 +1031,8 @@ collections:
         label_singular: Photo
         hint: Extra photos for this tattoo's popup, e.g. the tattoo on a wall in a
           room. Customers flip through them with arrows and thumbnails.
-        field:
-          label: Photo
+        fields:
+        - label: Photo
           name: image
           widget: image
           media_folder: /assets/images/wall tattoos rooms
