@@ -75,7 +75,7 @@ body.worlds-page {
 /* ============================================
    MOBILE NAV TOGGLE (hamburger)
    Hidden on desktop — only shown inside the
-   max-width: 768px media query below.
+   max-width: 1080px media query below (the full nav only fits from ~1100px).
    ============================================ */
 .nav-toggle {
   display: none;
@@ -193,7 +193,7 @@ body.worlds-page {
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .nav {
     padding: 0 5vw;
     height: 56px;

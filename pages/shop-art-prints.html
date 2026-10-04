@@ -213,7 +213,8 @@
       lbImg.alt           = item.name;
       lbName.textContent  = item.name;
       lbPrice.textContent = `€${item.price.toFixed(2)}`;
-      lbAddBtn.onclick    = () => Cart.addItem(item.id, item.name, item.price, item.image);
+      // Close first so the lightbox doesn't sit over the cart drawer
+      lbAddBtn.onclick    = () => { closeLb(); Cart.addItem(item.id, item.name, item.price, item.image); };
     }
 
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
