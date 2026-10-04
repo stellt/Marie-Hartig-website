@@ -908,6 +908,19 @@ collections:
       required: false
       default: ✦   Click Here for Custom Compositions
       hint: The button that opens the "build your own wall" page.
+    - label: How-To Video
+      name: howto_video
+      widget: file
+      media_folder: /assets/videos
+      public_folder: /assets/videos
+      required: false
+      hint: MP4 video shown in a popup from a button above the tattoos. The button
+        only appears once a video is uploaded. Keep it under ~50 MB.
+    - label: How-To Video Button Text
+      name: howto_button_text
+      widget: string
+      required: false
+      default: ▶   Click Here for Video Instructions
     - label: Page Background Color
       name: background_color
       widget: string
@@ -1010,6 +1023,19 @@ collections:
         widget: image
         media_folder: /assets/images/wall tattoos no bg
         public_folder: /assets/images/wall tattoos no bg
+      - label: More Photos
+        name: gallery
+        widget: list
+        required: false
+        label_singular: Photo
+        hint: Extra photos for this tattoo's popup, e.g. the tattoo on a wall in a
+          room. Customers flip through them with arrows and thumbnails.
+        field:
+          label: Photo
+          name: image
+          widget: image
+          media_folder: /assets/images/wall tattoos rooms
+          public_folder: /assets/images/wall tattoos rooms
       - label: Price (€)
         name: price
         widget: number

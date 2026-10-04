@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="../css/cart.css" />
   <style>
     body.shop-page { background: #dedad3; }
-    .shop-header { padding: 4rem 6vw 2rem; text-align: center; }
+    /* Clears the fixed nav with breathing room above the heading */
+    .shop-header { padding: 7.5rem 6vw 2rem; text-align: center; }
+    @media (max-width: 768px) { .shop-header { padding-top: 6rem; } }
     .shop-header h1 {
       font-family: 'Velour', serif; font-weight: 700;
       font-size: clamp(1.6rem, 3vw, 3rem); letter-spacing: 0.2em;

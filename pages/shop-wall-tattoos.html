@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="../css/cart.css" />
   <style>
     body.shop-page { background: #dedad3; }
-    .shop-header { padding: 4rem 6vw 2rem; text-align: center; }
+    /* Clears the fixed nav with breathing room above the heading */
+    .shop-header { padding: 7.5rem 6vw 2rem; text-align: center; }
+    @media (max-width: 768px) { .shop-header { padding-top: 6rem; } }
     .shop-header h1 {
       font-family: 'Velour', serif; font-weight: 700;
       font-size: clamp(1.6rem, 3vw, 3rem); letter-spacing: 0.2em;
@@ -131,6 +133,37 @@
     .tattoo-popup-image img.mirrored { transform: scaleX(-1); }
     .tattoo-popup-image img { cursor: zoom-in; }
 
+    /* Photo gallery: main tattoo image plus Marie's extra photos */
+    .tattoo-popup-image { flex-direction: column; gap: 1rem; }
+    .popup-stage {
+      position: relative; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .popup-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 2.2rem; height: 2.2rem; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.85);
+      color: #111; font-size: 1rem; line-height: 1; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .popup-arrow:hover { background: #fff; border-color: #111; }
+    .popup-arrow.prev { left: -0.6rem; }
+    .popup-arrow.next { right: -0.6rem; }
+    .popup-thumbs {
+      display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+    }
+    .popup-thumbs button {
+      width: 3.2rem; height: 3.2rem; padding: 0; cursor: pointer;
+      border: 1px solid transparent; background: #fff; border-radius: 2px;
+      opacity: 0.6; transition: opacity 0.2s, border-color 0.2s;
+    }
+    .popup-thumbs button.active { opacity: 1; border-color: #111; }
+    .popup-thumbs button:hover { opacity: 1; }
+    .popup-thumbs img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      max-height: none; cursor: pointer;
+    }
+
     /* Full-screen zoom of the popup image. Click once to fit, again to
        magnify 2.5x around the pointer (move to pan). --m carries the mirror. */
     .tattoo-zoom {
@@ -243,6 +276,30 @@
       transition: background 0.2s, color 0.2s;
     }
     .compose-page-btn:hover { background: #111; color: #fff; }
+    button.compose-page-btn { cursor: pointer; }
+    @media (max-width: 600px) {
+      .compose-btn-wrap { padding: 0 1rem; }
+      .compose-page-btn { padding: 0.8rem 1.2rem; letter-spacing: 0.14em; }
+    }
+
+    /* How-to video popup */
+    .howto-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1100;
+      background: rgba(0,0,0,0.85);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .howto-overlay.open { display: flex; }
+    .howto-box { position: relative; width: min(960px, 100%); }
+    .howto-box video {
+      display: block; width: 100%; max-height: 82vh;
+      background: #000; border-radius: 4px;
+    }
+    .howto-close {
+      position: absolute; top: -2.2rem; right: 0;
+      background: none; border: none; cursor: pointer; color: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
   </style>
 </head>
 <body class="worlds-page shop-page">
@@ -304,6 +361,18 @@
     <a class="compose-page-btn" id="compose-btn" href="shop-compose.html">✦ &nbsp; Click Here for Custom Compositions</a>
   </div>
 
+  <!-- Shown once a How-To Video is uploaded in the CMS -->
+  <div class="compose-btn-wrap" id="howto-btn-wrap" hidden>
+    <button class="compose-page-btn" id="howto-btn" type="button">▶ &nbsp; Click Here for Video Instructions</button>
+  </div>
+
+  <div class="howto-overlay" id="howto-overlay" aria-hidden="true">
+    <div class="howto-box">
+      <button class="howto-close" id="howto-close" type="button">&#215; Close</button>
+      <video id="howto-video" controls playsinline preload="none"></video>
+    </div>
+  </div>
+
   <div class="tattoo-zoom" id="tattoo-zoom" aria-hidden="true">
     <button class="tattoo-zoom-close" type="button">&#215; Close</button>
     <img id="tattoo-zoom-img" src="" alt="" />
@@ -315,7 +384,12 @@
     <div class="tattoo-popup">
       <button class="tattoo-popup-close" id="tattoo-popup-close">&#215; Close</button>
       <div class="tattoo-popup-image">
-        <img id="popup-img" src="" alt="" />
+        <div class="popup-stage">
+          <button class="popup-arrow prev" id="popup-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
+          <img id="popup-img" src="" alt="" />
+          <button class="popup-arrow next" id="popup-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
+        </div>
+        <div class="popup-thumbs" id="popup-thumbs" hidden></div>
       </div>
       <div class="tattoo-popup-info">
         <h2 class="tattoo-popup-name" id="popup-name"></h2>
@@ -486,10 +560,45 @@
       }
     }
 
+    // Photo 0 is the tattoo itself; the rest are Marie's extra photos
+    // (Decap may store each as a bare string or as {image}).
+    const popupPrev = document.getElementById('popup-prev');
+    const popupNext = document.getElementById('popup-next');
+    const popupThumbs = document.getElementById('popup-thumbs');
+    let popupPhotos = [];
+    let popupPhotoIdx = 0;
+
+    function showPhoto(i) {
+      popupPhotoIdx = (i + popupPhotos.length) % popupPhotos.length;
+      popupImg.src = imgUrl(popupPhotos[popupPhotoIdx], 1200);
+      // Mirroring previews the tattoo only, never a room photo
+      popupImg.classList.toggle('mirrored', popupPhotoIdx === 0 && popupTilt === 'mirrored');
+      popupThumbs.querySelectorAll('button').forEach((b, j) => b.classList.toggle('active', j === popupPhotoIdx));
+    }
+
+    function setPhotos(item) {
+      const extra = (item.gallery || []).map(g => typeof g === 'string' ? g : g && g.image).filter(Boolean);
+      popupPhotos = [item.image, ...extra];
+      const many = popupPhotos.length > 1;
+      popupPrev.hidden = popupNext.hidden = popupThumbs.hidden = !many;
+      popupThumbs.innerHTML = many ? popupPhotos.map((src, j) =>
+        `<button type="button" data-i="${j}" aria-label="Photo ${j + 1}"><img src="${imgUrl(src, 160)}" alt="" /></button>`
+      ).join('') : '';
+      showPhoto(0);
+    }
+
+    popupPrev.addEventListener('click', () => showPhoto(popupPhotoIdx - 1));
+    popupNext.addEventListener('click', () => showPhoto(popupPhotoIdx + 1));
+    popupThumbs.addEventListener('click', e => {
+      const b = e.target.closest('button');
+      if (b) showPhoto(+b.dataset.i);
+    });
+
     function setTilt(tilt) {
       popupTilt = tilt;
       const mirrored = tilt === 'mirrored';
-      popupImg.classList.toggle('mirrored', mirrored);
+      if (mirrored && popupPhotoIdx !== 0) showPhoto(0);
+      popupImg.classList.toggle('mirrored', mirrored && popupPhotoIdx === 0);
       tiltStandardBtn.classList.toggle('active', !mirrored);
       tiltMirroredBtn.classList.toggle('active', mirrored);
     }
@@ -520,7 +629,8 @@
       popupItem = item;
       popupPageData = pageData;
 
-      popupImg.src = imgUrl(item.image, 1200);
+      popupTilt = 'standard';
+      setPhotos(item);
       popupImg.alt = item.name;
       popupName.textContent = item.name;
       popupDesc.innerHTML = (item.description || []).map(p =>
@@ -563,7 +673,7 @@
     const zoomImg = document.getElementById('tattoo-zoom-img');
     function openZoom() {
       if (!popupItem) return;
-      zoomImg.src = imgUrl(popupItem.image, 2400);
+      zoomImg.src = imgUrl(popupPhotos[popupPhotoIdx], 2400);
       zoomImg.alt = popupItem.name;
       zoomImg.classList.toggle('mirrored', popupImg.classList.contains('mirrored'));
       zoomImg.style.transformOrigin = '';
@@ -595,9 +705,28 @@
       if (zoom.classList.contains('detail')) aimZoom(e);
     });
 
+    const howto = document.getElementById('howto-overlay');
+    const howtoVideo = document.getElementById('howto-video');
+    function openHowto() {
+      howto.classList.add('open');
+      howto.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      howtoVideo.play().catch(() => {});
+    }
+    function closeHowto() {
+      howtoVideo.pause();
+      howto.classList.remove('open');
+      howto.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('howto-btn').addEventListener('click', openHowto);
+    document.getElementById('howto-close').addEventListener('click', closeHowto);
+    howto.addEventListener('click', e => { if (e.target === howto) closeHowto(); });
+
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
-      if (zoom.classList.contains('open')) closeZoom();
+      if (howto.classList.contains('open')) closeHowto();
+      else if (zoom.classList.contains('open')) closeZoom();
       else if (popupOverlay.classList.contains('open')) closePopup();
     });
 
@@ -624,6 +753,11 @@
         if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
         if (data.subtitle) document.getElementById('shop-subtitle').textContent = data.subtitle;
         if (data.compose_button_text) document.getElementById('compose-btn').textContent = data.compose_button_text;
+        if (data.howto_video) {
+          howtoVideo.src = data.howto_video;
+          if (data.howto_button_text) document.getElementById('howto-btn').textContent = data.howto_button_text;
+          document.getElementById('howto-btn-wrap').hidden = false;
+        }
         if (/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(data.background_color || '')) {
           document.body.style.background = data.background_color;
         }
