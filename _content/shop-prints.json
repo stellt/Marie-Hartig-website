@@ -3,24 +3,24 @@
   "price": 150,
   "prints": [
     {
-      "name": "Art Print 1",
+      "name": "Blue Birds - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker1.png",
-      "price": 35
+      "price": 100
     },
     {
-      "name": "Art Print 2",
+      "name": "Cockatoo Pink and Green - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker2.png",
-      "price": 35
+      "price": 100
     },
     {
-      "name": "Art Print 3",
+      "name": "Red Butterflies - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker3.png",
-      "price": 35
+      "price": 100
     },
     {
-      "name": "Art Print 4",
+      "name": "Toucanet - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker4.png",
-      "price": 35
+      "price": 100
     },
     {
       "name": "Celosia",
