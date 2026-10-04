@@ -23,13 +23,13 @@
       "price": 100
     },
     {
-      "name": "Celosia - Monsoon Collection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker5.png",
+      "name": "Henry and the Mangos - Monsoon Collection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker12.png",
       "price": 100
     },
     {
-      "name": "Guava - Monsoon Collection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker6.png",
+      "name": "Celosia - Monsoon Collection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker5.png",
       "price": 100
     },
     {
@@ -43,8 +43,8 @@
       "price": 100
     },
     {
-      "name": "Neem - Monsoon Collection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker9.png",
+      "name": "Guava - Monsoon Collection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker6.png",
       "price": 100
     },
     {
@@ -53,14 +53,14 @@
       "price": 100
     },
     {
-      "name": "Jasmine - Monsoon Collection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker11.png",
+      "name": "Neem - Monsoon Collection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker9.png",
       "price": 100
     },
     {
-      "name": "Henry and the Mangos",
-      "image": "../assets/images/wall stickers/Sticker12.png",
-      "price": 35
+      "name": "Jasmine - Monsoon Collection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker11.png",
+      "price": 100
     }
   ]
 }
