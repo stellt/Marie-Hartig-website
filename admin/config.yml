@@ -915,7 +915,8 @@ collections:
       public_folder: /assets/videos
       required: false
       hint: MP4 video shown in a popup from a button above the tattoos. The button
-        only appears once a video is uploaded. Keep it under ~50 MB.
+        only appears once a video is uploaded. Large videos may fail to upload
+        here; send those to Ado instead.
     - label: How-To Video Button Text
       name: howto_button_text
       widget: string

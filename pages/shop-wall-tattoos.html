@@ -152,6 +152,7 @@
     .popup-thumbs {
       display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
     }
+    .popup-arrow[hidden], .popup-thumbs[hidden] { display: none; }
     .popup-thumbs button {
       width: 3.2rem; height: 3.2rem; padding: 0; cursor: pointer;
       border: 1px solid transparent; background: #fff; border-radius: 2px;
@@ -682,6 +683,7 @@
     }
     function closeZoom() {
       zoom.classList.remove('open', 'detail');
+      zoomImg.removeAttribute('src');
       zoom.setAttribute('aria-hidden', 'true');
     }
     // Unmagnified: aim at the clicked point. Magnified: pan by where the
