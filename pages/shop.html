@@ -10,8 +10,8 @@
   <style>
     .shop-panels {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
       margin-top: 64px;
       background: #ffffff;
     }
@@ -19,7 +19,7 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      aspect-ratio: 3/4;
+      height: max(420px, calc(100svh - 64px - 5rem));
       display: block;
       text-decoration: none;
     }
@@ -32,6 +32,9 @@
       transition: transform 0.7s ease;
     }
     .shop-panel:hover img { transform: scale(1.04); }
+    /* The Art Prints thumbnail has a white paper border baked in; crop it off */
+    .shop-panel img[src$="ThumbnailArtPrints.png"] { transform: scale(1.16); }
+    .shop-panel:hover img[src$="ThumbnailArtPrints.png"] { transform: scale(1.2); }
     .shop-panel-overlay {
       position: absolute;
       inset: 0;
@@ -79,13 +82,19 @@
     }
     @media (max-width: 900px) {
       .shop-panels {
-        grid-template-columns: repeat(2, 1fr);
         margin-top: 56px;
+      }
+      .shop-panel {
+        height: auto;
+        aspect-ratio: 3/4;
       }
     }
     @media (max-width: 580px) {
       .shop-panels {
         grid-template-columns: 1fr;
+      }
+      .shop-panel {
+        aspect-ratio: 4/5;
       }
     }
     .shop-panel-coming-soon {
@@ -178,7 +187,7 @@
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel disabled" href="#">
+    <a class="shop-panel disabled" href="#" data-live-href="shop-art-prints.html">
       <img src="../assets/images/ThumbnailArtPrints.png" alt="Original Art Prints" />
       <div class="shop-panel-overlay"></div>
       <div class="shop-panel-coming-soon">
@@ -189,20 +198,10 @@
         <span class="shop-panel-sub">Shop the collection</span>
       </div>
     </a>
-    <a class="shop-panel disabled" href="#">
-      <img src="../assets/images/ThumbnailWallpaper.jpeg" alt="Wallpapers" />
-      <div class="shop-panel-overlay"></div>
-      <div class="shop-panel-coming-soon">
-        <span class="coming-soon-label">Coming Soon</span>
-      </div>
-      <div class="shop-panel-label">
-        Wallpapers
-        <span class="shop-panel-sub">Shop the collection</span>
-      </div>
-    </a>
   </div>
 
-  <p class="shop-footer-caption">Create your Own Marie's Painted World Composition</p>
+  <!-- Custom compositions hidden for launch; remove `hidden` to bring it back -->
+  <p class="shop-footer-caption" hidden>Create your Own Marie's Painted World Composition</p>
 
   <script src="../js/maintenance.js"></script>
   <script src="../js/cart.js"></script>
@@ -210,20 +209,19 @@
   <script src="../js/site-design.js"></script>
   <script>
     // "Shop is Live" toggle, set in the CMS under Page Text > Shop Settings.
-    // Off = the Wall Tattoos tile shows "Coming Soon" and doesn't link.
-    // On = it becomes a real link. Art Prints and Wallpapers are not launched
-    // yet, so they stay "Coming Soon" regardless of this toggle -- to launch
-    // them later, add data-live-href handling for them here.
+    // Off = both tiles (Wall Tattoos, Art Prints) show "Coming Soon" and
+    // don't link. On = they become real links. Wallpapers is hidden from the
+    // landing page for now; shop-wallpapers.html still exists.
     fetch('../_content/shop-settings.json')
       .then(res => res.json())
       .then(data => {
         if (!data.is_live) return;
-        const panel = document.querySelector('.shop-panel[data-live-href="shop-wall-tattoos.html"]');
-        if (!panel) return;
-        panel.classList.remove('disabled');
-        panel.href = panel.dataset.liveHref;
-        const badge = panel.querySelector('.shop-panel-coming-soon');
-        if (badge) badge.remove();
+        document.querySelectorAll('.shop-panel[data-live-href]').forEach(panel => {
+          panel.classList.remove('disabled');
+          panel.href = panel.dataset.liveHref;
+          const badge = panel.querySelector('.shop-panel-coming-soon');
+          if (badge) badge.remove();
+        });
       })
       .catch(() => {});
   </script>

@@ -91,22 +91,62 @@
 .hero-subtitle {
   font-family: 'Velour', serif;
   font-weight: 700;
-  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   pointer-events: all;
   opacity: 1;
+  padding: 0 1rem;
 }
 
 .hero-subtitle a {
-  color: rgba(255,255,255,0.85);
+  color: #ffffff;
   text-decoration: none;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  transition: color 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55), 0 0 22px rgba(0,0,0,0.55);
 }
 
-.hero-subtitle a:hover {
-  color: #ffffff;
+/* Round arrow button under the subtitle so it's obvious the hero is clickable */
+.hero-enter {
+  pointer-events: all;
+  margin-top: 1.6rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow: 0 2px 18px rgba(0,0,0,0.25);
+  animation: hero-nudge 2.4s ease-in-out infinite;
+  transition: background-color 0.3s ease;
+}
+
+.hero-enter svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-enter:hover,
+.hero-enter:focus-visible {
+  background: rgba(255,255,255,0.22);
+  animation-play-state: paused;
+}
+
+@keyframes hero-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter { animation: none; }
 }
 
 /* ---- Counter ---- */

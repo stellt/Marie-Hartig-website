@@ -88,6 +88,10 @@
   </style>
 </head>
 <body class="worlds-page shop-page">
+  <script>
+    // Shop switched off in the CMS (Shop Settings > Shop is Live) -> back to the Coming Soon shop page.
+    fetch('../_content/shop-settings.json').then(r => r.json()).then(d => { if (!d.is_live) location.replace('shop.html'); }).catch(() => {});
+  </script>
   <nav class="nav" aria-label="Main navigation">
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span class="nav-toggle-bar"><span></span><span></span><span></span></span>
@@ -181,8 +185,11 @@
               <div class="tattoo-card-name">${item.name}</div>
               <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>
             </div>
-            <button class="add-to-cart-btn" onclick="Cart.addItem('${item.id}', '${item.name}', ${item.price}, '${item.image}')">Add to Cart</button>
+            <button class="add-to-cart-btn">Add to Cart</button>
           `;
+          // Wired here rather than inline so names with apostrophes don't break it
+          card.querySelector('.add-to-cart-btn').addEventListener('click', () =>
+            Cart.addItem(item.id, item.name, item.price, item.image));
           printGrid.appendChild(card);
         });
       })

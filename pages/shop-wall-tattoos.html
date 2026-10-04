@@ -129,6 +129,33 @@
       transition: transform 0.25s ease;
     }
     .tattoo-popup-image img.mirrored { transform: scaleX(-1); }
+    .tattoo-popup-image img { cursor: zoom-in; }
+
+    /* Full-screen zoom of the popup image. Click once to fit, again to
+       magnify 2.5x around the pointer (move to pan). --m carries the mirror. */
+    .tattoo-zoom {
+      position: fixed; inset: 0; z-index: 2000;
+      background: #f5f3ef;
+      display: none; align-items: center; justify-content: center;
+      overflow: hidden; cursor: zoom-in;
+    }
+    .tattoo-zoom.open { display: flex; }
+    .tattoo-zoom.detail { cursor: zoom-out; }
+    .tattoo-zoom img {
+      --m: 1; --z: 1;
+      max-width: calc(100vw - 4rem); max-height: calc(100vh - 4rem);
+      object-fit: contain;
+      transform: scale(var(--z)) scaleX(var(--m));
+      transition: transform 0.3s ease;
+    }
+    .tattoo-zoom img.mirrored { --m: -1; }
+    .tattoo-zoom.detail img { --z: 2.5; }
+    .tattoo-zoom-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; color: #111; cursor: pointer; z-index: 1;
+      font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
     .tattoo-popup-info {
       flex: 1 1 58%; padding: 2.4rem 2rem 2rem; overflow-y: auto;
       display: flex; flex-direction: column; gap: 0.9rem;
@@ -272,8 +299,14 @@
 
   <div class="shop-intro" id="shop-intro"></div>
 
-  <div class="compose-btn-wrap">
+  <!-- Custom compositions hidden for launch; remove `hidden` to bring it back -->
+  <div class="compose-btn-wrap" hidden>
     <a class="compose-page-btn" id="compose-btn" href="shop-compose.html">✦ &nbsp; Click Here for Custom Compositions</a>
+  </div>
+
+  <div class="tattoo-zoom" id="tattoo-zoom" aria-hidden="true">
+    <button class="tattoo-zoom-close" type="button">&#215; Close</button>
+    <img id="tattoo-zoom-img" src="" alt="" />
   </div>
 
   <div class="tattoo-grid" id="tattoo-grid"></div>
@@ -526,8 +559,46 @@
     tiltMirroredBtn.addEventListener('click', () => setTilt('mirrored'));
     document.getElementById('tattoo-popup-close').addEventListener('click', closePopup);
     popupOverlay.addEventListener('click', e => { if (e.target === popupOverlay) closePopup(); });
+    const zoom = document.getElementById('tattoo-zoom');
+    const zoomImg = document.getElementById('tattoo-zoom-img');
+    function openZoom() {
+      if (!popupItem) return;
+      zoomImg.src = imgUrl(popupItem.image, 2400);
+      zoomImg.alt = popupItem.name;
+      zoomImg.classList.toggle('mirrored', popupImg.classList.contains('mirrored'));
+      zoomImg.style.transformOrigin = '';
+      zoom.classList.add('open');
+      zoom.setAttribute('aria-hidden', 'false');
+    }
+    function closeZoom() {
+      zoom.classList.remove('open', 'detail');
+      zoom.setAttribute('aria-hidden', 'true');
+    }
+    // Unmagnified: aim at the clicked point. Magnified: pan by where the
+    // pointer sits in the window (the scaled rect would make it jump).
+    function aimZoom(e) {
+      const detail = zoom.classList.contains('detail');
+      const r = detail ? { left: 0, top: 0, width: innerWidth, height: innerHeight } : zoomImg.getBoundingClientRect();
+      let x = (e.clientX - r.left) / r.width * 100;
+      const y = (e.clientY - r.top) / r.height * 100;
+      if (zoomImg.classList.contains('mirrored')) x = 100 - x;
+      zoomImg.style.transformOrigin = `${Math.min(100, Math.max(0, x))}% ${Math.min(100, Math.max(0, y))}%`;
+    }
+    popupImg.addEventListener('click', openZoom);
+    zoom.querySelector('.tattoo-zoom-close').addEventListener('click', e => { e.stopPropagation(); closeZoom(); });
+    zoom.addEventListener('click', e => {
+      if (e.target !== zoomImg) { closeZoom(); return; }
+      if (!zoom.classList.contains('detail')) aimZoom(e);
+      zoom.classList.toggle('detail');
+    });
+    zoom.addEventListener('mousemove', e => {
+      if (zoom.classList.contains('detail')) aimZoom(e);
+    });
+
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && popupOverlay.classList.contains('open')) closePopup();
+      if (e.key !== 'Escape') return;
+      if (zoom.classList.contains('open')) closeZoom();
+      else if (popupOverlay.classList.contains('open')) closePopup();
     });
 
     popupAddBtn.addEventListener('click', () => {

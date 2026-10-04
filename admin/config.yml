@@ -1223,10 +1223,9 @@ collections:
       name: is_live
       widget: boolean
       default: true
-      hint: On = the Wall Tattoos shop is open and customers can buy. Off = the
-        Shop page shows "Coming Soon" on Wall Tattoos and the shop pages redirect
-        back to it. Art Prints and Wallpapers always show "Coming Soon" until
-        they are launched.
+      hint: On = the Wall Tattoos and Art Prints shops are open and customers can
+        buy. Off = the Shop page shows "Coming Soon" on both and the shop pages
+        redirect back to it.
     - label: Shipping — Austria (€)
       name: shipping_austria
       widget: number
