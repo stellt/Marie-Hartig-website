@@ -3,12 +3,14 @@
 // Listens for Stripe events and verifies the signature so you know the event
 // genuinely came from Stripe.
 //
-// When an order is actually PAID it sends two emails (through Resend):
+// When an order is actually PAID it sends three emails (through Resend):
 //   1. The PRINTER gets the print job only -- what to print, size, mirrored or
 //      not, quantity, artwork link. No customer name/address/contact details:
 //      Marie ships the orders herself, so the printer doesn't need them.
 //   2. MARIE gets the full order -- the same items plus totals, the customer's
 //      details and the shipping address, so she can pack and ship it.
+//   3. The CUSTOMER gets an order confirmation (items, totals, shipping address).
+//      Replies go to Marie.
 //
 // Netlify environment variables:
 //   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET   (already set)
@@ -221,6 +223,55 @@ function buildOwnerEmail(ref, full, items, ship, rateName) {
   return { subject, text: textParts.join('\n'), html };
 }
 
+function buildCustomerEmail(ref, full, items, ship, rateName) {
+  const cur = full.currency;
+  const total = money(full.amount_total, cur);
+  const subject = `Your order ${ref} from Marie's Painted Worlds`;
+  const when = fmtDate(full.created);
+  const shipCents = full.total_details && full.total_details.amount_shipping != null
+    ? full.total_details.amount_shipping
+    : (full.shipping_cost && full.shipping_cost.amount_total);
+  const name = (full.customer_details && full.customer_details.name) || '';
+  const greeting = name ? `Dear ${name.split(' ')[0]},` : 'Hello,';
+  const addr = formatAddress(ship);
+
+  const text = [
+    greeting,
+    '',
+    'Thank you for your order! Your payment has been received and Marie will now prepare your order.',
+    '',
+    `Order ${ref}`,
+    `Paid: ${when}`,
+    '',
+    items.map((it, i) => itemBlockText(it, i, true)).join('\n\n'),
+    '',
+    `Items: ${money(full.amount_subtotal, cur)}`,
+    `${rateName || 'Shipping'}: ${money(shipCents, cur)}`,
+    `TOTAL PAID: ${total}`,
+    '',
+    'SHIPPING TO',
+    addr ? addr.join('\n') : '(no shipping address)',
+    '',
+    'Questions about your order? Just reply to this email.',
+    '',
+    "Marie's Painted Worlds",
+    SITE_URL,
+  ].join('\n');
+
+  const html = shell('Thank you for your order!',
+    `<p style="margin:0 0 12px">${esc(greeting)}</p>` +
+    `<p style="margin:0 0 12px">Your payment has been received and Marie will now prepare your order.</p>` +
+    `<p style="margin:0 0 4px"><strong>Order ${esc(ref)}</strong></p><p style="margin:0 0 12px;color:#555">Paid: ${esc(when)}</p>` +
+    items.map((it, i) => itemBlockHtml(it, i, true)).join('') +
+    `<table style="border-collapse:collapse;font-size:14px;margin:12px 0"><tr><td style="padding:2px 16px 2px 0;color:#777">Items</td><td>${esc(money(full.amount_subtotal, cur))}</td></tr>` +
+    `<tr><td style="padding:2px 16px 2px 0;color:#777">${esc(rateName || 'Shipping')}</td><td>${esc(money(shipCents, cur))}</td></tr>` +
+    `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr></table>` +
+    `<p style="margin:16px 0 4px"><strong>Shipping to</strong></p><p style="margin:0">${addr ? addr.map(esc).join('<br>') : '(no shipping address)'}</p>` +
+    `<p style="margin:16px 0 0">Questions about your order? Just reply to this email.</p>` +
+    `<p style="margin:16px 0 0">Marie's Painted Worlds<br><a href="${SITE_URL}">${SITE_URL.replace('https://', '')}</a></p>`);
+  return { subject, text, html };
+}
+
 // ---------- sending (Resend) ----------
 
 function sendEmail({ apiKey, idempotencyKey, from, to, replyTo, subject, html, text }) {
@@ -287,12 +338,23 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName);
     jobs.push({ label: 'owner', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-owner`, from, to: ownerTo, replyTo: [], ...e }) });
   }
+  const customerTo = full.customer_details && full.customer_details.email;
+  if (customerTo) {
+    const e = buildCustomerEmail(ref, full, items, ship, rateName);
+    jobs.push({ label: 'customer', optional: true, promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-customer`, from, to: [customerTo], replyTo: ownerTo, ...e }) });
+  } else {
+    console.warn('No customer email on', session.id, '- no confirmation sent');
+  }
 
   const results = await Promise.allSettled(jobs.map(j => j.promise));
   const failures = [];
   results.forEach((r, i) => {
     if (r.status === 'fulfilled') console.log(`Order ${ref}: ${jobs[i].label} email sent`);
-    else { console.error(`Order ${ref}: ${jobs[i].label} email FAILED:`, r.reason && r.reason.message); failures.push(jobs[i].label); }
+    else {
+      console.error(`Order ${ref}: ${jobs[i].label} email FAILED:`, r.reason && r.reason.message);
+      // A bad customer address must not make Stripe retry the whole event.
+      if (!jobs[i].optional) failures.push(jobs[i].label);
+    }
   });
   if (failures.length) throw new Error('Order email failed for: ' + failures.join(', '));
 }
