@@ -145,27 +145,6 @@ function totalQty(items) {
   return items.reduce((n, it) => n + (Number(it.quantity) || 0), 0);
 }
 
-function buildPrinterEmail(ref, session, items) {
-  const n = totalQty(items);
-  const subject = `New print order ${ref} - ${n} item${n === 1 ? '' : 's'}`;
-  const when = fmtDate(session.created);
-  const text = [
-    `New order ${ref}`,
-    `Paid: ${when}`,
-    '',
-    'Please print:',
-    '',
-    items.map((it, i) => itemBlockText(it, i, false)).join('\n\n'),
-    '',
-    'Sent automatically once payment is confirmed. Reply to this email to reach Marie.',
-  ].join('\n');
-  const html = shell(`New order ${ref}`,
-    `<p style="margin:0 0 12px;color:#555">Paid: ${esc(when)}</p><p style="margin:0 0 4px"><strong>Please print:</strong></p>` +
-    items.map((it, i) => itemBlockHtml(it, i, false)).join('') +
-    `<p style="margin:16px 0 0;color:#777;font-size:13px">Sent automatically once payment is confirmed. Reply to this email to reach Marie.</p>`);
-  return { subject, text, html };
-}
-
 function formatAddress(ship) {
   if (!ship) return null;
   const a = ship.address || {};
@@ -173,7 +152,9 @@ function formatAddress(ship) {
   return lines.length ? lines : null;
 }
 
-function buildOwnerEmail(ref, full, items, ship, rateName) {
+// The printer gets the same email as Marie (they ship it, so they need the
+// address); only the footer differs and the Stripe link is left out.
+function buildOwnerEmail(ref, full, items, ship, rateName, forPrinter = false) {
   const n = totalQty(items);
   const cur = full.currency;
   const total = money(full.amount_total, cur);
@@ -184,8 +165,11 @@ function buildOwnerEmail(ref, full, items, ship, rateName) {
     : (full.shipping_cost && full.shipping_cost.amount_total);
   const customer = full.customer_details || {};
   const addr = formatAddress(ship);
-  const dashboard = full.payment_intent && typeof full.payment_intent === 'string'
+  const dashboard = !forPrinter && full.payment_intent && typeof full.payment_intent === 'string'
     ? `https://dashboard.stripe.com/payments/${full.payment_intent}` : '';
+  const footer = forPrinter
+    ? 'Sent automatically once payment is confirmed. Please print and ship to the address above. Reply to this email to reach Marie.'
+    : 'The printer has been sent this same email, including the shipping address.';
 
   const textParts = [
     `New order ${ref}`,
@@ -206,7 +190,7 @@ function buildOwnerEmail(ref, full, items, ship, rateName) {
     'SHIP TO',
     addr ? addr.join('\n') : '(no shipping address collected)',
     '',
-    'The printer has been emailed the print job separately (no customer details are sent to them).',
+    footer,
     dashboard ? `Stripe: ${dashboard}` : null,
   ].filter(l => l !== null);
 
@@ -219,7 +203,7 @@ function buildOwnerEmail(ref, full, items, ship, rateName) {
     `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr></table>` +
     `<p style="margin:16px 0 4px"><strong>Customer</strong></p><p style="margin:0">${esc(customer.name || '(no name)')}<br>${esc(customer.email || '(no email)')}${customer.phone ? '<br>' + esc(customer.phone) : ''}</p>` +
     `<p style="margin:16px 0 4px"><strong>Ship to</strong></p><p style="margin:0">${addr ? addr.map(esc).join('<br>') : '(no shipping address collected)'}</p>` +
-    `<p style="margin:16px 0 0;color:#777;font-size:13px">The printer has been emailed the print job separately (no customer details are sent to them).${dashboard ? ` <a href="${esc(dashboard)}">Open in Stripe</a>` : ''}</p>`);
+    `<p style="margin:16px 0 0;color:#777;font-size:13px">${esc(footer)}${dashboard ? ` <a href="${esc(dashboard)}">Open in Stripe</a>` : ''}</p>`);
   return { subject, text: textParts.join('\n'), html };
 }
 
@@ -331,7 +315,7 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
 
   const jobs = [];
   if (printerTo.length) {
-    const e = buildPrinterEmail(ref, full, items);
+    const e = buildOwnerEmail(ref, full, items, ship, rateName, true);
     jobs.push({ label: 'printer', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-printer`, from, to: printerTo, replyTo: ownerTo, ...e }) });
   }
   if (ownerTo.length) {
