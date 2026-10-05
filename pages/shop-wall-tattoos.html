@@ -290,9 +290,10 @@
       align-items: center; justify-content: center; padding: 1rem;
     }
     .howto-overlay.open { display: flex; }
-    .howto-box { position: relative; width: min(960px, 100%); }
+    .howto-box { position: relative; max-width: min(960px, 100%); }
+    /* Sized from the video itself so portrait phone clips get no black bars */
     .howto-box video {
-      display: block; width: 100%; max-height: 82vh;
+      display: block; width: auto; height: auto; max-width: 100%; max-height: 82vh;
       background: #000; border-radius: 4px;
     }
     .howto-close {
@@ -370,7 +371,7 @@
   <div class="howto-overlay" id="howto-overlay" aria-hidden="true">
     <div class="howto-box">
       <button class="howto-close" id="howto-close" type="button">&#215; Close</button>
-      <video id="howto-video" controls playsinline preload="none"></video>
+      <video id="howto-video" controls playsinline preload="metadata"></video>
     </div>
   </div>
 

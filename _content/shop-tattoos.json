@@ -690,5 +690,6 @@
   "subtitle": "Create your own Marie’s Painted World’s Composition !",
   "setup_instructions_pdf": "/assets/downloads/marie-wall-tattoo-setup-instructions.pdf",
   "compose_canvas_label": "Your Wall",
-  "delivery_note": "*delivery up to 3 weeks"
+  "delivery_note": "*delivery up to 3 weeks",
+  "howto_video": "/assets/videos/wall-tattoo-instructions.mp4"
 }
