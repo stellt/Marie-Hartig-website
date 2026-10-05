@@ -4,11 +4,11 @@
 // genuinely came from Stripe.
 //
 // When an order is actually PAID it sends three emails (through Resend):
-//   1. The PRINTER gets the print job only -- what to print, size, mirrored or
-//      not, quantity, artwork link. No customer name/address/contact details:
-//      Marie ships the orders herself, so the printer doesn't need them.
-//   2. MARIE gets the full order -- the same items plus totals, the customer's
-//      details and the shipping address, so she can pack and ship it.
+//   1. MARIE gets the full order -- items, totals, the customer's details and
+//      the shipping address.
+//   2. The PRINTER gets that same email (minus the Stripe link): the printer
+//      prints AND ships, so needs the address. Marie asked for this after the
+//      first real order on 2026-10-05.
 //   3. The CUSTOMER gets an order confirmation (items, totals, shipping address).
 //      Replies go to Marie.
 //
