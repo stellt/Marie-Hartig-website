@@ -29,13 +29,13 @@
       "mirror_available": true,
       "gallery": [
         {
-          "image": "/assets/images/wall tattoos rooms/roe-deer-room-test.jpg"
-        },
-        {
           "image": "/assets/images/wall tattoos rooms/deer-sunlit-mediterranean-foyer-with-art-and-deer.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/countryside-closeup.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/roe-deer-room-test.jpg"
         }
       ]
     },
@@ -53,7 +53,11 @@
           "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "41 x 37 cm"
+        }
+      ],
       "mirror_available": true,
       "gallery": [
         {
