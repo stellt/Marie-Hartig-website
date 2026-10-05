@@ -40,6 +40,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/roe-deer-room-test.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_8860.jpeg"
         }
       ]
     },
@@ -411,7 +414,15 @@
           "label": "44 × 31 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_8881.jpeg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/scandinavian-kitchen-with-warm-red-accents.png"
+        }
+      ]
     },
     {
       "name": "Red Parrot",
@@ -658,6 +669,12 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/toucan.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6327.jpeg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/scandinavian-kitchen-with-warm-red-accents.png"
         }
       ]
     },
