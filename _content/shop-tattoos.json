@@ -283,7 +283,12 @@
           "label": "63 x 30 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_9276.jpeg"
+        }
+      ]
     },
     {
       "name": "Cactus",
@@ -308,6 +313,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/cactus-and-twins.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_7230.jpeg"
         }
       ]
     },
@@ -334,6 +342,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/impala-and-jungle-plant.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6896.jpeg"
         }
       ]
     },
@@ -356,7 +367,12 @@
           "label": "52 × 39 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_4580.jpeg"
+        }
+      ]
     },
     {
       "name": "Jungle Plant 2",
@@ -458,7 +474,12 @@
           "label": "60 × 35 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6999.jpeg"
+        }
+      ]
     },
     {
       "name": "Lemurs",
