@@ -25,7 +25,11 @@
           "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "74 x 55 cm"
+        }
+      ],
       "mirror_available": true,
       "gallery": [
         {
@@ -163,7 +167,7 @@
       "sizes": [
         {
           "price": "",
-          "label": "120 x 55"
+          "label": "174 x 80 cm"
         }
       ],
       "mirror_available": true,
@@ -256,7 +260,11 @@
           "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "63 x 30 cm"
+        }
+      ],
       "mirror_available": true
     },
     {
@@ -346,7 +354,11 @@
           "text": "This lovely Jungle plant can also be made taller by adding Jungle Plant 2 underneath it…they fit together seamlessly.\n\nMarie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "56 x 40 cm"
+        }
+      ],
       "mirror_available": true,
       "gallery": [
         {
@@ -368,7 +380,11 @@
           "text": "This lovely Jungle plant can also be made taller by adding Jungle Plant 2 above it…they fit together seamlessly.\n\nMarie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "52 x 35 cm"
+        }
+      ],
       "mirror_available": true,
       "gallery": [
         {
@@ -543,7 +559,11 @@
           "text": "Marie Hartig Wall Tattoos are high-quality art prints created from original hand-painted designs. They are designed to be applied carefully and left in place; larger or more intricate pieces may take a little time to install and are often easiest to apply with two people. While they can be repositioned if necessary, they are not intended to be moved repeatedly. Please treat them as wall art rather than a children’s sticker product."
         }
       ],
-      "sizes": [],
+      "sizes": [
+        {
+          "label": "58 x 30"
+        }
+      ],
       "mirror_available": true
     },
     {
@@ -644,7 +664,7 @@
     {
       "name": "Pink Hydrangea",
       "image": "/assets/images/wall tattoos no bg/pink-hydrangea.png",
-      "price": 45,
+      "price": 50,
       "description": [
         {
           "font_family": "default",
