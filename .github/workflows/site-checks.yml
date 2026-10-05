@@ -1,0 +1,78 @@
+name: Site checks
+
+# Runs on every push to main -- including every save Marie makes in the CMS
+# (Decap commits straight to main via git-gateway) -- and catches the things
+# that break the live site silently: a content JSON file that no longer
+# parses (checkout reads the shop JSON directly), a broken admin/config.yml
+# (kills the whole CMS), a function with a syntax error, or the order emails
+# no longer giving the printer the ship-to address.
+#
+# This does NOT block the deploy: Netlify deploys every push regardless.
+# On failure it opens (or comments on) a GitHub issue that @mentions Ado,
+# so he gets an email instead of Marie or Stella.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Content JSON parses
+        run: |
+          node -e '
+            const fs = require("fs"), path = require("path");
+            let bad = 0, n = 0;
+            for (const dir of ["_content", "_collections", "netlify/functions/_data"]) {
+              if (!fs.existsSync(dir)) continue;
+              for (const f of fs.readdirSync(dir).filter(f => f.endsWith(".json"))) {
+                n++;
+                try { JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); }
+                catch (e) { bad++; console.log("::error file=" + dir + "/" + f + "::" + e.message); }
+              }
+            }
+            console.log(n + " JSON files checked, " + bad + " broken");
+            process.exit(bad ? 1 : 0);
+          '
+
+      - name: CMS config is valid YAML
+        run: |
+          pip install --quiet pyyaml
+          python -c "import yaml; yaml.safe_load(open('admin/config.yml', encoding='utf-8')); print('admin/config.yml OK')"
+
+      - name: Functions and site scripts have no syntax errors
+        run: |
+          for f in netlify/functions/*.js js/*.js; do node --check "$f" || exit 1; done
+          echo "syntax OK"
+
+      - name: Order emails (printer gets ship-to address)
+        run: node scripts/test-order-emails.js
+
+      - name: Alert Ado on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          title="Site checks failing on main"
+          body="@AnandaTris a site check failed after: \"${COMMIT_MSG%%$'\n'*}\" (pushed by ${ACTOR}, ${GITHUB_SHA::7}). The site still deployed. Details: ${RUN_URL}"
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi
