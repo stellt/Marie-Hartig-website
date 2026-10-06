@@ -389,6 +389,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/img_4580.jpeg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
         }
       ]
     },
@@ -502,6 +505,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/red-parrot.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
         }
       ]
     },
@@ -524,7 +530,12 @@
           "label": "42 × 24 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
+        }
+      ]
     },
     {
       "name": "Mr & Mrs Feather",
@@ -574,6 +585,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/img_6416.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
         }
       ]
     },
@@ -600,6 +614,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/img_6418.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
         }
       ]
     },
@@ -759,6 +776,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/scandinavian-kitchen-with-warm-red-accents.png"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
         }
       ]
     },
@@ -917,6 +937,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/countryside-vibes.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
         }
       ]
     },
