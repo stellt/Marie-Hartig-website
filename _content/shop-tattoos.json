@@ -33,6 +33,9 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/img_8860.jpeg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/deer-sunlit-mediterranean-foyer-with-art-and-deer.jpg"
         },
         {
@@ -40,9 +43,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/roe-deer-room-test.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/img_8860.jpeg"
         }
       ]
     },
@@ -68,13 +68,13 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/img_4578.jpeg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/cockatoo-and-monstera.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_7108.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/img_4578.jpeg"
         }
       ]
     },
@@ -101,6 +101,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/countryside-vibes.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_7106.jpg"
         }
       ]
     },
@@ -127,6 +130,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/giraffe-beige-sunlit-boho-doorway.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/7696dd14-bdb4-4154-a7ff-bc3972c6b349.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/7696dd14-bdb4-4154-a7ff-bc3972c6b349.jpg"
@@ -521,6 +527,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/countryside-vibes.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_7742.jpg"
         }
       ]
     },
@@ -543,7 +552,12 @@
           "label": "33 × 28 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6416.jpg"
+        }
+      ]
     },
     {
       "name": "Monkey Max and the Papaya",
@@ -564,7 +578,12 @@
           "label": "38 × 26 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6418.jpg"
+        }
+      ]
     },
     {
       "name": "Ocelot",
@@ -587,6 +606,9 @@
       ],
       "mirror_available": true,
       "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6740.jpg"
+        },
         {
           "image": "/assets/images/wall tattoos rooms/ocelot-and-mze.jpg"
         }
@@ -628,7 +650,12 @@
         }
       ],
       "sizes": [],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_0819.jpg"
+        }
+      ]
     },
     {
       "name": "Monkey Morris",
