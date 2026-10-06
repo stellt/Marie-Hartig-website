@@ -680,6 +680,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/monkeys-sunlit-doorway-with-whimsical-monkeys.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6492.jpg"
         }
       ]
     },
@@ -734,7 +737,7 @@
           "image": "/assets/images/wall tattoos rooms/toucan.jpg"
         },
         {
-          "image": "/assets/images/wall tattoos rooms/img_6327.jpeg"
+          "image": "/assets/images/wall tattoos rooms/img_6665.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/scandinavian-kitchen-with-warm-red-accents.png"
@@ -760,7 +763,12 @@
           "label": "60 × 40.5 cm"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6325.jpg"
+        }
+      ]
     },
     {
       "name": "Squirrels",
@@ -781,6 +789,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/fox-and-squirels.png"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_8343.jpg"
         }
       ]
     },
@@ -803,6 +814,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/red-plants-golden-glow-modern-classic-lounge.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6323.jpg"
         }
       ]
     },
@@ -829,6 +843,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/ocelot-and-mze.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_6417.jpg"
         }
       ]
     },
