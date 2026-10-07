@@ -56,6 +56,17 @@
   line-height: 1.1;
 }
 
+/* Subtitle under the heading: bigger than the links, smaller than the heading */
+.connect-tagline {
+  font-family: var(--content-font-family, 'Velour', serif);
+  font-weight: 500;
+  font-size: clamp(calc(0.95rem * var(--text-scale)), calc(1.3vw * var(--text-scale)), calc(1.2rem * var(--text-scale)));
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  color: var(--body-text-color, #111);
+  margin: -0.8rem 0 2rem;
+}
+
 /* Social links row — exactly like Nate Berkus */
 .connect-socials {
   display: flex;
@@ -77,6 +88,12 @@
 }
 
 .connect-socials a:hover { color: #555; }
+
+.connect-socials .social-icon { display: inline-flex; line-height: 0; }
+.connect-socials .social-icon svg {
+  width: 17px; height: 17px;
+  fill: none; stroke: currentColor; stroke-width: 1.4;
+}
 
 .connect-socials .sep {
   font-family: 'Jost', sans-serif;

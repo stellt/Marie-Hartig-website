@@ -353,6 +353,10 @@ collections:
       name: heading
       widget: string
       default: Connect
+    - label: Subtitle
+      name: tagline
+      widget: string
+      required: false
     - label: Instagram Handle
       name: instagram_handle
       widget: string
