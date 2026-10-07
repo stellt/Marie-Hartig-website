@@ -1206,6 +1206,17 @@ collections:
         widget: image
         media_folder: /assets/images/wall stickers
         public_folder: /assets/images/wall stickers
+      - label: More Photos
+        name: gallery
+        widget: list
+        required: false
+        label_singular: Photo
+        fields:
+        - label: Photo
+          name: image
+          widget: image
+          media_folder: /assets/images/art prints rooms
+          public_folder: /assets/images/art prints rooms
       - label: Price (€)
         name: price
         widget: number

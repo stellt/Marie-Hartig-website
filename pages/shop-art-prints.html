@@ -96,10 +96,43 @@
     .tattoo-lightbox-prev { left: -3.5rem; }
     .tattoo-lightbox-next { right: -3.5rem; }
     .tattoo-lightbox-prev:hover, .tattoo-lightbox-next:hover { color: #111; }
+
+    /* Photo gallery: main print image plus Marie's extra photos (same look as the tattoo popup) */
+    .popup-stage {
+      position: relative; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .popup-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 2.2rem; height: 2.2rem; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.85);
+      color: #111; font-size: 1rem; line-height: 1; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .popup-arrow:hover { background: #fff; border-color: #111; }
+    .popup-arrow.prev { left: -0.6rem; }
+    .popup-arrow.next { right: -0.6rem; }
+    .popup-thumbs {
+      display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+    }
+    .popup-arrow[hidden], .popup-thumbs[hidden] { display: none; }
+    .popup-thumbs button {
+      width: 3.2rem; height: 3.2rem; padding: 0; cursor: pointer;
+      border: 1px solid transparent; background: #fff; border-radius: 2px;
+      opacity: 0.6; transition: opacity 0.2s, border-color 0.2s;
+    }
+    .popup-thumbs button.active { opacity: 1; border-color: #111; }
+    .popup-thumbs button:hover { opacity: 1; }
+    .popup-thumbs img {
+      width: 100%; height: 100%; object-fit: cover; display: block; max-height: none;
+    }
     @media (max-width: 768px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 4vw 6rem; }
       .tattoo-lightbox-prev { left: 0.5rem; }
       .tattoo-lightbox-next { right: 0.5rem; }
+      /* On phones the print-to-print arrows sit on top of the photo arrows */
+      .tattoo-lightbox.has-gallery .tattoo-lightbox-prev,
+      .tattoo-lightbox.has-gallery .tattoo-lightbox-next { display: none; }
     }
   </style>
 </head>
@@ -161,7 +194,12 @@
     <div class="tattoo-lightbox-inner">
       <button class="tattoo-lightbox-close" onclick="closeLb()">&#215; Close</button>
       <button class="tattoo-lightbox-prev" onclick="shiftLb(-1)">&#8592;</button>
-      <img id="lb-img" src="" alt="" />
+      <div class="popup-stage">
+        <button class="popup-arrow prev" id="popup-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
+        <img id="lb-img" src="" alt="" />
+        <button class="popup-arrow next" id="popup-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
+      </div>
+      <div class="popup-thumbs" id="popup-thumbs" hidden></div>
       <div id="lb-name" style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.12em;color:#111;text-transform:uppercase;"></div>
       <div id="lb-price" style="font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:#111;"></div>
       <button id="lb-add-btn" class="add-to-cart-btn" style="width:100%;margin-top:0.5rem;">Add to Cart</button>
@@ -229,13 +267,45 @@
 
     function renderLb() {
       const item = lbItems[lbCur];
-      lbImg.src           = item.image;
+      setPhotos(item);
       lbImg.alt           = item.name;
       lbName.textContent  = item.name;
       lbPrice.textContent = `€${item.price.toFixed(2)}`;
       // Close first so the lightbox doesn't sit over the cart drawer
       lbAddBtn.onclick    = () => { closeLb(); Cart.addItem(item.id, item.name, item.price, item.image); };
     }
+
+    const popupPrev   = document.getElementById('popup-prev');
+    const popupNext   = document.getElementById('popup-next');
+    const popupThumbs = document.getElementById('popup-thumbs');
+    let popupPhotos   = [];
+    let popupPhotoIdx = 0;
+
+    function showPhoto(i) {
+      popupPhotoIdx = (i + popupPhotos.length) % popupPhotos.length;
+      lbImg.src = imgUrl(popupPhotos[popupPhotoIdx], 1200);
+      popupThumbs.querySelectorAll('button').forEach((b, j) => b.classList.toggle('active', j === popupPhotoIdx));
+    }
+
+    function setPhotos(item) {
+      // Decap can store single-field list items as bare strings
+      const extra = (item.gallery || []).map(g => typeof g === 'string' ? g : g && g.image).filter(Boolean);
+      popupPhotos = [item.image, ...extra];
+      const many = popupPhotos.length > 1;
+      popupPrev.hidden = popupNext.hidden = popupThumbs.hidden = !many;
+      lb.classList.toggle('has-gallery', many);
+      popupThumbs.innerHTML = many ? popupPhotos.map((src, j) =>
+        `<button type="button" data-i="${j}" aria-label="Photo ${j + 1}"><img src="${imgUrl(src, 160)}" alt="" /></button>`
+      ).join('') : '';
+      showPhoto(0);
+    }
+
+    popupPrev.addEventListener('click', () => showPhoto(popupPhotoIdx - 1));
+    popupNext.addEventListener('click', () => showPhoto(popupPhotoIdx + 1));
+    popupThumbs.addEventListener('click', e => {
+      const b = e.target.closest('button');
+      if (b) showPhoto(+b.dataset.i);
+    });
 
     function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
     function shiftLb(d) {
