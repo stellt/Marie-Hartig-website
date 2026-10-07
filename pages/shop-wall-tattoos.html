@@ -429,7 +429,7 @@
             <button type="button" class="tilt-btn" id="popup-tilt-mirrored" data-tilt="mirrored">Mirrored</button>
           </div>
         </div>
-        <a class="tattoo-popup-setup-link" id="popup-setup-link" href="" download target="_blank" rel="noopener">Setup Instructions</a>
+        <a class="tattoo-popup-setup-link" id="popup-setup-link" href="setup-instructions.html" target="_blank" rel="noopener">Setup Instructions</a>
         <div class="tattoo-popup-price"><span class="tattoo-popup-price-amount" id="popup-price"></span></div>
         <button class="add-to-cart-btn" id="popup-add-btn" type="button">Add to Cart</button>
         <p class="tattoo-popup-delivery" id="popup-delivery"></p>
@@ -664,15 +664,8 @@
       setTilt('standard');
       popupDelivery.textContent = popupPageData.delivery_note || '';
 
-      // Download link for the application/care PDF -- hidden entirely until
-      // Marie uploads one via the CMS, rather than showing a dead link.
-      if (popupPageData.setup_instructions_pdf) {
-        popupSetupLink.href = popupPageData.setup_instructions_pdf;
-        popupSetupLink.textContent = popupPageData.setup_instructions_text || 'Setup Instructions';
-        popupSetupLink.hidden = false;
-      } else {
-        popupSetupLink.hidden = true;
-      }
+      // Opens the setup-instructions page in a new tab so the popup stays put.
+      popupSetupLink.textContent = popupPageData.setup_instructions_text || 'Setup Instructions';
 
       popupOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';

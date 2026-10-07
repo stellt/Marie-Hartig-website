@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wall Tattoo Setup Instructions | Marie Hartig Studio</title>
+  <!-- SEO -->
+  <meta name="description" content="How to prepare your wall, apply, reposition and remove Premium Wall Tattoos from Marie&#x27;s Painted Worlds." />
+  <link rel="canonical" href="https://www.mariespaintedworlds.com/pages/setup-instructions.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Marie Hartig Studio" />
+  <meta property="og:title" content="Wall Tattoo Setup Instructions | Marie Hartig Studio" />
+  <meta property="og:description" content="How to prepare your wall, apply, reposition and remove Premium Wall Tattoos from Marie&#x27;s Painted Worlds." />
+  <meta property="og:url" content="https://www.mariespaintedworlds.com/pages/setup-instructions.html" />
+  <meta property="og:image" content="https://www.mariespaintedworlds.com/assets/images/og-share.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- /SEO -->
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/worlds.css" />
+  <link rel="stylesheet" href="../css/cart.css" />
+  <link rel="stylesheet" href="../css/legal.css" />
+  <link rel="stylesheet" href="../css/setup.css" />
+</head>
+<body class="worlds-page legal-page">
+
+  <!-- NAVIGATION -->
+  <nav class="nav" aria-label="Main navigation">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav-toggle-bar"><span></span><span></span><span></span></span>
+    </button>
+    <a class="nav-logo" href="../index.html">Marie's Painted Worlds</a>
+    <ul class="nav-links">
+      <li><a href="about-marie.html">About Marie</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="contact.html">Connect</a></li>
+      <li>
+        <button class="cart-icon-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart</h2>
+      <button class="cart-close" id="cart-close">&#215; Close</button>
+    </div>
+    <div class="cart-drawer-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">€0.00</span>
+      </div>
+      <button class="cart-checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <main class="legal-main setup-main">
+    <img class="setup-banner" id="setup-banner" alt="" hidden />
+    <p class="legal-eyebrow" id="setup-eyebrow">Premium · Wall Tattoos</p>
+    <h1 class="legal-title" id="setup-heading">Setup Instructions</h1>
+    <p class="setup-intro" id="setup-intro"></p>
+    <ol class="setup-steps" id="setup-steps"></ol>
+    <div class="setup-closing">
+      <p class="setup-closing-line" id="setup-closing"></p>
+      <p class="setup-closing-note" id="setup-closing-note"></p>
+      <img class="setup-signature" id="setup-signature" alt="Marie Hartig" hidden />
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="legal-footer">
+    <span><a href="contact.html">Connect</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="shipping-returns.html">Shipping &amp; Returns</a> &nbsp;|&nbsp; <a href="impressum.html">Impressum</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a></span>
+    <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
+  </footer>
+
+  <script src="../js/maintenance.js"></script>
+  <script src="../js/img.js"></script>
+  <script src="../js/site-design.js"></script>
+  <script>
+    fetch('../_content/setup-instructions.json')
+      .then(res => res.json())
+      .then(data => {
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          el.textContent = value || '';
+          el.hidden = !value;
+        };
+        const setImg = (id, path, w) => {
+          const el = document.getElementById(id);
+          if (!path) { el.hidden = true; return; }
+          el.src = imgUrl(path, w);
+          el.hidden = false;
+        };
+        setText('setup-eyebrow', data.eyebrow);
+        setText('setup-heading', data.heading || 'Setup Instructions');
+        setText('setup-intro', data.intro);
+        setText('setup-closing', data.closing);
+        setText('setup-closing-note', data.closing_note);
+        setImg('setup-banner', data.header_image, 1600);
+        setImg('setup-signature', data.signature, 400);
+
+        const list = document.getElementById('setup-steps');
+        list.innerHTML = '';
+        (data.steps || []).forEach((step, i) => {
+          const li = document.createElement('li');
+          li.className = 'setup-step';
+          const num = document.createElement('span');
+          num.className = 'setup-step-num';
+          num.textContent = String(i + 1).padStart(2, '0');
+          const h2 = document.createElement('h2');
+          h2.textContent = step.title || '';
+          li.append(num, h2);
+          String(step.text || '').split(/\n\s*\n/).forEach(para => {
+            if (!para.trim()) return;
+            const p = document.createElement('p');
+            p.textContent = para.trim();
+            li.appendChild(p);
+          });
+          list.appendChild(li);
+        });
+      });
+  </script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

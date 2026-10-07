@@ -388,6 +388,54 @@ collections:
       - 'Must be a hex color code, e.g. #dedad3'
       hint: The color behind the text panel on this page. Leave blank to use the site's
         usual beige.
+  - label: Wall Tattoo Setup Instructions
+    name: setup-instructions
+    file: _content/setup-instructions.json
+    preview_path: /pages/setup-instructions.html
+    fields:
+    - label: Heading
+      name: heading
+      widget: string
+      default: Setup Instructions
+    - label: Small Line Above Heading
+      name: eyebrow
+      widget: string
+      required: false
+    - label: Intro Line
+      name: intro
+      widget: string
+      required: false
+    - label: Header Image
+      name: header_image
+      widget: image
+      required: false
+      media_folder: /assets/images/setup
+      public_folder: /assets/images/setup
+    - label: Steps
+      name: steps
+      widget: list
+      fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Text
+        name: text
+        widget: text
+        hint: Leave an empty line between paragraphs.
+    - label: Closing Line
+      name: closing
+      widget: string
+      required: false
+    - label: Closing Note
+      name: closing_note
+      widget: string
+      required: false
+    - label: Signature
+      name: signature
+      widget: image
+      required: false
+      media_folder: /assets/images/setup
+      public_folder: /assets/images/setup
   - label: Home / About Page
     name: about
     file: _content/about.json
@@ -967,14 +1015,6 @@ collections:
       required: false
       default: '*delivery up to 3 weeks'
       hint: Shown under the Add to Cart button in each tattoo's popup.
-    - label: Setup Instructions PDF
-      name: setup_instructions_pdf
-      widget: file
-      media_folder: /assets/downloads
-      public_folder: /assets/downloads
-      required: false
-      hint: The PDF customers can download from each tattoo's popup (application
-        and care instructions). Upload a new file here any time to replace it.
     - label: Setup Instructions Link Text
       name: setup_instructions_text
       widget: string
