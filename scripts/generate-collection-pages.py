@@ -84,7 +84,7 @@ TEMPLATE = """<!DOCTYPE html>
   </div>
 
   <footer class="collection-footer">
-    <span><a href="../contact.html">Connect</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></span>
+    <span><a href="../contact.html">Connect</a> &nbsp;|&nbsp; <a href="../terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="../shipping-returns.html">Shipping &amp; Returns</a> &nbsp;|&nbsp; <a href="../impressum.html">Impressum</a> &nbsp;|&nbsp; <a href="../privacy.html">Privacy Policy</a></span>
     <span>© All Rights Reserved 2026. Marie Hartig Studio</span>
   </footer>
 

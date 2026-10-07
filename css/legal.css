@@ -1,0 +1,171 @@
+/* ============================================
+   LEGAL PAGES — terms, shipping-returns, impressum, privacy
+   Typography follows the Process page (Velour headings, Jost body).
+   .legal-footer is also used by the shop pages, which had no footer.
+   ============================================ */
+
+body.legal-page {
+  background: var(--site-bg);
+  color: var(--body-text-color, #333);
+}
+
+.legal-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(64px + 5vw) 6vw 6vw;
+}
+
+.legal-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.4);
+  margin-bottom: 0.9rem;
+}
+
+.legal-title {
+  font-family: var(--content-font-family, 'Velour', serif);
+  font-weight: 700;
+  font-size: clamp(calc(1.5rem * var(--text-scale)), calc(2.6vw * var(--text-scale)), calc(2.4rem * var(--text-scale)));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--body-text-color, #111);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  overflow-wrap: break-word; /* "Datenschutzerklärung" is wider than a phone */
+}
+
+.legal-meta {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(0,0,0,0.45);
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+  margin-bottom: 2.4rem;
+}
+
+.legal-section { margin-bottom: 2.2rem; }
+
+.legal-section h2 {
+  font-family: var(--content-font-family, 'Velour', serif);
+  font-weight: 500;
+  font-size: clamp(calc(0.78rem * var(--text-scale)), calc(0.95vw * var(--text-scale)), calc(0.9rem * var(--text-scale)));
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--body-text-color, #111);
+  margin-bottom: 0.9rem;
+}
+
+.legal-section p,
+.legal-section li,
+.legal-address,
+.legal-form {
+  font-family: var(--content-font-family, 'Jost', sans-serif);
+  font-weight: 300;
+  font-size: clamp(calc(0.8rem * var(--text-scale)), calc(0.95vw * var(--text-scale)), calc(0.9rem * var(--text-scale)));
+  line-height: 1.65;
+  color: var(--body-text-color, #333);
+}
+
+.legal-section p { margin-bottom: 0.85rem; }
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section a {
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  transition: border-color 0.2s ease;
+}
+.legal-section a:hover { border-color: rgba(0,0,0,0.7); }
+
+.legal-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0 0 0.85rem;
+}
+
+.legal-section li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.legal-section li::before {
+  content: '—';
+  color: rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  font-weight: 200;
+}
+
+.legal-address {
+  font-style: normal;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(0,0,0,0.15);
+  margin: 0 0 0.85rem;
+}
+
+/* Model withdrawal form */
+.legal-form {
+  border: 1px solid rgba(0,0,0,0.18);
+  padding: 1.6rem 1.8rem;
+  margin-top: 1.2rem;
+}
+
+.legal-form p { margin-bottom: 1rem; }
+
+.legal-form dl { margin-top: 1.2rem; }
+
+.legal-form dt {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.45);
+  padding-top: 1rem;
+}
+
+.legal-form dd {
+  height: 1.9rem;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+
+/* ---- FOOTER (legal pages + shop pages) ---- */
+.legal-footer {
+  background: var(--site-bg);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 4vw;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.legal-footer a {
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.legal-footer a:hover { color: #333; }
+
+@media (max-width: 900px) {
+  .legal-main { padding: calc(64px + 10vw) 8vw 12vw; }
+  .legal-title {
+    font-size: calc(1.2rem * var(--text-scale));
+    letter-spacing: 0.06em;
+  }
+  .legal-form { padding: 1.2rem; }
+  .legal-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
