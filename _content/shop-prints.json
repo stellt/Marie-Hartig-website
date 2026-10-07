@@ -80,27 +80,70 @@
     {
       "name": "Indian Shot - Monsoon Collection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker8.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/indian-shot-and-guava.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/indianshot.jpg"
+        }
+      ]
     },
     {
       "name": "Guava - Monsoon Collection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker6.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/guava.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/all.jpg"
+        }
+      ]
     },
     {
       "name": "Twins - Monsoon Collection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker10.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/twinsa.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/twins.jpg"
+        }
+      ]
     },
     {
       "name": "Neem - Monsoon Collection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker9.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/all-fo-them.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/all.jpg"
+        }
+      ]
     },
     {
       "name": "Jasmine - Monsoon Collection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker11.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/all-fo-them.jpg"
+        }
+      ]
     }
   ]
 }
