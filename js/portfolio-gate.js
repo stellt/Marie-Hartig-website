@@ -33,10 +33,13 @@ function registerUser(email, password) {
   localStorage.setItem(GATE_REGISTERED_USERS_KEY, JSON.stringify(users));
 }
 
-function isRegistered(email, password) {
-  const users = getRegisteredUsers();
-  const lowerEmail = email.toLowerCase();
-  return users[lowerEmail] === hashPassword(password);
+// Records a new portfolio sign-up in Netlify Forms (portfolio-registration).
+function trackRegistration(email) {
+  const formData = new FormData();
+  formData.append('form-name', 'portfolio-registration');
+  formData.append('email', email);
+  formData.append('registered-at', new Date().toISOString());
+  fetch('/', { method: 'POST', body: formData }).catch(() => {});
 }
 
 function buildGate() {
@@ -101,18 +104,20 @@ function wireGate(el) {
 
   const forgotBtn = el.querySelector('#portfolio-gate-forgot');
   forgotBtn.addEventListener('click', () => {
-    alert('To reset your password, please contact Marie directly or use the email you registered with to create a new account.');
+    alert('No problem: just create an account again with the same email and a new password.');
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
 
-    // Check if email is registered with that password
-    if (!isRegistered(emailInput.value, passwordInput.value)) {
-      errorEl.textContent = 'Invalid login. Please register your account first.';
-      return;
+    // Accounts are only remembered in the browser they were created in, so a
+    // sign-in from another device or browser is not an error: record it as a
+    // registration and let them in (the server accepts any email + password).
+    if (!getRegisteredUsers()[emailInput.value.toLowerCase()]) {
+      trackRegistration(emailInput.value);
     }
+    registerUser(emailInput.value, passwordInput.value);
 
     const granted = await submitLogin(emailInput.value, passwordInput.value);
     if (granted) {
@@ -139,25 +144,12 @@ function wireGate(el) {
     const email = registerEmailInput.value;
     const password = registerPasswordInput.value;
 
-    // Check if already registered
-    const users = getRegisteredUsers();
-    if (users[email.toLowerCase()]) {
-      registerErrorEl.textContent = 'This email is already registered. Please sign in above.';
-      return;
+    // An email already known in this browser just gets its password updated
+    // rather than an "already registered" dead end.
+    if (!getRegisteredUsers()[email.toLowerCase()]) {
+      trackRegistration(email);
     }
-
-    // Register the user
     registerUser(email, password);
-
-    // Track registration via Netlify Forms
-    const formData = new FormData();
-    formData.append('form-name', 'portfolio-registration');
-    formData.append('email', email);
-    formData.append('registered-at', new Date().toISOString());
-    console.log('Submitting registration:', email);
-    fetch('/', { method: 'POST', body: formData })
-      .then(() => console.log('Registration submitted successfully'))
-      .catch((err) => console.error('Registration submission failed:', err));
 
     // Grant access immediately
     const granted = await submitRegister(email, password);
