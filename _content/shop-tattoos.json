@@ -1,10 +1,12 @@
 {
   "print_sizes": [
     {
-      "label": "30 × 40 cm"
+      "label": "30 × 40 cm",
+      "price": 70
     },
     {
-      "label": "40 × 50 cm"
+      "label": "40 × 50 cm",
+      "price": 100
     }
   ],
   "compose_canvas_hint": "Drag tattoos here to build your composition",
