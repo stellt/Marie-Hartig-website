@@ -250,7 +250,12 @@
         }
       ],
       "sizes": [],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/butterflies.jpg"
+        }
+      ]
     },
     {
       "name": "Green Twins",
