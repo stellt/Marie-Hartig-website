@@ -13,6 +13,16 @@
       ]
     },
     {
+      "name": "Red Butterflies - Tropical Selection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker3.png",
+      "price": 100
+    },
+    {
+      "name": "Toucanet - Tropical Selection (40x50cm)",
+      "image": "../assets/images/wall stickers/Sticker4.png",
+      "price": 100
+    },
+    {
       "name": "Blue Birds - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker1.png",
       "price": 100,
@@ -24,16 +34,6 @@
           "image": "/assets/images/art prints rooms/bluebirds.jpg"
         }
       ]
-    },
-    {
-      "name": "Red Butterflies - Tropical Selection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker3.png",
-      "price": 100
-    },
-    {
-      "name": "Toucanet - Tropical Selection (40x50cm)",
-      "image": "../assets/images/wall stickers/Sticker4.png",
-      "price": 100
     },
     {
       "name": "Henry and the Mangos - Monsoon Collection (40x50cm)",
