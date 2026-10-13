@@ -3,7 +3,8 @@
   "slug": "sweetest",
   "images": [
     "/assets/images/portfolio/05v.jpg",
-    "/assets/images/portfolio/04.jpg"
+    "/assets/images/portfolio/04.jpg",
+    "/assets/images/portfolio/dreams.jpg"
   ],
   "description": [
     {
@@ -11,14 +12,18 @@
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     },
     {
       "text": "The concept: a popular one: a stunning background colour of choice and then I go for it and paint all your favourite trees, birds and plants into the room in a composition and colour scheme that really works for the space. It has a chinoiserie feel to it. I love to do this style and the room ends up looking cosy, warm, elevated and lovely. Positive vibes all round.",
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     }
   ],
   "location": "Bedroom. Private Home. Feusisberg, Switzerland",
