@@ -16,7 +16,7 @@
     {
       "name": "Roe Deer",
       "image": "/assets/images/wall tattoos no bg/roe-deer.png",
-      "price": 55,
+      "price": 65,
       "description": [
         {
           "font_family": "default",
@@ -32,7 +32,7 @@
           "label": "74 x 55 cm"
         }
       ],
-      "mirror_available": true,
+      "mirror_available": false,
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/img_8860.jpeg"
