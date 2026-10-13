@@ -29,7 +29,7 @@
       ],
       "sizes": [
         {
-          "label": "74 x 55 cm"
+          "label": "75 x 52 cm"
         }
       ],
       "mirror_available": false,
@@ -115,7 +115,7 @@
     {
       "name": "Josefine the Giraffe",
       "image": "/assets/images/wall tattoos no bg/jossefine-the-giraffe.png",
-      "price": 50,
+      "price": 21,
       "description": [
         {
           "font_family": "default",
@@ -147,7 +147,7 @@
     {
       "name": "Victoria the Fox",
       "image": "/assets/images/wall tattoos no bg/fox-victoria.png",
-      "price": 50,
+      "price": 13,
       "description": [
         {
           "font_family": "default",
@@ -179,7 +179,7 @@
     {
       "name": "Banana Plant",
       "image": "/assets/images/wall tattoos no bg/banana-plant.png",
-      "price": 80,
+      "price": 75,
       "description": [
         {
           "font_family": "default",
@@ -193,7 +193,7 @@
       "sizes": [
         {
           "price": "",
-          "label": "174 x 80 cm"
+          "label": "116 x 50 cm"
         }
       ],
       "mirror_available": true,
