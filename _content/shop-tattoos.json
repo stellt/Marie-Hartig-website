@@ -434,7 +434,7 @@
     {
       "name": "Jungle Plant 2b",
       "image": "/assets/images/wall tattoos no bg/jungle-plant-2b.png",
-      "price": 45,
+      "price": 55,
       "description": [
         {
           "font_family": "default",
@@ -665,7 +665,7 @@
     {
       "name": "Rubber Plant",
       "image": "/assets/images/wall tattoos no bg/rubber-plant.png",
-      "price": 45,
+      "price": 55,
       "description": [
         {
           "font_family": "default",
@@ -686,7 +686,7 @@
     {
       "name": "Mushrooms",
       "image": "/assets/images/wall tattoos no bg/mushrooms.png",
-      "price": 40,
+      "price": 45,
       "description": [
         {
           "font_family": "default",
@@ -737,7 +737,7 @@
     {
       "name": "Monstera Plant",
       "image": "/assets/images/wall tattoos no bg/monstera-plant.png",
-      "price": 45,
+      "price": 55,
       "description": [
         {
           "font_family": "default",
@@ -801,7 +801,7 @@
     {
       "name": "Pink Hydrangea",
       "image": "/assets/images/wall tattoos no bg/pink-hydrangea.png",
-      "price": 50,
+      "price": 55,
       "description": [
         {
           "font_family": "default",
@@ -827,7 +827,7 @@
     {
       "name": "Squirrels",
       "image": "/assets/images/wall tattoos no bg/squirrels.png",
-      "price": 40,
+      "price": 45,
       "description": [
         {
           "font_family": "default",
