@@ -333,6 +333,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/heron.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/heron-gross.jpg"
         }
       ]
     },
@@ -362,6 +365,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_7230.jpeg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/cactus_normal.jpg"
         }
       ]
     },
@@ -391,6 +397,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_6896.jpeg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/impala_normal.jpg"
         }
       ]
     },
@@ -423,6 +432,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/hornbill_normal.jpg"
         }
       ]
     },
@@ -449,6 +461,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/impala-and-jungle-plant.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/jungle-plant-2-gross.jpg"
         }
       ]
     },
@@ -475,6 +490,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/impala-and-jungle-plant.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/jungle-plant-2b-gross.jpg"
         }
       ]
     },
@@ -507,6 +525,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/lamb_normal.jpg"
         }
       ]
     },
@@ -539,6 +560,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/red-parrot_normal.jpg"
         }
       ]
     },
@@ -565,6 +589,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/lemurs_normal.jpg"
         }
       ]
     },
@@ -590,6 +617,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_7742.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/frather_normal.jpg"
         }
       ]
     },
@@ -651,6 +681,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monkey-max-papya_normal.jpg"
         }
       ]
     },
@@ -680,6 +713,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/ocelot-and-mze.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/ocelot_normal.jpg"
         }
       ]
     },
@@ -702,7 +738,12 @@
           "label": "58 x 30"
         }
       ],
-      "mirror_available": true
+      "mirror_available": true,
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/rubber-plant-gross.jpg"
+        }
+      ]
     },
     {
       "name": "Mushrooms",
@@ -752,6 +793,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_6492.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monkey-morris_normal.jpg"
         }
       ]
     },
@@ -781,6 +825,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/monstera.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monstera-plant-gross.jpg"
         }
       ]
     },
@@ -816,6 +863,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/toucar_normal.jpg"
         }
       ]
     },
@@ -842,6 +892,9 @@
       "gallery": [
         {
           "image": "/assets/images/wall tattoos rooms/img_6325.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/pink-hortensien-gross.jpg"
         }
       ]
     },
@@ -892,6 +945,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_6323.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/red-plant_normal.jpg"
         }
       ]
     },
@@ -921,6 +977,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_6417.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/mze-monkey_normal.jpg"
         }
       ]
     },
