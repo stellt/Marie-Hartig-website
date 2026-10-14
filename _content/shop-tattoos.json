@@ -35,6 +35,9 @@
       "mirror_available": false,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/reh-gross.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/img_8860.jpeg"
         },
         {
@@ -45,9 +48,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/roe-deer-room-test.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/reh-gross.jpg"
         }
       ]
     },
@@ -73,6 +73,9 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/cockatoo_normal.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/img_4578.jpeg"
         },
         {
@@ -83,9 +86,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-hallway-with-bird-prints.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/cockatoo_normal.jpg"
         }
       ]
     },
@@ -111,13 +111,13 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/foxgloves_normal.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/countryside-vibes.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_7106.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/foxgloves_normal.jpg"
         }
       ]
     },
@@ -143,6 +143,9 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/giraffe-gross.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/giraffe-beige-sunlit-boho-doorway.jpg"
         },
         {
@@ -150,9 +153,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/7696dd14-bdb4-4154-a7ff-bc3972c6b349.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/giraffe-gross.jpg"
         }
       ]
     },
@@ -178,6 +178,9 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/fox-victoria_normal.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/fox-and-squirels.png"
         },
         {
@@ -185,9 +188,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/fox-victoria_normal.jpg"
         }
       ]
     },
@@ -240,6 +240,9 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/gustav-spider-monkey_normal.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/monkeys-sunlit-doorway-with-whimsical-monkeys.jpg"
         },
         {
@@ -247,9 +250,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/gustav-spider-monkey_normal.jpg"
         }
       ]
     },
@@ -297,13 +297,13 @@
       "mirror_available": true,
       "gallery": [
         {
+          "image": "/assets/images/wall tattoos rooms/twins_normal.jpg"
+        },
+        {
           "image": "/assets/images/wall tattoos rooms/cactus-and-twins.jpg"
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_4579.jpeg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/twins_normal.jpg"
         }
       ]
     },
@@ -332,10 +332,10 @@
           "image": "/assets/images/wall tattoos rooms/img_9276.jpeg"
         },
         {
-          "image": "/assets/images/wall tattoos rooms/heron.jpg"
+          "image": "/assets/images/wall tattoos rooms/heron-gross.jpg"
         },
         {
-          "image": "/assets/images/wall tattoos rooms/heron-gross.jpg"
+          "image": "/assets/images/wall tattoos rooms/heron.jpg"
         }
       ]
     },
