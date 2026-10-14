@@ -1009,6 +1009,9 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/replant2.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/red-plant-2_normal.jpg"
         }
       ]
     },
@@ -1038,25 +1041,11 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/warm-scandinavian-nursery-gallery.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/sophie-hen_normal.jpg"
         }
       ]
-    },
-    {
-      "name": "Red Plant Stems",
-      "image": "/assets/images/wall tattoos no bg/red-plant-stems.png",
-      "price": 5,
-      "description": [
-        {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "These Stems go with Red Plant 1 and 2 in case you want to make them longer!\n\nMarie Hartig Wall Tattoos are premium-quality reproductions of original hand-painted artworks, designed to bring the character of a painted mural into your home. They are made to be carefully applied and left in place; larger or more intricate designs may take a little time to install and are often easiest to apply with two people.\n\nWhile the Wall Tattoos can be repositioned if necessary, they are not designed to be moved repeatedly. Please treat them as a piece of wall art rather than a conventional children’s sticker."
-        }
-      ],
-      "sizes": [],
-      "mirror_available": true
     }
   ],
   "howto_video": "/assets/videos/wall-tattoo-instructions.mp4",
