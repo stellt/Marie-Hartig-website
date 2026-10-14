@@ -156,6 +156,12 @@ const Cart = (() => {
     const closeBtn = document.getElementById('cart-close');
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
 
+    // VAT note under the cart total (Marie, 2026-10-14)
+    const totalRow = document.querySelector('.cart-total');
+    if (totalRow && !document.querySelector('.cart-vat-note')) {
+      totalRow.insertAdjacentHTML('afterend', '<p class="cart-vat-note">Prices include applicable VAT. Shipping calculated at checkout.</p>');
+    }
+
     // Checkout button
     const checkoutBtn = document.querySelector('.cart-checkout-btn');
     if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);

@@ -40,6 +40,13 @@ function money(cents, currency) {
   return (cur === 'EUR' ? '€' : cur + ' ') + n.toFixed(2);
 }
 
+// Prices are VAT-inclusive, so VAT is shown as an "incl." line under the
+// total, never added on top. Only present once Stripe Tax is switched on
+// (STRIPE_TAX_ENABLED) and the order actually carried VAT.
+function vatCents(full) {
+  return (full.total_details && Number(full.total_details.amount_tax)) || 0;
+}
+
 function splitEmails(v) {
   return String(v || '').split(/[,;\s]+/).map(s => s.trim()).filter(Boolean);
 }
@@ -181,6 +188,7 @@ function buildOwnerEmail(ref, full, items, ship, rateName, forPrinter = false) {
     `Items: ${money(full.amount_subtotal, cur)}`,
     `${rateName || 'Shipping'}: ${money(shipCents, cur)}`,
     `TOTAL PAID: ${total}`,
+    vatCents(full) ? `(incl. VAT ${money(vatCents(full), cur)})` : null,
     '',
     'CUSTOMER',
     `${customer.name || '(no name)'}`,
@@ -200,7 +208,9 @@ function buildOwnerEmail(ref, full, items, ship, rateName, forPrinter = false) {
     items.map((it, i) => itemBlockHtml(it, i, true)).join('') +
     `<table style="border-collapse:collapse;font-size:14px;margin:12px 0"><tr><td style="padding:2px 16px 2px 0;color:#777">Items</td><td>${esc(money(full.amount_subtotal, cur))}</td></tr>` +
     `<tr><td style="padding:2px 16px 2px 0;color:#777">${esc(rateName || 'Shipping')}</td><td>${esc(money(shipCents, cur))}</td></tr>` +
-    `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr></table>` +
+    `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr>` +
+    (vatCents(full) ? `<tr><td style="padding:2px 16px 2px 0;color:#777">incl. VAT</td><td style="color:#777">${esc(money(vatCents(full), cur))}</td></tr>` : '') +
+    `</table>` +
     `<p style="margin:16px 0 4px"><strong>Customer</strong></p><p style="margin:0">${esc(customer.name || '(no name)')}<br>${esc(customer.email || '(no email)')}${customer.phone ? '<br>' + esc(customer.phone) : ''}</p>` +
     `<p style="margin:16px 0 4px"><strong>Ship to</strong></p><p style="margin:0">${addr ? addr.map(esc).join('<br>') : '(no shipping address collected)'}</p>` +
     `<p style="margin:16px 0 0;color:#777;font-size:13px">${esc(footer)}${dashboard ? ` <a href="${esc(dashboard)}">Open in Stripe</a>` : ''}</p>`);
@@ -232,6 +242,7 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
     `Items: ${money(full.amount_subtotal, cur)}`,
     `${rateName || 'Shipping'}: ${money(shipCents, cur)}`,
     `TOTAL PAID: ${total}`,
+    vatCents(full) ? `(incl. VAT ${money(vatCents(full), cur)})` : null,
     '',
     'SHIPPING TO',
     addr ? addr.join('\n') : '(no shipping address)',
@@ -240,7 +251,7 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
     '',
     "Marie's Painted Worlds",
     SITE_URL,
-  ].join('\n');
+  ].filter(l => l !== null).join('\n');
 
   const html = shell('Thank you for your order!',
     `<p style="margin:0 0 12px">${esc(greeting)}</p>` +
@@ -249,7 +260,9 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
     items.map((it, i) => itemBlockHtml(it, i, true)).join('') +
     `<table style="border-collapse:collapse;font-size:14px;margin:12px 0"><tr><td style="padding:2px 16px 2px 0;color:#777">Items</td><td>${esc(money(full.amount_subtotal, cur))}</td></tr>` +
     `<tr><td style="padding:2px 16px 2px 0;color:#777">${esc(rateName || 'Shipping')}</td><td>${esc(money(shipCents, cur))}</td></tr>` +
-    `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr></table>` +
+    `<tr><td style="padding:2px 16px 2px 0"><strong>Total paid</strong></td><td><strong>${esc(total)}</strong></td></tr>` +
+    (vatCents(full) ? `<tr><td style="padding:2px 16px 2px 0;color:#777">incl. VAT</td><td style="color:#777">${esc(money(vatCents(full), cur))}</td></tr>` : '') +
+    `</table>` +
     `<p style="margin:16px 0 4px"><strong>Shipping to</strong></p><p style="margin:0">${addr ? addr.map(esc).join('<br>') : '(no shipping address)'}</p>` +
     `<p style="margin:16px 0 0">Questions about your order? Just reply to this email.</p>` +
     `<p style="margin:16px 0 0">Marie's Painted Worlds<br><a href="${SITE_URL}">${SITE_URL.replace('https://', '')}</a></p>`);

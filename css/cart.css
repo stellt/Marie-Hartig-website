@@ -230,6 +230,17 @@
 .cart-total-label { color: #888; font-weight: 300; }
 .cart-total-amount { color: #111; font-weight: 500; }
 
+.cart-vat-note,
+.vat-note {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #888;
+}
+.cart-vat-note { margin: -0.8rem 0 1.2rem; }
+.shop-header .vat-note { font-size: 0.75rem; letter-spacing: 0.04em; text-transform: none; margin-top: 0.6rem; }
+
 .cart-checkout-btn {
   display: block;
   width: 100%;

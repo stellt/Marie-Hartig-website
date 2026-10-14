@@ -34,6 +34,20 @@ function rootAbsolute(p) {
 // structured description of what the customer bought. It gets attached to
 // each Stripe line item, so the order emails (stripe-webhook.js) can tell
 // the printer exactly what to print without guessing from display names.
+// VAT and invoices (Marie's email, 2026-10-14). Both are OFF until their
+// env var is 'true' in Netlify, because they need Stripe Dashboard setup
+// first -- turning tax on without it makes every checkout fail:
+//   STRIPE_TAX_ENABLED       Stripe Tax: origin address + Austria
+//                            registration set under Dashboard > Tax.
+//   STRIPE_INVOICES_ENABLED  a PDF invoice emailed after payment: business
+//                            address + UID set on the invoice template, and
+//                            "Email customers about paid invoices" switched on.
+// Prices and shipping are VAT-INCLUSIVE: €55 stays €55 in every country and
+// Stripe works out the VAT inside it (0 for exports). Never 'exclusive' --
+// that would add VAT on top of Marie's prices.
+const TAX_ENABLED = process.env.STRIPE_TAX_ENABLED === 'true';
+const INVOICES_ENABLED = process.env.STRIPE_INVOICES_ENABLED === 'true';
+
 function buildCatalog() {
   const catalog = {};
 
@@ -133,6 +147,7 @@ exports.handler = async (event) => {
           metadata,
         },
         unit_amount: Math.round(entry.price * 100), // catalog-verified price, in cents
+        ...(TAX_ENABLED ? { tax_behavior: 'inclusive' } : {}),
       },
       quantity: qty,
     });
@@ -169,6 +184,7 @@ exports.handler = async (event) => {
         type: 'fixed_amount',
         fixed_amount: { amount: Math.round(fee * 100), currency: 'eur' },
         display_name: label,
+        ...(TAX_ENABLED ? { tax_behavior: 'inclusive', tax_code: 'txcd_92010001' } : {}),
         delivery_estimate: {
           minimum: { unit: 'week', value: weeksMin },
           maximum: { unit: 'week', value: weeksMax },
@@ -205,6 +221,11 @@ exports.handler = async (event) => {
       cancel_url: `${origin}/pages/cancel.html`,
       // Optional: collect shipping address if you sell physical goods
       shipping_address_collection: { allowed_countries: allowedCountries },
+      ...(TAX_ENABLED ? { automatic_tax: { enabled: true } } : {}),
+      ...(INVOICES_ENABLED ? {
+        billing_address_collection: 'required',
+        invoice_creation: { enabled: true },
+      } : {}),
     });
 
     return {
