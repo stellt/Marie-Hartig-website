@@ -2,7 +2,7 @@
   "title": "Safari Vibes",
   "slug": "safari-vibes",
   "images": [
-    "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-1.jpg",
+    "/assets/images/portfolio/giraffe.jpg",
     "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-2.jpg",
     "/assets/images/portfolio/10 SAFARI VIBES/safari-vibes-3.jpg"
   ],
@@ -12,14 +12,18 @@
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     },
     {
       "text": "Zebra, Giraffe, leopard, cheetahs, Dung beetles and even an Elephant…if you can find it…all framed with a beautiful pattern inspired by west African wall art.",
       "text_color": "default",
       "text_size": "default",
       "font_family": "default",
-      "text_color_custom": ""
+      "text_color_custom": "",
+      "indent": "default",
+      "spacing": "default"
     }
   ],
   "location": "Children's Room. Private Home. Nassau, Bahamas",
