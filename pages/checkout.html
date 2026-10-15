@@ -25,6 +25,11 @@
       color: #888; text-decoration: none;
     }
     .checkout-back:hover { color: #111; }
+    .checkout-note {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.9rem; color: #555; margin: 0 0 1.5rem;
+    }
+    .checkout-note:empty { display: none; }
     .checkout-status {
       font-family: 'Jost', sans-serif; font-weight: 300;
       font-size: 0.9rem; color: #900; min-height: 1.2em; margin: 0 0 1rem;
@@ -35,6 +40,7 @@
   <main class="checkout-wrap">
     <a class="checkout-back" href="shop.html" onclick="if (history.length > 1) { history.back(); return false; }">← Back</a>
     <h1>Checkout</h1>
+    <p class="checkout-note" id="checkout-note"></p>
     <p class="checkout-status" id="checkout-status" role="alert"></p>
     <div id="checkout-form"></div>
   </main>

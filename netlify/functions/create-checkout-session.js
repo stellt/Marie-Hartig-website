@@ -180,7 +180,6 @@ exports.handler = async (event) => {
     // time a payment method gets turned on/off in the Dashboard.
     line_items,
     shipping_options: [shippingOption(zone, country, TAX_ENABLED)],
-    ...(deliveryNote ? { custom_text: { shipping_address: { message: deliveryNote } } } : {}),
     ...(TAX_ENABLED ? { automatic_tax: { enabled: true } } : {}),
     ...(INVOICES_ENABLED ? {
       billing_address_collection: 'required',
@@ -213,7 +212,8 @@ exports.handler = async (event) => {
       });
       return {
         statusCode: 200,
-        body: JSON.stringify({ clientSecret: session.client_secret, publishableKey }),
+        // The form rejects custom_text, so the page shows the delivery note.
+        body: JSON.stringify({ clientSecret: session.client_secret, publishableKey, deliveryNote }),
       };
     } catch (err) {
       console.error('Embedded checkout refused, using hosted page:', err && err.message);
@@ -223,6 +223,7 @@ exports.handler = async (event) => {
   try {
     const session = await stripe.checkout.sessions.create({
       ...common,
+      ...(deliveryNote ? { custom_text: { shipping_address: { message: deliveryNote } } } : {}),
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
       shipping_address_collection: { allowed_countries: [country] },

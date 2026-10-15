@@ -42,7 +42,8 @@
     return result;
   }
 
-  async function mountForm({ clientSecret, publishableKey }) {
+  async function mountForm({ clientSecret, publishableKey, deliveryNote }) {
+    document.getElementById('checkout-note').textContent = deliveryNote || '';
     await loadStripeJs();
     const stripe = window.Stripe(publishableKey);
     const checkout = await stripe.initCheckoutFormSdk({ clientSecret });
