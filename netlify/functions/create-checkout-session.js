@@ -21,6 +21,15 @@ const { findZone, allCountries, shippingOption } = require('./_shared/shipping')
 // API version or newer. Hosted checkout keeps the account default.
 const FORM_API_VERSION = '2026-09-30.endive';
 
+// Stripe sends the customer back to this origin after paying, so only our own
+// hosts are trusted. Any other Origin header (or none) gets the live site.
+const SITE_URL = 'https://www.mariespaintedworlds.com';
+const OWN_ORIGIN = /^https:\/\/(www\.mariespaintedworlds\.com|([a-z0-9-]+--)?willowy-semolina-acaf23\.netlify\.app)$/;
+function trustedOrigin(headers) {
+  const o = String((headers && headers.origin) || '');
+  return OWN_ORIGIN.test(o) ? o : SITE_URL;
+}
+
 // Mirrors the id-building logic in pages/shop-wall-tattoos.html and
 // pages/shop-compose.html -- keep these in sync if that logic ever changes.
 function slug(s) {
@@ -119,11 +128,14 @@ exports.handler = async (event) => {
   }
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-  let items, country;
+  let items, country, wantsHosted;
   try {
     const body = JSON.parse(event.body);
     items = body.items;
     country = String(body.country || '').toUpperCase();
+    // js/checkout.js asks for the hosted page when the embedded form failed
+    // to load in the customer's browser (Stripe.js blocked, etc.).
+    wantsHosted = body.hosted === true;
   } catch (err) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
@@ -132,6 +144,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Cart is empty or too large' }) };
   }
 
+  const origin = trustedOrigin(event.headers);
   const catalog = buildCatalog();
   const line_items = [];
   for (const item of items) {
@@ -149,7 +162,10 @@ exports.handler = async (event) => {
         currency: 'eur',
         product_data: {
           name: String(item.name || '').slice(0, 200),
-          images: item.image ? [absoluteImageUrl(item.image, event)] : undefined,
+          // Thumbnail from the catalog, not the browser: every shop page sends
+          // the product's own image anyway, and this way no one can hand
+          // Stripe an off-site URL.
+          images: entry.meta.image ? [absoluteImageUrl(entry.meta.image, origin)] : undefined,
           metadata,
         },
         unit_amount: Math.round(entry.price * 100), // catalog-verified price, in cents
@@ -158,8 +174,6 @@ exports.handler = async (event) => {
       quantity: qty,
     });
   }
-
-  const origin = event.headers.origin || `https://${event.headers.host}`;
 
   // Shipping follows the delivery country (Marie, 2026-10-15). The cart asks
   // for the country first; the zone containing it (CMS: Page Text > Shop
@@ -201,7 +215,7 @@ exports.handler = async (event) => {
 
   // If Stripe refuses the embedded form, fall through to the hosted page so a
   // customer can always pay.
-  if (publishableKey) {
+  if (publishableKey && !wantsHosted) {
     try {
       const formStripe = Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: FORM_API_VERSION });
       const session = await formStripe.checkout.sessions.create({
@@ -246,16 +260,16 @@ exports.handler = async (event) => {
 // no spaces). This resolves your relative cart image paths to absolute ones
 // and skips any that won't work (e.g. local-only or containing spaces) so
 // session creation doesn't fail.
-function absoluteImageUrl(imagePath, event) {
+function absoluteImageUrl(imagePath, origin) {
   try {
-    const origin = event.headers.origin || `https://${event.headers.host}`;
     // cart.js stores paths like "../assets/images/..." which only make sense
     // relative to the shop pages, not the site root. Strip leading ../ and
     // assume assets live at site root /assets/...
     const cleaned = imagePath.replace(/^(\.\.\/)+/, '/');
-    const url = new URL(cleaned, origin).toString();
-    // Stripe rejects URLs with unencoded spaces (e.g. "wall tattoos no bg")
-    return encodeURI(url);
+    // Stripe rejects URLs with unencoded spaces (e.g. "wall tattoos no bg");
+    // URL() percent-encodes them. Don't encodeURI() on top -- that turned
+    // "%20" into "%2520" and broke every product thumbnail with a space.
+    return new URL(cleaned, origin).toString();
   } catch {
     return undefined;
   }
