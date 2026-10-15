@@ -30,6 +30,7 @@ looked wired up but the page was still hardcoded HTML).
 | `index.html` (root) | `_content/slideshow-opening.json` via `js/slideshow.js` | "Opening Page Slideshow" in CMS — despite the name this drives the site's actual homepage |
 | `pages/about.html` | `_content/slideshow-home.json` via `js/worlds.js` | "Home Page Slideshow" in CMS — despite the name this drives the fullscreen slideshow reached via index.html's "Explore" link, NOT the homepage. Images live in `assets/images_backup/slides/slide-NN.jpg` (see gotcha below) |
 | `pages/shop-wall-tattoos.html`, `shop-art-prints.html`, `shop-wallpapers.html` | `_content/shop-tattoos.json`, `shop-prints.json`, `shop-wallpapers.json` | Fully wired; `shop.html` landing page intentionally still shows "Coming Soon" tiles that don't link anywhere — client asked to leave that gated for now |
+| `pages/checkout.html` via `js/checkout.js` | `netlify/functions/create-checkout-session.js`, `update-shipping.js`, `_shared/shipping.js`; zones in `_content/shop-settings.json` | Stripe embedded form when the `STRIPE_PUBLISHABLE_KEY` env var is set (shipping re-priced per delivery country), hosted Stripe page otherwise. Prices and images always come from the server-side catalog, never the browser. `stripe-webhook.js` emails printer/owner/customer via Resend; `node scripts/test-order-emails.js` checks the email builders |
 
 ## Gotchas discovered this session (read before touching image/list fields)
 
