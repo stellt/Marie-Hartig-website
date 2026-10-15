@@ -325,6 +325,15 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
     || null;
   const rate = full.shipping_cost && full.shipping_cost.shipping_rate;
   const rateName = rate && typeof rate === 'object' ? rate.display_name : '';
+  // Shipping is priced for one country (shipping rate metadata.country, set by
+  // _shared/shipping.js). If the parcel goes somewhere else -- e.g. a wallet
+  // like Apple Pay skipped the re-price on the embedded form -- warn Marie.
+  const pricedFor = rate && typeof rate === 'object' && rate.metadata && rate.metadata.country;
+  const shipsTo = ship && ship.address && ship.address.country;
+  const warning = pricedFor && shipsTo && pricedFor !== shipsTo
+    ? `CHECK SHIPPING: the customer paid shipping for ${pricedFor} but the address is in ${shipsTo}.`
+    : '';
+  if (warning) console.warn(`Order ${ref}: ${warning}`);
 
   const jobs = [];
   if (printerTo.length) {
@@ -333,6 +342,11 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
   }
   if (ownerTo.length) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName);
+    if (warning) {
+      e.subject = 'CHECK SHIPPING - ' + e.subject;
+      e.text = warning + '\n\n' + e.text;
+      e.html = `<p style="padding:10px;background:#fde8e8;color:#900;font-weight:bold">${esc(warning)}</p>` + e.html;
+    }
     jobs.push({ label: 'owner', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-owner`, from, to: ownerTo, replyTo: [], ...e }) });
   }
   const customerTo = full.customer_details && full.customer_details.email;

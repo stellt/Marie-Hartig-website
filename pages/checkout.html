@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Marie Hartig Studio</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    .checkout-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 6vw 6rem;
+    }
+    .checkout-wrap h1 {
+      font-family: 'Velour', serif; font-weight: 700;
+      font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: 0.15em;
+      text-transform: uppercase; color: #111; margin: 0 0 2rem;
+    }
+    .checkout-back {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #888; text-decoration: none;
+    }
+    .checkout-back:hover { color: #111; }
+    .checkout-status {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.9rem; color: #900; min-height: 1.2em; margin: 0 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="checkout-wrap">
+    <a class="checkout-back" href="shop.html" onclick="if (history.length > 1) { history.back(); return false; }">← Back</a>
+    <h1>Checkout</h1>
+    <p class="checkout-status" id="checkout-status" role="alert"></p>
+    <div id="checkout-form"></div>
+  </main>
+  <script src="../js/checkout.js"></script>
+  <script src="../js/maintenance.js"></script>
+</body>
+</html>

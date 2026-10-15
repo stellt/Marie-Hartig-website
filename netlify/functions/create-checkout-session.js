@@ -15,6 +15,11 @@ const shopTattoos = require('../../_content/shop-tattoos.json');
 const shopPrints = require('../../_content/shop-prints.json');
 const shopWallpapers = require('../../_content/shop-wallpapers.json');
 const shopSettings = require('../../_content/shop-settings.json');
+const { findZone, allCountries, shippingOption } = require('./_shared/shipping');
+
+// Pinned for the embedded checkout form (ui_mode 'form'), which needs this
+// API version or newer. Hosted checkout keeps the account default.
+const FORM_API_VERSION = '2026-09-30.endive';
 
 // Mirrors the id-building logic in pages/shop-wall-tattoos.html and
 // pages/shop-compose.html -- keep these in sync if that logic ever changes.
@@ -47,20 +52,6 @@ function rootAbsolute(p) {
 // that would add VAT on top of Marie's prices.
 const TAX_ENABLED = process.env.STRIPE_TAX_ENABLED === 'true';
 const INVOICES_ENABLED = process.env.STRIPE_INVOICES_ENABLED === 'true';
-
-// Decap can store a one-field list item as a bare string, so countries may be
-// 'AT' or { country: 'AT' } -- read both.
-function shippingZones() {
-  return (shopSettings.shipping_zones || []).map(z => ({
-    name: String(z.name || '').trim(),
-    price: Number(z.price),
-    countries: (z.countries || []).map(c => String(typeof c === 'string' ? c : (c && (c.country || c.value)) || '').toUpperCase()),
-  })).filter(z => z.name && z.price >= 0 && z.countries.length);
-}
-function findZone(country) {
-  if (!/^[A-Z]{2}$/.test(country)) return null;
-  return shippingZones().find(z => z.countries.includes(country)) || null;
-}
 
 function buildCatalog() {
   const catalog = {};
@@ -172,45 +163,63 @@ exports.handler = async (event) => {
 
   // Shipping follows the delivery country (Marie, 2026-10-15). The cart asks
   // for the country first; the zone containing it (CMS: Page Text > Shop
-  // Settings > Shipping Zones) sets ONE flat price per order, and Stripe is
-  // told to accept only an address in that same country -- so nobody can
-  // pick a cheaper zone than where the parcel actually goes. Hosted Checkout
-  // can't re-price shipping after the address is typed, which is why the
-  // country is chosen in the cart instead. A country in no zone gets a 400
-  // and the cart sends the customer to the contact page for a quote.
+  // Settings > Shipping Zones) sets ONE flat price per order. A country in no
+  // zone gets a 400 and the cart sends the customer to the contact page for a
+  // quote.
   const zone = findZone(country);
   if (!zone) {
     return { statusCode: 400, body: JSON.stringify({ error: 'quote_required' }) };
   }
-  const shipping_options = [{
-    shipping_rate_data: {
-      type: 'fixed_amount',
-      fixed_amount: { amount: Math.round(zone.price * 100), currency: 'eur' },
-      display_name: 'Shipping — ' + zone.name,
-      ...(TAX_ENABLED ? { tax_behavior: 'inclusive', tax_code: 'txcd_92010001' } : {}),
-    },
-  }];
   const deliveryNote = String(shopSettings.delivery_note || '').trim().slice(0, 1200);
+  const common = {
+    mode: 'payment',
+    // No payment_method_types here on purpose: Stripe then shows whichever
+    // methods are turned on in the Dashboard (Settings > Payment methods)
+    // automatically -- card, Apple Pay, Google Pay, Link, PayPal, etc.
+    // Hardcoding the list here would mean coming back to this file every
+    // time a payment method gets turned on/off in the Dashboard.
+    line_items,
+    shipping_options: [shippingOption(zone, country, TAX_ENABLED)],
+    ...(deliveryNote ? { custom_text: { shipping_address: { message: deliveryNote } } } : {}),
+    ...(TAX_ENABLED ? { automatic_tax: { enabled: true } } : {}),
+    ...(INVOICES_ENABLED ? {
+      billing_address_collection: 'required',
+      invoice_creation: { enabled: true },
+    } : {}),
+  };
+
+  // Two ways to pay, switched by STRIPE_PUBLISHABLE_KEY in Netlify:
+  //
+  // Set   -> embedded form on /pages/checkout.html (Marie, 2026-10-15: "if
+  //          the customer changes their shipping address, the shipping cost
+  //          automatically updates"). Every zone country is accepted; the
+  //          cart country's price is the starting point, and update-shipping.js
+  //          re-prices whenever the customer finishes typing an address.
+  // Unset -> Stripe's hosted page, which can't re-price, so Stripe only
+  //          accepts an address in the country chosen in the cart. Deleting
+  //          the env var rolls the site back to this.
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
   try {
+    if (publishableKey) {
+      const formStripe = Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: FORM_API_VERSION });
+      const session = await formStripe.checkout.sessions.create({
+        ...common,
+        ui_mode: 'form',
+        return_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
+        shipping_address_collection: { allowed_countries: allCountries() },
+      });
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ clientSecret: session.client_secret, publishableKey }),
+      };
+    }
+
     const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      // No payment_method_types here on purpose: Stripe then shows whichever
-      // methods are turned on in the Dashboard (Settings > Payment methods)
-      // automatically -- card, Apple Pay, Google Pay, Link, PayPal, etc.
-      // Hardcoding the list here would mean coming back to this file every
-      // time a payment method gets turned on/off in the Dashboard.
-      line_items,
-      shipping_options,
+      ...common,
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
       shipping_address_collection: { allowed_countries: [country] },
-      ...(deliveryNote ? { custom_text: { shipping_address: { message: deliveryNote } } } : {}),
-      ...(TAX_ENABLED ? { automatic_tax: { enabled: true } } : {}),
-      ...(INVOICES_ENABLED ? {
-        billing_address_collection: 'required',
-        invoice_creation: { enabled: true },
-      } : {}),
     });
 
     return {

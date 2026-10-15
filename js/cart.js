@@ -213,41 +213,16 @@ const Cart = (() => {
     if (panel) panel.classList.remove('open');
   }
 
-  async function checkout(btn) {
-    const items = getItems();
-    const country = getCountry();
-    if (items.length === 0 || !zoneFor(country)) return;
-
+  // The checkout page creates the Stripe session from the saved cart and
+  // either embeds Stripe's form or redirects to Stripe (js/checkout.js).
+  function checkout(btn) {
+    if (getItems().length === 0 || !zoneFor(getCountry())) return;
     if (!(btn instanceof HTMLElement)) btn = document.querySelector('.cart-review-yes');
-    const originalText = btn ? btn.textContent : '';
     if (btn) {
       btn.disabled = true;
       btn.textContent = 'Redirecting…';
     }
-
-    try {
-      const res = await fetch('/.netlify/functions/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, country }),
-      });
-
-      if (!res.ok) throw new Error('Checkout session creation failed');
-
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL returned');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Something went wrong starting checkout. Please try again in a moment.');
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = originalText;
-      }
-    }
+    window.location.href = '/pages/checkout.html';
   }
 
   function init() {
@@ -269,6 +244,10 @@ const Cart = (() => {
     updateBadge();
     renderDrawer();
     loadZones();
+
+    // Back from the checkout page restores this page from cache with the
+    // review's button still on "Redirecting…" -- close the review instead.
+    window.addEventListener('pageshow', e => { if (e.persisted) closeReview(); });
 
     // Cart icon click
     document.querySelectorAll('.cart-icon-btn').forEach(btn => {
