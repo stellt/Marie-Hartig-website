@@ -1,7 +1,108 @@
 {
   "is_live": true,
-  "shipping_austria": 5.0,
-  "shipping_europe": 23.0,
-  "shipping_americas_asia": 40.0,
-  "shipping_australia_row": 50.0
+  "delivery_note": "Made to order. Please allow 1–2 weeks for preparation. Shipping times vary by destination.",
+  "shipping_zones": [
+    {
+      "name": "Austria",
+      "price": 9,
+      "countries": [
+        "AT"
+      ]
+    },
+    {
+      "name": "Central Europe",
+      "price": 22,
+      "countries": [
+        "DE",
+        "NL",
+        "BE",
+        "LU",
+        "CZ",
+        "SK",
+        "HU",
+        "SI",
+        "DK"
+      ]
+    },
+    {
+      "name": "Western & Nearby Europe",
+      "price": 26,
+      "countries": [
+        "FR",
+        "IT",
+        "HR",
+        "PL",
+        "SE"
+      ]
+    },
+    {
+      "name": "Rest of the EU",
+      "price": 29,
+      "countries": [
+        "FI",
+        "GR",
+        "IE",
+        "BG",
+        "RO",
+        "EE",
+        "LV",
+        "LT",
+        "MT",
+        "CY"
+      ]
+    },
+    {
+      "name": "Spain & Portugal",
+      "price": 29,
+      "countries": [
+        "ES",
+        "PT"
+      ]
+    },
+    {
+      "name": "UK & Non-EU Europe",
+      "price": 39,
+      "countries": [
+        "GB",
+        "CH",
+        "NO",
+        "IS",
+        "LI"
+      ]
+    },
+    {
+      "name": "USA & Canada",
+      "price": 49,
+      "countries": [
+        "US",
+        "CA"
+      ]
+    },
+    {
+      "name": "Asia",
+      "price": 55,
+      "countries": [
+        "JP",
+        "SG",
+        "KR",
+        "CN",
+        "HK",
+        "TW",
+        "IN",
+        "TH",
+        "PH",
+        "VN",
+        "ID",
+        "MY"
+      ]
+    },
+    {
+      "name": "Australia & New Zealand",
+      "price": 75,
+      "countries": [
+        "AU",
+        "NZ"
+      ]
+    }
+  ]
 }

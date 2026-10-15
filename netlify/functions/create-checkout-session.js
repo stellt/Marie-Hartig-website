@@ -1,7 +1,7 @@
 // netlify/functions/create-checkout-session.js
 //
 // Creates a Stripe Checkout Session from the cart items sent by the client.
-// Expects POST body: { items: [{ id, name, price, image, qty }, ...] }
+// Expects POST body: { items: [{ id, name, price, image, qty }, ...], country: 'AT' }
 //
 // Prices are NEVER trusted from the client. Each cart item's id is looked up
 // in a catalog built from the site's own shop data (the same _content/
@@ -47,6 +47,20 @@ function rootAbsolute(p) {
 // that would add VAT on top of Marie's prices.
 const TAX_ENABLED = process.env.STRIPE_TAX_ENABLED === 'true';
 const INVOICES_ENABLED = process.env.STRIPE_INVOICES_ENABLED === 'true';
+
+// Decap can store a one-field list item as a bare string, so countries may be
+// 'AT' or { country: 'AT' } -- read both.
+function shippingZones() {
+  return (shopSettings.shipping_zones || []).map(z => ({
+    name: String(z.name || '').trim(),
+    price: Number(z.price),
+    countries: (z.countries || []).map(c => String(typeof c === 'string' ? c : (c && (c.country || c.value)) || '').toUpperCase()),
+  })).filter(z => z.name && z.price >= 0 && z.countries.length);
+}
+function findZone(country) {
+  if (!/^[A-Z]{2}$/.test(country)) return null;
+  return shippingZones().find(z => z.countries.includes(country)) || null;
+}
 
 function buildCatalog() {
   const catalog = {};
@@ -114,10 +128,11 @@ exports.handler = async (event) => {
   }
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-  let items;
+  let items, country;
   try {
     const body = JSON.parse(event.body);
     items = body.items;
+    country = String(body.country || '').toUpperCase();
   } catch (err) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
@@ -155,57 +170,27 @@ exports.handler = async (event) => {
 
   const origin = event.headers.origin || `https://${event.headers.host}`;
 
-  // Shipping is priced by region, set in the CMS under Page Text > Shop
-  // Settings, based on Marie's real Austrian Post rates by country (consolidated
-  // into 4 tiers, each rounded UP to the highest real rate in that group, so
-  // the flat fee never falls short of the real cost -- see git history for
-  // her original per-country numbers).
-  //
-  // Stripe's hosted Checkout page (the redirect-to-Stripe flow this site
-  // uses) can't detect the customer's country and auto-select a rate --
-  // that needs Stripe's embedded/Elements checkout instead, a bigger
-  // integration change. So instead every priced region is offered as its
-  // own clearly-labeled option, and the customer picks the one matching
-  // where they live. A region with no price set (0 or unset) is left out
-  // entirely, rather than showing a confusing "€0.00" option.
-  //
-  // Stripe hard-caps shipping_options at 5 entries per session -- we're
-  // using 4, so there's exactly one more slot free if a 5th tier is ever
-  // needed. More than 5 would need consolidating further, not just adding.
-  const AUSTRIA = ['AT'];
-  const EUROPE_REST = ['DE', 'HU', 'CZ', 'HR', 'FR', 'IT', 'NL', 'BE', 'ES', 'PT', 'GR', 'SE', 'IE', 'GB', 'CH', 'NO'];
-  const AMERICAS_ASIA = ['CA', 'US', 'MX', 'BR', 'AR', 'JP', 'SG'];
-  const AUSTRALIA_ROW = ['AU', 'NZ', 'ZA', 'KR', 'CN', 'HK', 'TW', 'IN', 'TH', 'PH', 'VN', 'ID', 'MY', 'AE', 'IL', 'SA', 'QA', 'KW'];
-
-  function shippingRate(label, fee, weeksMin, weeksMax) {
-    if (!(fee > 0)) return null;
-    return {
-      shipping_rate_data: {
-        type: 'fixed_amount',
-        fixed_amount: { amount: Math.round(fee * 100), currency: 'eur' },
-        display_name: label,
-        ...(TAX_ENABLED ? { tax_behavior: 'inclusive', tax_code: 'txcd_92010001' } : {}),
-        delivery_estimate: {
-          minimum: { unit: 'week', value: weeksMin },
-          maximum: { unit: 'week', value: weeksMax },
-        },
-      },
-    };
+  // Shipping follows the delivery country (Marie, 2026-10-15). The cart asks
+  // for the country first; the zone containing it (CMS: Page Text > Shop
+  // Settings > Shipping Zones) sets ONE flat price per order, and Stripe is
+  // told to accept only an address in that same country -- so nobody can
+  // pick a cheaper zone than where the parcel actually goes. Hosted Checkout
+  // can't re-price shipping after the address is typed, which is why the
+  // country is chosen in the cart instead. A country in no zone gets a 400
+  // and the cart sends the customer to the contact page for a quote.
+  const zone = findZone(country);
+  if (!zone) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'quote_required' }) };
   }
-
-  const shippingTiers = [
-    { rate: shippingRate('Shipping — Austria', Number(shopSettings.shipping_austria) || 0, 1, 2), countries: AUSTRIA },
-    { rate: shippingRate('Shipping — Rest of Europe', Number(shopSettings.shipping_europe) || 0, 2, 3), countries: EUROPE_REST },
-    { rate: shippingRate('Shipping — Americas & Asia', Number(shopSettings.shipping_americas_asia) || 0, 3, 5), countries: AMERICAS_ASIA },
-    { rate: shippingRate('Shipping — Australia & Rest of World', Number(shopSettings.shipping_australia_row) || 0, 4, 6), countries: AUSTRALIA_ROW },
-  ].filter(t => t.rate);
-
-  const shipping_options = shippingTiers.length ? shippingTiers.map(t => t.rate) : undefined;
-  // Only let the customer enter an address in a country we actually have a
-  // shipping price for -- no point collecting an address we can't quote.
-  const allowedCountries = shippingTiers.length
-    ? [...new Set(shippingTiers.flatMap(t => t.countries))]
-    : [...AUSTRIA, ...EUROPE_REST, ...AMERICAS_ASIA, ...AUSTRALIA_ROW]; // all tiers unpriced (0) -- still let anyone through since shipping's free
+  const shipping_options = [{
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      fixed_amount: { amount: Math.round(zone.price * 100), currency: 'eur' },
+      display_name: 'Shipping — ' + zone.name,
+      ...(TAX_ENABLED ? { tax_behavior: 'inclusive', tax_code: 'txcd_92010001' } : {}),
+    },
+  }];
+  const deliveryNote = String(shopSettings.delivery_note || '').trim().slice(0, 1200);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -219,8 +204,8 @@ exports.handler = async (event) => {
       shipping_options,
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pages/cancel.html`,
-      // Optional: collect shipping address if you sell physical goods
-      shipping_address_collection: { allowed_countries: allowedCountries },
+      shipping_address_collection: { allowed_countries: [country] },
+      ...(deliveryNote ? { custom_text: { shipping_address: { message: deliveryNote } } } : {}),
       ...(TAX_ENABLED ? { automatic_tax: { enabled: true } } : {}),
       ...(INVOICES_ENABLED ? {
         billing_address_collection: 'required',

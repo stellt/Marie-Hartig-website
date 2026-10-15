@@ -259,6 +259,82 @@
 }
 
 .cart-checkout-btn:hover { background: #333; }
+.cart-checkout-btn:disabled { background: #bbb; cursor: not-allowed; }
+
+/* Ship-to country + Items/Shipping rows (injected by cart.js) */
+.cart-ship {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cart-ship-select {
+  flex: 1;
+  max-width: 60%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  background: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  color: #111;
+}
+.cart-total.cart-line { margin-bottom: 0.5rem; }
+.cart-line span:last-child { color: #111; font-weight: 300; }
+
+/* "Are you sure?" review panel over the drawer */
+.cart-review {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  padding: 2rem;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  font-family: 'Jost', sans-serif;
+  z-index: 1;
+}
+.cart-review.open { display: flex; }
+.cart-review h3 {
+  font-family: 'Velour', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+.cart-review-items { list-style: none; padding: 0; margin: 0 0 1rem; }
+.cart-review-items li,
+.cart-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.cart-review-total { font-weight: 500; border-bottom: none; }
+.cart-review-question { font-size: 0.95rem; margin: 1.5rem 0 1rem; }
+.cart-review-no {
+  margin-top: 0.6rem;
+  width: 100%;
+  padding: 1rem;
+  background: none;
+  border: 1px solid #111;
+  border-radius: 2px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
 /* Add to cart button */
 .add-to-cart-btn {
