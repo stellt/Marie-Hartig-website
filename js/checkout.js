@@ -50,41 +50,71 @@
     const form = checkout.createForm();
     form.mount('#checkout-form');
 
-    // Re-price once per completed address; reset when it's edited again.
-    let priced = false;
-    form.on('change', async ({ value, status: st }) => {
-      const complete = st && st.shippingAddress && st.shippingAddress.complete;
-      if (complete && !priced) {
-        priced = true;
-        const loaded = await checkout.loadActions();
-        if (loaded.type !== 'success') { priced = false; return; }
-        const actions = loaded.actions;
-        try {
-          await actions.runServerUpdate(() => updateShipping(actions.getSession().id, value.shippingAddress));
+    // Re-price whenever a complete address names a country we haven't priced
+    // yet. Keyed on the country (zones are per country), not on the address
+    // merely becoming complete, so switching AT -> DE with the rest of the
+    // form still filled in re-prices too. One update in flight at a time.
+    // A country change that lands while an update is running is picked up by
+    // the loop afterwards, so the last address typed is always the one priced.
+    let pricedCountry = '';
+    let wanted = null; // { country, addr } of the latest complete address
+    let inFlight = false;
+    async function reprice() {
+      inFlight = true;
+      try {
+        while (wanted && wanted.country !== pricedCountry) {
+          const { country, addr } = wanted;
+          const loaded = await checkout.loadActions();
+          if (loaded.type !== 'success') return;
+          const actions = loaded.actions;
+          await actions.runServerUpdate(() => updateShipping(actions.getSession().id, addr));
+          pricedCountry = country;
           show('');
-        } catch (err) {
-          priced = false;
-          show(err.message || "We couldn't update shipping. Please try again.");
         }
-      } else if (!complete && priced) {
-        priced = false;
+      } catch (err) {
+        show(err.message || "We couldn't update shipping. Please try again.");
+      } finally {
+        inFlight = false;
       }
+    }
+    form.on('change', ({ value, status: st }) => {
+      const complete = st && st.shippingAddress && st.shippingAddress.complete;
+      const addr = value && value.shippingAddress;
+      const country = complete && addr && addr.address ? String(addr.address.country || '').toUpperCase() : '';
+      wanted = country ? { country, addr } : null;
+      if (country && !inFlight) reprice();
     });
+  }
+
+  async function createSession(hosted) {
+    const res = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items, country, hosted }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data.error === 'quote_required') { window.location.replace('/pages/contact.html'); return null; }
+    if (!res.ok) throw new Error(data.error || 'Checkout session creation failed');
+    return data;
   }
 
   async function start() {
     try {
-      const res = await fetch('/.netlify/functions/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, country }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (data.error === 'quote_required') { window.location.replace('/pages/contact.html'); return; }
-      if (!res.ok) throw new Error(data.error || 'Checkout session creation failed');
+      const data = await createSession(false);
+      if (!data) return;
       if (data.url) { window.location.replace(data.url); return; }
       if (!data.clientSecret || !data.publishableKey) throw new Error('No checkout returned');
-      await mountForm(data);
+      try {
+        await mountForm(data);
+      } catch (err) {
+        // Stripe.js blocked or the form failed to mount in this browser:
+        // ask for the hosted page instead so the customer can still pay.
+        console.error('Embedded form failed, using hosted page:', err);
+        const hosted = await createSession(true);
+        if (!hosted) return;
+        if (!hosted.url) throw err;
+        window.location.replace(hosted.url);
+      }
     } catch (err) {
       console.error(err);
       show('Something went wrong starting checkout. Please go back and try again in a moment.');
