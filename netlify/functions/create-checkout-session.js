@@ -200,8 +200,10 @@ exports.handler = async (event) => {
   //          the env var rolls the site back to this.
   const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
-  try {
-    if (publishableKey) {
+  // If Stripe refuses the embedded form, fall through to the hosted page so a
+  // customer can always pay.
+  if (publishableKey) {
+    try {
       const formStripe = Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: FORM_API_VERSION });
       const session = await formStripe.checkout.sessions.create({
         ...common,
@@ -213,8 +215,12 @@ exports.handler = async (event) => {
         statusCode: 200,
         body: JSON.stringify({ clientSecret: session.client_secret, publishableKey }),
       };
+    } catch (err) {
+      console.error('Embedded checkout refused, using hosted page:', err && err.message);
     }
+  }
 
+  try {
     const session = await stripe.checkout.sessions.create({
       ...common,
       success_url: `${origin}/pages/success.html?session_id={CHECKOUT_SESSION_ID}`,
