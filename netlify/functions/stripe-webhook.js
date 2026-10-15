@@ -217,6 +217,31 @@ function buildOwnerEmail(ref, full, items, ship, rateName, forPrinter = false) {
   return { subject, text: textParts.join('\n'), html };
 }
 
+// Statutory withdrawal instructions and model form (Annex I of Directive
+// 2011/83/EU, FAGG §4/§7), sent inside the customer's confirmation so the
+// customer holds them on a durable medium. Keep in step with
+// pages/shipping-returns.html. ALL-CAPS lines render as headings.
+const WITHDRAWAL_LINES = [
+  'SELLER',
+  "Marie Hartig / Marie's Painted Worlds, Gumpendorferstrasse 32/14, 1060 Vienna, Austria. info@mariespaintedworlds.com, +43 699 11325517.",
+  '',
+  'RIGHT OF WITHDRAWAL',
+  'You have the right to withdraw from this contract within 14 days without giving any reason. The withdrawal period expires 14 days after the day on which you, or a third party other than the carrier indicated by you, take possession of the goods.',
+  'To exercise the right of withdrawal, you must inform us (address above) of your decision by a clear statement, for example a letter sent by post or an email. You may use the model withdrawal form below, but it is not obligatory. To meet the deadline it is sufficient to send your communication before the withdrawal period has expired.',
+  'Effects of withdrawal: if you withdraw from this contract, we will reimburse all payments received from you, including the costs of delivery (except for the supplementary costs resulting from your choice of a type of delivery other than our least expensive standard delivery), without undue delay and in any event not later than 14 days from the day on which we are informed of your decision. We will carry out the reimbursement using the same means of payment as you used for the initial transaction, unless you have expressly agreed otherwise; you will not incur any fees as a result. We may withhold reimbursement until we have received the goods back or you have supplied evidence of having sent them back, whichever is earliest.',
+  'You must send back or hand over the goods to us without undue delay and in any event not later than 14 days from the day on which you communicate your withdrawal to us. You bear the direct cost of returning the goods. You are only liable for any diminished value of the goods resulting from handling other than what is necessary to establish their nature, characteristics and functioning.',
+  'The right of withdrawal does not apply to goods made to your specifications or clearly personalised.',
+  '',
+  'MODEL WITHDRAWAL FORM',
+  'Complete and return this form only if you wish to withdraw from the contract.',
+  "To Marie Hartig / Marie's Painted Worlds, Gumpendorferstrasse 32/14, 1060 Vienna, Austria, info@mariespaintedworlds.com:",
+  'I/We hereby give notice that I/We withdraw from my/our contract of sale of the following goods: ______',
+  'Ordered on / received on: ______   Order number: ______',
+  'Name and address of consumer(s): ______',
+  'Date / signature (only if this form is notified on paper): ______',
+  '',
+];
+
 function buildCustomerEmail(ref, full, items, ship, rateName) {
   const cur = full.currency;
   const total = money(full.amount_total, cur);
@@ -249,6 +274,13 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
     '',
     'Questions about your order? Just reply to this email.',
     '',
+    // Contract confirmation on a durable medium (FAGG §7): the withdrawal
+    // instructions and model form themselves, not just a link to a page
+    // that can change later.
+    ...WITHDRAWAL_LINES,
+    `Full shipping & returns information: ${SITE_URL}/pages/shipping-returns.html`,
+    `Terms & Conditions: ${SITE_URL}/pages/terms.html`,
+    '',
     "Marie's Painted Worlds",
     SITE_URL,
   ].filter(l => l !== null).join('\n');
@@ -265,6 +297,11 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
     `</table>` +
     `<p style="margin:16px 0 4px"><strong>Shipping to</strong></p><p style="margin:0">${addr ? addr.map(esc).join('<br>') : '(no shipping address)'}</p>` +
     `<p style="margin:16px 0 0">Questions about your order? Just reply to this email.</p>` +
+    `<div style="margin:24px 0 0;padding-top:12px;border-top:1px solid #ddd;color:#555;font-size:12px;line-height:1.5">` +
+    WITHDRAWAL_LINES.map(l => l === '' ? '' : (l === l.toUpperCase() && /[A-Z]/.test(l)
+      ? `<p style="margin:12px 0 4px;font-weight:bold">${esc(l)}</p>`
+      : `<p style="margin:0 0 6px">${esc(l)}</p>`)).join('') +
+    `<p style="margin:12px 0 0"><a href="${SITE_URL}/pages/shipping-returns.html">Shipping, Returns &amp; Right of Withdrawal</a> · <a href="${SITE_URL}/pages/terms.html">Terms &amp; Conditions</a></p></div>` +
     `<p style="margin:16px 0 0">Marie's Painted Worlds<br><a href="${SITE_URL}">${SITE_URL.replace('https://', '')}</a></p>`);
   return { subject, text, html };
 }
@@ -293,7 +330,11 @@ function sendEmail({ apiKey, idempotencyKey, from, to, replyTo, subject, html, t
       res.on('data', d => { body += d; });
       res.on('end', () => {
         if (res.statusCode >= 200 && res.statusCode < 300) resolve(body);
-        else reject(new Error(`Resend ${res.statusCode}: ${body}`));
+        else {
+          const err = new Error(`Resend ${res.statusCode}: ${body}`);
+          err.statusCode = res.statusCode;
+          reject(err);
+        }
       });
     });
     req.on('error', reject);
@@ -363,8 +404,13 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
     if (r.status === 'fulfilled') console.log(`Order ${ref}: ${jobs[i].label} email sent`);
     else {
       console.error(`Order ${ref}: ${jobs[i].label} email FAILED:`, r.reason && r.reason.message);
-      // A bad customer address must not make Stripe retry the whole event.
-      if (!jobs[i].optional) failures.push(jobs[i].label);
+      // A bad customer address (Resend 4xx) must not make Stripe retry the
+      // whole event; a Resend outage or timeout should, so the customer still
+      // gets the confirmation. The idempotency keys stop the printer and
+      // owner emails going out twice on that retry.
+      const sc = r.reason && r.reason.statusCode;
+      const rejected = sc >= 400 && sc < 500;
+      if (!jobs[i].optional || !rejected) failures.push(jobs[i].label);
     }
   });
   if (failures.length) throw new Error('Order email failed for: ' + failures.join(', '));

@@ -40,6 +40,10 @@ const { handler } = require(path.join(__dirname, '..', 'netlify', 'functions', '
     'printer body identical to owner body (except footer/link)': strip(p.text) === strip(o.text),
     'owner still has Stripe link': o.text.includes('dashboard.stripe.com'),
   };
+  const c = sent.find(e => e.to.includes('buyer@example.com'));
+  checks['customer email carries withdrawal instructions + model form (text + html)'] = !!c
+    && c.text.includes('RIGHT OF WITHDRAWAL') && c.text.includes('MODEL WITHDRAWAL FORM') && c.text.includes('Gumpendorferstrasse 32/14')
+    && c.html.includes('MODEL WITHDRAWAL FORM') && c.html.includes('shipping-returns.html');
   checks['webhook returned 200 and sent 3 emails'] = r.statusCode === 200 && sent.length === 3;
   for (const [k, v] of Object.entries(checks)) console.log(v ? 'PASS' : 'FAIL', k);
   if (Object.values(checks).includes(false)) {
