@@ -45,6 +45,16 @@ const { handler } = require(path.join(__dirname, '..', 'netlify', 'functions', '
     && c.text.includes('RIGHT OF WITHDRAWAL') && c.text.includes('MODEL WITHDRAWAL FORM') && c.text.includes('Gumpendorferstrasse 32/14')
     && c.html.includes('MODEL WITHDRAWAL FORM') && c.html.includes('shipping-returns.html');
   checks['webhook returned 200 and sent 3 emails'] = r.statusCode === 200 && sent.length === 3;
+
+  // Mismatch: shipping was priced for AT but the parcel goes to PT (a wallet
+  // skipped the re-price). Marie gets the warning; the printer is held.
+  session.shipping_cost.shipping_rate.metadata = { country: 'AT' };
+  sent.length = 0;
+  const r2 = await handler({ headers: { 'stripe-signature': 'x' }, body: '{}', isBase64Encoded: false });
+  const o2 = sent.find(e => e.to.includes('owner@example.com'));
+  checks['mismatch: printer held, owner + customer still sent'] = r2.statusCode === 200 && sent.length === 2 && !sent.some(e => e.to.includes('printer@example.com'));
+  checks['mismatch: owner email flagged and told to forward'] = !!o2 && o2.subject.startsWith('CHECK SHIPPING - ')
+    && o2.text.includes('paid shipping for AT but the address is in PT') && o2.text.includes('printer has NOT been sent') && o2.html.includes('printer has NOT been sent');
   for (const [k, v] of Object.entries(checks)) console.log(v ? 'PASS' : 'FAIL', k);
   if (Object.values(checks).includes(false)) {
     console.log('\n--- printer email ---\nSubject:', p.subject, '\n' + p.text);

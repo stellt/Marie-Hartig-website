@@ -368,25 +368,30 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
   const rateName = rate && typeof rate === 'object' ? rate.display_name : '';
   // Shipping is priced for one country (shipping rate metadata.country, set by
   // _shared/shipping.js). If the parcel goes somewhere else -- e.g. a wallet
-  // like Apple Pay skipped the re-price on the embedded form -- warn Marie.
+  // like Apple Pay skipped the re-price on the embedded form -- warn Marie
+  // and HOLD the printer job: she forwards the order to the printer herself
+  // once the shipping is sorted (Ado's call, 2026-10-16).
   const pricedFor = rate && typeof rate === 'object' && rate.metadata && rate.metadata.country;
   const shipsTo = ship && ship.address && ship.address.country;
   const warning = pricedFor && shipsTo && pricedFor !== shipsTo
     ? `CHECK SHIPPING: the customer paid shipping for ${pricedFor} but the address is in ${shipsTo}.`
     : '';
-  if (warning) console.warn(`Order ${ref}: ${warning}`);
+  if (warning) console.warn(`Order ${ref}: ${warning} Printer not notified.`);
 
   const jobs = [];
-  if (printerTo.length) {
+  if (printerTo.length && !warning) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName, true);
     jobs.push({ label: 'printer', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-printer`, from, to: printerTo, replyTo: ownerTo, ...e }) });
   }
   if (ownerTo.length) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName);
     if (warning) {
+      const hold = printerTo.length
+        ? ' The printer has NOT been sent this order. Please forward this email to the printer once the shipping is sorted out.'
+        : '';
       e.subject = 'CHECK SHIPPING - ' + e.subject;
-      e.text = warning + '\n\n' + e.text;
-      e.html = `<p style="padding:10px;background:#fde8e8;color:#900;font-weight:bold">${esc(warning)}</p>` + e.html;
+      e.text = warning + hold + '\n\n' + e.text;
+      e.html = `<p style="padding:10px;background:#fde8e8;color:#900;font-weight:bold">${esc(warning + hold)}</p>` + e.html;
     }
     jobs.push({ label: 'owner', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-owner`, from, to: ownerTo, replyTo: [], ...e }) });
   }
