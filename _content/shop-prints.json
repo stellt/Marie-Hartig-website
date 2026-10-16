@@ -1,6 +1,6 @@
 {
   "heading": "Art Prints",
-  "price": 150,
+  "price": 151,
   "prints": [
     {
       "name": "Cockatoo Pink and Green - Tropical Selection (40x50cm)",
@@ -48,6 +48,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4-window.jpg"
         }
       ]
     },
@@ -61,6 +64,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/redflowers.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4-window.jpg"
         }
       ]
     },
@@ -74,6 +80,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4-window.jpg"
         }
       ]
     },
@@ -87,6 +96,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/all-fo-them.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4.jpg"
         }
       ]
     },
@@ -100,6 +112,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4.jpg"
         }
       ]
     },
@@ -116,6 +131,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/twins.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoons3.jpg"
         }
       ]
     },
@@ -129,6 +147,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/indianshot.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoon-4.jpg"
         }
       ]
     },
@@ -142,6 +163,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/all.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/monsoons3.jpg"
         }
       ]
     }
