@@ -9,18 +9,31 @@
       "gallery": [
         {
           "image": "/assets/images/art prints rooms/cockatoo.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/sunlit-english-country-botanical-vignette.jpg"
         }
       ]
     },
     {
       "name": "Red Butterflies - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker3.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/redbutterfyinsitu.jpg"
+        }
+      ]
     },
     {
       "name": "Toucanet - Tropical Selection (40x50cm)",
       "image": "../assets/images/wall stickers/Sticker4.png",
-      "price": 100
+      "price": 100,
+      "gallery": [
+        {
+          "image": "/assets/images/art prints rooms/toucanettebathroom.jpg"
+        }
+      ]
     },
     {
       "name": "Blue Birds - Tropical Selection (40x50cm)",
@@ -32,6 +45,9 @@
         },
         {
           "image": "/assets/images/art prints rooms/bluebirds.jpg"
+        },
+        {
+          "image": "/assets/images/art prints rooms/bluebirdsinsitu.jpg"
         }
       ]
     },
