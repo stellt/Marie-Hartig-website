@@ -34,6 +34,23 @@
       font-family: 'Jost', sans-serif; font-weight: 300;
       font-size: 0.9rem; color: #f0a0a0; min-height: 1.2em; margin: 0 0 1rem;
     }
+    .checkout-confirm {
+      margin: auto; border: none; border-radius: 2px; padding: 2rem;
+      width: min(92vw, 380px); background: #fff; color: #111;
+      font-family: 'Jost', sans-serif; font-weight: 300; text-align: center;
+    }
+    .checkout-confirm::backdrop { background: rgba(0,0,0,0.6); }
+    .checkout-confirm p { font-size: 0.95rem; margin: 0 0 0.5rem; }
+    .checkout-confirm-total { font-weight: 500; }
+    .checkout-confirm-total:empty { display: none; }
+    .checkout-confirm form { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+    .checkout-confirm button {
+      width: 100%; padding: 1rem; border: 1px solid #111; border-radius: 2px;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer;
+    }
+    .checkout-confirm button[value="yes"] { background: #111; color: #fff; }
+    .checkout-confirm button[value="no"] { background: none; color: #111; }
   </style>
 </head>
 <body>
@@ -43,6 +60,14 @@
     <p class="checkout-note" id="checkout-note"></p>
     <p class="checkout-status" id="checkout-status" role="alert"></p>
     <div id="checkout-form"></div>
+    <dialog class="checkout-confirm" id="checkout-confirm">
+      <p>Are you sure you want to complete your purchase?</p>
+      <p class="checkout-confirm-total"></p>
+      <form method="dialog">
+        <button value="yes">Yes, confirm purchase</button>
+        <button value="no">No, go back</button>
+      </form>
+    </dialog>
   </main>
   <script src="../js/checkout.js"></script>
   <script src="../js/maintenance.js"></script>

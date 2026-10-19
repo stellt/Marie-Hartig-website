@@ -174,50 +174,16 @@ const Cart = (() => {
     if (drawer) drawer.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
     document.body.style.overflow = '';
-    closeReview();
-  }
-
-  // "Are you sure?" step before leaving for Stripe (Marie, 2026-10-15).
-  function openReview() {
-    const drawer = document.getElementById('cart-drawer');
-    const items = getItems();
-    const code = getCountry();
-    if (!drawer || items.length === 0) return;
-    if (code === QUOTE) { window.location.href = '/pages/contact.html'; return; }
-    const zone = zoneFor(code);
-    if (!zone) return;
-    let panel = drawer.querySelector('.cart-review');
-    if (!panel) {
-      panel = document.createElement('div');
-      panel.className = 'cart-review';
-      drawer.appendChild(panel);
-    }
-    panel.innerHTML = `
-      <h3>Review Your Order</h3>
-      <ul class="cart-review-items">
-        ${items.map(i => `<li><span>${i.qty} × ${i.name}</span><span>${money(i.price * i.qty)}</span></li>`).join('')}
-      </ul>
-      <div class="cart-review-row"><span>Shipping to ${countryName(code)}</span><span>${money(zone.price)}</span></div>
-      <div class="cart-review-row cart-review-total"><span>Total</span><span>${money(getTotal() + zone.price)}</span></div>
-      <p class="cart-review-question">Are you sure you want to complete your purchase?</p>
-      <button type="button" class="cart-checkout-btn cart-review-yes">Yes, confirm purchase</button>
-      <button type="button" class="cart-review-no">No, go back</button>
-    `;
-    panel.querySelector('.cart-review-no').addEventListener('click', closeReview);
-    panel.querySelector('.cart-review-yes').addEventListener('click', e => checkout(e.currentTarget));
-    panel.classList.add('open');
-  }
-
-  function closeReview() {
-    const panel = document.querySelector('.cart-review');
-    if (panel) panel.classList.remove('open');
   }
 
   // The checkout page creates the Stripe session from the saved cart and
   // either embeds Stripe's form or redirects to Stripe (js/checkout.js).
+  // The "Are you sure?" step now comes after Pay there (Marie, 2026-10-20).
   function checkout(btn) {
-    if (getItems().length === 0 || !zoneFor(getCountry())) return;
-    if (!(btn instanceof HTMLElement)) btn = document.querySelector('.cart-review-yes');
+    if (getItems().length === 0) return;
+    if (getCountry() === QUOTE) { window.location.href = '/pages/contact.html'; return; }
+    if (!zoneFor(getCountry())) return;
+    if (!(btn instanceof HTMLElement)) btn = document.querySelector('.cart-drawer-footer .cart-checkout-btn');
     if (btn) {
       btn.disabled = true;
       btn.textContent = 'Redirecting…';
@@ -246,8 +212,8 @@ const Cart = (() => {
     loadZones();
 
     // Back from the checkout page restores this page from cache with the
-    // review's button still on "Redirecting…" -- close the review instead.
-    window.addEventListener('pageshow', e => { if (e.persisted) closeReview(); });
+    // button still on "Redirecting…" -- redraw it instead.
+    window.addEventListener('pageshow', e => { if (e.persisted) renderShipping(); });
 
     // Cart icon click
     document.querySelectorAll('.cart-icon-btn').forEach(btn => {
@@ -262,9 +228,9 @@ const Cart = (() => {
     const closeBtn = document.getElementById('cart-close');
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
 
-    // Checkout button opens the review step first
+    // Checkout button
     const checkoutBtn = document.querySelector('.cart-drawer-footer .cart-checkout-btn');
-    if (checkoutBtn) checkoutBtn.addEventListener('click', openReview);
+    if (checkoutBtn) checkoutBtn.addEventListener('click', e => checkout(e.currentTarget));
   }
 
   document.addEventListener('DOMContentLoaded', init);

@@ -42,6 +42,19 @@
     return result;
   }
 
+  // "Are you sure?" after Pay, before Stripe charges (Marie, 2026-10-20).
+  // Resolves true on Yes, false on No / Esc.
+  function askSure(session) {
+    const dialog = document.getElementById('checkout-confirm');
+    const total = session && session.total && session.total.total && session.total.total.amount;
+    dialog.querySelector('.checkout-confirm-total').textContent = typeof total === 'string' ? `Total ${total}` : '';
+    dialog.returnValue = '';
+    dialog.showModal();
+    return new Promise(resolve => {
+      dialog.addEventListener('close', () => resolve(dialog.returnValue === 'yes'), { once: true });
+    });
+  }
+
   async function mountForm({ clientSecret, publishableKey, deliveryNote }) {
     document.getElementById('checkout-note').textContent = deliveryNote || '';
     await loadStripeJs();
@@ -95,6 +108,7 @@
         if (running) await running;
         const loaded = await checkout.loadActions();
         if (loaded.type !== 'success') throw new Error();
+        if (!(await askSure(loaded.actions.getSession()))) return;
         await loaded.actions.confirm({ formConfirmEvent: event });
       } catch (err) {
         console.error(err);
