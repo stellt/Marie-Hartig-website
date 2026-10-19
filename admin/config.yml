@@ -1235,6 +1235,11 @@ collections:
       widget: number
       value_type: float
       default: 35.0
+    - label: Delivery Note
+      name: delivery_note
+      widget: string
+      required: false
+      hint: Shown under the Add to Cart button in each print's popup.
     - label: Prints
       name: prints
       widget: list
@@ -1265,6 +1270,24 @@ collections:
         name: price
         widget: number
         value_type: float
+      - label: Description
+        name: description
+        widget: list
+        required: false
+        label_singular: Paragraph
+        summary: '{{fields.text}}'
+        hint: Shown in the popup when a customer clicks this print. Leave empty
+          for none.
+        fields:
+        - label: Text
+          name: text
+          widget: markdown
+          buttons:
+          - bold
+          - italic
+          editor_components: []
+          modes:
+          - rich_text
   - label: Shop — Wallpapers
     name: shop-wallpapers
     file: _content/shop-wallpapers.json

@@ -124,7 +124,7 @@
     .tattoo-popup-overlay.open { display: flex; }
     .tattoo-popup {
       background: #fff; border-radius: 4px;
-      width: min(760px, 100%); max-height: 92vh;
+      width: min(1000px, 100%); max-height: 92vh;
       display: flex; overflow: hidden; position: relative;
       box-shadow: 0 20px 80px rgba(0,0,0,0.3);
     }
@@ -136,12 +136,12 @@
     }
     .tattoo-popup-close:hover { color: #111; }
     .tattoo-popup-image {
-      flex: 1 1 42%; background: #f5f3ef;
+      flex: 1 1 55%; background: #f5f3ef;
       display: flex; align-items: center; justify-content: center;
       padding: 2rem; min-width: 0;
     }
     .tattoo-popup-image img {
-      max-width: 100%; max-height: 46vh; object-fit: contain;
+      max-width: 100%; max-height: 62vh; object-fit: contain;
       transition: transform 0.25s ease;
     }
     .tattoo-popup-image img.mirrored { transform: scaleX(-1); }
@@ -204,8 +204,19 @@
       font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.15em;
       text-transform: uppercase;
     }
+    .zoom-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 1;
+      width: 3rem; height: 3rem; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.85);
+      color: #111; font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .zoom-arrow:hover { background: #fff; border-color: #111; }
+    .zoom-arrow.prev { left: 1.2rem; }
+    .zoom-arrow.next { right: 1.2rem; }
+    .zoom-arrow[hidden], .tattoo-zoom.detail .zoom-arrow { display: none; }
     .tattoo-popup-info {
-      flex: 1 1 58%; padding: 2.4rem 2rem 2rem; overflow-y: auto;
+      flex: 1 1 45%; padding: 2.4rem 2rem 2rem; overflow-y: auto;
       display: flex; flex-direction: column; gap: 0.9rem;
     }
     .tattoo-popup-name {
@@ -392,7 +403,9 @@
 
   <div class="tattoo-zoom" id="tattoo-zoom" aria-hidden="true">
     <button class="tattoo-zoom-close" type="button">&#215; Close</button>
+    <button class="zoom-arrow prev" id="zoom-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
     <img id="tattoo-zoom-img" src="" alt="" />
+    <button class="zoom-arrow next" id="zoom-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
   </div>
 
   <div class="tattoo-grid" id="tattoo-grid"></div>
@@ -687,15 +700,38 @@
     popupOverlay.addEventListener('click', e => { if (e.target === popupOverlay) closePopup(); });
     const zoom = document.getElementById('tattoo-zoom');
     const zoomImg = document.getElementById('tattoo-zoom-img');
-    function openZoom() {
-      if (!popupItem) return;
+    const zoomPrev = document.getElementById('zoom-prev');
+    const zoomNext = document.getElementById('zoom-next');
+    function renderZoom() {
       zoomImg.src = imgUrl(popupPhotos[popupPhotoIdx], 2400);
-      zoomImg.alt = popupItem.name;
       zoomImg.classList.toggle('mirrored', popupImg.classList.contains('mirrored'));
       zoomImg.style.transformOrigin = '';
+      zoom.classList.remove('detail');
+    }
+    function openZoom() {
+      if (!popupItem) return;
+      zoomImg.alt = popupItem.name;
+      zoomPrev.hidden = zoomNext.hidden = popupPhotos.length < 2;
+      renderZoom();
       zoom.classList.add('open');
       zoom.setAttribute('aria-hidden', 'false');
     }
+    // Steps the popup's photo too, so closing the zoom lands on the same one
+    function shiftZoom(d) {
+      if (popupPhotos.length < 2) return;
+      showPhoto(popupPhotoIdx + d);
+      renderZoom();
+    }
+    zoomPrev.addEventListener('click', e => { e.stopPropagation(); shiftZoom(-1); });
+    zoomNext.addEventListener('click', e => { e.stopPropagation(); shiftZoom(1); });
+    let zoomTouchX = null;
+    zoom.addEventListener('touchstart', e => { zoomTouchX = e.touches[0].clientX; }, { passive: true });
+    zoom.addEventListener('touchend', e => {
+      if (zoomTouchX === null || zoom.classList.contains('detail')) return;
+      const dx = e.changedTouches[0].clientX - zoomTouchX;
+      zoomTouchX = null;
+      if (Math.abs(dx) > 50) shiftZoom(dx < 0 ? 1 : -1);
+    });
     function closeZoom() {
       zoom.classList.remove('open', 'detail');
       zoomImg.removeAttribute('src');
@@ -741,6 +777,10 @@
     howto.addEventListener('click', e => { if (e.target === howto) closeHowto(); });
 
     document.addEventListener('keydown', e => {
+      if (zoom.classList.contains('open') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        shiftZoom(e.key === 'ArrowLeft' ? -1 : 1);
+        return;
+      }
       if (e.key !== 'Escape') return;
       if (howto.classList.contains('open')) closeHowto();
       else if (zoom.classList.contains('open')) closeZoom();

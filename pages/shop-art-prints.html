@@ -44,21 +44,36 @@
       max-width: 1400px;
       margin: 0 auto;
     }
+    /* Cards, popup and zoom follow the Wall Tattoos page so both shops look alike */
     .tattoo-card {
-      background: #fff; border-radius: 4px; padding: 1.5rem 1.5rem 1rem;
+      background: #fff; border-radius: 4px; padding: 0.6rem 0.6rem 0.9rem;
       box-shadow: 0 2px 20px rgba(0,0,0,0.06);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex; flex-direction: column; justify-content: space-between;
+      display: flex; flex-direction: column; cursor: pointer;
     }
-    .tattoo-card-top { display: flex; flex-direction: column; flex: 1; }
-    .tattoo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .tattoo-card:hover, .tattoo-card:focus-visible {
+      transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    }
+    .tattoo-card:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
     .tattoo-card-img {
-      width: 100%; aspect-ratio: 1/1;
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      width: 100%; aspect-ratio: 3 / 4; min-height: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; border-radius: 2px;
     }
-    .tattoo-card-img img {
-      width: 100%; height: 100%; object-fit: contain; display: block;
-      filter: brightness(1);
+    .tattoo-card-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .tattoo-card-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0); opacity: 0;
+      transition: opacity 0.25s ease, background 0.25s ease; pointer-events: none;
+    }
+    .tattoo-card:hover .tattoo-card-hint, .tattoo-card:focus-visible .tattoo-card-hint {
+      opacity: 1; background: rgba(0,0,0,0.22);
+    }
+    .tattoo-card-hint span {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #fff; border: 1px solid rgba(255,255,255,0.8); padding: 0.5rem 1rem;
     }
     .tattoo-card-name {
       font-family: 'Jost', sans-serif; font-weight: 300;
@@ -67,54 +82,53 @@
     }
     .tattoo-card-price {
       font-family: 'Jost', sans-serif; font-weight: 500;
-      font-size: 0.85rem; letter-spacing: 0.08em;
-      color: #111; text-align: center; margin-bottom: 0.6rem;
+      font-size: 0.85rem; letter-spacing: 0.08em; color: #111; text-align: center;
     }
-    .tattoo-lightbox {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.85); z-index: 1000;
-      align-items: center; justify-content: center;
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 4vw 4rem; }
     }
-    .tattoo-lightbox.open { display: flex; }
-    .tattoo-lightbox-inner {
-      background: #fff; padding: 3rem; max-width: 500px;
-      width: 90vw; position: relative; border-radius: 4px;
-      display: flex; flex-direction: column; align-items: center; gap: 1rem;
-    }
-    .tattoo-lightbox-inner img { max-width: 100%; max-height: 50vh; object-fit: contain; filter: brightness(1); }
-    .tattoo-lightbox-close {
-      position: absolute; top: 1rem; right: 1.2rem;
-      background: none; border: none; font-family: 'Jost', sans-serif;
-      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #888; cursor: pointer;
-    }
-    .tattoo-lightbox-close:hover { color: #111; }
-    .tattoo-lightbox-prev, .tattoo-lightbox-next {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: none; border: none; font-size: 1.4rem; color: #aaa; cursor: pointer;
-    }
-    .tattoo-lightbox-prev { left: -3.5rem; }
-    .tattoo-lightbox-next { right: -3.5rem; }
-    .tattoo-lightbox-prev:hover, .tattoo-lightbox-next:hover { color: #111; }
 
-    /* Photo gallery: main print image plus Marie's extra photos (same look as the tattoo popup) */
+    .tattoo-popup-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6); z-index: 1000;
+      align-items: center; justify-content: center; padding: 4vh 4vw;
+    }
+    .tattoo-popup-overlay.open { display: flex; }
+    .tattoo-popup {
+      background: #fff; border-radius: 4px;
+      width: min(1000px, 100%); max-height: 92vh;
+      display: flex; overflow: hidden; position: relative;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+    }
+    .tattoo-popup-close {
+      position: absolute; top: 0.8rem; right: 1rem; z-index: 2;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Jost', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: #888;
+    }
+    .tattoo-popup-close:hover { color: #111; }
+    .tattoo-popup-image {
+      flex: 1 1 55%; background: #f5f3ef;
+      display: flex; flex-direction: column; gap: 1rem;
+      align-items: center; justify-content: center;
+      padding: 2rem; min-width: 0;
+    }
+    .tattoo-popup-image img { max-width: 100%; max-height: 62vh; object-fit: contain; cursor: zoom-in; }
     .popup-stage {
       position: relative; width: 100%;
       display: flex; align-items: center; justify-content: center;
     }
-    .popup-arrow {
+    .popup-arrow, .zoom-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
-      width: 2.2rem; height: 2.2rem; border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.85);
-      color: #111; font-size: 1rem; line-height: 1; cursor: pointer;
+      border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); background: rgba(255,255,255,0.85);
+      color: #111; line-height: 1; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
     }
-    .popup-arrow:hover { background: #fff; border-color: #111; }
+    .popup-arrow { width: 2.2rem; height: 2.2rem; font-size: 1rem; }
+    .popup-arrow:hover, .zoom-arrow:hover { background: #fff; border-color: #111; }
     .popup-arrow.prev { left: -0.6rem; }
     .popup-arrow.next { right: -0.6rem; }
-    .popup-thumbs {
-      display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
-    }
+    .popup-thumbs { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
     .popup-arrow[hidden], .popup-thumbs[hidden] { display: none; }
     .popup-thumbs button {
       width: 3.2rem; height: 3.2rem; padding: 0; cursor: pointer;
@@ -123,16 +137,63 @@
     }
     .popup-thumbs button.active { opacity: 1; border-color: #111; }
     .popup-thumbs button:hover { opacity: 1; }
-    .popup-thumbs img {
-      width: 100%; height: 100%; object-fit: cover; display: block; max-height: none;
+    .popup-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; max-height: none; cursor: pointer; }
+
+    /* Full-screen zoom. Click once to fit, again to magnify 2.5x around the pointer. */
+    .tattoo-zoom {
+      position: fixed; inset: 0; z-index: 2000; background: #f5f3ef;
+      display: none; align-items: center; justify-content: center;
+      overflow: hidden; cursor: zoom-in;
     }
-    @media (max-width: 768px) {
-      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 4vw 6rem; }
-      .tattoo-lightbox-prev { left: 0.5rem; }
-      .tattoo-lightbox-next { right: 0.5rem; }
-      /* On phones the print-to-print arrows sit on top of the photo arrows */
-      .tattoo-lightbox.has-gallery .tattoo-lightbox-prev,
-      .tattoo-lightbox.has-gallery .tattoo-lightbox-next { display: none; }
+    .tattoo-zoom.open { display: flex; }
+    .tattoo-zoom.detail { cursor: zoom-out; }
+    .tattoo-zoom img {
+      --z: 1;
+      max-width: calc(100vw - 4rem); max-height: calc(100vh - 4rem);
+      object-fit: contain; transform: scale(var(--z)); transition: transform 0.3s ease;
+    }
+    .tattoo-zoom.detail img { --z: 2.5; }
+    .tattoo-zoom-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; color: #111; cursor: pointer; z-index: 1;
+      font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .zoom-arrow { z-index: 1; width: 3rem; height: 3rem; font-size: 1.2rem; }
+    .zoom-arrow.prev { left: 1.2rem; }
+    .zoom-arrow.next { right: 1.2rem; }
+    .zoom-arrow[hidden], .tattoo-zoom.detail .zoom-arrow { display: none; }
+
+    .tattoo-popup-info {
+      flex: 1 1 45%; padding: 2.4rem 2rem 2rem; overflow-y: auto;
+      display: flex; flex-direction: column; justify-content: center; gap: 0.9rem;
+    }
+    .tattoo-popup-name {
+      font-family: 'Velour', serif; font-weight: 700;
+      font-size: 1.3rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: #111; margin: 0;
+    }
+    .tattoo-popup-desc:empty { display: none; }
+    .tattoo-popup-desc p {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.85rem; line-height: 1.7; color: #555; margin: 0 0 0.9rem;
+    }
+    .tattoo-popup-price { display: flex; align-items: baseline; justify-content: center; gap: 0.5rem; margin-top: 0.2rem; }
+    .tattoo-popup-price-amount {
+      font-family: 'Jost', sans-serif; font-weight: 500;
+      font-size: 1.05rem; letter-spacing: 0.05em; color: #111;
+    }
+    .tattoo-popup-info .add-to-cart-btn { width: 100%; }
+    .tattoo-popup-delivery {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.68rem; letter-spacing: 0.04em; color: #999; margin: 0;
+    }
+    .tattoo-popup-delivery:empty { display: none; }
+    @media (max-width: 700px) {
+      .tattoo-popup { flex-direction: column; max-height: 94vh; }
+      .tattoo-popup-image { padding: 1.2rem; }
+      .tattoo-popup-image img { max-height: 30vh; }
+      .tattoo-popup-info { padding: 1.6rem 1.4rem 1.4rem; }
     }
   </style>
 </head>
@@ -191,20 +252,31 @@
 
   <div class="product-grid" id="print-grid"></div>
 
-  <div class="tattoo-lightbox" id="product-lb">
-    <div class="tattoo-lightbox-inner">
-      <button class="tattoo-lightbox-close" onclick="closeLb()">&#215; Close</button>
-      <button class="tattoo-lightbox-prev" onclick="shiftLb(-1)">&#8592;</button>
-      <div class="popup-stage">
-        <button class="popup-arrow prev" id="popup-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
-        <img id="lb-img" src="" alt="" />
-        <button class="popup-arrow next" id="popup-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
+  <div class="tattoo-zoom" id="tattoo-zoom" aria-hidden="true">
+    <button class="tattoo-zoom-close" type="button">&#215; Close</button>
+    <button class="zoom-arrow prev" id="zoom-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
+    <img id="tattoo-zoom-img" src="" alt="" />
+    <button class="zoom-arrow next" id="zoom-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
+  </div>
+
+  <div class="tattoo-popup-overlay" id="tattoo-popup-overlay">
+    <div class="tattoo-popup">
+      <button class="tattoo-popup-close" id="tattoo-popup-close">&#215; Close</button>
+      <div class="tattoo-popup-image">
+        <div class="popup-stage">
+          <button class="popup-arrow prev" id="popup-prev" type="button" aria-label="Previous photo" hidden>&#8592;</button>
+          <img id="popup-img" src="" alt="" />
+          <button class="popup-arrow next" id="popup-next" type="button" aria-label="Next photo" hidden>&#8594;</button>
+        </div>
+        <div class="popup-thumbs" id="popup-thumbs" hidden></div>
       </div>
-      <div class="popup-thumbs" id="popup-thumbs" hidden></div>
-      <div id="lb-name" style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.12em;color:#111;text-transform:uppercase;"></div>
-      <div id="lb-price" style="font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:500;color:#111;"></div>
-      <button id="lb-add-btn" class="add-to-cart-btn" style="width:100%;margin-top:0.5rem;">Add to Cart</button>
-      <button class="tattoo-lightbox-next" onclick="shiftLb(1)">&#8594;</button>
+      <div class="tattoo-popup-info">
+        <h2 class="tattoo-popup-name" id="popup-name"></h2>
+        <div class="tattoo-popup-desc" id="popup-desc"></div>
+        <div class="tattoo-popup-price"><span class="tattoo-popup-price-amount" id="popup-price"></span></div>
+        <button class="add-to-cart-btn" id="popup-add-btn" type="button">Add to Cart</button>
+        <p class="tattoo-popup-delivery" id="popup-delivery"></p>
+      </div>
     </div>
   </div>
 
@@ -220,81 +292,56 @@
   <script src="../js/cart.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-    let lbItems = [];
-    let lbCur   = 0;
-    const lb       = document.getElementById('product-lb');
-    const lbImg    = document.getElementById('lb-img');
-    const lbName   = document.getElementById('lb-name');
-    const lbPrice  = document.getElementById('lb-price');
-    const lbAddBtn = document.getElementById('lb-add-btn');
     const printGrid = document.getElementById('print-grid');
     const cardSizes = '(max-width: 768px) 50vw, 300px';
 
-    fetch('../_content/shop-prints.json')
-      .then(res => res.json())
-      .then(data => {
-        if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
-        lbItems = (data.prints || []).map((item, i) => ({ ...item, id: `print-${i}` }));
-        lbItems.forEach((item, idx) => {
-          const card = document.createElement('div');
-          card.className = 'tattoo-card';
-          card.innerHTML = `
-            <div class="tattoo-card-top">
-              <div class="tattoo-card-img" onclick="openLb(${idx})">
-                <img ${imgAttrs(item.image, cardSizes)} alt="${item.name}" loading="lazy" />
-              </div>
-              <div class="tattoo-card-name">${item.name}</div>
-              <div class="tattoo-card-price">€${item.price.toFixed(2)}</div>
-            </div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-          `;
-          // Wired here rather than inline so names with apostrophes don't break it
-          card.querySelector('.add-to-cart-btn').addEventListener('click', () =>
-            Cart.addItem(item.id, item.name, item.price, item.image));
-          printGrid.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error('Failed to load prints:', err);
-        printGrid.innerHTML = '<p style="text-align:center;color:#888;">Unable to load products right now.</p>';
-      });
-
-    function openLb(i) {
-      lbCur = i;
-      renderLb();
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    // Bold/italic from the CMS's restricted markdown editor, bold first so
+    // **x** isn't read as italic.
+    function mdFormat(s) {
+      return esc(s)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/_(.+?)_/g, '<em>$1</em>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    }
+    // A paragraph may be a bare string or a {text} object
+    function paraText(p) { return typeof p === 'string' ? p : ((p && p.text) || ''); }
+    function itemPrice(item, pageData) {
+      return typeof item.price === 'number' ? item.price : (Number(pageData.price) || 0);
     }
 
-    function renderLb() {
-      const item = lbItems[lbCur];
-      setPhotos(item);
-      lbImg.alt           = item.name;
-      lbName.textContent  = item.name;
-      lbPrice.textContent = `€${item.price.toFixed(2)}`;
-      // Close first so the lightbox doesn't sit over the cart drawer
-      lbAddBtn.onclick    = () => { closeLb(); Cart.addItem(item.id, item.name, item.price, item.image); };
-    }
+    // ---- Detail popup: one size per print, so just photos, text, price, Add to Cart ----
+    const popupOverlay = document.getElementById('tattoo-popup-overlay');
+    const popupImg     = document.getElementById('popup-img');
+    const popupName    = document.getElementById('popup-name');
+    const popupDesc    = document.getElementById('popup-desc');
+    const popupPrice   = document.getElementById('popup-price');
+    const popupAddBtn  = document.getElementById('popup-add-btn');
+    const popupDelivery = document.getElementById('popup-delivery');
+    let popupItem = null;
+    let popupPriceValue = 0;
 
-    const popupPrev   = document.getElementById('popup-prev');
-    const popupNext   = document.getElementById('popup-next');
+    // Photo 0 is the print itself; the rest are Marie's extra photos
+    // (Decap may store each as a bare string or as {image}).
+    const popupPrev = document.getElementById('popup-prev');
+    const popupNext = document.getElementById('popup-next');
     const popupThumbs = document.getElementById('popup-thumbs');
-    let popupPhotos   = [];
+    let popupPhotos = [];
     let popupPhotoIdx = 0;
 
     function showPhoto(i) {
       popupPhotoIdx = (i + popupPhotos.length) % popupPhotos.length;
-      lbImg.src = imgUrl(popupPhotos[popupPhotoIdx], 1200);
+      popupImg.src = imgUrl(popupPhotos[popupPhotoIdx], 1200);
       popupThumbs.querySelectorAll('button').forEach((b, j) => b.classList.toggle('active', j === popupPhotoIdx));
     }
 
     function setPhotos(item) {
-      // Decap can store single-field list items as bare strings
       const extra = (item.gallery || []).map(g => typeof g === 'string' ? g : g && g.image).filter(Boolean);
       popupPhotos = [item.image, ...extra];
       const many = popupPhotos.length > 1;
       popupPrev.hidden = popupNext.hidden = popupThumbs.hidden = !many;
-      lb.classList.toggle('has-gallery', many);
       popupThumbs.innerHTML = many ? popupPhotos.map((src, j) =>
         `<button type="button" data-i="${j}" aria-label="Photo ${j + 1}"><img src="${imgUrl(src, 160)}" alt="" /></button>`
       ).join('') : '';
@@ -308,19 +355,133 @@
       if (b) showPhoto(+b.dataset.i);
     });
 
-    function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
-    function shiftLb(d) {
-      lbCur = (lbCur + d + lbItems.length) % lbItems.length;
-      renderLb();
+    function openPopup(item, pageData) {
+      popupItem = item;
+      setPhotos(item);
+      popupImg.alt = item.name;
+      popupName.textContent = item.name;
+      popupDesc.innerHTML = (item.description || []).map(p => `<p>${mdFormat(paraText(p))}</p>`).join('');
+      popupPriceValue = itemPrice(item, pageData);
+      popupPrice.textContent = '€' + popupPriceValue.toFixed(2);
+      popupDelivery.textContent = pageData.delivery_note || '';
+      popupOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
-    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-    document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'ArrowLeft')  shiftLb(-1);
-      if (e.key === 'ArrowRight') shiftLb(1);
-      if (e.key === 'Escape')     closeLb();
+    function closePopup() {
+      popupOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      popupItem = null;
+    }
+
+    document.getElementById('tattoo-popup-close').addEventListener('click', closePopup);
+    popupOverlay.addEventListener('click', e => { if (e.target === popupOverlay) closePopup(); });
+
+    // Cart id stays print-<index>: the checkout function prices prints by it
+    popupAddBtn.addEventListener('click', () => {
+      if (!popupItem) return;
+      Cart.addItem(popupItem.id, popupItem.name, popupPriceValue, popupItem.image);
+      closePopup();
     });
+
+    const zoom = document.getElementById('tattoo-zoom');
+    const zoomImg = document.getElementById('tattoo-zoom-img');
+    const zoomPrev = document.getElementById('zoom-prev');
+    const zoomNext = document.getElementById('zoom-next');
+    function renderZoom() {
+      zoomImg.src = imgUrl(popupPhotos[popupPhotoIdx], 2400);
+      zoomImg.style.transformOrigin = '';
+      zoom.classList.remove('detail');
+    }
+    function openZoom() {
+      if (!popupItem) return;
+      zoomImg.alt = popupItem.name;
+      zoomPrev.hidden = zoomNext.hidden = popupPhotos.length < 2;
+      renderZoom();
+      zoom.classList.add('open');
+      zoom.setAttribute('aria-hidden', 'false');
+    }
+    function closeZoom() {
+      zoom.classList.remove('open', 'detail');
+      zoomImg.removeAttribute('src');
+      zoom.setAttribute('aria-hidden', 'true');
+    }
+    // Steps the popup's photo too, so closing the zoom lands on the same one
+    function shiftZoom(d) {
+      if (popupPhotos.length < 2) return;
+      showPhoto(popupPhotoIdx + d);
+      renderZoom();
+    }
+    // Unmagnified: aim at the clicked point. Magnified: pan by where the
+    // pointer sits in the window (the scaled rect would make it jump).
+    function aimZoom(e) {
+      const detail = zoom.classList.contains('detail');
+      const r = detail ? { left: 0, top: 0, width: innerWidth, height: innerHeight } : zoomImg.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width * 100;
+      const y = (e.clientY - r.top) / r.height * 100;
+      zoomImg.style.transformOrigin = `${Math.min(100, Math.max(0, x))}% ${Math.min(100, Math.max(0, y))}%`;
+    }
+    popupImg.addEventListener('click', openZoom);
+    zoom.querySelector('.tattoo-zoom-close').addEventListener('click', e => { e.stopPropagation(); closeZoom(); });
+    zoomPrev.addEventListener('click', e => { e.stopPropagation(); shiftZoom(-1); });
+    zoomNext.addEventListener('click', e => { e.stopPropagation(); shiftZoom(1); });
+    zoom.addEventListener('click', e => {
+      if (e.target !== zoomImg) { closeZoom(); return; }
+      if (!zoom.classList.contains('detail')) aimZoom(e);
+      zoom.classList.toggle('detail');
+    });
+    zoom.addEventListener('mousemove', e => {
+      if (zoom.classList.contains('detail')) aimZoom(e);
+    });
+    let zoomTouchX = null;
+    zoom.addEventListener('touchstart', e => { zoomTouchX = e.touches[0].clientX; }, { passive: true });
+    zoom.addEventListener('touchend', e => {
+      if (zoomTouchX === null || zoom.classList.contains('detail')) return;
+      const dx = e.changedTouches[0].clientX - zoomTouchX;
+      zoomTouchX = null;
+      if (Math.abs(dx) > 50) shiftZoom(dx < 0 ? 1 : -1);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (zoom.classList.contains('open') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        shiftZoom(e.key === 'ArrowLeft' ? -1 : 1);
+        return;
+      }
+      if (e.key !== 'Escape') return;
+      if (zoom.classList.contains('open')) closeZoom();
+      else if (popupOverlay.classList.contains('open')) closePopup();
+    });
+
+    fetch('../_content/shop-prints.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.heading) document.querySelector('.shop-header h1').textContent = data.heading;
+        (data.prints || []).forEach((print, i) => {
+          const item = { ...print, id: `print-${i}` };
+          const card = document.createElement('div');
+          card.className = 'tattoo-card';
+          card.tabIndex = 0;
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-label', `View ${item.name}`);
+          card.innerHTML = `
+            <div class="tattoo-card-img">
+              <img ${imgAttrs(item.image, cardSizes)} alt="${esc(item.name)}" loading="lazy" />
+              <div class="tattoo-card-hint"><span>View &amp; Order</span></div>
+            </div>
+            <div class="tattoo-card-name">${esc(item.name)}</div>
+            <div class="tattoo-card-price">€${itemPrice(item, data).toFixed(2)}</div>
+          `;
+          card.addEventListener('click', () => openPopup(item, data));
+          card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPopup(item, data); }
+          });
+          printGrid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load prints:', err);
+        printGrid.innerHTML = '<p style="text-align:center;color:#888;">Unable to load products right now.</p>';
+      });
   </script>
 </body>
 </html>
