@@ -77,12 +77,29 @@
         inFlight = false;
       }
     }
+    let running = null;
     form.on('change', ({ value, status: st }) => {
       const complete = st && st.shippingAddress && st.shippingAddress.complete;
       const addr = value && value.shippingAddress;
       const country = complete && addr && addr.address ? String(addr.address.country || '').toUpperCase() : '';
       wanted = country ? { country, addr } : null;
-      if (country && !inFlight) reprice();
+      if (country && !inFlight) running = reprice();
+    });
+
+    // The form's own Pay button only emits 'confirm'; the page has to pass
+    // that event to actions.confirm or the click does nothing (Marie,
+    // 2026-10-20: "she can't checkout"). Waits for any shipping re-price
+    // still running so the charged total is the one shown.
+    form.on('confirm', async event => {
+      try {
+        if (running) await running;
+        const loaded = await checkout.loadActions();
+        if (loaded.type !== 'success') throw new Error();
+        await loaded.actions.confirm({ formConfirmEvent: event });
+      } catch (err) {
+        console.error(err);
+        show("Payment didn't go through. Please check your details and try again.");
+      }
     });
   }
 
