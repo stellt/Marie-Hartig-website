@@ -308,7 +308,31 @@ function buildCustomerEmail(ref, full, items, ship, rateName) {
 
 // ---------- sending (Resend) ----------
 
-function sendEmail({ apiKey, idempotencyKey, from, to, replyTo, subject, html, text }) {
+// Resend allows ~2 requests/second per team, so a burst of orders gets 429s.
+// Those (and 5xx / timeouts) are worth another try within this invocation;
+// anything still failing at the deadline is left for Stripe's retry. A 409
+// means this idempotency key was already used, so that email is out (or going).
+const RETRYABLE = sc => !sc || sc === 408 || sc === 429 || sc >= 500;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+async function sendWithRetry(args, deadline) {
+  for (let attempt = 0; ; attempt++) {
+    const left = deadline - Date.now();
+    if (left < 1000) throw new Error('Out of time before Resend answered');
+    try {
+      return await sendEmail({ ...args, timeoutMs: Math.max(1000, Math.min(4000, left)) });
+    } catch (err) {
+      if (err.statusCode === 409) return 'already sent';
+      if (!RETRYABLE(err.statusCode)) throw err;
+      // Jitter so simultaneous orders don't all come back in the same instant.
+      const pause = (err.retryAfterMs || 600 * (attempt + 1)) + Math.random() * 400;
+      if (Date.now() + pause + 1000 > deadline) throw err;
+      await wait(pause);
+    }
+  }
+}
+
+function sendEmail({ apiKey, idempotencyKey, from, to, replyTo, subject, html, text, timeoutMs = 7000 }) {
   const payload = JSON.stringify({
     from, to, subject, html, text,
     ...(replyTo && replyTo.length ? { reply_to: replyTo } : {}),
@@ -327,18 +351,24 @@ function sendEmail({ apiKey, idempotencyKey, from, to, replyTo, subject, html, t
       },
     }, res => {
       let body = '';
+      res.on('error', reject);
+      res.on('aborted', () => reject(new Error('Resend response aborted')));
       res.on('data', d => { body += d; });
       res.on('end', () => {
         if (res.statusCode >= 200 && res.statusCode < 300) resolve(body);
         else {
           const err = new Error(`Resend ${res.statusCode}: ${body}`);
           err.statusCode = res.statusCode;
+          const ra = Number(res.headers && res.headers['retry-after']);
+          if (ra > 0) err.retryAfterMs = Math.min(ra, 3) * 1000;
           reject(err);
         }
       });
     });
     req.on('error', reject);
-    req.setTimeout(7000, () => req.destroy(new Error('Resend request timed out')));
+    // Wall-clock cap: req.setTimeout only fires on inactivity.
+    const timer = setTimeout(() => req.destroy(new Error('Resend request timed out')), timeoutMs);
+    req.on('close', () => clearTimeout(timer));
     req.write(payload);
     req.end();
   });
@@ -357,6 +387,7 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
   if (!printerTo.length) console.warn('PRINTER_EMAIL is not set - the printer was NOT emailed for', session.id);
   if (!ownerTo.length) console.warn('OWNER_EMAIL is not set - Marie was NOT emailed for', session.id);
 
+  const started = Date.now();
   const { full, items } = await loadOrder(stripe, session);
   const ref = orderRef(session);
   const ship = (full.collected_information && full.collected_information.shipping_details)
@@ -381,7 +412,7 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
   const jobs = [];
   if (printerTo.length && !warning) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName, true);
-    jobs.push({ label: 'printer', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-printer`, from, to: printerTo, replyTo: ownerTo, ...e }) });
+    jobs.push({ label: 'printer', args: { apiKey, idempotencyKey: `${stripeEvent.id}-printer`, from, to: printerTo, replyTo: ownerTo, ...e } });
   }
   if (ownerTo.length) {
     const e = buildOwnerEmail(ref, full, items, ship, rateName);
@@ -393,31 +424,35 @@ async function forwardPaidOrder(stripe, stripeEvent, session) {
       e.text = warning + hold + '\n\n' + e.text;
       e.html = `<p style="padding:10px;background:#fde8e8;color:#900;font-weight:bold">${esc(warning + hold)}</p>` + e.html;
     }
-    jobs.push({ label: 'owner', promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-owner`, from, to: ownerTo, replyTo: [], ...e }) });
+    jobs.push({ label: 'owner', args: { apiKey, idempotencyKey: `${stripeEvent.id}-owner`, from, to: ownerTo, replyTo: [], ...e } });
   }
   const customerTo = full.customer_details && full.customer_details.email;
   if (customerTo) {
     const e = buildCustomerEmail(ref, full, items, ship, rateName);
-    jobs.push({ label: 'customer', optional: true, promise: sendEmail({ apiKey, idempotencyKey: `${stripeEvent.id}-customer`, from, to: [customerTo], replyTo: ownerTo, ...e }) });
+    jobs.push({ label: 'customer', optional: true, args: { apiKey, idempotencyKey: `${stripeEvent.id}-customer`, from, to: [customerTo], replyTo: ownerTo, ...e } });
   } else {
     console.warn('No customer email on', session.id, '- no confirmation sent');
   }
 
-  const results = await Promise.allSettled(jobs.map(j => j.promise));
+  // One at a time, printer first, so a single order never trips Resend's
+  // per-second limit on its own. 8s counted from before the Stripe reads
+  // keeps the whole run inside Netlify's 10s.
+  const deadline = started + 8000;
   const failures = [];
-  results.forEach((r, i) => {
-    if (r.status === 'fulfilled') console.log(`Order ${ref}: ${jobs[i].label} email sent`);
-    else {
-      console.error(`Order ${ref}: ${jobs[i].label} email FAILED:`, r.reason && r.reason.message);
+  for (const job of jobs) {
+    try {
+      const result = await sendWithRetry(job.args, deadline);
+      console.log(`Order ${ref}: ${job.label} email ${result === 'already sent' ? 'already sent' : 'sent'}`);
+    } catch (err) {
+      console.error(`Order ${ref}: ${job.label} email FAILED:`, err && err.message);
       // A bad customer address (Resend 4xx) must not make Stripe retry the
-      // whole event; a Resend outage or timeout should, so the customer still
-      // gets the confirmation. The idempotency keys stop the printer and
-      // owner emails going out twice on that retry.
-      const sc = r.reason && r.reason.statusCode;
-      const rejected = sc >= 400 && sc < 500;
-      if (!jobs[i].optional || !rejected) failures.push(jobs[i].label);
+      // whole event; a rate limit, outage or timeout should, so the customer
+      // still gets the confirmation. The idempotency keys stop the emails
+      // that did go out being sent twice on that retry.
+      const rejected = !RETRYABLE(err && err.statusCode);
+      if (!job.optional || !rejected) failures.push(job.label);
     }
-  });
+  }
   if (failures.length) throw new Error('Order email failed for: ' + failures.join(', '));
 }
 
