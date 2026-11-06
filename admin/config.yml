@@ -1079,6 +1079,7 @@ collections:
         - label: Photo
           name: image
           widget: image
+          required: false
           media_folder: /assets/images/wall tattoos rooms
           public_folder: /assets/images/wall tattoos rooms
       - label: Price (€)
@@ -1264,6 +1265,7 @@ collections:
         - label: Photo
           name: image
           widget: image
+          required: false
           media_folder: /assets/images/art prints rooms
           public_folder: /assets/images/art prints rooms
       - label: Price (€)

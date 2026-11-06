@@ -197,8 +197,7 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_7817.jpeg"
-        },
-        {}
+        }
       ]
     },
     {
@@ -544,8 +543,7 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/img_6999.jpeg"
-        },
-        {}
+        }
       ]
     },
     {
@@ -1103,7 +1101,7 @@
     {
       "mirror_available": true,
       "name": "Happy Matteo",
-      "image": "",
+      "image": "/assets/images/wall tattoos rooms/hartig_marie_happy-matteo.jpg",
       "price": 45,
       "description": [
         {
@@ -1116,9 +1114,6 @@
         }
       ],
       "gallery": [
-        {
-          "image": "/assets/images/wall tattoos rooms/hartig_marie_happy-matteo.jpg"
-        },
         {
           "image": "/assets/images/wall tattoos rooms/monkey-matteo_normal.jpg"
         },
