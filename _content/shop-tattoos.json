@@ -401,6 +401,36 @@
       ]
     },
     {
+      "mirror_available": true,
+      "name": "Happy Matteo",
+      "image": "/assets/images/wall tattoos rooms/hartig_marie_happy-matteo.jpg",
+      "price": 45,
+      "description": [
+        {
+          "font_family": "default",
+          "text_size": "default",
+          "text_color": "default",
+          "indent": "default",
+          "spacing": "default",
+          "text": "Happy Matteo is available as a Wall Tattoo / Decal Sticker or as a Fine Art Print in two sizes. Marie Hartig Wall Tattoos are premium-quality reproductions of original hand-painted artworks, designed to bring the character of a painted mural into your home. They are made to be carefully applied and left in place; larger or more intricate designs may take a little time to install and are often easiest to apply with two people. While the Wall Tattoos can be repositioned if necessary, they are not designed to be moved repeatedly. Please treat them as a piece of wall art rather than a conventional children’s sticker."
+        }
+      ],
+      "gallery": [
+        {
+          "image": "/assets/images/wall tattoos rooms/monkey-matteo_normal.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/happy-monkey-decal.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
+        },
+        {
+          "image": "/assets/images/wall tattoos rooms/img_0290.jpeg"
+        }
+      ]
+    },
+    {
       "name": "Hornbill",
       "image": "/assets/images/wall tattoos no bg/hornbill.png",
       "price": 45,
@@ -1095,36 +1125,6 @@
         },
         {
           "image": "/assets/images/wall tattoos rooms/sophie-hen-framed.jpg"
-        }
-      ]
-    },
-    {
-      "mirror_available": true,
-      "name": "Happy Matteo",
-      "image": "/assets/images/wall tattoos rooms/hartig_marie_happy-matteo.jpg",
-      "price": 45,
-      "description": [
-        {
-          "font_family": "default",
-          "text_size": "default",
-          "text_color": "default",
-          "indent": "default",
-          "spacing": "default",
-          "text": "Happy Matteo is available as a Wall Tattoo / Decal Sticker or as a Fine Art Print in two sizes. Marie Hartig Wall Tattoos are premium-quality reproductions of original hand-painted artworks, designed to bring the character of a painted mural into your home. They are made to be carefully applied and left in place; larger or more intricate designs may take a little time to install and are often easiest to apply with two people. While the Wall Tattoos can be repositioned if necessary, they are not designed to be moved repeatedly. Please treat them as a piece of wall art rather than a conventional children’s sticker."
-        }
-      ],
-      "gallery": [
-        {
-          "image": "/assets/images/wall tattoos rooms/monkey-matteo_normal.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/happy-monkey-decal.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/monkeys-kids-room.jpg"
-        },
-        {
-          "image": "/assets/images/wall tattoos rooms/img_0290.jpeg"
         }
       ]
     }
