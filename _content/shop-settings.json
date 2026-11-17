@@ -11,7 +11,7 @@
     },
     {
       "name": "Central Europe",
-      "price": 22,
+      "price": 21,
       "countries": [
         "DE",
         "NL",
@@ -26,7 +26,7 @@
     },
     {
       "name": "Western & Nearby Europe",
-      "price": 26,
+      "price": 25,
       "countries": [
         "FR",
         "IT",
@@ -37,7 +37,7 @@
     },
     {
       "name": "Rest of the EU",
-      "price": 29,
+      "price": 25,
       "countries": [
         "FI",
         "GR",
@@ -53,7 +53,7 @@
     },
     {
       "name": "Spain & Portugal",
-      "price": 29,
+      "price": 25,
       "countries": [
         "ES",
         "PT"
@@ -61,7 +61,7 @@
     },
     {
       "name": "UK & Non-EU Europe",
-      "price": 39,
+      "price": 30,
       "countries": [
         "GB",
         "CH",
@@ -72,7 +72,7 @@
     },
     {
       "name": "USA & Canada",
-      "price": 49,
+      "price": 40,
       "countries": [
         "US",
         "CA"
@@ -80,7 +80,7 @@
     },
     {
       "name": "Asia",
-      "price": 55,
+      "price": 29,
       "countries": [
         "JP",
         "SG",
@@ -98,7 +98,7 @@
     },
     {
       "name": "Australia & New Zealand",
-      "price": 75,
+      "price": 45,
       "countries": [
         "AU",
         "NZ"
