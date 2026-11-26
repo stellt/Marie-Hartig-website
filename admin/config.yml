@@ -38,6 +38,7 @@ collections:
       label: Image
       name: image
       widget: image
+      required: false
       media_folder: /assets/images/portfolio
       public_folder: /assets/images/portfolio
   - label: Description
